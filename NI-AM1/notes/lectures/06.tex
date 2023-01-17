@@ -1,0 +1,223 @@
+\section{REST}
+
+REST není jen protokol, kterým \textbf{klient} přistupuje na server, může být využit i pro \textbf{crawling}, nebo třeba volání jinou \textbf{službou}.
+
+\vspace{4pt}
+\noindent \textbf{Re}presentational \textbf{S}tate \textbf{T}ransfer: přenos stavu, obsahujícího reprezentaci, vytvořen Roy Fieldingem v rámci disertační práce, vychází z technických detailů HTTP (bezestavovost).
+
+\vspace{4pt}
+\noindent Služby, které implementují REST v plné podobě, se nazývají \textbf{RESTful}, lidé často \textbf{porušují} principy RESTu. REST realizuje \textbf{WSA} resource-oriented model.
+
+\subsection{Principy}
+
+\textbf{Oddělení zodpovědností} \textit{(separation of concerns)}: jsem schopný oddělit vrstvy od sebe \textit{(klient, server)}, vývoj může probíhat nezávisle.
+
+\vspace{4pt}
+\noindent \textbf{Využívání standardů}, které definují způsob komunikace, na kterých se shodli uživatelé a organizace.
+
+\vspace{4pt}
+\noindent \textbf{Open source}, bez licenčních poplatků
+
+\subsection{Výhody HTTP}
+
+\textbf{Důvěrnost}: HTTP je rozšířený, známý
+
+\vspace{4pt}
+\noindent \textbf{Interoperabilita}: HTTP knihovny nalezneme na všech prostředích, můžeme se zaměřit na jádro problému, nezáleží na konkrétní aplikaci.
+
+\vspace{4pt}
+\noindent \textbf{Škálovatelnost}: Webová infrastruktura se dá velmi dobře škálovat (proxy) a cachovat (GET idempotence, safe metody).
+
+\subsection{Omezení}
+
+REST funguje pouze na architektuře \textbf{klient}-\textbf{server}. REST je \textbf{bezestavový} \textit{(server by neměl mít uloženou žádnou informaci o session)}, \textbf{cachovatelný} = nutnost cachování, \textbf{vrstvený systém} -- klient by neměl vědět, s kterou vrstvou za endpointem komunikuje, \textbf{jednotné rozhraní} (GET, POST, PUT, PATCH, DELETE) -- doménově nezávislé.
+
+\subsection{Zdroj}
+
+Zdroj může být \textbf{reálný objekt}, ale také jen abstraktní věc, vzniklá spojením více reálných. Každý zdroj má nějakou svou \textbf{reprezentaci} a \textbf{identifikátor} tak, aby se k němu klient mohl dostat.
+
+\newpage
+\subsubsection*{Přístup ke zdroji}
+
+Když chce klient přistoupit ke zdroji, musí nejprve provést \textbf{dereferenci URI}, aby zjistil, který protokol chce použít. Následně \textbf{přistoupí} k tomuto zdroji, služba předzpracuje požadavek a vytvoří \textbf{výslednou reprezentaci}, kterou pošle klientovi zpět. Klient tuto reprezentaci následně \textbf{interpretuje}.
+
+\subsection{Uniform Resource Identifier}
+
+URI: identifikuje \textbf{zdroj} \textit{(tento zdroj ale nemusí fyzicky existovat)}, může to být URL (lokátor) nebo URN (jméno), je \textbf{globálně} platný v rámci internetu. Skládá se ze schématu (není protokol), autority, cesty, dotazu a fragmentu.
+
+\vspace{4pt}
+\noindent $\to$ scheme://authority/path?query\#fragment
+
+\vspace{4pt}
+\noindent URL: umožní najít zdroj na zadané \textbf{lokaci} v síti, každé URL je zároveň URI
+
+\vspace{4pt}
+\noindent URN: Uniform Resource Name: \textbf{jméno}, případně obsahující namespace \textit{(isbn: 9877-1222-1414-1222)}
+
+\subsubsection*{Resources over Entities}
+
+URI často identifikuje zdroj v datovém modelu aplikace: \textbf{path} reflektuje datový model (je to graf, URI identifikuje zdroj cestou v tomto grafu).
+
+\vspace{4pt}
+\noindent Oproti tomu \textbf{query} umožňuje provést \textbf{selekci} \textit{(?status=valid)} nebo \textbf{projekci} \textit{(?properties=id,name)}.
+
+\vspace{4pt}
+\noindent \textbf{Fragment}y jsou definovány na základě formátu = v HTML je to tag \textbf{id}, v XML ale nic takového není.
+
+\subsubsection*{Pojmy}
+
+\textbf{Capability URL}: krátkodobá URL pro určitý účel \textit{(odkaz ke změně e-mail adresy)}
+
+\vspace{4pt}
+\noindent \textbf{URI alias}: dvě různá URI identifikující stejný zdroj
+
+\vspace{4pt}
+\noindent \textbf{URI collision}: jedna URI identifikující dva zdroje \textit{(chyba)}
+
+\vspace{4pt}
+\noindent \textbf{URI opacity}: content type jako součást URI
+
+\vspace{4pt}
+\noindent \textbf{Persistent URL}: i po odstranění dokumentu URL zůstává platné
+
+\subsubsection*{Reprezentace zdrojů}
+
+Měly by odpovídat Internet Media Types: XML, HTML, JSON, YAML, RDF
+
+\vspace{4pt}
+\noindent Datový formát: \textbf{binární} (specifický, komprimovaná data), \textbf{textový} (všechny běžné formáty)
+
+\vspace{4pt}
+\noindent \textbf{Metadata}: data o zdroji, definován HTTP hlavičkami v odpovědi nebo přímo v datovém formátu \textit{(author, updated)}.
+
+\vspace{4pt}
+\noindent \textbf{Content-Type}: Accept (požadavek klienta), Content-Type (odpověď serveru), odpovídá IANA \textit{(Internet Assigned Numbers Authority)} media types, zdroj může poskytnout více reprezentací.
+
+\vspace{4pt}
+\noindent \textbf{Typické formáty}: text/plain, text/html \textit{(data v přirozeném jazyce)}, application/xml, application/json \textit{(specifický formát dané aplikace)} a další specifické zápisy.
+
+\vspace{4pt}
+\noindent \textbf{Netypické formáty}: na začátek podtypu dám \textbf{x-}, případně \textbf{vnd.}, pokud chci vlastní formát -- application/x-latex, application/vnd.ms-excel
+
+\vspace{4pt}
+\noindent Když mluvíme o zdroji, myslíme tím \textbf{stav zdroje} (aktuální obsah, který se v průběhu času mění).
+
+\subsection{Uniform Interface}
+
+\textbf{Jednotné rozhraní} = konečná množina operací, v RESTu se nazývají CRUD (Create -- POST/PUT, Read -- GET, Update -- PUT/PATCH, Delete -- DELETE).
+
+\vspace{4pt}
+\noindent Jednotlivé operace \textbf{nejsou} doménově specifické: GET nemá sémantiku z pohledu aplikace. \textit{(nejmenuje se to getOrders(), ale GET /orders)}
+
+\subsubsection*{Vlastnosti method}
+
+\textbf{Safe}: nemění stav zdroje, read-only / lookup, lze cachovat (GET)
+
+\vspace{2pt}
+\noindent \textbf{Unsafe}: může změnit stav, transakce, unsafe neznamená nebezpečná.
+
+\vspace{2pt}
+\noindent \textbf{Idempotence}: zavolání metody na stejném zdroji má \textbf{stejný} efekt \textit{(dostane zdroj do stejného stavu stavu)} -- GET, PUT i \textbf{DELETE}
+
+\subsubsection*{Metody}
+
+\textbf{GET}: získá stav zdroje, hledání, cachovatelné, safe, idempotentní, vrátí typicky 200 OK nebo 404 NOT FOUND.
+
+\vspace{2pt}
+\noindent \textbf{PUT}: update (kompletní náhrada) nebo insert (vložení), není safe, ale je idempotentní. Návratový kód 200 OK nebo 204 No Content při aktualizaci, nebo 201 Created při vložení.
+
+\vspace{2pt}
+\noindent \textbf{PATCH}: partial update (částečná náhrada) zdroje, není safe ani idempotentní, návratový kód 200 OK nebo 204 No Content, případně 404 Not Found. Používá se například v \textbf{GData} protokolu.
+
+\vspace{2pt}
+\noindent \textbf{POST}: vloží nový zdroj, ID je generováno, klient poskytne pouze obsah a URI, není safe ani idempotentní, 201 Created.
+
+\vspace{2pt}
+\noindent \textbf{DELETE}: smaže specifický zdroj, není safe, ale je \textbf{idempotentní} \textit{(vícenásobné zavolání má stejný efekt -- zdroj neexistuje)}, návratový kód 200 OK nebo 204 No Content.
+
+\vspace{2pt}
+\noindent \textbf{HEAD}: GET jen pro hlavičky, specifický, safe a idempotentní
+
+\vspace{2pt}
+\noindent \textbf{OPTIONS}: získá konfiguraci zdrojů \textit{(používáno v protokolu CORS)}, safe a idempotentní
+
+\subsubsection*{Návratové kódy -- chyba 4xx}
+
+\textbf{400}: obecná chyba na straně klienta, neplatný formát, chyba syntaxe
+
+\vspace{2pt}
+\noindent \textbf{404}: zdroj se zadanou adresou neexistuje
+
+\vspace{2pt}
+\noindent \textbf{401}: nesprávné přihlašovací údaje (user/pass, API klíč), odpověď by měla obsahovat hlavičku indikující typ autenifikace
+
+\vspace{2pt}
+\noindent \textbf{405}: nepovolená metoda HTTP, hlavička Allow umožňuje vypsat podporované metody
+
+\vspace{2pt}
+\noindent \textbf{406}: příliš mnoho omezení na typ přijímaného média (Accept)
+
+\vspace{6pt}
+\noindent Při zpracování bychom \textbf{měli} používat návratové kódy! Tedy neexistuje nic jako vrátit 200 s payloadem error. Tak stejně je třeba respektovat sémantiku HTTP metod (tedy nic jako GET /orders/?add).
+
+\subsection{HATEOAS}
+
+Název vychází z \textbf{hypertextu} (reprezentace zdroje obsahující \textbf{odkazy}), odkaz je URI zdroje a to, že aplikujeme přístupovou metodu na zdroj pomocí odkazu je \textbf{přechod mezi stavy}. HATEOAS umožňuje bezestavovou implementaci služeb.
+
+\vspace{6pt}
+\noindent \textbf{Stateful server}: Stav aplikace je uložen v paměti serveru, klient se identifikuje pomocí cookie.
+
+\vspace{2pt}
+\noindent \textbf{Perzistentní úložiště}: obsahuje data aplikace \textit{(např. databáze zboží)}
+
+\vspace{2pt}
+\noindent \textbf{Úložiště session}: obsahuje stav aplikace, používá se cookies
+
+\vspace{6pt}
+\noindent \textbf{Stateless server}: Nepoužívá paměť serveru, stav se přesouvá pomocí odkazů: POST /orders: obsahuje odkaz /orders/1 $\to$ při více serverech je mnohem lepší, protože nemusíme přenášet stav mezi servery.
+
+\vspace{2pt}
+\noindent Odkazy můžou mít hodnotu \textbf{rel}, která definuje \textbf{sémantiku} operace pod odkazem \textit{(next, previous, self, nebo klidně URI s danou operací)}.
+
+\vspace{6pt}
+\noindent Pokud používám HATEOAS, \textbf{nemusím} pak kontrolovat \textbf{preconditions} u jednotlivých stavů, protože mi odkazy \blockquote{nedovolí} se dostat do neplatného stavu.
+
+\vspace{4pt}
+\noindent \textbf{Výhody}: průhlednost lokace (zveřejníme jen úvodní odkazy, ostatní se můžou změnit beze změny logiky klienta), loose coupling (klient ví, kam se může dostat přes odkazy), bezstavovost (umožní lepší škálovatelnost).
+
+\subsection{Caching, Revalidation, Concurrency Control}
+
+\subsubsection*{Škálovatelnost}
+
+Na web přichází velké množství požadavků $\to$ chceme škálovat, což lze v RESTu pomocí cachování, revalidace a concurrency control.
+
+\subsubsection*{Caching}
+
+Cachujeme vždy \textbf{statické} zdroje, ale také \textbf{dynamické} zdroje (získávané pomocí GET, pomocí hlavičky \textbf{Cache-Control}, podle té se pak revaliduje).
+
+\vspace{4pt}
+\noindent \textbf{Cache-Control}: private \textit{(cachuje pouze klient)}, public \textit{(cachovat může i proxy)}, no-cache \textit{(cachovat se nemá)}, no-store \textit{(nesmí se perzistentně ukládat)}, no-transform \textit{(nesmí se komprimovat data)}, \textbf{max-age}: platnost cache (v sekundách).
+
+\vspace{4pt}
+\noindent \textbf{Last-Modified} a \textbf{ETag}: umožní cachovat podle posledního data úpravy nebo podle obsahu zdroje (\textbf{Strong} ETag = obsah bit po bitu, např. objednávka, \textbf{Weak} ETag = sémantický obsah, definuje aplikace, např. u seznamu objednávek, začíná W/) -- hlavičky odpovědi.
+
+\vspace{2pt}
+\noindent \textbf{If-Modified-Since} a \textbf{If-None-Match} hlavičky požadavku $\to$ používá se při revalidaci obsahu \textit{(podmíněný GET -- viz. úkol)}.
+
+\subsubsection*{Concurrency}
+
+Používá \blockquote{optimistické řízení přístupu} = nezamykám záznam, ale použiji Conditional PUT s hlavičkou \textbf{If-Unmodified-Since} \textit{(čas)} a \textbf{If-Match} \textit{(ETag)}. Odpovědí pak může být 200 OK nebo \textbf{412 Precondition Failed}. \textcolor{red}{Diplomka !!!}
+
+\subsubsection*{Richardson Maturiy Model}
+
+Definuje úrovně toho, jak moc je API RESTové:
+
+\vspace{2pt}
+
+ $\to$ 0. úroveň: pouze \textbf{XML} \textit{(používám na vše POST, neexistují zdroje)}
+
+ $\to$ 1. úroveň: \textbf{zdroje} a URI \textit{(pořád ale ještě používám na vše POST)}
+
+ $\to$ 2. úroveň: \textbf{HTTP metody} \textit{(používání GET, PUT, DELETE)}
+
+ $\to$ 3. úroveň: \textbf{odkazy} \textit{(HATEOAS)}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<records>
+	<record type="trip">
+		<id>1</id>
+		<location>Bohemian Switzerland</location>
+		<capacity>5</capacity>
+		<occupied>1</occupied>
+	</record>
+	<record type="trip">
+		<id>2</id>
+		<location>Rychlebske stezky</location>
+		<capacity>5</capacity>
+		<occupied>0</occupied>
+	</record>
+	<record type="trip">
+		<id>3</id>
+		<location>Sumava Lakes</location>
+		<capacity>5</capacity>
+		<occupied>0</occupied>
+	</record>
+	<record type="trip">
+		<id>4</id>
+		<location>Beskids Mountains</location>
+		<capacity>5</capacity>
+		<occupied>0</occupied>
+	</record>
+	<record type="booking">
+		<id>5</id>
+		<trip>1</trip>
+		<person>Jan Novak</person>
+	</record>
+</records>

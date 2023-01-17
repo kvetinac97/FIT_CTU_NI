@@ -1,0 +1,18 @@
+= HW3 - Webové služby
+
+Obsahem úkolu je IntelliJ projekt (`homework-03.iml`), který na základě Maven skriptu `pom.xml` spustí SOAP službu pro *správu letových rezervací*.
+
+Tato služba umožňuje:
+
+ 1. výpis existujících rezervací `getBookingRequest`
+ 2. přidání rezervace `addBookingRequest`
+ 3. odstranění rezervace `deleteBookingRequest`
+ 4. aktualizaci rezervace `updateBookingRequest`
+
+Data rezervace obsahují údaje o zákazníkovi, odletu/příletu a ID rezervace.
+
+Data o zákazníkovi obsahují jeho křestní jméno (`first-name`) a příjmení (`last-name`)
+
+Data odletu/příletu obsahují identifikátor/jméno letiště (`airport`) a časovou značku odletu `dateTime`.
+
+Ve složce `src/` jsou umístěny zdrojové kódy, složka `results/` obsahuje soubor `homework-03-soapui-project.xml` se SoapUI projektem, který byl použit pro otestování této služby.

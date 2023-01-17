@@ -1,0 +1,7 @@
+.idea/
+.gradle/
+build/
+out/
+data/
+blackbox/wuf20-91R/wuf20-91R-M-prg.dat
+!blackbox/*/*-prg.dat

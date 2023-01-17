@@ -1,0 +1,17 @@
+= Mathematics for Informatics
+
+Completed all mandatory MARAST quizzes. +
+Got 100 % points from homework. +
+
+Got full 40 points from written part of exam. +
+33 out of 40 points from oral part of exam.
+
+Finished with grade *A*.
+
+== Lectures
+
+Lecture notes from first three lectures _(afterwards, I moved my notes to OneNote)_, rendered to `lectures.pdf`.
+
+== Homework
+
+Code for homework, which was to solve system of linear equations using numeric methods _(Gauss-Seidel, Jacobi)_.

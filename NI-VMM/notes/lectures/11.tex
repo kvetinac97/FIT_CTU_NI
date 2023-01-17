@@ -1,0 +1,30 @@
+U metrických metod hledáme rychle v databázi, používáme \textbf{metrické indexování}, závisející na lower-boundingu pomocí \textbf{pivotů}, musí zde platit metrické postuláty.
+
+\subsection{Tabulky pivotů}
+
+Třídy indexů, mapují data do prostoru pivotů, AESA (každý datový objekt je pivot, náročná \textbf{kvadratická} konstrukce, ale \textbf{konstantní} hledání), LAESA (je vybráno jen \textbf{k} objekůt jako pivoty), dotazovaní probíhá v $L_{\infty}$ metrice.
+
+Další metody závisející na tabulkách pivotů jsou TLAESA \textit{(optimalizace pomocí struktury závisející na stromu)}, ROAESA \textit{(redukce pro přechod matice vzdáleností)} atd.
+
+\subsection{Stromové indexy}
+
+Reprezentují metrický prostor přímo v hierarchické rovině.
+\begin{itemize}
+    \item gh-tree (2), \textbf{GNAT} (n): reprezentují pomocí reprezentace v \textbf{nadrovinách}, binární strom, statická konstrukce z dvou (n) pivotů, rozdělení na \textbf{poloprostory}, pak lze filtrovat v binárním (n-árním) stromu
+    \item vp-tree, mvp-tree: reprezentují pomocí \textbf{metrických koulí} (prstenců), rozvrství prostor na \textbf{vrstvy} jako cibule, vybere se pivot a k němu vztahuji další prostory \textit{(vrstvy se můžou protínat u mvp-tree)}.
+    \item M-tree: modifikace R-stromu do metrického prostoru, \textbf{hierarchie} vnoře\-ných koulí, vhodný pro \textbf{sekundární} ukládání, opět umožňuje \textbf{rychlé} procházení dotazu
+    \item PM-tree: M strom, který ještě navíc používá \textbf{množinu} pivotů, každá koule je tedy ještě redukována prstenci danými pivoty
+\end{itemize}
+
+\subsection{Hashované indexy}
+
+\textbf{D-index}: závisí na hashi, vypočítá si hashovací funkci \textit{bps} (ternární hash) rozdělující na základě koule, která rozdělí každý objekt do určitých \textbf{bucketů}.
+
+\subsection{Bezindexové MAM}
+
+\textbf{D-file}: originální databáze za použití sekvenčního skenování, ale používá \textbf{D-cache}: strukturu, která si pamatuje již spočítané vzdálenosti a poskytuje \textbf{lower boundy} požadovaných vzdáleností. Není třeba žádné indexování.
+
+\subsection{Míry nákladů}
+
+Zajímá nás náročnost \textbf{indexování} a \textbf{dotazování}, to může být v kontextu počtu volání \textbf{vzdálenostní funkce}, ceny I/O operací \textit{(počet přístupů na disk, RAM/HDD/SSD, sekvenční, náhodný)}, ceny vnitřních volání \textit{(výpočetní výkon)}, ceny v \textbf{reálném} čase \textit{(míra zkompilování)}.
+

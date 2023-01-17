@@ -1,0 +1,5 @@
+= HW9 - Jednoduchý load balancer
+
+Cílem úlohy bylo naprogramovat jednoduchý *load balancer*. Ten jsem implementoval jako *webovou službu*, která pravidelně každých *5 sekund* zavolá každý ze serverů a poznačí si, který z nich je *aktivní* a který ne.
+
+Dále obsahuje endpoint `/test`, který po zavolání vybere *náhodně* jednu z běžících služeb, přepošle na ni HTTP *požadavek* a vrátí zpět odpověď. Pokud není žádná služba běžící, vybere náhodnou službu ze všech služeb.

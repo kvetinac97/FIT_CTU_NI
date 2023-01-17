@@ -1,0 +1,92 @@
+\section{P a NP}
+
+\subsection{Složitost}
+
+\textbf{Výpočetní} složitost: velikost instance určuje čas výpočtu
+
+\noindent \textbf{Paměťová} složitost: velikost instance určuje spotřebu paměti
+
+\vspace{4pt}
+\noindent Jak můžeme měřit velikost instance? Buď \textbf{hrubou} mírou \textit{(počet prvků instance -- věcí v batohu, uzlů v grafu \ldots)} nebo \textbf{jemnou} mírou \textit{(počet bitů nutných k zakódování instance)}.
+
+\vspace{4pt}
+\noindent Jak měřit čas výpočtu? Buď počtem \textbf{typických operací}, nebo počtem \textbf{kroků} jednotného výpočetního modelu.
+
+\subsection{Výpočetní modely}
+
+Turingův stroj, RAM stroj (adresace), Booleův obvod (hradla)
+
+\subsubsection*{Turingův stroj}
+
+Program $M$ deterministický Turingův stroj řeší \textbf{rozhodovací problém} v čase $t$ / s pamětí $m$, jestliže se výpočet zastaví po $t$ krocích / využije nejvýše $m$ paměťových buněk pro každou instanci.
+
+\vspace{4pt}
+\noindent Instanci kódujeme do řetězce $\{0, 1\}^*$, \textbf{způsob} \textbf{kódování} instance \textbf{neovlivní} čas výpočtu více než \textbf{polynomiálně}.
+
+\subsection{Třída P}
+
+Rozhodovací problém \textbf{patří do třídy P}, pokud pro něj existuje program pro deterministický Turingův stroj, který jej řeší v čase $O(n^k)$, kde $n$ je velikost instance a $k$ je konečné číslo.
+
+\vspace{4pt}
+\noindent \textit{(Note: Existuje program, ne, že ten algoritmus známe.)}
+
+\subsection{Třída PSPACE}
+
+Rozhodovací problém \textbf{patří do třídy PSPACE}, pokud pro něj existuje program pro deterministický Turingův stroj, který jej řeší v paměti $O(n^k)$, kde $n$ je velikost instance a $k$ je konečné číslo.
+
+\subsection{Třída EXPTIME}
+
+Rozhodovací problém \textbf{patří do třídy EXPTIME}, pokud pro něj existuje program pro deterministický Turingův stroj, který jej řeší v čase $O(2^{P(n)})$, kde $P(n)$ je polynom ve velikosti instance $n$. Platí, že PSPACE $\subset$ EXPTIME.
+
+\subsection{Třída NP}
+
+\subsubsection*{Motivace}
+
+NP = Nedeterministicky polynomiální. Problémy, které \textbf{nemusí} mít polynomiální algoritmus, ale kde \textbf{cesta stavovým (konfiguračním) prostorem} je vždy \textbf{únosně dlouhá} (polynomiální ve velikosti instance).
+
+\subsubsection*{Řešení problému}
+
+Pro každý problém označíme $\Pi_{ANO}$ množinu instancí, které mají výstup ANO, $\Pi_{NE}$ množinu instancí, které mají výstup NE.
+
+\vspace{4pt}
+\noindent Program M pro nedeterministický Turingův stroj řeší rozhodovací problém $\Pi$ v~čase $t$, pokud se výpočet zastaví po $t$ krocích pro každou instanci $I \in \Pi_{ANO}$ problému $\Pi$. \textit{(Nic neříkáme o instancích $\Pi_{NE}$}
+
+\subsubsection*{Třída NP}
+
+Rozhodovací problém \textbf{patří do třídy NP}, pokud pro něj existuje program pro \textbf{nedeterministický} Turingův stroj, který každou instanci $I \in \Pi_{ANO}$ řeší v~čase $O(n^k)$, kde $n$ je délka vstupních dat a $k$ konečné číslo.
+
+\vspace{4pt}
+\noindent Rozhodovací problém \textbf{patří do třídy NP}, právě když pro každou instanci $I \in \Pi_{ANO}$ existuje konfigurace $Y$ taková, že kontrola, zda $Y$ je řešením, patří do P. \textit{(omezující podmínky lze vyhodnotit v polynomiálním čase, Y nazýváme certifikátem nebo svědkem)}
+
+\subsubsection*{P = NP ?}
+
+Určitě víme, že P $\subseteq$ NP. Jestli platí P = NP? Kdo ví \ldots
+
+\subsubsection*{"Otočení" NP problému}
+
+Je graf bez Hamiltonových kružnic? Je Booleova formule nesplnitelná? NP zde nefunguje, jak najdeme certifikát? Přecházíme z NP problému $\exists Y, R(I, Y)$ k~coNP problému $\forall Y, \neg R(I, Y)$.
+
+\subsubsection*{Svědkové}
+
+NP problém: Y je krátký svědek odpovědi ANO, krátký svědek odpovědi NE neexistuje, ale jsme schopni udělat krátké vyhodnocení každé konfigurace.
+
+\subsubsection{Třída P, NP, co-NP}
+
+P patří do NP $\cap$ coNP \textit{(jsme schopni najít svědka ANO i NE, je to řešení problému samotného)}. Jsou ale problémy, které nejsou P, a jsou zároveň NP i co-NP \textit{(existuje prvočinitel celého čísla $N$, jehož poslední číslice je 7?)}
+
+\subsection{Vztahy}
+
+P $=$ co-P, P $\subseteq$ NP $\cap$ co-NP \textit{(máme certifikát $\exists$ i $\forall$)}
+
+\vspace{4pt}
+\noindent Pokud by platilo P $=$ NP, pak by platilo NP $=$ co-NP.
+
+\subsection{Horší než NP}
+
+\textbf{QSAT$_2$}: Booleovská formule $F(X_1, X_2) 2n$ proměnných. $\exists Y_1, \forall Y_2 F(Y_1, Y_2) = 1$? Certifikátem je $Y_1$, jak ale zkontrolovat druhou část, když je problém kontroly v co-NP? Tyhle problémy můžeme neustále zhoršovat, až po QSAT$_k \ldots$
+
+\vspace{4pt}
+\noindent Takto konstruktivně definuji třídy problémů $\Sigma_i^P$, pro které existuje krátký $\exists$-svědek a problém jeho kontroly je třídy $\Pi_{i-1}^P$ a také třídu problémů $\Pi_i^P$, pro které existuje krátký $\forall$-svědek a problém jejich kontroly je třídy $\Sigma_{i-1}^P$.
+
+\vspace{4pt}
+\noindent Například tedy $\Sigma_0^P = $ P = $\Pi_0^P$, $\Sigma_1^P$ = NP, $\Pi_1^P$ = co-NP. Jak je to dál nevíme $\ldots$

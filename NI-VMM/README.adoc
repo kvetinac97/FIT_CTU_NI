@@ -1,0 +1,14 @@
+= Searching Multimedia Databases
+
+Got 100 % for semestral team project. +
+Got enough points from written exam for grade *A*.
+
+== Lectures
+
+Lecture notes in LaTeX, rendered to `lectures.pdf`.
+
+== Semestral work
+
+In our semestral work, we wrote a website in Python that uses machine learning to determine music genres of given files.
+
+link:semestral/[You can see the semestral work here]

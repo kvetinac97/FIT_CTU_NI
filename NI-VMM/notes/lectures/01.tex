@@ -1,0 +1,79 @@
+\section{Úvod}
+
+\vspace{12pt}
+
+\subsection{Obsah předmětu}
+
+Témata:
+\begin{itemize}
+    \item techniky patřící do information retrieval
+    \item techniky související s počítačovým viděním
+    \item indexace pro rychlejší vyhledávání a namodelování struktury databáze a způsobu dotazování
+\end{itemize}
+
+\noindent V přednáškách se budeme zabývat:
+\begin{itemize}
+    \item platformy pro vyhledávání multimédií (2)
+    \item slovníkové metody hledání obrázků (1)
+    \item podobnostní vyhledávání v multimédiích (3)
+    \item techniky extrakce vlastností (5)
+    \item indexace multimédií (2)
+\end{itemize}
+
+\subsection{Obsah multimédií}
+
+Biliony fotografií denně, 500 hodin videa se nahraje každou minutu na YouTube. To vše díky rychlému internetu, výpočetní síle, cloudu, principu webu 2.0 (každý je producent) a přesunu lidských aktivit na internet (sociální sítě, banky, e-shopy). Narůstá důležitost mobilních platforem, aplikace jsou používané mnohem častěji než desktop.
+
+Multimédia jsou víc než jeden typ digitálního média (audio, obrázky, video), přesná definice ale neexistuje, je to buzzword. Dá se to všechno ale taky kombinovat -- dokument s obsahem ke čtení, poslechu, vidění, nebo teoreticky i celý web. Většina typů jsou nestrukturované, jedná se ale i o člověkem zpracovaná data.
+
+\subsection{Strukturovaná vs nestrukturovaná data}
+
+Strukturovaná data šla postupně od relačních (SQL) přes objektové, XML, RDF a SPARQL k NoSQL.
+
+Nestrukturovaná data jdou postupně od textu, řetězců, časových řad (série událostí, např. co člověk v čase sleduje), dat ze senzorů, až ke zpracování proudových/cloudových dat.
+
+\subsection{Kategorie producentů dat}
+
+Nejvíce dat produkují \textbf{free-time users} (lidé sdílí fotky z dovolené, z domu, venkovní) -- hodně velká sémantika (lidé, město, příroda, sporty) s komplexními scénami. Tato data nejsou kritická, nemají anotace, jsou pro zábavu.
+
+Pak jsou zde ale data pro \textbf{průmysl a výzkum}, tento obsah je vytvořen profesionály v mnoha velmi úzkých poddoménách (rentgeny, viditelné/neviditelné spektrum, ultrazvuk). Tato data jsou kritická, mají přesné anotace, jsou pro lékařskou diagnózu.
+
+\subsection{Deskriptory multimédií}
+
+\begin{itemize}
+    \item \textbf{anotace} -- externí popis s přesnou sémantikou (explicitní: klíčová slova, odkaz, GPS a kontextové: lajky, komentáře, sdílení)
+    \item \textbf{deskriptory vlastností na základě obsahu} (extrahované z pixelů, na~nízké úrovni bez sémantiky, např. histogram barev v obrázku)
+    \item \textbf{multimodální deskriptory} -- více pohledů \textit{(modalit)} na jednu věc (např. histogram barev a počet hran)
+\end{itemize}
+
+Například taková fotografie na Flickru obsahuje vizuální obsah (pixely obráz\-ku), explicitní anotaci (popisek a tagy) a kontextovou anotaci (komentáře ostatních lidí v síti).
+
+Anotace jsou dobré díky vysoké sémantice a jednoduchému vyhledávání, nevýhodou je ale subjektivnost a neúplnost. Generují je dnes také deep learning metody \url{https://cloud.google.com/vision/}
+
+Obsahové vlastnosti jsou vždy přítomné a objektivní, mají ale nízkou sémantiku a hrozí tzv. \textit{semantic gap}.
+
+Anotovat lze v úzké doméně (kritické věci, scan mozku), ale vždy tam musí být člověk, pak jde anotovat i v široké doméně (úroveň objektů -- stůl, počítač, židle, úroveň konceptů -- kancelář, světlé, business).
+
+\subsection{SW architektury pro vyhledávání}
+
+Aplikace zaměřené na \textbf{data} (vyhledávací služby, hosting servery -- vidím fotku hodinek $\to$ jsou to hodinky) nebo na \textbf{služby} (sociální sítě, interaktivní platformy -- vidím fotku hodinek $\to$ zjistím, kde se dají koupit, co to je za značka, kolik stojí).
+
+\subsection{Vyhledávací zdroje}
+
+Hledáme textové dotazy, crawler stáhne všechen dostupný obsah webu, je nutné ale mít model pro samotné vyhledávání -- nejjednodušší je \textbf{metadata-based}, ale u multimédií budeme potřebovat spíše \textbf{content-based}.
+
+\subsection{Hosting servery}
+
+Jedná se o \textbf{úložiště} obsahu a zároveň \textbf{search engine} \textit{(vyhledávací zdroj)}, hledání ale \textbf{pouze} pomocí \textbf{textu} -- překlápí se směrem k sociálním sítím. Existují \textbf{image} hosting servery: alba, galerie -- Flickr, PhotoBucket, ImageShack, a také \textbf{video} hosting servery: YouTube, Dailymotion.
+
+Jsou zde ale také \textbf{stock} servery, které obsahují \textbf{placený} obsah pro profesionální designéry, s \textbf{kontrolovanou} kvalitou obsahu -- Corbis, Getty, iStockPhoto.
+
+Největší služby umožňují také automatizované \textbf{API}, vhodné pro agregaci s~ostatními daty (Google Maps, YouTube, Flickr).
+
+\subsection{Service-centric aplikace}
+
+\textbf{Další krok} vyhledávání multimédií, multimédia nejsou cíl, ale význam, finálním produktem je \textbf{služba}. Multimédium může být \textbf{přímý} konektor \textit{(fotka produktu k nákupu)}, nebo \textbf{nepřímý} \textit{(dva lidé jsou na jedné fotce = můžou mít nějaký vztah)}.
+
+U těchto aplikací se často vyskytují také \textbf{map servery} -- mapa je specifický velký obrázek, kde ale probíhá spíše \textbf{navigace}, než vyhledávání, hledat se dá textově (adresy). Pokročilejší aplikace pak můžou umožňovat zobrazení \textbf{specifických vrstev} -- počasí, turistické informace.
+
+Jednou ze skvělých věcí jsou dnes \textbf{mobilní platformy}, které umožňují snadné vyhledávání na základě multimédií, různé aplikace (Google Lens) a pracuje se i na \textbf{rozšířené realitě} (AR).

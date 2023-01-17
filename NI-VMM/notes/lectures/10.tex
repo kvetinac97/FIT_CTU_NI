@@ -1,0 +1,29 @@
+\section{Indexování multimédií}
+
+Je rozdíl mezi \textbf{efektivitou} (effectivity) a \textbf{výkonem} (effectiveness) -- rychlostí vyhledávání, předpokládáme \textbf{drahý} výpočet vzdáleností a chceme si usnadnit počet výpočtů $\to$ \textbf{redukovat} jejich počet \textit{(počet I/O operací, čas běhu)}.
+
+\subsection{Lower-bounding}
+
+Používáme levný \textbf{lower bound} místo drahé vzdálenostní funkce \textit{(v metrickém modelu závisí na pivotech a metrických postulátech, umožní rozdělit metrický prostor a rozdělit databázi v závislosti a tomto modelu)}. Levná \textbf{vylučovací} funkce, drahá vzdálenostní funkce.
+
+\textbf{Metrické postuláty}: reflexivita \textit{(objekt je nejvíce podobný sám sobě)}, nezápornost, symetrie, trojúhelníková nerovnost.
+
+Předpokládáme jednoduchý dotaz, query ball (o poloměru r od bodu Q), vysokou \textbf{selektivitu} \textit{(vracím malou část databáze)}. Vyberu tedy \textbf{pivot}, znám $\delta(Q, P)$ a $\delta(P, X)$ a díky trojúhelníkové nerovnosti vím, že $|\delta(Q, P) - \delta(X, P)|$ je lower bound \textit{(dolní mez)} $\delta(Q, X)$, pokud je tedy větší než \textbf{r}, vzdálenost je taky větší než r.
+
+\textbf{Vzdálenosti} k pivotům si pak můžu uložit do metrického \textbf{indexu}, a předpočítávat si je \textit{(vyhledávání je pak mnohem rychlejší)}.
+
+Jednotlivé lower/upper boundy můžu samozřejmě \textbf{kombinovat} (hyper-plane partitioning) nebo počítat lower bound ke \textbf{clusteru} \textit{(ne k jednotlivým pivotům)}. Pak potřebuji ty regiony nějak v metrickém prostoru organizovat, ukládat.
+
+Pivot je dobrý, když je \textbf{blíž} k Q nebo x \textit{(nesmí být stejně blízko ke všem)}, jinak je lower bound 0.
+
+Pivoti můžou být \textbf{globální} (statická množina, každý lower-bound je počítán ze stejné množiny pivotů) nebo \textbf{lokální} (dynamicky vybrané během indexování, každý lower bound je pak počítán k jiné množině).
+
+\subsection{Metrické přístupové metody (MAM)}
+
+Algoritmy a struktury umožňující \textbf{efficient} (rychlé) podobnostní vyhledávání v metrickém modelu, založen na \textbf{metrickém indexu} (perzistentní, nebo v paměti), index se musí vybudovat.
+
+\textbf{Indexovatelnost}: metrické postuláty nezaručují efficient (rychlé) indexování a vyhledávání, ani vhodné rozmístění v prostoru. Indexovatelnost je tedy \textbf{schopnost} databáze se rozdělit na \textbf{rozdílné} třídy (clustery) $\to$ vnitřní dimenze, faktor překrývání clusterů\ldots
+
+Vnitřní dimenze \textit{(intrinsic dimensionality}: $\rho(S,\delta) = \mu^2 / 2\sigma^2$, kde $\mu$ je průměr a $\sigma^2$ je rozptyl rozložení diskrétní vzdálenosti v datasetu \textbf{S} $\to$ nízké $\rho$ (pod 10) znamená \textbf{dobrou strukturu}, vysoké = špatná struktura \textit{(objekty jsou skoro stejně vzdálené)}.
+
+Ball-overlap: všechny body si představím jako koule v prostoru, a pokud poměr všech dvojic, které se protínají ke všem bude velký \textit{(vše se protíná)}, bude to špatně indexovatelné, jinak dobře indexovatelné.

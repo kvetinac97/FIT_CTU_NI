@@ -1,0 +1,84 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:bns="https://courses.fit.cvut.cz/NI-AM1/homeworks/bookings/"
+           targetNamespace="https://courses.fit.cvut.cz/NI-AM1/homeworks/bookings/"
+           elementFormDefault="qualified">
+
+    <xs:element name="getBookingRequest">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getBookingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="booking" type="bns:booking"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addBookingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="booking" type="bns:booking"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addBookingResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateBookingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="booking" type="bns:booking"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateBookingResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteBookingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteBookingResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="passenger">
+        <xs:sequence>
+            <xs:element name="first-name" type="xs:string"/>
+            <xs:element name="last-name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="airportDateTime">
+        <xs:sequence>
+            <xs:element name="airport" type="xs:string"/>
+            <xs:element name="dateTime" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="booking">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="passenger" type="bns:passenger"/>
+            <xs:element name="departure" type="bns:airportDateTime"/>
+            <xs:element name="arrival" type="bns:airportDateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

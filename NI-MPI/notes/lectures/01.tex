@@ -1,0 +1,129 @@
+\section{Funkce více proměnných}
+
+\vspace{12pt}
+
+\subsection{Vícerozměrný prostor a funkce}
+
+\subsubsection{Norma a vzdálenost}
+
+\textbf{Norma} na vektorovém prostoru V je zobrazení $||\cdot|| : V \to \mathbb{R}_0^+$ splňující, že norma nulového vektoru je 0, lze z ní vytknout skalár $\alpha$ a platí zde trojúhelníková nerovnost. \textbf{Vzdálenost} vektorů $x, y \in V$ pak definujeme jako $d(x,y) = ||x - y||$.
+
+\vspace{4pt} \noindent Platí zde tedy triviálně $d(x,y) = 0 \Leftrightarrow x = y$, symetrie a trojúhelníková nerovnost.
+
+\vspace{4pt} \noindent Obecně, pro libovolné $p \geq 1$ je
+\begin{equation}
+    ||x||_p = \sqrt[p]{\sum_{i=1}^n{|x_i|^p}}
+\end{equation}
+norma (pro $p = 2$ jde o euklidovskou normu, $p = 1$ součtová norma).
+
+\subsubsection{Okolí bodu}
+
+Pokud volím normu, pak $\delta$-okolí bodu $x$ je množina
+\begin{equation}
+    H_\delta(x) = \{b \in \mathbb{R}^n: ||x - b|| < \delta\}
+\end{equation}
+takzvaná \textbf{otevřená koule} o středu $x$ a poloměru $\delta$. Obecně pro všechna okolí píšeme jednoduše $H(x)$.
+
+\vspace{4pt} \noindent O $x \in \mathbb{R}^n$ řekneme, že je \textbf{hromadným bodem} $M$, pokud pro všechna $r > 0$ platí
+\begin{equation}
+    H_r(x) \setminus \{x\} \cap M \neq \emptyset
+\end{equation}
+Bod $M$, který není hromadný, se nazývá \textbf{izolovaný}.
+
+\subsubsection{Limita posloupnosti a funkce}
+
+O posloupnosti $(x_i)_{i=0}^{\infty}$ řekneme, že má \textbf{limitu} $L \in \mathbb{R}^n$, pokud
+\begin{equation}
+    (\forall \epsilon > 0)(\exists N)(\forall n > N)(x_n \in H_{\epsilon}(L))
+\end{equation}
+
+\noindent Reálná funkce více proměnných je zobrazení $f: D_f \to \mathbb{R}$, kde $D_f \subseteq \mathbb{R}^n$ (pro kladné celé n), opět zde platí definiční obor a obor hodnot.
+
+\vspace{4pt} \noindent \textbf{Graf} funkce $f$ je množina bodů z funkce.
+
+\vspace{4pt} \noindent Řekneme, že \textbf{funkce} $f: D_f \to \mathbb{R}$ má \textbf{limitu} $L \in \mathbb{R}$ v hromadném bodě $b$ množiny $D_f$ pokud
+
+\begin{equation}
+    \forall H(L) \quad \exists H(b) \quad x \in (D_f \cap H(b)) \setminus \{b\} \Longrightarrow f(x) \in H(L)
+\end{equation}
+
+\subsubsection{Spojitost funkce}
+
+Řekneme, že funkce $f: D_f \to \mathbb{R}, D_f \subset \mathbb{R}^n$ je \textbf{spojitá} v bodě $x_0 \in D_f$, pokud:
+
+\begin{equation}
+    \forall \epsilon > 0 \quad \exists \delta > 0 \quad x \in (D_f \cap H_\epsilon(x_0)) \Longrightarrow f(x) \in H_\epsilon(f(x_0))
+\end{equation}
+
+\noindent V izolovaném bodě je každá funkce spojitá.
+
+\subsubsection{Extrémy funkce}
+
+O funkci $f$ řekneme, že má v bodě $b \in D_f$:
+
+\begin{itemize}
+    \item \textbf{lokální minimum}, pokud $\exists \delta > 0, \forall x \in (D_f \cap H_\delta(b)), f(x) \geq f(b)$;
+    \item \textbf{ostré lokální minimum}, pokud $\exists \delta > 0, \forall x \in (D_f \cap H_\delta(b)), f(x) > f(b)$;
+    \item \textbf{globální minimum}, pokud $\forall x \in D_f, f(x) \geq f(b)$.
+\end{itemize}
+
+\noindent Pokud máme $D_f \subset \mathbb{R}^n$, která je \textbf{omezená} (je podmnožinou nějaké otevřené koule) a \textbf{uzavřená} (obsahuje i svou hranici -- body, jejichž každé okolí obsahuje bod z $D_f$ i bod mimo $D_f$), pak má spojitá funkce $D_f \to \mathbb{R}$ v $D_f$ globální minimum/maximum.
+
+\subsection{Parciální derivace}
+
+\subsubsection{Definice}
+
+\textbf{Parciální derivace} funkce $f$ve směru osy $x_i$ v bodě $b = (b_1, b_2, \ldots, b_n) \in D_f$ takovém, že $\exists H(b) \subset D_f$, je
+\begin{equation}
+    \lim_{h \to 0}\frac{f(b_1, b_2, \ldots, b_i + h, \ldots, b_n) - f(b_1, b_2, \ldots, b_i, \ldots, b_n)}{h} = L,
+\end{equation}
+pokud tato limita existuje.
+
+\vspace{4pt} \noindent Značíme $\frac{\partial f}{\partial x_i}(b) = L$, jedná se o sm. tečny ke grafu funkce $f$ ve směru osy $x_i$.
+
+\subsubsection{Gradient funkce}
+
+\textbf{Gradient funkce} $f$ v bodě $b \in D_f$ je vektor
+\begin{equation}
+    \nabla f(b) = \left(\frac{\partial f}{\partial x_1}(b), \frac{\partial f}{\partial x_2}(b), \ldots, \frac{\partial f}{\partial x_n}(b)\right).
+\end{equation}
+
+Představuje směr nejvyššího růstu funkce $f$ (kde je "nejstrmější").
+
+\subsubsection{Derivace ve směru}
+
+Derivace funkce $f$ ve směru $v \in \mathbb{R}^{n,1} = \mathbb{R}^n, ||v|| = 1$ v bodě $b \in D_f$ takovém, že $\exists H(b) \subset D_f$, je
+\begin{equation}
+    \nabla_v f(b) = \lim_{h \to 0}\frac{f(b + hv) - f(b)}{h}
+\end{equation}
+
+\noindent Platí, že pokud jsou všechny parciální derivace $f$ na nějakém okolí bodu $b$ spojité, pak
+\begin{equation}
+    \nabla_v f(b) = \nabla f(b) \cdot v.
+\end{equation}
+
+\subsubsection{Tečná nadrovina}
+
+Jedná se o jakési sjednocení tečen ve všech směrech v daném bodě. Její rovnicí je pak
+\begin{equation}
+    z = \frac{\partial f}{\partial x_1}(b)(x_1 - b_1) + \frac{\partial f}{\partial x_2}(b)(x_2 - b_2) + \ldots + \frac{\partial f}{\partial x_n}(b)(x_n - b_n) + f(b)
+\end{equation}
+
+\subsubsection{Nutná podmínka lokálního extrému}
+
+Nechť má funkce $f: D_f \to \mathbb{R}, D_f \subset \mathbb{R}^n$, v bodě $b$ parciální derivaci podle i-té proměnné.
+
+\vspace{4pt} \noindent Pokud $f$ má v bodě $b$ lokální extrém, pak
+\begin{equation}
+    \frac{\partial f}{\partial x_i}(b) = 0.
+\end{equation}
+
+\subsubsection{Stacionární bod}
+
+Pokud existuje gradient funkce $f$ v bodě $b$, pak existence lokální extrému implikuje $\nabla f(b) = 0$.
+
+\vspace{4pt} \noindent Body $b \in D_f$ splňující $\nabla f(b) = 0$ se nazývají \textbf{stacionární}.
+
+\subsubsection{Kritický bod}
+
+Kritickým bodem (podezřelým z extrému) je ten, kde je gradient nulový (stacionární bod) nebo gradient neexistuje.

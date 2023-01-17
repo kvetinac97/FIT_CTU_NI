@@ -1,0 +1,68 @@
+\section{Randomizované algoritmy}
+
+\textbf{Randomizovaný algoritmus}: založen na náhodné volbě, jeho vlastnosti jsou tedy vyjádřeny statisticky.
+
+\vspace{4pt}
+\noindent \textbf{Monte Carlo} algoritmy: dosažený výsledek je náhodná proměnná, čas běhu je pevný pro danou instanci \textit{(budu gamblit do půlnoci, otázkou je, kolik prohraju)}
+
+\vspace{4pt}
+\noindent \textbf{Las Vegas} algoritmy: dosažený výsledek je vždy správný, čas běhu je náhodná proměnná \textit{(všechno prohraji, otázkou je za jak dlouho)}
+
+\vspace{4pt}
+\noindent Například u randomizovaného SATu mám počáteční ohodnocení se stejnou prav\-děpodobností, a pak postupně opakuji algoritmus a získávám tím lepší výsledek = lokální heuristika s \textbf{náhodnou} volbou. \textit{(Monte Carlo)}
+
+\vspace{4pt}
+\noindent Příkladem může být i Rabin-Millerův test prvočíselnosti (pravděpodobnost, že číslo je složené, je $1 - \frac{1}{4}^r$ \textit{(Monte Carlo)}) nebo Quicksort \textit{(Las Vegas)}.
+
+\vspace{4pt}
+\noindent \textbf{Výhody}: strukturní \textbf{jednoduchost}, očekávaná kvalita může být lepší než zaručená kvalita aproximativních algoritmů, u Monte Carlo se dá nezávislým opakováním \textbf{zlepšit} kvalita.
+
+\vspace{4pt}
+\noindent Kombinace s deterministickými prvky tedy poskytuje \textbf{nestrannost} (náhodný start, náhodně vybraný sousední stav, náhodně vybraný krok z množiny, kde heuristická funkce dává stejnou hodnotu).
+
+\vspace{4pt}
+\noindent Formální analýza je \textbf{složitější}, většinou očekáváme střední hodnotu. Proto si vybíráme \textbf{experimentální} charakterizaci -- primární metrikou je počet kroků, úspěch (na \textbf{jedné} instanci: rozdělení počtu kroků, (korigovaná) distribuční funkce, na \textbf{více} instancích: )
+
+\section{Nasazení heuristik}
+
+\subsection{Instalační závislosti}
+
+Máme problém řešení instalačních závislostí (balíčky jsou v různých repozitářích, mají na sobě různé závislosti, nebo konflikty).
+
+\vspace{4pt}
+\noindent Existují \textbf{distribuce}, které tento problém převádí na \textbf{SAT}. Instalací balíčku se rozumí daný balíček, požadavek na instalaci balíčku je klauzule $(a)$, \textbf{závislost} je $(\lnot a + b)$, konflikt $(\lnot a + \lnot b)$ a hledám \textbf{ohodnocení} proměnných (= rozhodnutí o instalaci) takové, aby byla hodnota \textbf{1} (nainstaloval jsem vše), optimalizačním kritériem může být \textbf{velikost} stažení, aktuálnost systému.
+
+\subsection{Práce s heuristikami}
+
+Každý algoritmus / heuristika má nějaké číselné \textbf{parametry}, které jsou nesrozumitelné koncovému uživateli a navzájem se ovlivňují.
+
+\vspace{4pt}
+\noindent Buď tedy uživatel může zkusit \textbf{postupně} zjišťovat, kde to funguje optimálně, nebo \textbf{pochopí}, co který parametr dělá, sleduje charakter a využije to.
+
+\vspace{4pt}
+\noindent \textbf{white-box}: pracujeme s omezenou sadou instancí, provádíme detailní měření, abychom všemu porozuměli, modifikace heuristiky
+
+\vspace{4pt}
+\noindent \textbf{black-box}: plná sada instancí, měření výsledků, ověření kvality a výkonu bez modifikace heuristiky
+
+\vspace{4pt}
+\noindent Parametry obecně nejsou nezávislé, někde je závislost známa, někde je nutná ověřit, v každém případě se vždy jedná o \textbf{konfiguraci heuristiky}.
+
+\subsubsection{Faktorový návrh}
+
+Vyzkouším \textbf{všechny} kombinace hodnot parametrů $\to$ pokud neznám chování algoritmu. Nevýhodou je ale \textbf{více} parametrů, musíme odhadnout \textbf{rozsah} a \textbf{krok} každého parametru.
+
+\subsubsection{Cesta prostorem parametrů}
+
+Snažím se \textbf{postupnými změnami} parametrů dostat k ideální variantě. Zabere méně práce, času, musíme ale \textbf{porozumět} algoritmu a nevíme, jestli to bude \textbf{konvergovat}.
+
+\subsection{Zpráva o nasazení}
+
+Velmi důležité je \textbf{shrnutí}: v jakém rozsahu lze heuristiku \textbf{nasadit}, jaká je \textbf{kvalita}.
+
+\vspace{4pt}
+\noindent \textbf{White box}: postup, důvod postupu, důvod nastaveného rozsahu faktorového návrhu, důvody kroků při nastavování parametrů včetně slepých uliček, popis experimentů a jejich interpretace.
+
+\vspace{4pt}
+\noindent \textbf{Black box}: prokazované tvrzení, návrh průkazného experimentu, jeho provedení a interpretace (IMRaD).
+

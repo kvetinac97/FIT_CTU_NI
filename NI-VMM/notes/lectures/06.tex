@@ -1,0 +1,66 @@
+\section{Globální deskriptory obrázků}
+
+\subsection{Historie}
+
+Kdysi bylo vyhledávání pouze na základě \textbf{textu} \textit{(anotace)}. Na začátku 90. let začíná vyhledávání na základě \textbf{obsahu} pomocí feature extraction, od roku 2012 se začíná rozšiřovat \textbf{deep learning} (sémantické deskriptory).
+
+\subsection{Lokální a globální vlastnosti}
+
+Vlastnost může být \textbf{globální} (vlastnost celého obrázku / videa), nebo \textbf{lokální} (vztažená k určité části). Také jsou vlastnosti buď \textbf{nízkoúrovňové} (barva, tvar, textura, melodie), nebo \textbf{vysokoúrovňové} (objekty, hlasy). Některé můžou být také \textbf{doménově závislé} (otisky prstů, obličeje).
+
+\subsection{Semantic gap}
+
+U \textbf{vysokoúrovňových} vlastností je velmi \textbf{těžké} je extrahovat \textit{(kůň na horách)}. \textbf{Nízkoúrovňové} vlastnosti se dá velmi \textbf{dobře} extrahovat, nedají se ale příliš dobře popsat uživatelem.
+
+\subsection{MPEG}
+
+Organizace, která vytváří \textbf{standardy} pro reprezentaci audiovizuálního obsahu (postupně MPEG-1, MPEG-2, MPEG-4). Standard \textbf{MPEG-7} slouží k popisu multimediálního obsahu pomocí \textbf{metadat} -- definuje schéma, ale nedefinuje způsob, jak ho získat.
+
+\textbf{Vizuální} deskriptory jsou nízkoúrovňové, a popisují DominantColor, ScalableColor, ColorLayout, ColorStructure, HomogeneousTexture, TextureBrowsing, EdgeHistogram, ale taky třeba RegionShape, ContourShape, pohyb\ldots
+
+\subsubsection*{Barevné deskriptory}
+
+Sémanticky nejnižší informací je barevná informace. Pro člověka je vizuálně barva \textbf{nejdůležitější}, umožňuje hledání v \textbf{barevném prostoru} 
+červená, zelená, modrá – RGB \textbf{není} příliš vhodná pro modelování, hodí se spíše použít \textbf{HSV} (odstín – hue, saturation – sytost, value – hodnota, jas).
+
+Existují i další různé modely (\textbf{YCbCr}: světlost, míra modré, míra zelené), HMMD (odstín, minimum/maximum R, G, B hodnot). Tyto barvy pak jsme schopni \textbf{kvantizovat} (redukovat počet unikátních barev v obrázku) -- můžeme rovnoměrně, nebo nelineárně \textit{(např. člověk vnímá více zelenou barvu)}.
+
+\subsubsection*{Podobnost barev}
+
+Používá se \textbf{kvadratická forma} -- máme redukovaný počet barev, korelujeme jednotlivé barvy.
+
+\subsubsection*{Dominant Color Descriptor}
+
+Kompaktní popis \textbf{jednotlivých barev} (\textbf{vektor} barevných komponent, \textbf{procento} pixelů namapovaných na tuto barvu, \textbf{rozptyl} barevných hodnot těchto pixelů).
+
+\subsubsection*{Scalable Color Descriptor}
+
+\textbf{Histogram} barev (256 binů) v obrázku, následně použiju \textbf{Haarovu transformaci}, která mi to ještě více \textbf{kvantizuje} (zmenší, komprimuji).
+
+\subsubsection*{Color Layout Descriptor}
+
+Celý obrázek \textbf{zmenšíme} do ikonky 8x8, na které provedeme \textbf{diskrétní kosinovou transformaci}, kterou pak můžeme porovnávat.
+
+\subsubsection*{Color Structure Descriptor}
+
+Reprezentuje jak \textbf{distribuci} barev, tak \textbf{lokální umístění} těchto barev v prostoru $\to$ tento deskriptor je \textbf{citlivý} i na vlastnosti, které histogramové deskriptory \textbf{nevidí}.
+
+\subsubsection*{Podobnost textur}
+
+Textura odpovídá \textbf{určitým vlastnostem} obrázku, zajímá nás \textbf{struktura} (letecké fotografie, látka, materiál, lékařské využití).
+
+\subsubsection*{Homogeneous Texture Descriptor}
+
+Předpokládá, že je textura \textbf{homogenní}, obrázek se tedy \textbf{naškáluje} na základě \textbf{orientace} (na který vzor reaguje nejvíce).
+
+\subsubsection*{Texture Browsing Descriptor}
+
+Porovnává pravidelnost \textbf{textury} -- jestli je někde jasně horizontální, nebo vertikální distribuce = určí dominantní \textbf{směr} a pravidelnost.
+
+\subsubsection*{Edge Histogram Descriptor}
+
+Rozseká obrázek do více \textbf{histogramů} $\to$ směrovost, vertikální, horizontální, 45 stupňů, 135 stupňů = 80 binový hranový histogram.
+
+\subsubsection*{Face Descriptor}
+
+Specifický deskriptor, který reprezentuje obličej jako \textbf{lineární kombinaci} jednotlivých vzorových obličejů, \textbf{nepoužívá se}.

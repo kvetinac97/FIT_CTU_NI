@@ -1,0 +1,34 @@
+= Semestrální práce z VMM
+
+Vojtěch Sillik, Ondřej Wrzecionko
+
+== Audio
+
+Hudební žánry:
+
+- opera, jazz, reggae (VS)
+- classic, metal, rap (OW)
+
+Od každého žánru máme přibližně 5 trénovacích souborů.
+
+== Analýza
+
+Spuštění porovnávačů deskriptorů na trénovacích souborech a následné porovnání pomocí grafů, abychom zjistili, které deskriptory má cenu vyzkoušet pro porovnání.
+
+Deskriptory analyzovány z:
+
+ - jAudio (Java, VS) -> area of moments
+ - MPEG (Java, OW) -> spectral centroid, spectrum spread type
+ - MFCC (Python, OW) -> průměr koeficientů, časová řada koeficientu
+
+== Program
+
+Samotný webový server, na který proběhne nahrání souboru, který se zanalyzuje, porovná s referenční databází skladeb a na základě toho se vykreslí koláčový graf s pravděpodobností jednotlivých žánrů.
+
+Součástí webového serveru je také stránka, kde lze nastavovat jednotlivé parametry pro porovnávání jejich efektivity a rychlosti _(šířku okna pro porovnávání časové řady MFCC, počet nejbližších sousedů, váhy jednotlivých deskriptorů)_.
+
+=== Prerekvizity pro spuštění
+
+Předpokládáme Python3, moduly scipy, python_speech_features, numpy, matplotlib, streamlit a nainstalovanou Javu ve verzi minimálně 19.
+
+&copy; VS & OW 2022

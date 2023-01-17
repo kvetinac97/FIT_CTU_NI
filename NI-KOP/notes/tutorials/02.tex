@@ -1,0 +1,82 @@
+\section{Konfigurační proměnné}
+
+\subsection{Definice}
+
+Mám dáno ohodnocení konfiguračních proměnných = \textbf{konfigurace}. Nezaměňovat se vstupními a výstupními proměnnými.
+
+\textbf{Omezení} počítám ze vstupních proměnných a dosazuji do něj konfiguraci. \textbf{Optimalizační kritérium} se počítá z výstupních proměnných, ty vychází z konfigurace. Každé řešení musí mít konfiguraci, ze které vychází, jinak se šidím.
+
+\subsection{Příklady}
+
+\subsubsection{Minimum vertex cover}
+
+Hledáme minimální množinu vrcholů $V' \subseteq V$ takovou, aby z každé hrany $(u,v) \in E$ alespoň jeden vrchol ležel ve $V'$. Optimalizační kritérium je $|V'|$. \textit{(kardinalita množiny vrcholů)}
+
+$\to$ Konfigurační proměnné jsou podmnožina V. Tento problém také patří do kategorie minimální podmnožina.
+
+\subsubsection{Traveling Salesman Problem}
+
+Máme zadáno množinu $C$ z $m$ měst a vzdálenosti mezi nimi $d(c_i, c_j) \in \mathbb{N}$. Hledáme permutaci měst, aby vzdálenost měst byla minimální.
+
+$\to$ Konfigurační proměnnou jsou navštívená města (pořadí). Omezující podmínkou je to, aby se jednalo o permutaci.
+
+\subsubsection{Minimum Bin Problem}
+
+Máme zadánu množinu $U$ předmětů, který má každý velikost $s(u) \in \mathbb{Z}^+$ a kapacita krabičky $B$. Hledáme rozdělení $U$ do disjunktních množin $U_1, U_2, \ldots, U_m$ takové, aby se každá množina vlezla do krabičky. Optimalizačním kritériem je množství použitých krabiček.
+
+$\to$ Konfigurační proměnnou je dvojrozměrné pole krabiček a předmětů v nich /nebo/ pole předmětů s informací o tom, ve které krabičce jsou.
+
+\subsubsection{Minimum Rectangle Tiling}
+
+Máme pole $n \times n$ nezáporných čísel a kladné celé číslo $p$. Řešením je rozdělení tohoto pole na $p$ nepřesahujících podpolí ve tvaru obdélníku. Optimalizačním kritériem je váha čísel v obdélníku.
+
+$\to$ Konfigurační proměnnou jsou jednotlivé obdélníky, reprezentovat je může\-me jako souřadnice levého horního a pravého dolního rohu každého obdélníku.
+
+\subsubsection{Minimum Graph Motion Planning}
+
+Máme dán graf $G$, počáteční pozici robota, cílovou pozici robota, a pozice jednotlivých překážek. V každém tahu můžeme pohnout buď s robotem, nebo s překážkou a posunout ho/ji na sousední vrchol. Řešením je posloupnost pohybů robota a překážek. Optimalizačním kritériem je počet těchto pohybů.
+
+$\to$ Konfigurační proměnnou je posloupnost provedených kroků (co, kam).
+
+\subsubsection{The Buckets problem}
+
+Máme $n$ kbelíků, kohoutek a umyvadlo. Známe kapacity kbelíků, jejich původní a cílové naplnění vodou. V každém kroku lze zaplnit kyblík po rysku, vyprázdnit kyblík nebo přelít vodu z jednoho do druhého. Řešením je posloupnost přechodů, optimalizačním kritériem je počet operací.
+
+$\to$ Konfigurační proměnnou je posloupnost přechodů. (odkud, kam) kde odkud a kam může být číslo kbelíku, T (kohoutek) nebo S (umyvadlo).
+
+\textit{(Tento problém si můžu reprezentovat jako $n$ rozměrný graf a konfigurační proměnnou je jakási čára po bodech.)}
+
+\section{Experimentální vyhodnocení algoritmu (1 instance)}
+
+\textbf{Algoritmus GSAT}: snaží se o řešení problému splnitelnosti Booleovských formulí; vygeneruje náhodné rozložení proměnných, a pak se snaží ho vylepšit.
+
+\vspace{4pt}
+\noindent \textbf{Náhodný} krok -- náhodný výběr nesplněné klauzule a proměnné v ní střídající se s \textbf{greedy} krokem -- vybere se náhodně jedna z nejvhodnějších proměnných pro flip \textit{(která splní nejvíce formulí)}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c|c|c}
+         Klauzule & (1,0,1) & (0,0,0) & (0,1,0) & (1,1,0) \\
+           \hline
+          $x_1 + x_2 + x_3$ & 2 & 0 & 1 & 2 \\
+           \hline
+          $\neg x_1 + \neg x_2 + x_3$ & 2 & 2 & 1 & 0 \\
+           \hline
+          $x_1 + \neg x_2 + x_3$ & 3 & 1 & 0 & 1 \\
+           \hline
+          $\neg x_1 + \neg x_2 + \neg x_3$ & 1 & 3 & 2 & 1 \\
+          \hline
+          $x_1 + \neg x_2 + \neg x_3$ & 2 & 2 & 1 & 2 \\
+           \hline
+          $\neg x_1 + x_2 + x_3$ & 1 & 1 & 2 & 1 \\
+          \hline
+          & splněno & nespl. & flip $x_2$ & greedy
+    \end{tabular}
+\end{table}
+
+\noindent V prvním případě bylo rovnou \textbf{splněno}, v druhém zkusíme \textbf{náhodný} krok = flipneme náhodně proměnnou, abychom splnili klauzuli (zde $x_2$). V třetím zkusíme \textbf{hladový} krok = vybereme nejlepší možnost \textit{(všechny možnosti zde ale splní pořád jen 5, tedy náhodně)}.
+
+Program GSAT můžeme spustit s různými parametry: -r time iniciuje pseudo\-náhodný generátor, -i 1000 nastaví počet MAX\_FLIPS na 1000, -p 0.4 nastaví pravděpodobnost na 0.4.
+
+\vspace{4pt}
+\noindent Můžeme porovnávat také pomocí \textbf{ECDF} (distribuční funkce) -- viz. přednáška, zaneseme graf, je to porovnání pravděpodobností, že algoritmus skončil nejvýše v daném kroku \textit{(včetně neúspěšných běhů)}.

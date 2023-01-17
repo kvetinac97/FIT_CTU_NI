@@ -1,0 +1,41 @@
+== Diskuze
+
+_V této kapitole diskutujeme detaily našeho řešení, rozbor nedostatků -- proč některé věci nefungují, a jak by to šlo potenciálně v budoucnu opravit._
+
+=== Deskriptory
+
+Z prvotní analýzy nám vyšlo jako *nejvhodnější* zkoumat deskriptory `SpectrumSpreadType`, `SpectrumCentroidType`, `Area Method of Moments`, `Method of Moments` a `MFCC`.
+
+Na základě měření v experimentální sekci můžeme vidět, že pro deskriptory `SpectrumSpreadType` a `SpectrumCentroidType` počítající *rozsah* a *rozptyl* spektra nám vyšla přesnost jen necelých *22*
+%, respektive *28* %, což není o příliš více než *náhodný* výběr _(16%)_.
+
+S téměř 100 % přesností rozpoznaly tyto deskriptory pouze žánr *opera* -- to sedí s prvotní hypotézou, že budou tyto deskriptory vhodné pro rozpoznávání žánrů, kde se často objevují *vysoké frekvence*, mezi které opera patří. Přesto ale tyto deskriptory nerozpoznaly spolehlivě *metal*, kde se vysoké a nízké frekvence také často střídají. Zajímavostí je také to, že deskriptor `SpectrumCentroidType` správně rozpoznal *reggae*, zatímco deskriptor `SpectrumSpreadType` rozpoznal *jazz*.
+
+Pro *celkové* použití tyto deskriptory příliš vhodné vzhledem ke své přesnosti *nebudou*, dalo by se je ale vhodně *použít* pro rozlišení *opery* a **jazz**u, respektive *opery* a *reggae*.
+
+Deskriptor `Area Method of Moments` z knihovny jAudio  vypadal při analýze jako velmi *užitečný*, při experimentálním testování se však ukázalo, že jeho přesnost _(u průměru i std. odchylky)_ dosahuje jen pouhých *22* %, tedy téměř náhodný výběr. Spolehlivě rozpoznal pouze *operu*, tento deskriptor tedy *nemá* cenu používat pro *žádné* žánry.
+
+Deskriptor `Method of Moments` _(průměr)_ se ale již ukázal jako *použitelný*, jelikož jeho přesnost dosahuje *50* %, což je v případě audio retrieval *velká* úspěšnost.
+
+Tento deskriptor spolehlivě rozpoznal *jazz*, *rap* a *operu*, šel by tedy využít pro jejich rozlišování.
+
+Posledním zkoumaným deskriptorem bylo `MFCC`, a to jak *průměr* všech 13 koeficientů, tak *časová řada* prvních 250 hodnot prvního koeficientu.
+
+Deskriptor průměr MFCC koeficientů dopadl ze všech deskriptorů *nejlépe* s přesností *71* %
+procent. Dokázal velmi dobře rozpoznat *všechny* žánry, s pár občasnými chybami mezi klasickou hudbou a operou, rapem, jazzem a reggae. To *sedí* s hypotézou, že MFCC slouží dobře k rozpoznávání mluvené řeči a typu nástrojů.
+
+Deskriptor *časové řady* prvních 250 členů prvního koeficientu MFCC měl lehce *horší* přesnost než průměr všech koeficientů _(57 %)_. Stejně jako průměr všech koeficientů správně rozpoznal většinu žánrů, měl ale větší problém s *rapem*.
+
+Po analýze *všech* deskriptorů a jejich experimentálním *testování* bychom tedy jako zlepšení zvolili použití deskriptoru *MFCC průměr* s tím, že skladby klasifikované jako jazz, rap a opera by se ještě *převážily* s pomocí deskriptoru *Method of Moments* pro jejich *přesnější* rozpoznání.
+
+=== Parametry
+
+Při testování parametru `TEST_K_NEAREST` neboli *počet nejbližších sousedů* můžeme vidět, že nejlepší přesnost a nejpřesnější výsledky vychází pro *k = 3*, respektive *k = 5*. To je velmi pravděpodobně tím, že z každého žánru je v databázi k dispozici právě 5 skladeb _(při testování přesnosti 2-3)_, u *nižšího* čísla k tedy může nějaký *false hit* jiného žánru zakrýt ten správný, u *vyššího* k zase není v databázi dostatek skladeb správného žánru, a *snižujeme* tedy přesnost.
+
+Parametr `DTW_WIDTH` na většinu deskriptorů neměl vliv, jelikož se jednalo o jednu hodnotu. Mělo smysl ho zkoumat právě pro deskriptor `MFCC` _(časová řada)_, kde určil, jak *moc daleko* od diagonály se má hledat cesta mezi řadami.
+
+Z experimentálního testování můžeme vidět, že čím *větší* šířku volíme, tím větší okolí prozkoumáváme a tím *déle* tedy běží porovnávání.
+
+Co je ovšem zajímavé je ale to, že nejlepší přesnosti dosahujeme pro šířku *5*, i přesto, že se nejedná se o největší okolí a přesnost pro šířku *0* _(hledáme pouze na diagonále)_ není o moc horší. Mezi časovými řadami je tedy nejspíše *nejčastější* posun právě do 5 hodnot, a proto vychází přesnost pro šířku 5 *nejlépe*.
+
+Co není překvapivé je fakt, že čím *větší* šířku volíme, tím *déle* porovnávání běží. Při ostrém běhu bychom z časových důvodů volili spíše šířku 0 nebo právě deskriptor `MFCC` _(průměr)_, jelikož se jedná o časově rychlejší řešení s téměř stejnou, ne-li *lepší* přesností.

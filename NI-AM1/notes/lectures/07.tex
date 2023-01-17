@@ -1,0 +1,65 @@
+\section{Vysoká dostupnost a výkon}
+
+\subsection{Dobrý výkon}
+
+Výkon \textbf{je určen} počtem uživatelů, souběžných připojení, zpráv, velikost zpráv, počet služeb, infrastruktura (kapacita, dostupnost, konfigurace).
+
+Vysokého výkonu dosáhneme pomocí \textbf{infrastruktury} (škálování, failover), ladění \textbf{výkonu} (aplikační server, JVM, OS) a konfigurace služby (paralelní zpracování, optimalizace procesů).
+
+\subsection{Definice}
+
+\textbf{Škálování}: vytváření víc instancí systému v případě větší zátěže tak, že koncový uživatel nepozná, že systém používá více uživatelů. Může být \textbf{horizontální} (přidávám nové servery) nebo \textbf{vertikální} (přidávám další CPU, zvětšuji paměť).
+
+\textbf{Dostupnost}: pravděpodobnost, že je služba v daném čase funkční \textit{(99.9987 \% = služba má výpadek 44 sekund ročně)}. \textbf{LSA}: zaručuje dostupnost služby, jinak zákazník dostane slevu.
+
+\textbf{Vysoká dostupnost}: schopnost systému se škálovat \textit{(když jedna instance spadne, operace budou přesměrovány na jinou)}, \textbf{application failover}: když selže jedna komponenta, překopíruje se práce na jinou -- musí to být ale možné)
+
+Metrika \textbf{doba odpovědi}: kolik času zabere od prvního zadání domény do návratu odpovědi: DNS lookup \textit{($\to$ nepoužívat doménová jména, ale rovnou DNS)}, TCP handshaking \textit{($\to$ používat perzistentní připojení)}, RTT \textit{(někdy lze ignorovat)} a samotný server processing time
+
+Další metrika je pak \textbf{queries per second} (na straně serveru).
+
+\subsection{Load balancing}
+
+\textbf{Rozložení} zátěže více instancím aplikace \textit{(na různých strojích, sdílení zátěže)}.
+
+\vspace{4pt}
+\noindent DNS-based load balancer \textit{(DNS round robin)} $\to$ NAT-based load balancer $\to$ Reverse-proxy load balancer $\to$ klientský load balancer.
+
+\subsubsection*{DNS-based}
+
+Na \textbf{jeden} DNS záznam je přiřazeno \textbf{více} IP adres, DNS systém přiděluje algoritmem Round Robin adresy ze seznamu. Velmi jednoduché, ale není možnost monitorovat status a zdraví serverů.
+
+\subsubsection*{Reverse Proxy (nginx)}
+
+Load Balancer (na úrovni \textbf{TCP} a \textbf{HTTP}) dostane příchozí požadavek a vybere instanci aplikace, které \textbf{přepošle} požadavek. Následně zpětně dostane odpověď a tu \textbf{vrátí} zpět. Jednotlivé instance obsahují také \textbf{endpointy} pro kontrolu zdraví \textit{(stavu)} aplikace.
+
+\textbf{Sticky session}: load balancer jednomu konkrétnímu uživateli zajišťuje, že bude vždy komunikovat s jedním \textbf{konkrétním} serverem \textit{(aby mu nezmizela session $\to$ pasivní cookie, nebo aktivní = load balancer přidá vlastní cookie)}.
+
+\subsection{Typy Load balancerů}
+
+Softwarové: Apache \textit{(mod\_proxy\_balancer)}, \textbf{NGINX}, obsahuje \textbf{sticky sessions}, různé možnosti konfigurace, plug-iny nebo hardwarové.
+
+\subsection{Round-Robin}
+
+Pokud existuje \textbf{identifikátor} sessionu, použije se \textbf{stejný} server. Jinak se pošle server na \textbf{další} server v pořadí \textit{(id serveru, plus modulo)} a zapamatuje si identifikátor sessionu.
+
+\subsection{Nastavení proxy}
+
+Toto ale nemusí fungovat vždy, server může být přetížen. Proto se používá také metrika \textbf{least connections} (požadavek se pošle na server, který je nejméně zatížený) nebo \textbf{least time} (požadavek se pošle na server s nejkratší průměrnou dobou odezvy a nejmenším počtem připojení).
+
+Zároveň můžeme omezit \textbf{maximální počet} připojení (throttling), nastavit kapacitu, nebo nastavit serveru pomalý začátek \textit{(úmyslné timeouty na začátku, aby server nebyl hned zahlcen)}.
+
+\subsubsection*{Sticky cookie}
+
+Cookie je definováno přímo load balancerem, může ho tedy v případě výpadku přeposlat na jiný server, případně \textbf{sticky learn} = load balancer rozpozná cookie od uživatele a využije ho.
+
+\subsubsection*{Session state persistence}
+
+Jinou možností je si ukládat informace o session přímo do databáze, ke které pak přistupují jednotlivé servery, a není tedy třeba používat sticky sessions v load balanceru.
+
+\subsection{Monitorování}
+
+Potřebujeme sbírat data o běhu systému, filtrovat je, ukládat, zobrazovat a následně \textbf{ladit}. Metriky můžeme získat z aplikačního serveru (přístupové logy, server logy), operačního systému (otevřené sockety, paměť, počet přepnutí kontextu, I/O výkon) a databáze.
+
+
+% ZKOUŠKA: zpět k původní variantě = písemná zkouška, pondělí 7:30, 3 části (otázky pokrývající vše z přednášek, uvažování v souvislostech, z každé části alespoň 50% bodů), kolem 11:00 se dozvíme výsledek v A-922, kde se na to můžeme podívat.

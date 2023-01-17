@@ -1,0 +1,9 @@
+\section{Nasazení simulované evoluce}
+
+Způsob výběru v genetických algoritmech = \textbf{selekční tlak} (pravděpodobnost výběru \textbf{nejlepšího} jedince). Zdatnost jedince je určena hodnotou \textbf{optimalizačního} kritéria. Pokud nám to tedy nechtělo konvergovat, měli jsme možná malý selekční tlak.
+
+Pokud mám na začátku \textbf{malé rozdíly} v populaci, může to být důvodem malého selekčního tlaku a pomalé konvergence. Řešením je použití \textbf{lineárního škálování} $\to$ méně časté hodnoty se \blockquote{naškálují} \textit{(funguje oběma směry -- při malých i velkých rozdílech)} tak, že \textbf{nejméně} zdatný jedinec bude mít \textbf{zdatnost} $z_1$ a \textbf{nejvíce} $z_2$ (slide KOP09-33). Pravděpodobnost \textbf{mutace} se typicky volí jako \textbf{nízké} jednotky procent (např. 3 \%).
+
+Kromě \textbf{lineárního škálování} můžu u výběru ruletou určovat selekční tlak ještě \textbf{ranking}em = nejhorší jedinec má zdatnost 1 a každý lepší o jedna větší, tím získáme pevný selekční tlak. (slide KOP09-38) nebo \textbf{zkráceným výběrem} (pracuji jen s lepší polovinou).
+
+V případě turnaje je \textbf{velikost turnaje} přímo úměrná selekčnímu tlaku. Při \textbf{faktorovém návrhu} bychom měli velikost populace, pravděpodobnost mutace, horní mez lineárního škálování \textit{(někdy je třeba trochu jemnější škála)}.

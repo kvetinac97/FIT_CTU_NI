@@ -1,0 +1,39 @@
+= HW1 - Transformace
+
+Obsahem úkolu je složka se zdrojovým kódem `src`.
+
+Třída `Application` obsahuje definici textového řetězce, který se použije jako vstup a vypíše výstup transformace.
+
+Samostatná transformace probíhá pomocí služby `TransformationService`, která s pomocí RegExu naparsuje plaintextový formát a vrátí s pomocí knihovny Gson textový řetězec ve formátu JSON.
+
+Vstup:
+
+[source,text]
+----
+Dear Sir or Madam,
+
+please find the details about my booking below:
+
+===
+Tour id: "1"
+Location: "Bohemian Switzerland"
+Person: "Jan Karel Novak"
+===
+
+Regards,
+Jan Novak
+----
+
+Výstup:
+
+[source,json]
+----
+{
+  "tourId": 1,
+  "location": "Bohemian Switzerland",
+  "person": {
+    "name": "Jan Karel",
+    "surname": "Novak"
+  }
+}
+----

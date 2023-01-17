@@ -1,0 +1,47 @@
+= Semestrální projekt NI-VMM
+:figure-caption: Obrázek
+:table-caption: Tabulka
+
+[.text-center]
+Vojtěch Sillik, Ondřej Wrzecionko +
+ +
+ +
+ +
+
+== Obsah
+
+1. <<intro,Úvod>>
+2. <<analysis,Analýza>>
+3. <<implementation,Implementace>>
+4. <<output,Příklad výstupu>>
+5. <<experiments,Experimentální sekce>>
+6. <<discussion,Diskuze>>
+7. <<ending,Závěr>>
+
+<<<
+[[intro]]
+include::parts/1_intro.adoc[]
+
+<<<
+[[analysis]]
+include::parts/2_analysis.adoc[]
+
+<<<
+[[implementation]]
+include::parts/3_implementation.adoc[]
+
+<<<
+[[output]]
+include::parts/4_output.adoc[]
+
+<<<
+[[experiments]]
+include::parts/5_experiments.adoc[]
+
+<<<
+[[discussion]]
+include::parts/6_discussion.adoc[]
+
+<<<
+[[ending]]
+include::parts/7_ending.adoc[]

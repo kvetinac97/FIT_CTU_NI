@@ -1,0 +1,86 @@
+\section{Podobnostní vyhledávání -- modely a dotazy}
+
+Bude to především o vyhledávání podle \textbf{obsahu} (textový, obrazový, audio, video). Kvůli jednoduchému modelu budou dotazy ve formátu \textbf{query-by-example}. Komplexnější dotazy se skládají právě z těchto jednoduchých dotazů \textit{(ale uvnitř to pořád bude o query-by-example)}.
+
+\subsection{Základní pojmy}
+
+\begin{itemize}
+    \item \textbf{podobnost}: relevance k dotazu, mechanismus pro organizaci objektů v databázi mezi sebou, \blockquote{vzdálenost} v prostoru
+    \item \textbf{feature extraction}: model, který vytvoří deskriptory vlastností multimédií, odpovídá kompresi -- zmenšuje velikost, ale zvyšuje sémantiku
+    \item \textbf{dissimilarity space}: prostor, který se skládá z \textbf{univerza vlastností} $U$ (vektorový prostor, databáze je pak sada deskriptorů $S \subset U$ a \textbf{podobnostní funkce} $\delta: U$ x $U \to \mathbb{R}$ (geometrizuje problém vyhledávání)
+\end{itemize}
+
+\subsection{Feature extraction}
+
+Vždy si musíme pečlivě vybrat, co do daného modelu vybereme tak, aby to \textbf{dobře} reprezentovalo entitu \textit{(např. uživatel -- otisk prstu, hlas}, a zároveň aby to bylo \textbf{kompaktní}.
+
+Můžeme zkusit reprezentovat \textbf{geometricky}: ať už užším modelem (vektorový prostor), obecným (metrický prostor) nebo rozdělením na více menším prostorů. Taky můžeme reprezentovat jedním, nebo dvěma deskriptory.
+
+\textbf{Vektor}: histogram u korelovaných dimenzí, čísla u nezávislých dimenzí, nebo kombinace (spojené histogramy) -- \textbf{nejčastější}.
+
+\textbf{Časová řada}: je to vlastně vektor s danými dimenzemi korelovanými v čase, seřazená množina
+
+\textbf{Řetězec}: posloupnost hodnot, může být symbolická časová řada \textit{(DNA sekvence)}
+
+\textbf{Další}: neuspořádaná množina, geometrická data, grafy, stromy
+
+\subsection{Podobnostní funkce}
+
+Musí být \textbf{kompatibilní} se zadaným deskriptorem, splňovat potřebné vlastnosti (metrické vlastnosti, adaptace, učení). Tato funkce může taky mít různou \textbf{složitost}: $O(n)$ až $O(2^n)$
+
+\subsection{Metrické postuláty}
+
+Pokud chceme dobrý kompromis mezi možností typu deskriptoru a omezením je \textbf{metrická podobnost}:
+
+\vspace{12pt}
+
+\begin{itemize}
+    \item \textbf{reflexivita}: $\delta(x,y) = 0 \iff x = y$ \textit{(objekt je podobný sám sobě)}
+    \item \textbf{nezápornost}: $\delta(x,y) > 0 \iff x \neq y$ \textit{(mezi dvěma neidentickými objekty bude nějaká nepodobnost)}
+    \item \textbf{symetrie}: $\delta(x,y) = \delta(y,x)$ \textit{(nezáleží na pořadí porovnávání)}
+    \item \textbf{trojúhelníková nerovnost}: $\delta(x,y) + \delta(y,z) \geq \delta(x,z)$ \textit{(podobnost je tranzitivní)}
+\end{itemize}
+
+\subsection{Nemetrická podobnost}
+
+Důvodem k použití je jednoduchost podobnostního modelování, argumenty proti metrickým postulátům, \textbf{robustnost} a podobnost s black-boxem.
+
+Výhodou je také fakt, že s tímto jsou schopni pracovat i \textbf{experti v doméně}, kteří by ty matematické vlastnosti ani nemuseli umět zaručit.
+
+Otázkou je také to, zda \textbf{argumenty} metrické podobnosti jsou v reálu \textbf{pravdivé} -- je objekt podobný sám sobě? Platí tranzitivita na podobnosti?
+
+\subsection{Chytré deskriptory}
+
+Jednou z možností je použít \textbf{vysoko}-úrovňový deskriptor a \textbf{jednoduchou} vzdá\-lenostní funkci -- feature extraction dělá největší část, musím být \textbf{schopný} to ale extrahovat -- vektorové prostory, podobnost nezávislých vlastností $O(n)$ (\textbf{levné}).
+
+Druhou je pak použít \textbf{nízko}-úrovňový deskriptor a \textbf{komplexní} vzdálenostní funkci. Podobnost se agreguje v průběhu dotazu, vlastnosti jsou korelované, počítání podobnosti je tedy \textbf{drahé} a \textbf{náročné} (alespoň $O(n^2)$).
+
+\subsection{Podobnostní dotazy}
+
+\textbf{Jednoduché}: rozsahové (range), kNN, RkNN, similarity join, nebo \textbf{složitější} (agregace s pomocí top-k operátoru), případně se dá také využít dotazové jazyky.
+
+\subsubsection{Rozsahové dotazy}
+
+Dotazem bude vždy nějaký \textbf{konkrétní příklad} Q a \textbf{poloměr} $r_Q$ (hranice, threshold). Zajímají nás pak všechny objekty, pro které je $\delta(Q,Q_i) \leq r_Q$. Vyžaduje, aby člověk znal podobnostní funkci $\delta$. Vzhledem k tomu, že je daná vzdálenost, bude vždy \textbf{100\% úplnost}, ale \textbf{není} předem jasná \textbf{velikost} výsledku.
+
+\subsubsection{kNN dotaz}
+
+Říkáme, že chceme \textbf{k nejpodobnějších} objektů. Opět se v podstatě jedná o geometrickou kouli, ale neznáme předem poloměr. Tento model je \textbf{přívětivější} pro koncového uživatele (známe předem velikost výsledku), ale otázkou je úplnost.
+
+\subsubsection{Reverse kNN dotaz}
+
+Mám objekt Q a počet objektů, pro které je Q \textbf{mezi} jejich \textbf{k nejbližšími} sousedy.
+
+\subsubsection{Pokročilé podobnostní dotazy}
+
+Ve velkých databázích je hodně duplikátů a kNN dotaz \textbf{ztratí} jeho \textbf{vyjadřovací sílu} -- řešením je použít \textbf{distinct} kNN.
+
+Obecně ale stále můžeme mít problém najít jeden konkrétní výsledek. Pomocí může být \textbf{skyline} operátor = hledám podle více kritérií v k-dimenzionálním prostoru.
+
+\subsubsection{Agregované dotazy}
+
+Získám různě uspořádané výsledky a seřadím je \textbf{agregační} funkcí (top-k operátor). Tak stejně jsem schopný se dotazovat ve více částech a přerankovat to.
+
+\subsubsection{Dotazy v SQL}
+
+Některé DBMS umožňují přímo práci s podobnostními dotazy a deskriptory v rámci \textbf{SQL}. Není tímpádem třeba upravovat existující systémy. Nedochází ale k indexování, a je to tedy pomalé, a je třeba dost programování.

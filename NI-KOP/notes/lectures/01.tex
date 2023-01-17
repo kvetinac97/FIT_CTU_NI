@@ -1,0 +1,123 @@
+\section{Úvod}
+
+\vspace{12pt}
+
+\subsection{Cíl předmětu}
+
+\textbf{Heuristická optimalizace}: Občas se dostaneme do situací, kdy neumíme formálně popsat, co chceme, ani neumíme napsat vyhovující algoritmus \textit{(nedokážeme formálně popsat "chodce")}, často v souvislosti se strojovým učením.
+
+V NI-KOP se naučíme, jak kombinatorické úlohy takto efektivně řešit. Algoritmus je většinou snadný, zkoumáme nasazení implementovaného algoritmu, experimentálně nastavujeme jeho parametry a vyhodnocujeme užitečnost.
+
+Často nasazení provádíme jednorázově, rozumíme danému algoritmu a doká\-žeme ji ladit libovolně až do požadovaného výsledku. Někdy se ale software šíří mimo dosah autora, obsluha algoritmu nerozumí a program se s tím musí vypořádat sám.
+
+Naučíme se porozumět principům a práci heuristik, složitosti řešených úloh a metodám, jak experimentovat.
+
+$\to$ Exaktní řešení bude náročné vždy, kontrola korektnosti daného řešení ale není obtížná, pokud nám tedy bude stačit alespoň trochu dobré řešení, máme naději na úspěch.
+
+\textbf{Profesionální řešení}: nasazení heuristiky, vyladění na menší sadě úloh, statistické vyhodnocení set až tisíc běhů podle charakteru heuristiky a úloh
+
+\subsection{Hodnocení}
+
+\begin{itemize}
+    \item teoretický test v 6. týdnu semestru (30 bodů, min. 10b)
+    \item 1. domácí úloha (experimentální vyhodnocení –- 15 bodů, povinné)
+    \item 2. domácí úloha (nasazení heuristiky -- povinná)
+    \item zkouškový test (25 bodů, min. 10b)
+\end{itemize}
+
+Při úlohách se hodnotí praktické provedení, pracovní postup, ani ne naprogramovaný kód nebo přesné rozdělení, ale především to, že přístup je racionální a výsledky jsou relevantní.
+
+Pokud se student odchýlí od zadání, úmysl je třeba prezentovat cvičícímu, modifikovaná úloha musí splnit původní cíle a srozumitelnost zprávy musí zůstat stejná.
+
+Programovat se musí v imperativním jazyce (libovolném), měří se veličiny, které charakterizují algoritmus, na efektivitě kódu nezáleží. Kód by měl být správný a korektní, aby se hodnotící nemusel vrtat v kódu.
+
+\newpage
+
+\subsection{Pojmy}
+
+\subsubsection*{Matematická optimalizace} 
+
+Zajímá se o konečné a diskrétní problémy s konečným počtem proměnných a konečným počtem hodnot každé proměnné. Vše lze tedy vyřešit hrubou silou, ale není prakticky použitelná \textit{(všech možných kombinací může být hodně)}.
+
+\subsubsection*{Problém vs instance}
+
+Problém (vstupní/výstupní/konfigurační proměnné, omezení, optimalizační kri\-téria) vs instance (konkrétní \textbf{hodnoty}).
+
+Problémem může být nalezení optimální cesty pro vrtačku na dané desce, instancí je pak konkrétní deska.
+
+\textbf{Konfigurační proměnné} jsou to, co nastavuje hrubá síla, všechny kombinace, to, kde se dají zkontrolovat omezení a z čeho lze vypočíst hodnotu optimalizačního kritéria. S výstupními proměnnými se shodují jen u některých problémů.
+
+\subsection{Problémy}
+
+Problém jsem schopný zakódovat (nejjednodušeji binárně), pak každá instance je charakterizována řetězcem 0 a 1, problém charakterizuji instancemi s výstupem ano, je to tedy jazyk (podmnožina \{0, 1\}*)
+
+\subsubsection*{Problémy bez optimalizačního kritéria}
+
+Nechť $I$ je instance problému, $Y$ konfigurace, $R(I, Y)$ omezení \textit{(Y je řešením)}:
+
+\begin{itemize}
+    \item rozhodovací problém: 
+    \begin{itemize}
+        \item Existuje $Y$ takové, že $R(I, Y)$?
+        \item Platí pro všechna $Y$, že $R(I, Y)$?
+    \end{itemize}
+    \item konstruktivní problém: sestrojit nějaké $Y$ takové, že $R(I, Y)$
+    \item enumerační problém: sestrojit všechna $Y$ taková, že $R(I, Y)$
+    \item početní problém: kolik existuje $Y$ takových, že $R(I, Y)$
+\end{itemize}
+
+\subsubsection*{Problémy optimalizační}
+
+Nechť $I$ je instance problému, $Y$ konfigurace, $R(I, Y)$ omezení a $C(Y)$ optimalizační kritérium \textit{(cenová funkce)}:
+
+\begin{itemize}
+    \item optimalizační rozhodovací problém: existuje $Y$ takové, že $R(I, Y)$ a $C(Y)$ je alespoň tak dobré, jako daná konstanta $K$?
+    \item optimalizační konstruktivní problém: sestrojit nějaké $Y$ takové, že $R(I, Y)$ a $C(Y)$ je nejlepší možné
+    \item optimalizační enumerační problém: sestrojit všechna $Y$ taková, že $R(I, Y)$ a $C(Y)$ je nejlepší možné
+    \item optimalizační početní problém: kolik existuje $Y$ takových, že $R(I, Y)$ a $C(Y)$ je alespoň tak dobré, jako daná konstanta K?
+    \item optimalizační evaluační problém: zjistit nejlepší možné $C(Y)$ takové, že $R(I, Y)$
+\end{itemize}
+
+\subsubsection*{Problém batohu}
+
+Je daná množina U, pro každý prvek $$u \in U$$ je dáno $$c(u), w(u) \in \mathbb{N}$$ Zkonstruujte množinu U' takovou, aby byl součet vah w(u) menší než M a součet cen c(u) co největší.
+
+\vspace{8pt}
+
+\begin{tabular}{|l|l|}
+    \hline
+    Vstupní proměnné & n, M, w(u), c(u) \\
+    \hline
+    Konfigurační proměnné & $U' \subseteq U$ \\
+    \hline
+    Omezení & hmotnost batohu  \\
+    \hline
+    Optimalizační kritérium & maximální cena \\
+    \hline
+\end{tabular}
+
+\vspace{8pt}
+
+Hledání konfiguračních proměnných je nalezení takové sestavy věcí (konstruktivní problém) v batohu, aby nebyl přetížen (tvrdá podmínka) a cena věcí byla maximální (měřítko).
+
+\vspace{8pt}
+
+\begin{tabular}{|l|l|}
+    \hline
+    Konfigurace & ohodnocení konfiguračních proměnných \\
+    \hline
+    Řešení & konfigurace, která vyhovuje omezujícím podmínkám \\
+    \hline
+    Optimální řešení & má nejlepší hodnotu optimalizačního kritéria \\
+    \hline
+    Suboptimální řešení & má přijatelnou hodnotu optimalizačního kritéria \\
+    \hline
+\end{tabular}
+
+\vspace{8pt}
+
+Existuje mnoho variant problému batohu -- existuje plnění s cenou K? Nalézt plnění s nejlepší cenou. Nalézt cenu nejlepšího plnění. Všechny tyto varianty mají stejné vstupní/konfigurační proměnné, omezení, ale výstup je jiný. Proto konfigurační proměnné potřebujeme.
+
+\subsubsection*{Problém splnitelnosti formule}
+
+Dána množina n proměnných, Booleova formule v konjunktivní normální formě. Cílem je nalézt, zda je formule splnitelná, výstupem je ano/ne.

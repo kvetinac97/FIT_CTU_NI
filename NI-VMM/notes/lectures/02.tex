@@ -1,0 +1,67 @@
+\section{Způsoby a kvalita vyhledávání}
+
+\subsection{Způsoby vyhledávání}
+
+Nezávisle na způsobu vyhledávání zjišťujeme \textbf{relevanci} výsledku. Buď je relevance \textbf{binární} (objekt je/není relevantní), nebo \textbf{více-hodnotová} (objekt je relevantní/podobný více či méně).
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|c|c|c|c}
+         & dotazování & brouzdání & exploration & doporučení \\
+         \hline
+        anotace & \textbf{klíčová slova} & prohledávání & navigace  & \multirow{2}{*}{filtry} \\
+        obsah & \textbf{příklad} & grafu & v hierarchii &
+    \end{tabular}
+\end{table}
+
+Pro hledání \textbf{anotacemi} je nejčastěji používáno hledání \textbf{klíčovými slovy} pomocí klasických modelů, které známe. Při navigaci v hierarchii jde o \textbf{ontologickou} hierarchii \textit{(nábytek je nadřazený stolu)}.
+
+Při hledání na základě \textbf{obsahu} je časté hledání příkladem a navigace v~hierarchii konceptů. Filtry jsou založené na obsahu, ne na textu.
+
+\subsubsection{Dotaz}
+
+Předpokládáme, že víme, na co se chceme zeptat. \textbf{Dotaz} je explicitní popis toho, co hledám. Model může být založen na \textbf{textu} (anotace), nebo \textbf{obsahu} (nahraný obrázek, může být i kombinace).
+
+Výsledkem dotazu je pak buď \textbf{neseřazená} množina objektů \textit{(binární relevance)} nebo \textbf{seřazená} množina objektů \textit{(více-hodnotová relevance)}. Na tento výsledek může uživatel poskytnout \textbf{zpětnou vazbu} a požádat o znovu-seřazení.
+
+\subsubsection{Browsing}
+
+Předpokládáme, že nedokážeme přesně popsat, co chceme najít. \textbf{Brouzdání} je iterativní navigací v databázi. Výsledkem je \textbf{podmnožina} objektů v databázi, případně nějaká hierarchie.
+
+Hledat můžeme \textbf{explicitním} grafem (příspěvky konkrétního člověka na sociální síti) nebo \textbf{virtuálním} grafem (vytvořen specificky pro browsing, tvořen posloupností dotazů -- hledám dárek na vánoce a náhodně klikám na podobné produkty).
+
+\subsubsection{Exploration}
+
+Chceme získat \textbf{představu} o obsahu \textbf{celé} databáze -- agregované brouzdání, vizualizace databáze, důraz na real-time zpracování.
+
+Příkladem může být prozkoumání prostoru autobusů -- zoom in/out, čím jsou předměty \textbf{podobnější}, tím jsou \textbf{blíže} k sobě.
+
+\subsubsection{Recommendation}
+
+Rekomendace neboli filtrování, postaveno naproti dotazování, \textbf{doporučovací systémy} (explicitně co chci vs implicitně podle nastavení uživatele, historie hledání, kolaborativní filtrování\ldots)
+
+Kdysi toto souviselo s \textbf{relevance feedback}: 3 kroky $\to$ prvotní vyhledání objektů $\to$ možnost zpětné vazby \textit{(expertní nebo neexpertní // explicitní, implicitní)} $\to$ vylepšený výsledek, probíhá ve \textbf{více iteracích}.
+
+Dnes je relevance feedback častější implicitně -- na základě toho, \textbf{kam} uživatel kliká jde zjistit, který produkt byl pro něj zajímavý a relevantní.
+
+\subsection{Kvalita vyhledávání}
+
+\subsubsection{Semantic gap}
+
+Při zadávání hledaných výsledků dotazů jsou zadání často \textbf{vysokoúrovňové}, ale reprezentace dat je velmi nízkoúrovňová. Jedná se tedy o velký rozdíl mezi sémantikami = \textbf{semantic gap} \textit{(např. barevné rozložení / tvar v obrázku)}.
+
+Pokud máme ale velmi \textbf{omezenou} doménu, tak jsme schopni na základě nízkoúrovňové reprezentace a nějakým deskriptorům toto rozpoznat. \textit{(např. dům vypadá pořád stejně vs lidé / zvířata se můžou tvářit jinak)}. U některých modelů to \textbf{nejsme schopni} vysvětlit, například při rozpoznávání obličejů.
+
+\subsubsection{Účinnost vyhledávání}
+
+\textbf{Efectiveness} (účinnost) = míra uživatelské spokojenosti \textit{(neplést s effectivity, efektivitou, tam jde o rychlost)} s výsledkem vyhledávání. \textbf{Relevantní objekty} by měly být ve výsledku dotazu, určit, zda se jedná o relevantní objekt jde pomocí anotací nebo referencí.
+
+Relevance je \textbf{subjektivní} (popsána lidmi, spojena s uživatelem) a \textbf{relativní} (porovnání dvou systémů, jeden referenční, částečně je ale pořád subjektivní).
+
+\textbf{Precision} (přesnost) a \textbf{recall} (úplnost) se vztahují vždy ke konkrétnímu dotazu. \textbf{Precision} = pravděpodobnost, že objekt ve výsledku je relevantní \textit{(Google)}. \textbf{Recall} = pravděpodobnost, že se relevantní objekt vyskytne ve~výsled\-ku \textit{(medicína, chci najít problém, pokud nějaký je)}.
+
+Když dostanu ve výsledku něco, co jsem nechtěl, je to \textbf{false alarm}. Když mi ve výsledku chybí něco, co tam patří, je to \textbf{false dismissal}. False alarm se dá odfiltrovat, není to takový problém, jako false dismissal.
+
+\textbf{Měřit} účinnosti můžeme pomocí \textbf{P-R curve} (křivky přesnosti a úplnosti): spočítá se přesnost na 11 standardních hodnotách úplnosti. Takto můžeme porovnávat jednotlivé systémy.
+
+Alternativní možnost měření je \textbf{P@k} (přesnost na top k výsledcích), \textbf{F-score} (harmonický průměr přesnosti a úplnosti), \textbf{mean precision} (průměrná přesnost přes všechny úrovně úplnosti) a další způsoby pro měření přesnosti více dotazů. Můžeme měřit také \textbf{coverage} (pokrytí) a \textbf{novelty} při více dotazech -- kolik je nových, dosud neviděných objektů.

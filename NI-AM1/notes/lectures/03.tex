@@ -1,0 +1,112 @@
+\section{Architektura služeb}
+
+\subsection{Pohledy na službu}
+
+\begin{itemize}
+    \item \textbf{business} pohled: služba provede efekt \textit{(v reálném světě)}, který přinese reálnou hodnotu uživateli \textit{(např. zakoupení knihy)}
+    \item \textbf{konceptuální} pohled: zapouzdření, znovupoužitelnost, loose coupling, abstrakce, composability \ldots
+    \item \textbf{logický} pohled: rozhraní služby, její popis a implementace, zaměření na zprávy nebo zdroje
+    \item pohled z hlediska \textbf{software architektury}: business service (externí, zveřejněná funkcionalita) x middleware service (interní, technická, zpracovává požadavky)
+    \item pohled z hlediska \textbf{technologie architektury}: REST, GraphQL, XML, RPC, SOAP, gRPC, WebSocket, \ldots
+\end{itemize}
+
+\subsection{Rozhraní, popis a implementace}
+
+Služba může mít více rozhraní, být naimplementována ve více programovacích jazycích.
+
+\begin{itemize}
+    \item \textbf{služba}: rozhraní služby + implementace služby
+    \item \textbf{WSDL} služba: popis služby v jazyce WSDL
+    \item \textbf{SOAP} služba: rozhraní, které je dostupné přes protokol SOAP
+    \item \textbf{REST/RESTful} služba: rozhraní, které splňuje styl architektury REST a HTTP protokol
+    \item \textbf{mikroslužba}: sada služeb, které realizují schopnosti aplikace
+\end{itemize}
+
+\subsection{Public Process}
+
+Pracujeme s pomocí stavového diagramu, který popisuje přechod mezi dvěma stavy. To probíhá pomocí operace, která má vstup, podmínky, efekty a výstup.
+
+\subsection{Principy služeb}
+
+\begin{itemize}
+    \item \textbf{loose coupling}: když klient volá službu, měl by na ni být co nejméně závislý
+    \item \textbf{reusability}: přepoužitelnost, aby mohla být služba využita v co nejvíce situacích
+    \item \textbf{contracting}: domluva jednotlivých stran na rozhraní používaném při komunikaci
+    \item \textbf{abstraction}: rozhraní by mělo být technologicky nezávislé a oddělené od konkrétní implementace
+    \item \textbf{discoverability}: služba by měla být objevitelná včetně návodu k použití
+    \item \textbf{composability}: služby lze složit do více komplexních procesů, které lze znova použít jako služby
+    \item \textbf{encapsulation}: zapouzdření, implementace je schována a jde vidět jen rozhraní
+\end{itemize}
+
+\subsection{Integrace a interoperabilita}
+
+\textbf{Integrace}: spojení aplikací tak, aby mohly sdílet informaci a funkcionality
+
+\vspace{4pt}
+\noindent \textbf{Interoperabilita}: schopnost dvou aplikací, aby se chápaly navzájem na úrovni dat \textit{(syntax/struktura)}, funkcí, procesů a technických aspektů
+
+\subsection{SOA}
+
+\textbf{One-To-One} integrace: špagetová architektura, vše je propojené neřízeně, je v tom nepořádek.
+
+\vspace{4pt}
+\noindent \textbf{Many-To-Many} integrace: centrální integrace pomocí Enterprise Service Bus, spravuje jednotlivé vrstvy pomocí \textbf{SOA}. \textit{(Špagety jsou zde pořád, jen jsou "schované" v ESB)}
+
+\vspace{4pt}
+\noindent SOA je o kultuře, metodologii \textit{(strategie top-down / bottom-up)} a technologii. Jedno z oddělení v IT $\to$ ITDelivery řeší \textbf{SOA Governance} = propojení jednotlivých systémů.
+
+\vspace{4pt}
+\noindent \textbf{Integraci} provedeme buď přes middleware (M:N, ESB, \textbf{service-oriented}), přímo (1:1) nebo přes databázi \textit{(datově orientovaná, aplikace D pracuje s databází aplikace B -- pozor na integritu dat)}.
+
+\vspace{4pt}
+\noindent Mezi těmito způsoby integrace existuje ještě rozdíl v typu dat: webové služby = \textbf{real-time} data // \textbf{ETL} \textit{(Extract, Transform, Load)}: načítání dat v dávkách. SOA využívá hlavně real-time, ale také ETL, třeba v případě selhání, synchronizace všech dat.
+
+\subsection{ESB}
+
+Operační systém $\to$ JVM $\to$ JDBC, \ldots $\to$ Datové zdroje, JMS $\to$ Aplikace. \textbf{ESB} je jednou z těchto aplikací, která má sama ještě své podaplikace.
+
+\vspace{4pt}
+\noindent ESB obsahuje služby (sdílené, pro infrastrukturu) i procesy (Technical, Business). \textbf{ESB Application} je běžná aplikace na aplikačním serveru. Můžeme zde používat různé integrační vzory.
+
+\subsection{Integrační vzory}
+
+\textbf{Synchronní} integrace: jeden socket, čas odpovědi na požadavek je krátký, jednoduchý na implementaci, ale zablokuje mi vlákno, server definuje endpoint
+
+\vspace{4pt}
+\noindent \textbf{Asynchronní} integrace: každý požadavek a odpověď má socket zvlášť, jak klient, tak server definují endpoint, čas odpovědi může být dlouhý
+
+\vspace{4pt}
+\noindent \textbf{Asynchronní} komunikace pomocí \textbf{prostředníka}: máme frontu požadavků na middlewaru, do které zapisují klienti a ze které čtou servery a frontu odpovědí, do které zapisují servery a ze které čtou klienti. Z tohoto vychází Message Queues a Publish / Subscribe, \textbf{používané}.
+
+\vspace{4pt}
+\noindent \textbf{Asynchronní} komunikace pomocí \textbf{polling}u: klient otevře socket, server mu potvrdí, že může přijímat a klient ho následně polluje a posílá mu požadavky. $\to$ typicky na webu \textit{(server nemůže otevřít požadavek)}.
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\vspace{4pt}
+\noindent \textbf{Message Broker}: ESB míchá a spojuje standardní i proprietární způsoby přenosu mezi klienty a servery.
+
+\vspace{4pt}
+\noindent \textbf{Location transparency}: ESB schová změnu v poloze služeb tak, aby např. změna IP adresu serveru nezměnila klienty, dá se použít i pro load balancing.
+
+\vspace{4pt}
+\noindent \textbf{Session Pooling}: ESB udržuje předem daný počet sessionů, které se využívají v runtime, jeden session token může být znovupoužit více instancemi jednoho procesu.
+
+\vspace{4pt}
+\noindent \textbf{Dynamic Routing}: ESB vystavuje službu, které přesměruje na různé služby na základě zpráv.
+
+\vspace{4pt}
+\noindent \textbf{Message enrichment}: Obohatí zprávu předtím, než zavolá nějakou backend službu \textit{(obohacení zprávy o data zákazníka ze služby dat zákazníků)}.
+
+\subsection{Datové transformace}
+
+Aplikace někdy potřebujeme mezi s sebou namapovat, využíváme strukturu XSLT, XQuery. Při transformaci je třeba namapovat také jednotlivé identifikátory, k čemuž slouží \textbf{mapování klíčů} : CRM-ID $\to$ UUID $\to$ OMS-ID.
+
+\subsection{Škálovatelnost}
+
+Dělit můžeme 3 způsoby -- X (škálujeme napříč instancemi \textit{(uživatel 1-100 sem\ldots)}, Z (datové roz.) a \textbf{Y} \textit{(rozdělením na mikroslužby na základě funkcí)}.
+
+\vspace{4pt}
+\noindent Mikroslužby tedy rozdělí aplikaci podle jednotlivých funkcionalit, vytvoří jednotlivé služby, a ty můžou být rozděleny na servery a sdíleny podle potřeby.
+
+\textbf{Charakteristika mikroslužeb}: loose coupling \textit{(klient by neměl vědět o tom, kde se služba nachází)}, technology-agnostic protokol \textit{(nezávisí na konkrétní technologii)}, nezávisle nasaditelné, snadno nahraditelné, zaměřené na informaci \textit{(účetnictví, doporučování)}, implementováno více technologií (polyglot), vlastní ji drobný tým.

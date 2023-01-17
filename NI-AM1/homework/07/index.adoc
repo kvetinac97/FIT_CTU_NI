@@ -1,0 +1,323 @@
+= HW7 - Podmíněný GET
+
+Pro tento úkol jsem vytvořil službu, která umožňuje získat *seznam zájezdů*. Zájezd je tvořen jeho identifikátorem, jménem a zákazníky.
+
+Kromě GET metody jsem implementoval také pomocné metody pro vytvoření zájezdu (POST /tour/), detail zájezdu (GET /tour/id) smazání zájezdu (DELETE /tour/id) a především *přidání zákazníka k zájezdu* (POST /tour/id/customer).
+
+Stejně jako v předchozím úkolu, i zde jsem dokumentaci API vygeneroval pomocí Spring pluginu, je dostupná ve složce *results/*.
+
+== Last-Modified
+
+Hlavička *If-Modified-Since* umožňuje zjistit, zda se od určitého času nezměnila data. Pokud ne, je vrácen návratový kód *304 NOT MODIFIED*, pokud ano, je vrácena *aktuální verze dat* včetně hlavičky Last-Modified v odpovědi.
+
+V rámci služby toto řeším pomocí property *lastModified* v `RestApplicationRepository`, která se *aktualizuje* při každém přidání nového zájezdu, zákazníka nebo smazání zájezdu.
+
+Při požadavku `GET /tour/` se pak porovná čas `lastModified` s časem poskytnutým v hlavičce `If-Modified-Since`. Pokud hlavička uvedena není, nebo pokud jsou data novější, pošlou se, jinak se vrátí *304 NOT MODIFIED*.
+
+=== Příklad
+
+Nejprve zavoláme `GET /tour/` pro zjištění aktuálních zájezdů:
+
+[source,text]
+----
+curl -v http://localhost:8080/tour/
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/ HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200
+< Last-Modified: Sat, 05 Nov 2022 12:48:28 GMT
+< Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+< Date: Sat, 05 Nov 2022 12:48:54 GMT
+<
+* Connection #0 to host localhost left intact
+{"_embedded":{"tourList":[{"id":"1","name":"Summer trip","customers":[]},{"id":"2","name":"Eiffel tower visit","customers":[{"id":"1","name":"Josef"},{"id":"2","name":"Tomáš"}]},{"id":"3","name":"Prague visit","customers":[]}]},"_links":{"self":{"href":"http://localhost:8080/tour/"}}}
+----
+
+Vidíme, že data byla naposledy upravena *5.11 ve 12:48*. Zkusíme nyní požadavek provést znovu, a to s hlavičkou *If-Modified-Since*.
+
+[source,text]
+----
+curl -H "If-Modified-Since: Sat, 05 Nov 2022 12:48:28 GMT" -v http://localhost:8080/tour/
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/ HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> If-Modified-Since: Sat, 05 Nov 2022 12:48:28 GMT
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 304
+< Last-Modified: Sat, 05 Nov 2022 12:48:28 GMT
+< Date: Sat, 05 Nov 2022 12:53:32 GMT
+<
+* Connection #0 to host localhost left intact
+----
+
+Vidíme, že tentokrát se nám vrátil kód *304*. Zkusíme nyní smazat zájezd s ID 1 pomocí `DELETE /tour/1`.
+
+[source,text]
+----
+curl -X DELETE -v http://localhost:8080/tour/1
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> DELETE /tour/1 HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 204
+< Date: Sat, 05 Nov 2022 12:54:30 GMT
+<
+* Connection #0 to host localhost left intact
+----
+
+Smazání proběhlo úspěšně. Zkusíme nyní znova zavolat `GET /tour/` s hlavičkou *If-Modified-Since*.
+
+[source,text]
+----
+curl -H "If-Modified-Since: Sat, 05 Nov 2022 12:48:28 GMT" -v http://localhost:8080/tour/
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/ HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> If-Modified-Since: Sat, 05 Nov 2022 12:48:28 GMT
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200
+< Last-Modified: Sat, 05 Nov 2022 12:54:30 GMT
+< Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+< Date: Sat, 05 Nov 2022 12:55:23 GMT
+<
+* Connection #0 to host localhost left intact
+{"_embedded":{"tourList":[{"id":"2","name":"Eiffel tower visit","customers":[{"id":"1","name":"Josef"},{"id":"2","name":"Tomáš"}]},{"id":"3","name":"Prague visit","customers":[]}]},"_links":{"self":{"href":"http://localhost:8080/tour/"}}}
+----
+
+A jak bychom mohli očekávat, vrátila se nám opět normální odpověď, s *posunutou hlavičkou* Last-Modified na 12:54.
+
+== ETag
+
+Hlavička *If-None-Match* umožňuje zjistit, zda se od posledního požadavku nezměnila data, a to pomocí jejich *hashe*. K dispozici jsou dvě varianty: *weak*, který porovnává pouze část objektů, a *strong*, který porovnává celé objekty.
+
+V mém případě *weak ETag* porovnává pouze id a jméno zájezdu, zatímco *strong ETag* porovnává i zákazníky, kteří se daného zájezdu účastní.
+
+*Weak ETag* řeším na endpointu `/tour/etag-weak`, kde si spočítám *weak* hash *všech* zájezdů a porovnám ho s obsahem hlavičky *If-None-Match*. Pokud je obsah stejný, data se nezměnila, a vrátím tedy *304 NOT MODIFIED*. V jiném případě se data změnila _(nebo hlavička nebyla uvedena)_ a vrátím tedy data.
+
+*Strong ETag* je řešen přímo Springem na endpointu `/tour/etag-strong` pomocí Beany "shallowEtagHeaderFilter", funkčnost je téměř stejná jako u weak ETagu s rozdílem použitého hashe (používá se "strong" hash = celý objekt).
+
+Zkusíme nejprve tedy získat seznam zájezdů z databáze:
+
+[source,text]
+----
+curl -v http://localhost:8080/tour/etag-weak
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/etag-weak HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200
+< ETag: W/"1442091208"
+< Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+< Date: Sat, 05 Nov 2022 13:14:50 GMT
+<
+* Connection #0 to host localhost left intact
+{"_embedded":{"tourList":[{"id":"1","name":"Summer trip","customers":[]},{"id":"2","name":"Eiffel tower visit","customers":[{"id":"1","name":"Josef"},{"id":"2","name":"Tomáš"}]},{"id":"3","name":"Prague visit","customers":[]}]},"_links":{"self":{"href":"http://localhost:8080/tour/etag-weak"}}}
+----
+
+Aktuální *weak ETag* je tedy *W/"1442091208"*. Zkusíme endpoint zavolat podruhé, ale tentokrát s tímto ETagem v hlavičce *If-None-Match*:
+
+[source,text]
+----
+curl -H 'If-None-Match:W/"1442091208"' -v http://localhost:8080/tour/etag-weak
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/etag-weak HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> If-None-Match:W/"1442091208"
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 304
+< Date: Sat, 05 Nov 2022 13:15:29 GMT
+<
+* Connection #0 to host localhost left intact
+----
+
+A jak by se dalo očekávat, dostali jsme *304 NOT MODIFIED*. Nyní zavoláme endpoint pro strong ETag:
+
+[source,text]
+----
+curl -v http://localhost:8080/tour/etag-strong
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/etag-strong HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200
+< ETag: "065d2d4582d0f2055fd0dc1a86743a77b"
+< Content-Type: application/hal+json
+< Content-Length: 298
+< Date: Sat, 05 Nov 2022 13:16:04 GMT
+<
+* Connection #0 to host localhost left intact
+{"_embedded":{"tourList":[{"id":"1","name":"Summer trip","customers":[]},{"id":"2","name":"Eiffel tower visit","customers":[{"id":"1","name":"Josef"},{"id":"2","name":"Tomáš"}]},{"id":"3","name":"Prague visit","customers":[]}]},"_links":{"self":{"href":"http://localhost:8080/tour/etag-strong"}}}
+----
+
+Získáváme zde *ETag "065d2d4582d0f2055fd0dc1a86743a77b"*. Zkusíme zavolat endpoint s tímto ETagem v hlavičce *If-None-Match*:
+
+[source,text]
+----
+curl -H 'If-None-Match:"065d2d4582d0f2055fd0dc1a86743a77b"' -v http://localhost:8080/tour/etag-strong
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/etag-strong HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> If-None-Match:"065d2d4582d0f2055fd0dc1a86743a77b"
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 304
+< ETag: "065d2d4582d0f2055fd0dc1a86743a77b"
+< Date: Sat, 05 Nov 2022 13:17:46 GMT
+<
+* Connection #0 to host localhost left intact
+----
+
+A získáváme odpověď s kódem *304 NOT MODIFIED*.
+
+Nyní provedeme přidání zákazníka k zájezdu. Tím by mělo dojít k změně *strong ETagu*, ale *weak ETag* by měl zůstat zachován.
+
+[source,text]
+----
+curl -v -H Content-Type:application/json -d '{"id":"1", "name":"Jan"}' http://localhost:8080/tour/1/customer
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> POST /tour/1/customer HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 24
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 201
+< Location: /tour/1
+< Content-Length: 0
+< Date: Sat, 05 Nov 2022 13:19:05 GMT
+<
+* Connection #0 to host localhost left intact
+----
+
+Zavoláme nyní `GET /tour/etag-weak` s našim weak ETagem.
+
+[source,text]
+----
+curl -H 'If-None-Match:W/"1442091208"' -v http://localhost:8080/tour/etag-weak
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/etag-weak HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> If-None-Match:W/"1442091208"
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 304
+< Date: Sat, 05 Nov 2022 13:19:30 GMT
+<
+* Connection #0 to host localhost left intact
+----
+
+Jak můžeme vidět, změna opravdu weak ETag *neovlivnila*. Zkusíme totéž provést se strong ETagem:
+
+[source,text]
+----
+curl -H 'If-None-Match:"065d2d4582d0f2055fd0dc1a86743a77b"' -v http://localhost:8080/tour/etag-strong
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/etag-strong HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> If-None-Match:"065d2d4582d0f2055fd0dc1a86743a77b"
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200
+< ETag: "0221c2dc4b44f75e6f4af04722c886b9e"
+< Content-Type: application/hal+json
+< Content-Length: 321
+< Date: Sat, 05 Nov 2022 13:20:04 GMT
+<
+* Connection #0 to host localhost left intact
+{"_embedded":{"tourList":[{"id":"1","name":"Summer trip","customers":[{"id":"1","name":"Jan"}]},{"id":"2","name":"Eiffel tower visit","customers":[{"id":"1","name":"Josef"},{"id":"2","name":"Tomáš"}]},{"id":"3","name":"Prague visit","customers":[]}]},"_links":{"self":{"href":"http://localhost:8080/tour/etag-strong"}}}
+----
+
+U strong ETagu už ke změně došlo, a dostali jsme proto seznam zájezdů, včetně nového zákazníka.
+
+Pro kontrolu můžeme zkusit ještě provést *větší* změnu, jako například *přidání zájezdu*, a zkontrolovat, jestli se opravdu i *weak* ETag *změní*:
+
+[source,text]
+----
+curl -v -H Content-Type:application/json -d '{"id":"4", "name":"Berlin"}' http://localhost:8080/tour/
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> POST /tour/ HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 27
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 201
+< Location: /tour/4
+< Content-Length: 0
+< Date: Sat, 05 Nov 2022 13:21:38 GMT
+<
+* Connection #0 to host localhost left intact
+----
+
+Zavoláme s naším weak ETagem:
+
+[source,text]
+----
+curl -H 'If-None-Match:W/"1442091208"' -v http://localhost:8080/tour/etag-weak
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> GET /tour/etag-weak HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> If-None-Match:W/"1442091208"
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200
+< ETag: W/"-553507321"
+< Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+< Date: Sat, 05 Nov 2022 13:22:08 GMT
+<
+* Connection #0 to host localhost left intact
+{"_embedded":{"tourList":[{"id":"1","name":"Summer trip","customers":[{"id":"1","name":"Jan"}]},{"id":"2","name":"Eiffel tower visit","customers":[{"id":"1","name":"Josef"},{"id":"2","name":"Tomáš"}]},{"id":"3","name":"Prague visit","customers":[]},{"id":"4","name":"Berlin","customers":null}]},"_links":{"self":{"href":"http://localhost:8080/tour/etag-weak"}}}
+----
+
+A můžeme vidět, že opravdu došlo i ke změně weak ETagu.

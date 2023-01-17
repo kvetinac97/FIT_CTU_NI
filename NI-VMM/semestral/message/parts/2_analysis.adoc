@@ -1,0 +1,94 @@
+:stem: latexmath
+
+== Analýza
+
+_Tato kapitola obsahuje popis analytické části projektu od výběru skladeb, deskriptorů, přes volbu metody porovnání deskriptorů a klastrování až po návrh samotné webové aplikace._
+
+{empty}
+
+=== Skladby a žánry
+
+Při porovnávání jednotlivých žánrů je nutné vybrat vhodně z každého žánru skladby, které tento žánr reprezentují. Zároveň je cílem, aby byly jednotlivé skladby v rámci žánru co "nejblíže" k sobě _(podobné)_ a jednotlivé žánry co "nejdále" od sebe _(nejméně podobné)_.
+
+Při výběru žánrů jsme zvolili následující žánry s jejich typickými charakteristikami, které budeme následně extrahovat pomocí zvolených deskriptorů:
+
+ * klasická hudba (*classic*), která je typická zastoupením *velkého počtu* hudebních nástrojů pokrývajících celé *spektrum* frekvencí a zároveň tato hudba **ne**obsahuje zpěv
+ * jazzová hudba (*jazz*), která má specifickou skladbu nástrojů, saxofonová *sóla* na vyšších frekvencích spektra a taktéž **ne**obsahuje zpěv
+ * *metal*, který se vyznačuje velkými skoky v rámci spektra (nízko položený zpěv -> vysoko položený zpěv), zvláštní skladbou nástrojů
+ * *opera*, založená na *zpěvu* na vysokých nebo nízkých frekvencích, s minimem hudebního doprovodu
+ * *rap*, obsahující především *mluvené slovo* (ani ne příliš zpěv) na jedné podobné frekvenci po celou dobu skladby s minimem hudebního doprovodu
+ * *reggae*, se specifickým rytmem a varhanovými nástroji
+
+Pro každý žánr jsme ručně _(ze skladeb, které posloucháme a z knihovny https://freemusicarchive.org/)_ vybrali skladby, které obsahují právě vlastnosti *specifické* pro daný žánr.
+
+=== Deskriptory
+
+K porovnání skladeb je nutné z nich *extrahovat* deskriptory popisující specifické charakteristiky. Provedli jsme tedy analýzu deskriptorů z knihoven https://mpeg7audioenc.sourceforge.net[MPEG7] a https://jmir.sourceforge.net/jAudio.html[jAudio].
+
+==== MPEG7
+
+MPEG7 knihovna umožňuje extrahovat ze zadaného .wav souboru sadu některých MPEG7 *low-level* deskriptorů. Těchto deskriptorů je celkem *17*, knihovna ale pro předané audio soubory extrahovala pouze následující: SpectrumSpreadType, SpectrumCentroidType, SpectralEnvelope a SpectrumMinMax.
+
+Pro sadu 3 žánrů (klasická hudba, metal, rap) jsme tedy spustili program MPEG7, zanesli získané hodnoty deskriptorů do grafu a histogramu a také jsme si spočítali průměr, medián, standardní odchylku těchto hodnot.
+
+[cols="a,a", frame=none, grid=none]
+|===
+| image::media/2_analysis_mpeg7_graph.png[alt=Graf deskriptoru SpectrumSpreadType,pdfWidth=50%]
+| image::media/2_analysis_mpeg7_hst.png[alt=Histogram deskriptoru SpectrumSpreadType,pdfWidth=50%]
+|===
+
+Graf a histogram časové řady deskriptoru `SpectrumSpreadType`
+
+image::media/2_analysis_mpeg7_table.png[Histogram deskriptoru SpectrumSpreadType]
+
+Tabulka s průměrem, mediánem a standardní odchylkou hodnot deskriptoru `SpectrumSpreadType`
+
+Například u parametru `SpectrumSpreadType` lze z výše uvedené tabulky vyčíst, že pro jednotlivé žánry nabývá průměr a standardní odchylka *podobné* hodnoty, zatímco mezi různými žánry jsou hodnoty víceméně *rozdílné*.
+
+Z analýzy nám vyšlo, že z knihovny MPEG7 budou nejlépe použitelné `SpectrumSpreadType` a `SpectrumCentroidType` _(konkrétně jejich průměr)_, které popisují *rozsah* a *rozložení* frekvenčního spektra, což souhlasí s hypotézou o rozdílnosti rozsahu a rozložení frekvencí v jednotlivých žánrech.
+
+==== jAudio
+
+Knihovna jAudio umožňuje podobně jako MPEG7 knihovna extrakci jednotlivých MPEG7 deskriptorů, kromě nich umožňuje ale získání *mnoha dalších* deskriptorů.
+
+Pro práci s knihovnou jAudio jsme použili sadu dalších 3 žánrů (opera, jazz a reggae), spustili jsme program pro získání všech deskriptorů a pomocí Jupiter notebooku, který naleznete ve složce `analysis/sound.ipynb` jsme vygenerovali grafy porovnávající jednotlivé žánry.
+
+[cols="a,a", frame=none, grid=none]
+|===
+| image::media/2_analysis_jaudio_mom.png[alt=Hodnoty průměru Method of Moments,pdfWidth=50%]
+| image::media/2_analysis_jaudio_amom.png[alt=Hodnoty standardní odchylky Area Method of Moments pdfWidth=50%]
+|===
+
+Graf průměru `Method of Moments` a standardních odchylek `Area Method of Moments`, červená je `reggae`, modrá `opera` a zelená `jazz`.
+
+Z analýzy nám vyšlo, že z knihovny jAudio bude nejlépe použitelný průměr `Method of Moments` a standardní odchylka `Area Method of Moments`, což je víceúrovňový deskriptor, který sdružuje všechny MPEG7 deskriptory a počítá jejich hodnoty pomocí *momentové metody*.
+
+==== MFCC
+
+Kromě výše zmíněných deskriptorů jsme se rozhodli vyzkoušet také *MFCC* -- Mel Frequency Cepstral koeficienty. Tato metoda umožňuje pomocí lineární kosinové transformace převést audio signál na sadu koeficientů, které lze následně použít pro *porovnání*.
+
+MFCC dobře slouží při *rozpoznávání* mluvené řeči a také k rozpoznání hudebních signálů, což bude *užitečné* právě proto, že námi zvolené žánry se vždy skládají z různých hudebních nástrojů a v některých zpěv je, v některých není obsažen.
+
+Z MFCC budeme používat 1. seznam *13 koeficientů* zprůměrovaných přes celou skladbu a za 2. *časovou řadu* jednoho vybraného koeficientu, a to implementaci v Pythonu.
+
+=== Porovnání deskriptorů
+
+Některé získané deskriptory jsou v podobě *časových řad*, kdy se za každý *interval* spočítá hodnota daného kritéria _(rozsah spektra, hodnota MFCC koeficientu)_, některé pouze v podobě *jednotlivých hodnot* _(průměr / standardní odchylka přes celou skladbu)_.
+
+Porovnávání jednotlivých hodnot jsme se rozhodli řešit jednoduchým vzorcem latexmath:[d(a,b) = |a - b|]. U porovnání časových řad jsme volili dva způsoby: prvním z nich je vypočtení *průměru* hodnot napříč celou řadou, druhým je pak porovnávání pomocí algoritmu DTW _(dynamic time warping)_.
+
+Časové řady nelze porovnávat vedle sebe hodnotu po hodnotě, jelikož můžou být vůči sobě posunuté a navíc může být jedna časová řada delší než druhá. Pro porovnání se tedy používá algoritmus *DTW*, který "natáhne" jednu řadu tak, aby bylo porovnání možné. _(viz. obrázek, zdroj: přednáška 5, NI-VMM, Podobnostní vyhledávání -- populární podobnostní funkce_)
+
+image::media/2_analysis_dtw.png[Porovnání použití klasické vektorové vzdálenosti a vzdálenosti pomocí DTW]
+
+Z našich konkrétních deskriptorů jsme se na základě analýzy grafů jednotlivých deskriptorů rozhodli deskriptory `SpectrumSpreadType`, `SpectrumCentroidType`, `Area Method of Moments` a `Method of Moments` rozhodli porovnávat jakožto průměr časové řady _(ad obrázek u podsekce MPEG7 -- jednotlivé časové řady nejsou v rámci žánrů příliš podobné)_ a deskriptor u koeficientu/koeficientů `MFCC` jsme se rozhodli vyzkoušet porovnávat jak průměrem, tak jakožto časovou řadu.
+
+=== Klastrování
+
+Ještě před samotným rozpoznáváním je třeba vybudovat "databázi" žánrů, na základě které se následně budou testované soubory porovnávat.
+
+V našem případě jsme se rozhodli databázi realizovat jako jednorozměrné pole *features*, kde jsou v databázovém souboru `db.dat` za sebou binárně uloženy features (pole deskriptorů) jednotlivých skladeb v žánrech. Jedna položka v databázi tedy vypadá takto: `(spectrum_spread_avg, spectral_centroid_avg, area_of_moments_avg, area_of_moments_std, method_of_moments_avg, mfcc_avg, mfcc_time_series, genre_name)`.
+
+Když chceme pro zadanou skladbu rozpoznat, kterému patří žánru, vypočteme pro ni hodnoty všech deskriptorů a porovnáme je s jednotlivými deskriptory v rámci žánrů, čímž v podstatě vypočteme *vzdálenost* od jednotlivých skladeb v rámci žánru. Tuto vzdálenost následně seřadíme od nejmenší po největší a vezmeme *k* skladeb (žánrů), které jsou nejblíže.
+
+Tímto postupem v podstatě realizujeme algoritmus *kNN* (hledání k nejbližších sousedů). Nejbližší sousedy pak zařadíme do jednotlivých žánrů a vydělíme k, čímž nám vznikne *pravděpodobnost*, že zadaná skladba *patří* do daného žánru.

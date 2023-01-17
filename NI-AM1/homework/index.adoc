@@ -1,0 +1,11 @@
+= Homework 
+
+* xref:01/index#[]
+* xref:02/index#[]
+* xref:03/index#[]
+* xref:04/index#[]
+* xref:05/index#[]
+* xref:06/index#[]
+* xref:07/index#[]
+* xref:08/index#[]
+* xref:09/index#[]

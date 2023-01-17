@@ -1,0 +1,35 @@
+\section{Podobnostní vyhledávání -- podobnostní míry}
+
+\subsection{Vektorové podobnostní míry}
+
+\subsubsection{Základní}
+
+Nejzákladnější je euklidovská / manhattanská (Lp) vzdálenost, předpokládáme \textbf{nezávislé} dimenze, \textbf{levné} na výpočet se složitostí $O(D)$, kde $D$ je počet dimenzí, jedná se o \textbf{metriku}.
+
+Další možností je měřit na základě \textbf{úhlu} -- kosinová podobnost, kosinová vzdálenost, úhlová vzdálenost, \textbf{ne}jedná se o \textbf{metriku}.
+
+\subsubsection{Histogramy}
+
+V případě, že porovnáváme \textbf{histogramy}, můžeme použít váženou euklidovskou vzdálenost (převážíme jednu ze složek -- \textit{např. zelenou barvu v RGB histogramu}), Kullback-Leibler, Jeffrey, nebo třeba $\chi^2$ vzdálenost.
+
+Nejjednodušší formou histogramové podobnosti je \textbf{kvadratická forma} (QDF) = vážím \textbf{každou kombinaci} dvou dimenzí (oproti jiným vzdálenostem drahá, $O(D^2)$, v případě pozitivně definitní matice metrická).
+
+\subsubsection{Pokročilejší}
+
+Pokročilou možností podobnosti je \textbf{EMD} (earth mover's distance), což je minimální množství práce, aby se histogram a změnil na b, je to \textbf{optimalizační} problém $\to$ pokud $D = m = n$, pak je složitost $O(D^3 \cdot log(D))$, jinak $O(2^D)$.
+
+\subsection{Podobnostní míry pro sekvence}
+
+\textbf{Sekvence} (časové řady) nejsem schopný pořádně převést do vektorových dimenzí. Řešením je \textbf{DTW} (dynamic time warping), které natáhne jednu řadu tak, aby byla zarovnaná s druhou, \textbf{ne}metrická, časová složitost $O(n^2)$.
+
+\textbf{DTW}: Hledám cestu v mřížce, odpovídá dynamickému programování. Cesta ale nemůže vést libovolně, ale jen \textbf{v určitém pásu}, aby se to nezaseklo $\to$ tímto omezením se složitost omezí na $O((m+n) \cdot \omega)$  
+
+Podobná může být \textbf{editační} vzdálenost řetězců \textit{(lze použít i pro porovnávání sekvencí DNA)} -- $O(m\cdot{}n)$, \textbf{Hammingova} vzdálenost -- $O(n)$ nebo nejdelší společná \textbf{podposloupnost} -- $O(m \cdot n)$.
+
+Podobnostní míry pro sekvence se hojně používají také v \textbf{biologii}, kde se měří podobnost proteinových sekvencí \textit{(pravděpodobnost mutace aminokyselin)}.
+
+\subsection{Podobnostní míry pro množiny}
+
+Jednou z jednodušších vzdáleností je \textbf{Jaccardova} vzdálenost: $1 - \frac{A \cap B}{A \cup B}$. Například takto můžeme porovnat předměty, které uživatelé koupili na e-shopu.
+
+Další možnou je \textbf{Hausdorffova} vzdálenost, kde probíhá hledání nejvzdále\-nějšího nejbližšího \textbf{souseda} \textit{(otisky prstů)}, \textbf{mnohoúhelníková} a \textbf{grafová} podo\-bnost nebo také \textbf{kvadratická} (SQFD). // tyto míry pak můžeme kombinovat.

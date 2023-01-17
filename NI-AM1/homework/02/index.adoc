@@ -1,0 +1,280 @@
+= HW2 - Aplikační protokoly
+
+== Telnet
+
+Vytvořte HTTP GET požadavek:
+
+[source,text]
+----
+telnet 147.32.233.18 8888
+Trying 147.32.233.18...
+Connected to 147.32.233.18.
+Escape character is '^]'.
+GET /NI-AM1-ApplicationProtocols/httpTelnet1 HTTP/1.0
+User-Agent: fit-telnet
+Accept: text/html
+Accept-Charset: utf-8
+Accept-Language: en-US
+
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Content-Type: text/html;charset=UTF-8
+Content-Length: 3
+Date: Sat, 24 Sep 2022 14:02:06 GMT
+Connection: close
+
+OK
+Connection closed by foreign host.
+----
+
+Vytvořte HTTP POST požadavek:
+
+[source,text]
+----
+telnet 147.32.233.18 8888
+Trying 147.32.233.18...
+Connected to 147.32.233.18.
+Escape character is '^]'.
+POST /NI-AM1-ApplicationProtocols/httpTelnet2 HTTP/1.0
+Referer: mi-mdw
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 8
+
+data=fit
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Content-Type: text/html;charset=UTF-8
+Content-Length: 3
+Date: Sat, 24 Sep 2022 14:11:02 GMT
+Connection: close
+
+OK
+Connection closed by foreign host.
+----
+
+== curl
+
+Otevřete následující stránku a následujte pokyny:
+
+[source,text]
+----
+curl -v http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol
+
+*   Trying 147.32.233.18:8888...
+* Connected to 147.32.233.18 (147.32.233.18) port 8888 (#0)
+> GET /NI-AM1-ApplicationProtocols/protocol HTTP/1.1
+> Host: 147.32.233.18:8888
+> User-Agent: curl/7.79.1
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: text/html;charset=UTF-8
+< Content-Length: 320
+< Date: Sat, 24 Sep 2022 14:32:01 GMT
+<
+<html>
+<head>
+<title>Protocol</title>
+</head>
+<body>
+<h1>Protocol</h1>
+<p>Your next page is <a href="./protocol/welcome">/protocol/welcome</a></p>
+<pre>curl http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/welcome</pre>
+<p><a href="http://curl.haxx.se/docs/httpscripting.html">Help</a></p>
+</body>
+</html>
+* Connection #0 to host 147.32.233.18 left intact
+----
+
+Navštívíme další stránku, nezapomeneme na Referer:
+
+[source,text]
+----
+curl -v -e http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/welcome http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/welcome
+*   Trying 147.32.233.18:8888...
+* Connected to 147.32.233.18 (147.32.233.18) port 8888 (#0)
+> GET /NI-AM1-ApplicationProtocols/protocol/welcome HTTP/1.1
+> Host: 147.32.233.18:8888
+> User-Agent: curl/7.79.1
+> Accept: */*
+> Referer: http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/welcome
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 116
+< Date: Sat, 24 Sep 2022 14:32:45 GMT
+<
+OK
+Your next page is /protocol/get
+send GET parameter "name" with value "aix"
+set Header "Accept" to "text/plain"
+* Connection #0 to host 147.32.233.18 left intact
+----
+
+Pošleme další požadavek se správným GET parametrem:
+
+[source,text]
+----
+curl -v -H Accept:text/plain "http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/get?name=aix"
+*   Trying 147.32.233.18:8888...
+* Connected to 147.32.233.18 (147.32.233.18) port 8888 (#0)
+> GET /NI-AM1-ApplicationProtocols/protocol/get?name=aix HTTP/1.1
+> Host: 147.32.233.18:8888
+> User-Agent: curl/7.79.1
+> Accept:text/plain
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 169
+< Date: Sat, 24 Sep 2022 14:33:45 GMT
+<
+OK
+Your next page is /protocol/post
+send POST parameter "name" with value "maybe"
+and set Header "Accept" is "text/plain"
+and set Header "Accept-Language" is "en-US"
+* Connection #0 to host 147.32.233.18 left intact
+----
+
+Další požadavek bude POST se správným parametrem a hlavičkami
+
+[source,text]
+----
+curl -v -H Accept:text/plain -H Accept-Language:en-US -d name=maybe "http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/post"
+*   Trying 147.32.233.18:8888...
+* Connected to 147.32.233.18 (147.32.233.18) port 8888 (#0)
+> POST /NI-AM1-ApplicationProtocols/protocol/post HTTP/1.1
+> Host: 147.32.233.18:8888
+> User-Agent: curl/7.79.1
+> Accept:text/plain
+> Accept-Language:en-US
+> Content-Length: 10
+> Content-Type: application/x-www-form-urlencoded
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 110
+< Date: Sat, 24 Sep 2022 14:34:49 GMT
+<
+OK
+Your next page is /protocol/referer
+change referer to value "himself"
+set Header "Accept" is "text/html"
+* Connection #0 to host 147.32.233.18 left intact
+----
+
+Pokračujeme na /protocol/referer se změněným refererem:
+
+[source,text]
+----
+curl -v -e himself -H Accept:text/html "http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/referer"
+*   Trying 147.32.233.18:8888...
+* Connected to 147.32.233.18 (147.32.233.18) port 8888 (#0)
+> GET /NI-AM1-ApplicationProtocols/protocol/referer HTTP/1.1
+> Host: 147.32.233.18:8888
+> User-Agent: curl/7.79.1
+> Referer: himself
+> Accept:text/html
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 124
+< Date: Sat, 24 Sep 2022 14:35:40 GMT
+<
+OK
+Your next page is /protocol/useragent
+and change User-Agent to value "iraq"
+and set Header "Accept-Language" is "en-US"
+* Connection #0 to host 147.32.233.18 left intact
+----
+
+Změníme uživatelského agenta na iraq...
+
+[source,text]
+----
+curl -v -A iraq -H Accept-Language:en-US "http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/useragent"
+*   Trying 147.32.233.18:8888...
+* Connected to 147.32.233.18 (147.32.233.18) port 8888 (#0)
+> GET /NI-AM1-ApplicationProtocols/protocol/useragent HTTP/1.1
+> Host: 147.32.233.18:8888
+> User-Agent: iraq
+> Accept: */*
+> Accept-Language:en-US
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 89
+< Date: Sat, 24 Sep 2022 14:36:25 GMT
+<
+OK
+Your next page is /protocol/cookie
+send cookie called "name" with value "theologies"
+* Connection #0 to host 147.32.233.18 left intact
+----
+
+Do dalšího požadavku přidáme teologickou sušenku:
+
+[source,text]
+----
+curl -v -b name=theologies "http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/cookie"
+*   Trying 147.32.233.18:8888...
+* Connected to 147.32.233.18 (147.32.233.18) port 8888 (#0)
+> GET /NI-AM1-ApplicationProtocols/protocol/cookie HTTP/1.1
+> Host: 147.32.233.18:8888
+> User-Agent: curl/7.79.1
+> Accept: */*
+> Cookie: name=theologies
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 107
+< Date: Sat, 24 Sep 2022 14:37:25 GMT
+<
+OK
+Your next page is /protocol/auth
+authenticate by "listening:alone"
+set Header "Accept" is "text/html"
+* Connection #0 to host 147.32.233.18 left intact
+----
+
+Přihlásíme se jménem listening a heslem alone:
+
+[source,text]
+----
+curl -v -u listening:alone -H Accept:text/html "http://147.32.233.18:8888/NI-AM1-ApplicationProtocols/protocol/auth"
+*   Trying 147.32.233.18:8888...
+* Connected to 147.32.233.18 (147.32.233.18) port 8888 (#0)
+* Server auth using Basic with user 'listening'
+> GET /NI-AM1-ApplicationProtocols/protocol/auth HTTP/1.1
+> Host: 147.32.233.18:8888
+> Authorization: Basic bGlzdGVuaW5nOmFsb25l
+> User-Agent: curl/7.79.1
+> Accept:text/html
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: Apache-Coyote/1.1
+< Content-Type: text/html;charset=UTF-8
+< Content-Length: 31
+< Date: Sat, 24 Sep 2022 14:38:03 GMT
+<
+OK
+Your final result is: souls
+* Connection #0 to host 147.32.233.18 left intact
+----
+
+A získáváme náš finální výsledek, **souls**!

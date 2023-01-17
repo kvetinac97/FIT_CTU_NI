@@ -1,0 +1,19 @@
+== Závěr
+
+{empty} +
+
+Cílem projektu bylo vytvořit webovou aplikaci, která pro zadanou *skladbu* rozpozná, do kterého hudebního *žánru* patří.
+
+Nejprve jsme pro každý z hudebních žánrů nalezli *skladby* a zvolili vhodné *deskriptory* tak, aby měly skladby v rámci stejného žánru deskriptory *blízko* a různé žánry byly co *nejdál* od sebe.
+
+Následně jsme celou aplikaci *naimplementovali* -- od načtení souboru, extrakce deskriptorů, spočítání vzdálenostní funkce a přiřazení jednotlivých skladeb do žánru. Aplikace je dostupná přes *konzolové* i *webové* rozhraní, kde lze zvolit jednotlivé *parametry* porovnávání.
+
+Při vhodné volbě parametrů jsme došli u rozpoznávání k *přesnosti* až *72%*, což vzhledem k typické přesnosti modelů, času a prostředkům, které jsme měli považujeme za *úspěšné*.
+
+V aplikaci jsme _(především z časových důvodů)_ podrobně neanalyzovali a *nevyzkoušeli* úplně všechny možné _(například i vysokoúrovňové)_ deskriptory, taktéž jsme neimplementovali další způsoby *porovnávání* jednotlivých deskriptorů (jiné než DTW) nebo jiné způsoby *klastrování* (například neuronové sítě).
+
+Mezi případnými budoucími rozšířeními by mohlo být *podrobnější* rozlišení žánrů, jak bylo již avizováno v kapitole Diskuze _(po použití jednoho deskriptoru by se ještě skladby ohodnocené žánry jazz, rap a opera přeměřily dalším)_.
+
+Dalším možným *vylepšením* by bylo zvolit v případě stejných pravděpodobností žánr *náhodně* _(aktuálně volíme vždy ten první v pořadí)_, čímž bychom mohli ještě *zvýšit* přesnost modelu.
+
+Tento projekt rozhodně *pomohl* lépe pochopit problematiku *audio retrieval* -- vyzkoušeli jsme si analýzu deskriptorů, napsat porovnávací funkci a navrhnout způsob klastrování. Naše řešení jsme následně experimentálně *odzkoušeli* a diskutovali jeho možná vylepšení.

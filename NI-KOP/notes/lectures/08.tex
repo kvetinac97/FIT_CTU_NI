@@ -1,0 +1,61 @@
+\section{Metoda simulovaného ochlazování}
+
+Pokud používáme jednoduché \textbf{lokální} heuristiky, může se nám stát, že \textbf{uvázneme} v lokálním \textbf{optimu}. Při řešení tedy musíme správně vyvážit \textbf{diverzifikaci} (rovnoměrný průzkum stavového prostoru, připouštíme akci, která vede k horšímu řešení) a \textbf{intenzifikaci} (konvergence k finálnímu řešení, nepřipouštíme akci vedoucí ke zhoršení řešení).
+
+\vspace{4pt}
+\noindent \textbf{Diverzifikace}: pomocí ní můžeme zvětšit prohledávané okolí, používají ji \textbf{pokro\-čilé} heuristiky.
+
+\subsection{Simulované ochlazování}
+
+Máme jednu konfiguraci, řídíme ji sekvenčně, využíváme diverzifikaci. Odpovídá postupnému ochlazování taveniny $\to$ můžeme ochlazovat opatrně, čímž vznikají velké krystaly, nebo prudce, čímž vzniknou malé krystaly.
+
+\subsubsection*{Teplota ochlazování}
+
+\textbf{Teplotou} rozumíme řídící parametr diverzifikace \textit{(jak často připouštíme akci vedoucí k horšímu řešení)}.
+
+\vspace{4pt}
+\noindent \textbf{Lokální} heuristiky snadno \textbf{uváznou} v lokálním minimu, vrátí prázdný stav, když neexistuje lepší soused \textit{(first improvement)}, snadno uváznou v lokálním optimu.
+
+\vspace{4pt}
+\noindent Oproti tomu \textbf{pokročilé} heuristiky povolují také horší řešení s určitou pravděpo\-dobností úměrnou zhoršení a teplotě \textit{(u first improvement tedy vybereme náhodně stav, pokud je lepší, přijmeme ho, jinak ho přijmeme na základě zhoršení / náhody)}.
+
+\vspace{4pt}
+\noindent Ve vzorci $random(0,1) < exp(- \frac{\delta}{T}$ je $\delta$ zhoršení (když jde k nule, je malé, přijme se často, když se zvětšuje, přijme se méně častěji) a $T$ teplota (když je nízká, zhoršení se přijmou s malou pravděpodobností $\to$ \textbf{intenzifikace}, při vysoké se přijmou i velká zhoršení $\to$ \textbf{diverzifikace}.
+
+\vspace{4pt}
+\noindent Při simulovaném ochlazování tedy postupně snižujeme teplotu: máme nějakou \textbf{počáteční teplotu}, pak funkci \textbf{frozen}, která určuje, zda se má ochlazování ukončit, \textbf{equilibrum}, které určuje, jestli je systém v \blockquote{rovnovážném stavu} (pokud ano, sníží se teplota) a \textbf{cool}, která sníží teplotu.
+
+\vspace{4pt}
+\noindent Všechny tyto funkce dohromady určují \textbf{rozvrh ochlazování} -- ten je předem určen, nebo ho řídíme zpětnou vazbou.
+
+\vspace{4pt}
+\noindent Stavový prostor, omezující podmínky a počáteční řešení jsou problémově závislé záležitosti lokálních iterativních heuristik.
+
+\vspace{4pt}
+\noindent Hodnoty cen bychom měli \textbf{normalizovat} na stejný rozsah pro všechny instance, aby nebyl problém při dělení s teplotou \textit{(koruny vs haléře, ale stejná teplota.?)}
+
+\subsubsection*{Ochlazování}
+
+\textbf{Ochlazování}: typicky cool(T) = $\alpha \cdot T$, kde $0.8 < \alpha < 0.999$
+
+\vspace{4pt}
+\noindent \textbf{Rovnováha}: typicky je určena pevným počtem kroků $N$. Jak cool, tak ekvilibrium spolu souvisí -- měníme \textbf{délku ekvilibria} $N$ a \textbf{koeficient chlazení} $\alpha$, abychom dosáhli $T_k$ v kroku $s$.
+
+\subsubsection*{Počáteční teplota}
+
+\textbf{Počáteční teplota}: chceme ji nastavit tak, aby bylo přijetí zhoršující akce pravděpodobné -- zjistíme to na základě hloubky lokálních optim $\delta$, dá se vypočítat ze sady zhoršujících akcí.
+
+\subsubsection*{Kdy to zastavit?}
+
+Metoda frozen, buď na pevné hodnotě teploty, nebo pokud četnost změn (k lepšímu) klesne pod nastavenou mez.
+
+\subsection{Stavový prostor}
+
+Simulované ochlazování bude fungovat, pokud je stavový prostor \textbf{symetrický} = pravděpodobnost generování akce $a$ ze stavu $s_1 \to s_2$ je stejná, jako pravděpodo\-bnost generování $a^-1$ ze stavu $s_2 \to s_1$, počet kroků tedy \textbf{roste} se vzdáleností uzlů.
+
+\vspace{4pt}
+\noindent Nějakým způsobem chceme pracovat s \textbf{omezujícími podmínkami} (můžeme využít relaxaci, opravit konfiguraci.?), \textbf{počátečním řešením} -- buď zvolíme náhodné a spustíme vícenásobně, nebo zvolíme \textbf{konstruktivní} počáteční řešení.
+
+\subsection{Práce s heuristikou}
+
+Nezapomínáme na vývoj ve dvou fázích -- \textbf{white box} (omezená sada instancí, detailní měření, porozumíme problému) $\to$ \textbf{black box} (plná sada instancí, měříme výsledky, ověříme kvalitu, výkon, už neměníme heuristiku).

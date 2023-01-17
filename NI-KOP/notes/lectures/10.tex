@@ -1,0 +1,74 @@
+\subsection{Nasazení na spojité problémy}
+
+Konfiguračními proměnnými je \textbf{vektor} reálných čísel $a = (a_1, a_2, \ldots, a_n) \in \mathbb{R}^n$. Optimalizačním kritériem bude nějaká funkce z $\mathbb{R}^n \to \mathbb{R}$. Mají iterativní charakter, jak ale hledat \textbf{souseda}?
+
+\vspace{4pt}
+\noindent Simulované ochlazování pro spojitý problém: kromě vektoru konfiguračních proměnných máme ještě vektor s \textbf{velikostmi kroků}, operátor přičte krok v \textbf{jedné} dimenzi, pokud je posun menší, krok se zvětší, jinak se zmenší.
+
+\subsection{Evoluční strategie}
+
+Konfigurace je opět \textbf{vektor reálných čísel} a další parametry (velikosti kroků, standardní odchylky).
+
+\vspace{4pt}
+\noindent Kostra opět vypadá podobně, ale při selekci se zohledňují i tyto \blockquote{další} parametry. Při \textbf{selekci} rozhoduje pouze pořadí \textbf{zdatnosti}.
+
+\vspace{4pt}
+\noindent \textbf{Rekombinace}: jak spojit dva vektory reálných čísel do jednoho?
+
+\vspace{4pt}
+\noindent \textbf{Diskrétní}: pro \textbf{každou} dimenzi náhodně vybrán rodič, jehož hodnota se přebírá, předpokládá se \textbf{nezávislost} hodnot v dimenzích.
+
+\vspace{2pt}
+\noindent \textbf{Střední}: všichni rodiče jsou zprůměrováni \textit{(pokud má jeden rodič chybu, tato chyba se příliš neprojeví)}
+
+\vspace{2pt}
+\noindent \textbf{Vážená}: všichni rodiče jsou zprůměrováni váženým průměrem podle zdatnosti.
+
+\vspace{6pt}
+\noindent \textbf{Mutace}: přičtení náhodné proměnné z rozložení s \textbf{nulovou střední hodnotou}, používáme normální rozdělení \textit{(neomezený rozsah pomůže uniknout z lokálních optim)}.
+
+\vspace{4pt}
+\noindent Obecně odpovídá \textbf{násobení} nějakou kovarianční maticí $\mathbb{C}$. Pro výběr mutace můžeme volit \textbf{nezávisle} na zdatnosti (deterministicky, stochasticky), pak \textbf{musí} následovat selekce na zdatnosti; nebo výběr \textbf{závislý} na zdatnosti.
+
+\subsection{Genetické programování}
+
+Hledá reprezentaci, která by umožnila \textbf{genetické operátory}, interpretaci virtuálním strojem a \textbf{vyjádření} každého (optimálního) \textbf{řešení}. Strom výrazu $\to$ genetické programování, řetězec $\to$ lineární, orientovaný acyklický graf $\to$ kartézské.
+
+\vspace{4pt}
+\noindent Kostra je opět víceméně stejná, ale před selekcí provádím \textbf{testy} a výběr elity \textit{(reprodukce)}.
+
+\vspace{4pt}
+\noindent \textbf{Stromová reprezentace}: vnitřní uzly jsou operace (aritmetické, if/else), listy jsou konstanty a proměnné, musí zde platit \textbf{uzavřenost} při kompozici (netypované či typované genetické programování).
+
+\vspace{4pt}
+\noindent \textbf{Inicializace}: zvolím náhodnou operaci jako kořen a buduji náhodně předchůdce až do maximální výšky $d$ (parametr).
+
+\vspace{4pt}
+\noindent \textbf{Křížení}: zvolím náhodný uzel v každém rodiči a prohodím podstromy.
+
+\vspace{4pt}
+\noindent \textbf{Mutace}: náhodně zvolím podstrom, ten ustřihnu a nahradím náhodně vygenerovaným.
+
+\vspace{4pt}
+\noindent \textbf{Architektura}: mám hlavní strom a různé funkce, které se vyvíjejí najednou.
+
+\subsection{Evoluční programování}
+
+Reprezentací je stavový stroj, operátory jsou změna výstupního symbolu / přechodu, přidání / vypuštění stavu, změna počátečního stavu. Řízení populace: stochastický výběr turnajem.
+
+\vspace{4pt}
+\noindent Není zde omezení na reprezentaci (může to být neuronová síť).
+
+\subsection{Závěrem}
+
+Operátory jsou definovány přímo na konfiguraci, nikoliv na binárním řetězci. Dokáží zachytit program jako strom, graf, nebo stavový stroj. Individuum se vyvíjí, není stálé. Nespoléhá se na kombinaci dobrých nápadů do ještě lepšího nápadu.
+
+\subsection{Proč to funguje?}
+
+Teorie \textbf{stavebních bloků}: mám dva stavební bloky (kvalitní řešení podúloh), ty vezmu a dám vedle sebe do jednoho genomu, čímž dostaneme něco ještě lepšího. 
+
+\vspace{4pt}
+\noindent \textbf{Schéma}: chromozom, v němž mají některé geny neurčitou hodnotu \textit{(odpovídá dont-cares z BI-SAP}. Řád schématu = počet určených genů, délka schematu = největší vzdálenost mezi geny v chromozomu.
+
+\vspace{4pt}
+\noindent \textbf{Linkage learning}: pozičně nezávislá notace, přeuspořádává rodiče do pořadí jiného rodiče, kříží a přeuspořádá zpět. Při hodnocení schémat pak někde nemusí být specifikované geny. 

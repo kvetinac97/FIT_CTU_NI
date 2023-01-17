@@ -1,0 +1,75 @@
+\section{Architektura aplikačního serveru}
+
+\textbf{Aplikační server}: prostředí, kde běží aplikační logika, se kterým komunikuje klient pomocí aplikačního protokolu \textit{(nejčastěji HTTP)}.
+
+\vspace{4pt}
+\noindent \textbf{Modulární} prostředí poskytující technologi pro enterprise systémy, obsahuje různé \textbf{komponenty}, kontejnery (JEE, servlety, JMS), poskytuje služby pro výkon, failover \textit{(přepnutí na funkční komponenty)}. Aplikační server \textbf{obsahuje} web server v sobě, může být složen z \textbf{více} serverů.
+
+\vspace{4pt}
+\noindent Oproti tomu \textbf{web server} poskytuje pouze HTTP, zpracovává HTTP požadavky, poskytuje HTTP odpovědi.
+
+\subsection{Architektura instance AS}
+
+Základem je \textbf{operační systém}, na tom běží \textbf{JVM}. Nad tím je RMI (volání metod), JDBC (databáze), JMS (zprávy), JNDI (naming \& directory interface), JTA (transakce), JMX (e-maily) a další \textbf{Java technologie}. Na těch stojí \textbf{aplikační server}, který obsahuje datové zdroje, JMS server a další \textbf{služby pro aplikace} a nad tím stojí každá \textbf{aplikace}.
+
+\vspace{4pt}
+\noindent AS je v operačním systému \textbf{jeden proces}, který naslouchá na 1 nebo více IP adresách a TCP portech, jedná se o \textbf{Java} proces (funguje zde garbage collection, alokace paměti\ldots)
+
+\subsubsection*{Pojmy}
+
+\textbf{doména} \textit{(skupina serverů se specifickou konfigurací)}, \textbf{administrační} server \textit{(spravuje doménu)}, \textbf{managed} server \textit{(spouští aplikace a "objekty" [datové zdroje])}, \textbf{cluster} \textit{(skupina managed serverů, obsahují stejnou kopii}, \textbf{machine} \textit{(fyzický přístroj a OS, na kterém běží servery)}, \textbf{node manager} \textit{(proces, který poskytuje přístup k serverům)}, \textbf{load balancer} \textit{(síťový prvek, který distribuuje požadavky klientů managed serverům)}.
+
+\subsubsection*{Servlet}
+
+Technologie, která umožní \textbf{rozšířit} funkcionality serveru (Java třída, definuje rozhraní, aplikace toto rozhraní implementuje). Jsou používány pro HTTP odpovědi \textit{(HttpServletRequest, HttpServletResponse)}.
+
+\subsection{Obsluha požadavku}
+
+\textbf{IO}: práce s vstupem nebo výstupem dat, existují dva základní mechanismy implementované různými technologiemi. V tu chvíli, kdy požadavek přijde je vytvořeno nové \textbf{vlákno} a řeším dvě úrovně: \textbf{inbound} (vstup) a \textbf{outbound} (výstup).
+
+
+\subsubsection*{Inbound}
+
+\vspace{4pt}
+\noindent \textbf{Synchronní} I/O: blokující, pro všechny příchozí požadavky se vytvoří 1 vlákno na 1 požadavek $\to$ \textbf{nevýhodné}, způsobuje velký počet vláken a nutnost přepínání kontextu
+
+\vspace{4pt}
+\noindent $\to$ \textbf{Asynchronní} I/O: předvytvořená vlákna čekají na příchozí požadavky, \textbf{obslužná} vlákna jim tyto požadavky přidělují \textit{(jsem schopný to škálovat -- jen určitý počet vláken danému požadavku)}.
+
+\subsubsection*{Outbound}
+
+\vspace{4pt}
+\noindent $\to$ \textbf{Synchronní} I/O: aktivita \textbf{pošle} požadavek, a čeká na odpověď, vlákno je uspané \textit{(blocked)} a čeká \textit{(používá se v kombinaci s JVT)}
+
+\vspace{4pt}
+\noindent \textbf{Asynchronní}: I/O: po odeslání požadavku se \textbf{nečeká} na odpověď, vlákno může být využito na další požadavky, po získání odpovědi se zavolá \textbf{callback}, tzv. event loop.
+
+\subsubsection*{Komponenty}
+
+V rámci aplikačního serveru funguje \textbf{muxer}, což je komponenta, která umožňuje zpracovávat komunikaci i přes jiné protokoly (HTTP, RMI\ldots) $\to$ předá požadavky do fronty, a z té to potom zpracuje \textbf{work manager}.
+
+
+\subsection{JVT}
+
+Java Virtual Threads = \textbf{virtuální vlákna} \textit{(něco jako korutiny)} -- vlákna, která JVM mapuje na vlákna operačního systému, ALE! blokující operace \textbf{neblokuje} systémová vlákno.
+
+Úlohy jsou obecně CPU bound, nebo I/O bound (omezeny výkonem CPU nebo I/O), na webovém serveru se jedná o úlohy \textbf{I/O bound}.
+
+\subsection{RMI}
+
+\textbf{R}emote \textbf{M}ethod \textbf{I}nvocation: protokol, který umožňuje komunikaci mezi \textbf{Java} aplikacemi $\to$ jedna Javovská třída může vzdáleně \textbf{zavolat} metody jiné třídy -- používá Java Remote Method Protocol. \textit{(!!! RMI není technologicky nezávislý)}
+
+Fáze \textbf{vývojová} \textit{(sdílené rozhraní)} $\to$ \textbf{kompilace} a spuštění $\to$ \textbf{vyhledání} referencí na jednotlivé objekty v serverovém registru $\to$ následně se \textbf{volají} metody na serveru.
+
+\textbf{Klient} = volá vzdálené metody, \textbf{server} = poskytuje vzdálené objekty, \textbf{stub}~= reprezentace komunikačního objektu na klientovi, \textbf{skeleton} = reprezentace komunikačního objektu na serveru, \textbf{registr} = komponenta držící stuby.
+
+\subsection{JNDI}
+
+Technologie pro \textbf{distribuci objektů} v aplikačním serveru \textit{(hierarchie objektů)}: může držet například\textbf{ }strom databází, který se nejprve nakonfiguruje, následně se to přiřadí \textit{(nabinduje)} do struktury, nasadí, a jiný klient je pak schopný tento objekt hledat.
+
+\vspace{4pt}
+\noindent Deployment = klient \textbf{nasadí} objekt na \textbf{jeden} ze serverů a admin server to následně \textbf{rozkopíruje} na všechny další servery v rámci clusteru.
+
+\subsection{Object Failover}
+
+Aplikační server obsahuje také \textbf{failover} mechanismus = v případě výpadku objektu jsem schopný pomocí tohoto mechanismu přepnout na jiný objekt, který \textbf{funguje}. \textit{(klient by neměl poznat, že nastal výpadek)}

@@ -1,0 +1,127 @@
+\section{Experimentální práce s algoritmy}
+
+\subsection{Účely}
+
+\textbf{Teorie}: srovnání se známými algoritmy, s optimem.
+
+\noindent \textbf{Aplikace}: vhodnost algoritmu pro zamýšlenou funkci.
+
+\vspace{4pt}
+
+\noindent \textbf{Složitosti}:
+
+\begin{itemize}
+    \item nejhorší případ (vzácný a nezajímavý, složitá analýza)
+    \item průměrný případ (proveditelné pro jednoduché případy)
+\end{itemize}
+
+\noindent $\to$ experimentální vyhodnocení = složitost jednotlivých kroků nelze spočítat.
+
+\vspace{4pt}
+
+\subsubsection*{Postup}
+
+Otázka co chci zjistit
+
+$\to$ plán experimentu
+
+$\to$ provedení experimentu
+
+$\to$ interpretace výsledků
+
+$\to$ odpověď \textit{(toto běželo x hodin, proto\ldots)}
+
+\subsection{Metriky}
+
+Zajímají nás metriky vstupu a výstupu a jejich závislost.
+
+Algoritmus: heuristika => problémově závislé části algoritmu => parametry algoritmu
+
+\noindent $\to$ v souvislosti s algoritmem se zkoumá počet navštívených konfigurací
+
+\vspace{4pt}
+
+\noindent Implementace: datové struktury -- kódování -- platforma
+
+$\to$ v souvislosti s implementací se zkoumá doba běhu (čas CPU)
+
+\vspace{4pt}
+
+Při měření závislostí metrik někde můžeme držet stejné metriky vstupu, u~některých to ale nejde (únava topiče).
+
+U SATu se zjistilo, že vstupní metrikou je poměr počtu klauzulí k počtu proměnných.
+
+Při generování sady instancí musím pro každou instanci se \textbf{zadanou metri\-kou} nechat \textbf{stejnou} pravděpodobnost. Pokud instance sbírám, snažím se získat co nejvíce instancí (se stejnou metrikou).
+
+Toto proženu algoritmem, změřím data, proženu to statistikou, abych se zbavil variance a interpretuji.
+
+\subsection{Statistika pro 1 hodnotu}
+
+Nejlepší je použít průměr nebo medián, použít vhodné parametry rozložení ($\mu$, $\sigma$) a následně kvalitně reprezentovat.
+
+\subsection{Srovnání algoritmů}
+
+Počet kroků algoritmu nechť je náhodná proměnná, pokud má A lepší parametry, je lepší. Pokud pro každou instanci A je lepší, pak A dominuje.
+
+\subsection{Randomizovaný algoritmus}
+
+Všechny hodnoty generátoru náhodných čísel jsou stejně pravděpodobné + potlačení variance z randomizace.
+
+Spolehlivá data můžeme ověřit pravděpodobnostním mechanismem testování hypotéz.
+
+\subsection*{Ale...}
+
+Někdy nejsme schopni charakterizovat problém $\to$ nemáme věrohodný generátor a nemůžeme potlačit varianci. Pak můžeme použít standardní sady problémů k určité úloze, kde najdeme i možnost porovnání s již existujícími algoritmy. Tomuto se říká \textbf{inženýrská algoritmika} -- srovnávat lze pouze vzhledem k dané sadě instancí.
+
+\subsection{Interpretace experimentu}
+
+\textbf{Data}: chování na konkrétních instancích s konkrétními parametry (pohled zvenčí, mnoho jednotlivých dat)
+
+\vspace{4pt}
+\noindent \textbf{Interpretace}: obecný závěr -- musíme provést extrapolaci, bývá kvalitativní, pohled zevnitř, jednoduchá formulace
+
+\subsection{Prezentace experimentu}
+
+Při prezentaci čtenáře zajímá důležitost otázky, relevance experimentu, reprodukovatelnost jeho důvěra v interpretaci a přijetí odpovědi.
+
+Autor tedy musí znát cílovou skupinu a předat ji data, získat její důvěru a přesvědčit ji. K tomu slouží tzv. IMRaD.
+
+\subsection{IMRaD}
+
+IMRaD se skládá z:
+
+\begin{itemize}
+    \item Introduction: je potřeba X, široce zaměřené
+    \item Methods \& Results: úžeji zaměřené, obsahuje reporty
+    \item Discussion (\& Conclusion): udělali jsme X, široce zaměřené
+\end{itemize}
+
+\subsubsection{Introduction}
+
+Proč byla studie provedena? Jaký byl účel výzkumu? Jaká byla otázka? Jakou hypotézu jsme testovali?
+
+$\to$ buduje výchozí bod pro další výklad
+
+\subsubsection{Methods}
+
+Kdy, kde a jak jsme experimenty provedli? Proč jsme použili dané metody? Jak jsme ověřili korektnost? Jaký jsme použili experimentální materiál a proč?
+
+\subsubsection{Results}
+
+K jakým jsme došli výsledkům? Jakou jsme získali odpověď? Potvrdili jsme hypotézu?
+
+$\to$ používáme zde vždy \textbf{pouze} všechna relevantní data
+
+\subsubsection{Discussion}
+
+Co odpověď může znamenat? Jaký má vztah k dosavadnímu výzkumu? Jaké má perspektivy?
+
+$\to$ vše, co podporuje i nepodporuje tvrzení článku, ale ne zbytečnosti
+
+\subsubsection{Zbytečnosti}
+
+Tabulky a grafy musí být vždy dohromady, jedno bez druhého nefunguje dobře. Chybějící sloupce v tabulkách jsou také na škodu. Grafy musí obsahovat srozumitelné sdělení. Popisky musí být výstižné. Pozor na pravdivosti tvrzení!
+
+\subsection{Pro KOPy}
+
+Cílovou skupinu známe, zadání také. Důležité je předat důvěru a přesvědčení ve výsledky + že autor rozumí tomu, co dělá.

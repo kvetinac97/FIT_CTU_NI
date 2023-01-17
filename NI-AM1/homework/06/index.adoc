@@ -1,0 +1,9 @@
+= HW6 - Asynchronní operace
+
+Cílem tohoto úkolu bylo udělat jednoduchou službu pro odstranění *výletů* z databáze.
+
+Vytvořil jsem tedy *REST* HATEOAS službu pro správu výletů se základními operacemi.
+
+Operace *DELETE* přesune okamžitě požadovaný výlet do seznamu "ke smazání", ze kterého je po 10 sekundách *odstraněna* _(tento 10 sekundový delay simuluje potvrzení odstranění jiným člověkem)_. Přítomnost v seznamu ke smazání se dá zkontrolovat pomocí endpointu */tour/to-delete*, na který odkazuje taky header *Location* u této operace.
+
+Dokumentace tohoto API, vygenerovaná pomocí pluginu do Springu je ve složce *results/*.

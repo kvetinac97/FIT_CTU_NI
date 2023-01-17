@@ -1,0 +1,1 @@
+rootProject.name = "ni-kop-task2"

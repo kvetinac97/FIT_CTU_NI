@@ -1,0 +1,259 @@
+\subsection{Postačující podmínky extrému}
+
+\subsubsection{Parciální derivace druhého řádu}
+
+První parciální derivace je pořád funkce více proměnných, můžu ji tedy stále derivovat a dostáváme tak parciální derivaci druhého řádu.
+
+\begin{equation}
+    \frac{\partial^2 f}{\partial x_j \partial x_i}(b) = \frac{\partial}{\partial x_j} \left(\frac{\partial f}{\partial x_i}\right)(b)
+\end{equation}
+
+Pokud se $x_i, x_j$ nerovnají, jedná se o smíšenou parciální derivaci. Pokud se rovnají, píšeme $x_i^2$.
+
+Druhé derivace jsou \textbf{zaměnitelné, pokud} existuje nějaká druhá parciální derivace, která je spojitá. Hessova matice je tedy často symetrická.
+
+\subsubsection{Hessova matice}
+
+Existují-li všechny druhé parciální derivace funkce $f$ v bodě $b$, můžeme je zaznamenat do \textbf{Hessovy matice}. \textit{(Prvně derivuji podle sloupce, druze podle řádku.)}
+
+\begin{equation}
+    \nabla^2 f(b) = \begin{pmatrix}
+\frac{\partial^2 f}{\partial x^2_1} (b) & \ldots & \frac{\partial^2 f}{\partial x_1 \partial x_n} (b)\\
+\vdots & \ddots & \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} (b) & \ldots & \frac{\partial^2 f}{\partial x^2_n} (b)
+\end{pmatrix}
+\end{equation}
+
+\subsubsection{Druhá derivace ve směru}
+
+Stejně tak, jako šlo znova derivovat první derivaci, tak stejně lze derivovat i druhou derivaci funkce $f$ ve směru $v$ v bodě $b \in D_f$ takovém, že $\exists H(b) \subset D_f$, je
+
+\begin{equation}
+    \nabla_v(\nabla_v f)(b).
+\end{equation}
+
+Mějme $v \in \mathbb{R}^{n,1}$, $||v|| = 1$. Mějme funkci $f$ a bod $b$ a nechť existuje okolí $H(b)$ takové, že tam jsou spojité všechny druhé parciální derivace, pak
+
+\begin{equation}
+    \nabla_v(\nabla_v f)(b) = v^T \cdot \nabla^2 f(b) \cdot v
+\end{equation}
+
+\subsubsection{Definitnost matic}
+
+Mějme $\mathbb{A} \in \mathbb{R}^{n,n}$. Řekneme, že matice $\mathbb{A}$ je
+
+\begin{itemize}
+    \item pozitivně semidefinitní, pokud $x^T \mathbb{A} x \geq 0$ pro $\forall x \in \mathbb{R}^{n,1}$;
+    \item pozitivně definitní, pokud $x^T \mathbb{A} x > 0$ pro $\forall x \in \mathbb{R}^{n,1}, x \neq 0$;
+    \item negativně semidefinitní, pokud $x^T \mathbb{A} x \leq 0$ pro $\forall x \in \mathbb{R}^{n,1}$;
+    \item negativně definitní, pokud $x^T \mathbb{A} x < 0$ pro $\forall x \in \mathbb{R}^{n,1}, x \neq 0$;
+    \item indefinitní, pokud není pozitivně ani negativně semidefinitní
+\end{itemize}
+
+\newpage
+
+\noindent Buď $\mathbb{A} \in \mathbb{R}^{n,n}$ symetrická matice. Pak platí:
+\begin{itemize}
+    \item matice A je pozitivně semidefinitní právě tehdy, když všechna její vlastní čísla jsou nezáporná
+    \item matice A je pozitivně definitní právě tehdy, když všechna její vlastní čísla jsou kladná
+    \item matice A je negativně semidefinitní právě tehdy, když všechna její vlastní čísla jsou nekladná
+    \item matice A je negativně definitní právě tehdy, když všechna její vlastní čísla jsou záporná
+    \item matice A je indefinitní právě tehdy, když existuje alespoň jedno kladné i záporné vlastní číslo
+\end{itemize}
+
+\noindent Pokud má matice $\mathbb{A} \in \mathbb{R}^{n,n}$ na diagonále dva prvky s různým znaménkem (kladný a záporný), pak je indefinitní.
+
+\subsubsection{Sylvestrovo kritérium}
+
+Buď $\mathbb{A} \in \mathbb{R}^{n,n}$ symetrická matice. Pro matici $\mathbb{A} \in \mathbb{R}^{n,n}$ definujeme matice $A_1, A_2, \ldots, A_n$ takto: $A_k \in \mathbb{R}^{k,k} $ je čtvercová matice v levém horním rohu matice $\mathbb{A}$. Platí:
+
+\begin{itemize}
+    \item Matice $\mathbb{A}$ je pozitivně definitní právě tehdy, když je determinant všech matic $A_1, A_2, \ldots, A_n$ kladný ($> 0$)
+    \item Matice $\mathbb{A}$ je negativně definitní právě tehdy, když je determinant všech matic $A_1, A_2, \ldots, A_n$ záporný pro $k$ liché a kladný pro $k$ sudé
+\end{itemize}
+
+\subsubsection{Postačující podmínka existence extrému}
+
+Stacionární bod, který není minimem ani maximem a na jehož nějakém okolí má funkce $f$ spojité všechny parciální derivace, se nazývá \textbf{sedlovým bodem}.
+
+\vspace{4pt}
+\noindent Nechť $b \in D_f$ je stacionární bod funkce $f$ a existuje okolí $H(b)$ takové, že $f$ má na $H(b)$ spojité všechny druhé parciální derivace, pak:
+
+\begin{itemize}
+    \item je-li $\nabla^2 f(b)$ pozitivně definitní, pak $b$ je ostré lokální minimum;
+    \item je-li $\nabla^2 f(b)$ negativně definitní, pak $b$ je ostré lokální maximum;
+    \item je-li $\nabla^2 f(b)$ indefinitní, pak $b$ je sedlový bod;
+\end{itemize}
+
+\subsubsection{Nutná podmínka existence extrému}
+
+Nechť $b \in D_f$ je stacionární bod funkce $f$ a existuje okolí $H(b)$ takové, že $f$ má na $H(b)$ spojité všechny druhé parciální derivace, pak:
+
+\begin{itemize}
+    \item je-li $b$ lokální minimum, pak $\nabla^2 f(b)$ je pozitivně semidefinitní
+    \item je-li $b$ lokální maximum, pak $\nabla^2 f(b)$ je negativně semidefinitní
+\end{itemize}
+
+\subsection{Postup analytického hledání extrémů}
+
+\begin{enumerate}
+    \item najít kritické body: stacionární body a body, kde alespoň jedna parciální derivace neexistuje
+    \item pokud jsou všechny 2. parciální derivace v okolí stacionárního bodu $b$ spojité, nalézt Hessovu matici. Pokud je tato matice:
+    \begin{enumerate}
+        \item pozitivně definitní, pak je $b$ bodem ostrého lokálního minima;
+        \item negativně definitní, pak je $b$ bodem ostrého lokálního maxima;
+        \item indefinitní, pak je bod $b$ sedlovým bodem (není extrémem)
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Konvexní funkce}
+
+\subsubsection{Definice}
+
+Funkce je konvexní, pokud
+
+\begin{equation}
+    \forall b_1, b_2 \in D_f , \forall t \in [0, 1] : f(tb_1) + (1 - t)b_2) \leq tf(b_1) + (1 - t)f(b_2)
+\end{equation}
+
+\noindent Platí, že funkce $f$, která má spojité všechny druhé parciální derivace, je konvexní právě tehdy, když je její Hessova matice pozitivně semidefinitní ve všech bodech vnitřku $D_f$ (množina bez své hranice).
+
+\vspace{4pt}
+\noindent Lokální minimum konvexní funkce je globálním minimem.
+
+\subsection{Příklady -- hledání extrémů}
+
+\subsubsection*{Příklad 1}
+
+$f(x,y) = x^2 + y^2$ -- je docela zřejmé, že zde bude jedno globální minimum v bodě $(0,0)$.
+
+\vspace{4pt}
+\noindent Gradient musí být nulový: $\nabla f(x,y) = (2x, 2y) = \vec{0}$ a to nastane právě tehdy, když $x = 0, y = 0$.
+
+\vspace{4pt}
+\noindent 
+Hessova matice \textit{(obecná)}: $\nabla^2 f(x, y) = \begin{pmatrix}
+    2 & 0 \\
+    0 & 2
+\end{pmatrix}$
+
+\vspace{6pt}
+\noindent
+Konkrétní v bodě $(0,0)$ bude zrovna v tomto případě stejná.
+
+\vspace{6pt}
+\noindent
+Syllvestrovo kritérium říká, že pokud je matice symetrická, pak je pozitivně definitní, pokud má jak ta "malá", tak ta "velká" matice kladný determinant, což platí \textit{(2 je kladné, 4 je kladné)}, tedy $(0,0)$ je \textbf{ostrým lokálním minimem}.
+
+\vspace{6pt}
+\noindent
+Nyní chceme parciální derivaci ve směru přímky $y = x$. Potřebujeme normalizovat $(1,1)$ tak, aby byla jeho velikost 1, což vyjde na $\left( \frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2} \right)$. To vynásobíme gradientem v bodě $(1,1)$, což vychází na $(2,2) \cdot \ldots = 2 \sqrt{2}$.
+
+\subsubsection*{Příklad 2}
+
+$g(x,y) = x^2 - y^2$, pro gradient platí $\nabla g(x, y) = (2x, -2y)$, což je nulové opět právě tehdy, když $x = 0, y = 0$.
+
+\vspace{6pt}
+\noindent Hessova matice nám vyjde $\nabla^2 g(x, y) = \begin{pmatrix}
+    2 & 0 \\
+    0 & -2
+\end{pmatrix}$ a dosadíme tam bod $(0, 0)$, čímž dostaneme stejnou matici.
+
+\vspace{6pt}
+\noindent Vidíme, že na diagonále je jeden kladný a jeden záporný prvek, matice je tedy indefinitní a $(0,0)$ je \textbf{sedlovým bodem}.
+
+\vspace{6pt}
+\noindent Opět hledáme parciální derivaci ve směru, násobíme našim vektorem v bodě $(1,1)$, čímž získáváme $(2,-2) \cdot \ldots = 0$.
+
+\subsubsection*{Příklad 3}
+
+$h(x,y) = x^2 - y^3$, pro gradient platí $\nabla h(x, y) = (2x, 3y^2)$, což je nulové opět právě tehdy, když $x = 0, y = 0$.
+
+\vspace{6pt}
+\noindent Hessova matice nám vyjde $\nabla^2 h(x, y) = \begin{pmatrix}
+    2 & 0 \\
+    0 & 6y
+\end{pmatrix}$ a dosadíme tam bod $(0, 0)$, čímž dostaneme $\begin{pmatrix}
+    2 & 0 \\
+    0 & 0
+\end{pmatrix}$.
+
+\vspace{6pt}
+\noindent Přímo z definice vidíme, že matice je pozitivně semidefinitní, takže nevíme, jestli to je nebo není extrém \textit{(maximálně víme, že tam nebude maximum)}.
+
+\subsubsection*{Příklad 4}
+
+$u(x,y) = xy$, pro gradient platí $\nabla u(x, y) = (y, x)$, což je nulové opět právě tehdy, když $x = 0, y = 0$.
+
+\vspace{6pt}
+\noindent Hessova matice nám vyjde $\nabla^2 u(x, y) = \begin{pmatrix}
+    0 & 1 \\
+    1 & 0
+\end{pmatrix}$.
+
+\vspace{6pt}
+\noindent Zkusím vynásobit obecným vektorem $\begin{pmatrix}
+    a & b
+\end{pmatrix} \cdot \begin{pmatrix}
+    0 & 1 \\
+    1 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+    a \\
+    b
+\end{pmatrix} = 2ab$, což jsme schopni nastavit tak, aby to bylo kladné i záporné, matice je tedy indefinitní a jedná se o \textbf{sedlový bod}.
+
+\subsubsection*{Příklad 5}
+
+$w(x,y) = (x + y)^2$, pro gradient platí $\nabla w(x, y) = \left(2(x + y), 2 (x + y)\right)$, což je nulové právě tehdy, když $x = -y, y \in \mathbb{R}$.
+
+\vspace{6pt}
+\noindent Hessova matice nám vyjde $\nabla^2 u(x, y) = \begin{pmatrix}
+    2 & 2 \\
+    2 & 2
+\end{pmatrix}$.
+
+\vspace{6pt}
+\noindent Zkusím vynásobit obecným vektorem $\begin{pmatrix}
+    a & b
+\end{pmatrix} \cdot \begin{pmatrix}
+    2 & 2 \\
+    2 & 2
+\end{pmatrix} \cdot \begin{pmatrix}
+    a \\
+    b
+\end{pmatrix} = 2a^2 + 4ab + 2b^2 = 2(a + b)^2 \geq 0$, matice je tedy pozitivně semidefinitní a funkce zde může mít lokální minimum \textit{(z kouknu a vidím vyplývá, že $y = -x$ opravdu je).}
+
+\subsubsection*{Příklad 6}
+
+$z(x,y) = x^4 + y^4$, pro gradient platí $\nabla z(x, y) = (4x^3, 4y^3)$, což je nulové právě tehdy, když $x = 0, y = 0$.
+
+\vspace{6pt}
+\noindent Hessova matice nám vyjde $\nabla^2 z(x, y) = \begin{pmatrix}
+    12 x^2 & 0 \\
+    0 & 12 y^2
+\end{pmatrix}$, což je v bodě $(0, 0)$ nulovou maticí. Matice je tedy pozitivně a negativně semidefinitní a nevíme tedy, co a jak.
+
+Použitím znalostí o pozitivní semidefinitnosti a konvexitě jsme ale schopni říct, že se bude jednat o \textbf{globální minimum}.
+
+\subsubsection*{Příklad 7}
+
+Máme $f(x,y,z) = x^3 + y^2 + z^2 + 12xy + 2z$. Gradientem je $\nabla f(x,y,z) = (3x^2 + 12y, 2y + 12x, 2z + 2)$. Kdy to bude nulové?
+
+\vspace{6pt}
+\noindent $\begin{matrix}
+    3x^2 & + 12y & & = 0 \\
+    12x & + 2y & & = 0 \\
+       &  &  2z + 2 & = 0
+\end{matrix}$
+
+\vspace{6pt}
+\noindent Z poslední rovnice je zřejmé, že $z = -1$, pak $y = -6x$, tedy $x^2 - 24x = 0$ \ldots body jsou ${(0,0,-1), (24, -144, -1)}$.
+
+\vspace{6pt}
+\noindent Hessova matice je $\nabla^2 f(x, y, z) = \begin{pmatrix}
+    6x & 12 & 0 \\
+    12 & 2 & 0 \\
+    0 & 0 & 2
+\end{pmatrix}$, v prvním bodě v levém horním rohu bude 0, v druhém 144.
+
+Po vynásobení obecným vektorem a dosazením zjistíme, že je tato matice v bodě $(0,0,-1)$ indefinitní a jedná se tedy o \textbf{sedlový bod}. V druhém bodě $(24,-144,-1)$ je matice pozitivně definitní a jedná se o \textbf{ostré lokální minimum}.

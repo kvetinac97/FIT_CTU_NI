@@ -1,0 +1,67 @@
+== Příklad výstupu
+
+_Tato kapitola obsahuje ukázku konkrétních vstupů a výstupů skriptů a snímky webového rozhraní aplikace._
+
+{empty}
+
+=== Skripty
+
+Jak jsme již zmínili v předchozích kapitolách, jednou ze součástí aplikace jsou skripty `script.py` pro sestavení databáze žánrů a otestování přesnosti a `recognise.py` pro rozpoznání žánru zadané skladby.
+
+[source,text]
+----
+> python3 script.py
+< Building database...
+(...)
+< Calculating precision...
+< Test set:     ['metal', 'metal', 'classic', 'classic', 'reggae', 'reggae', 'reggae', 'opera', 'opera', 'rap', 'rap', 'rap', 'jazz', 'jazz']
+< Predictions:  ['metal', 'metal', 'opera',   'opera', 'jazz', 'reggae', 'rap', 'opera', 'opera', 'reggae', 'rap', 'opera', 'jazz', 'jazz']
+< Precision: 57.142857142857146 %
+----
+
+Ukázka spuštění skriptu `script.py` s parametry `TEST_K_NEAREST = 5`, `DTW_WIDTH = 20` a `WEIGHTS = [1, 1, 1, 1, 1, 1, 1]`. Výsledkem je seznam předpovědí a přesnost modelu.
+
+[source,text]
+----
+> time python3 recognise.py ../test/rap_test.wav 5 0 1 1 1 1 1 1 1
+< Loading features for ../test/rap_test.wav
+< [('jazz', 0.4), ('classic', 0.2), ('rap', 0.2), ('reggae', 0.2)]
+< python3 recognise.py ../test/rap_test.wav 5 0 1 1 1 1 1 1 1  4.09s user 1.30s system 354% cpu 1.522 total
+
+> time python3 recognise.py ../test/rap_test.wav 10 20 1 1 1 1 1 1 1
+< Loading features for ../test/rap_test.wav
+< [('jazz', 0.30000000000000004), ('rap', 0.2), ('classic', 0.2), ('reggae', 0.2), ('opera', 0.1)]
+< python3 recognise.py ../test/rap_test.wav 10 20 1 1 1 1 1 1 1  5.41s user 1.20s system 221% cpu 2.990 total
+----
+
+Ukázka spuštění skriptu `recognise.py` pro rozpoznání žánru souboru `rap_test.wav` s různými parametry (váhy koeficientů jsou voleny vždy jako 1, mění se `TEST_K_NEAREST` z 5 na 10 a `DTW_WIDTH` z 0 na 20). Výsledkem jsou pravděpodobnosti jednotlivých žánrů a čas běhu.
+
+<<<
+
+=== Webová aplikace
+
+image::media/4_output_main.png[Úvodní stránka s výzvou k nahrání souboru]
+
+image::media/4_output_main_2.png[Úvodní stránka po nahrání souboru]
+
+Úvodní stránka s *výzvou* k nahrání souboru _(vlevo)_ a *po nahrání* souboru a změně parametrů _(vpravo)_.
+
+<<<
+
+==== Sestavení databáze
+
+image::media/4_output_build_db.png[Načítací obrazovka při sestavování databáze]
+
+image::media/4_output_built_db.png[Obrazovka indikující sestavení databáze]
+
+Stránka, která umožní *sestavit databázi* žánrů a jejich deskriptorů. Stav *při* sestavování _(vlevo)_ a *po* sestavení _(vpravo)_.
+
+<<<
+
+==== Testování přesnosti
+
+image::media/4_output_test_accuracy.png[Ukázka testování přesnosti]
+
+image::media/4_output_test_accuracy_2.png[Ukázka testování přesnosti s jinými parametry]
+
+Stránka umožňující *testování přesnosti* s různě nastavenými *parametry*.

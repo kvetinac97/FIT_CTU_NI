@@ -1,0 +1,157 @@
+\section{Simulovaná evoluce}
+
+\subsection{Principy}
+
+Oproti simulovanému ochlazování a lokálním heuristikám zde máme \textbf{více} stavů \textbf{najednou} (zpravidla konstantní počet), což nám \textbf{brání} uváznutí v jediném minimu \textit{(uvázne třeba jeden stav, ale ne všechny)}.
+
+\vspace{4pt}
+\noindent Operátor: kromě unárních operátorů zde máme i \textbf{binární} operátory (SxS $\to$ S, SxS $\to$ SxS, křížení).
+
+\subsection{Analogie}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|r|}
+        \hline
+        \textbf{biologie} & \textbf{optimalizační problémy} \\
+        \hline
+        jedinec & konfigurace \\
+        \hline
+        genetická reprezentace & konfigurace \\
+        \hline
+        gen & proměnná kódování \\
+        \hline
+        alela & hodnota proměnné \\
+        \hline
+        generace & aktuální množina reprezentací konfigurací \\
+        \hline
+        mutace & unární operátor \\
+        \hline
+        křížení & binární operátor \\
+        \hline
+        zdatnost (fitness) & optimalizační kritérium \\
+        \hline
+        konvergence & rozšíření kvalitní konfigurace \\
+        \hline
+        degenerace & rozšíření konfigurace uvázlé v lokálním minimu \\
+        \hline
+        biodiverzita & diverzita populace \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Kostra}
+
+Počáteční populace $\to$ \textbf{selekce} (zvýšení podílu zdatných jedinců) $\to$ \textbf{křížení} (kombinace do nových jedinců) $\to$ \textbf{mutace} (náhodný zdroj nové mutace) $\to$ znova selekce, nebo konečná populace.
+
+\subsection{Evoluční algoritmy}
+
+Nás se bude týkat především \textbf{genetický algoritmus} (reprezentace nuly a jedničky, dominuje křížení, malá mutace), další jsou \textbf{genetické programo\-vání} (stromy), \textbf{evoluční strategie} (vektor reálných čísel a mutace), \textbf{evoluční programování} (automat).
+
+\newpage
+\subsubsection*{Společné rysy}
+
+\begin{itemize}
+    \item více stavů
+    \item interakce stavů, kde nový stav je jejich kombinace
+    \item prostředky diverzifikace \textit{(vede k horšímu řešení)}: mutace
+    \item prostředky intenzifikace \textit{(vede k lepšímu řešení)}: selekce pro rekombinaci v další generaci
+\end{itemize}
+
+\subsubsection*{Charakteristické rysy}
+
+\begin{itemize}
+    \item reprezentace jednotlivých stavů
+    \item unární, binární operátory
+    \item selekce pro konstrukci následující generace
+    \item vztah stávající a vznikající generace (náhrada / soutěž)
+\end{itemize}
+
+\subsection{Generace}
+
+Obecně mám $\mu$ individuí (rodičů), které vyprodukují $\lambda$ jiných individuí (potomků), přičemž $\mu$ individuí má pokračovat $\to$ jak to spojit?
+
+\vspace{4pt}
+\noindent \textbf{Náhrada}: $\lambda = \mu$, nová generace nahradí původní, nebo \textbf{náhrada s elitismem}: několik málo elitních jedinců ze staré generace zůstává nebo \textbf{Soutěž}: z $\mu + \lambda$ individuí vybereme $\mu$ nových.
+
+\vspace{4pt}
+\noindent Někdy mám zvláštní případy -- $\lambda = \mu = 1$, pak se jedná o jednoduché heuristiky; pokud $\lambda = 1, \mu > 1$, jedná se o začlenění nového individua (\textbf{steady-state}).
+
+\vspace{4pt}
+\noindent U genetického algoritmu je typická \textbf{náhrada}.
+
+% =============
+
+\newpage
+\section{Genetické algoritmy}
+
+\subsection{Kódování}
+
+Klasická formulace je \textbf{binární řetězec}, i kdyby se jednalo o specifický problém -- někde je bez problému (optimální podmnožina, SAT), někde těžší (vektor proměnných $\to$ bin packing -- pro každou věc číslo kontejneru, permutace indexů měst\ldots)
+
+\subsection{Řízení operátorů}
+
+V naší kostře evolučních algoritmů je pravděpodobnost \textbf{křížení} typicky \textbf{1} (vždy se bude křížit), oproti tomu pravděpodobnost \textbf{mutace} bude \textbf{velmi nízká} (typicky $0.03$).
+
+\vspace{4pt}
+\noindent \textbf{Křížení}: náhodně zvolíme bod, kde se binární řetězce \textbf{rozdělí} a následně spojí do jednoho. \textbf{1}|000, 0|\textbf{101} -> \textbf{1|101}. Další možnost je \textbf{dvoubodové} křížení, kde se tyto body zvolí dva. \textbf{1}|00|\textbf{0}, 0|\textbf{10}|1 -> \textbf{1|10|1}. Nebo také \textbf{uniformní} křížení -- vygenerujeme náhodný vektor 0 a 1, kde je 0, bereme z prvního rodiče, kde je 1, z druhého.
+
+\vspace{4pt}
+\noindent Aby zůstala zachována kostra klasického genetického algoritmu, zavedla se \textbf{inverze}: zpřeházím genom, ale ponechám význam proměnných (jak je to přeházené).
+
+\vspace{4pt}
+\noindent \textbf{Selekce}: má za cíl způsobit, aby početní zastoupení jedince v populaci odpovídalo jeho zdatnosti, \textbf{vyvažuje} diverzifikaci a intenzifikaci.
+
+\vspace{4pt}
+\noindent \textbf{Selekční tlak}: pravděpodobnost výběru \textbf{nejlepšího} jedince, má dva extrémy: $p = 1$ = intenzifikace, $p = 1/n$ = nezáleží na zdatnosti, diverzifikace.
+
+\vspace{4pt}
+\noindent \textbf{Velký} selekční tlak = nebezpečí \textbf{degenerace} populace (uváznutí v lokálních optimech), \textbf{malý} selekční tlak = pomalá \textbf{konvergence}, pokud šum z mutace převáží pomalou konvergenci = \textbf{divergence}. Pokud snižujeme selekční tlak, chceme snížit i \textbf{pravděpodobnost} mutace.
+
+\subsection{Ruletový výběr}
+
+Při výběru určíme pomocí pravděpodobností jednotlivých prvků v podstatě koláčový graf – \textbf{ruletu}. Provedeme $m$ \textbf{náhodných} voleb úhlu = $m$ prvků, jeden prvek tedy můžeme vybrat vícekrát.
+
+\vspace{4pt}
+\noindent Vícenásobné vybrání jednoho prvku se dá kompenzovat \textbf{univerzálním stochastickým vzorkováním} = odměříme náhodný úhel a odměříme $m-1$ krát poměrný úhel.
+
+\subsubsection*{Lineární škálování} 
+
+Lineární škálování: naškálujeme velikost políček rulety podle \textbf{rozdílu zdatnosti} prvních dvou prvků dělený rozdílem mezi nejlepším a nejhorším: $Z = z_1 + (z - z_{min}) \cdot \frac{z_2 - z_1}{z_{max} - z_{min}}$.
+
+\vspace{4pt}
+\noindent \textbf{Výsledný} selekční tlak (pravděpodobnost výběru nejlepšího jedince) je \textbf{poměr} zdatnosti \textbf{nejlepšího} jedince a \textbf{průměru}. $c = \frac{Z_2}{Z_{avg}}$
+
+\subsubsection*{Další}
+
+\textbf{Ranking}: rozhoduje pouze pořadí, \textbf{Zkrácený výběr}: vybírá pouze podle prvních prvků, \textbf{Turnajový výběr}: náhodný výběr $r$ jedinců a z nich nejlepší, až do naplnění populace.
+
+\subsection{Řízení generací}
+
+U generací se typicky používá náhrada, nebo náhrada s elitismem \textit{(pozor na degeneraci)}.
+
+\vspace{4pt}
+\noindent \textbf{Populace}: malé populace = nebezpečí ztráty diverzity, \textbf{méně obtížné} problémy: \textbf{30} jedinců, \textbf{obtížné} problémy: cca \textbf{100} jedinců.
+
+\vspace{4pt}
+\noindent \textbf{Podmínky ukončení}: pevný počet generací, případně sledujeme příznaky konvergence \textit{(pokud je lze solidně měřit)} $\to$ změna průměrné zdatnosti, rozložení zdatnosti v generaci, sledování diverzity
+
+\subsection{Omezující podmínky}
+
+\textbf{Standardní}: trest smrti (neúspěšná konstrukce a vyhodnocení individua), oprava individua, relaxace
+
+\vspace{4pt}
+\noindent \textbf{Doménová reprezentace}: taková, že každá možná reprezentace je platná (zobrazuje fenotyp) -- např. permutační operátory = je to permutace.
+
+\vspace{4pt}
+\noindent \textbf{Dekodér}: zachová původní reprezentaci, pokud interpretujeme algoritmem, dostaneme vždy řešení \textit{(každé řešení je reprezentováno, malá změna genotypu = malá změna řešení)}
+
+\subsection{Příklad: evoluce posouvače}
+
+Máme posouvač obvodu, který posouvá o mocniny dvou bitů, chceme zkonstruovat jednotku, která bude posouvat efektivně a bude dost malá (obvodově).
+
+\vspace{4pt}
+\noindent Budu hledat jen posuvy $s_i$ pomocí genetického programování, a zbytek vypočítám pomocí dynamického programování (docela rychle).
+
+\vspace{4pt}
+\noindent Jednoduše se doménově reprezentuje, implementujeme pomocí jednobodového křížení $\to$ dojdeme ke konvergenci po 3 000 generacích.

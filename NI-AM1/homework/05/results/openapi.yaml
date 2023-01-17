@@ -1,0 +1,679 @@
+openapi: 3.0.1
+info:
+  title: Travel Agency
+  description: Rest API for our travel agency
+  version: '1.0.0'
+servers:
+  - url: 'http://t-a.org'
+    description: API domain
+paths:
+  /country/{id}:
+    get:
+      tags:
+        - country
+      operationId: getCountry
+      summary: Get country detail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Country'
+          links:
+            Self:
+              $ref: '#/components/links/getCountry'
+            Update:
+              $ref: '#/components/links/updateCountry'
+            Delete:
+              $ref: '#/components/links/deleteCountry'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/getCountry'
+    put:
+      tags:
+        - country
+      operationId: updateCountry
+      summary: Create new country or update existing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Country'
+        required: true
+      responses:
+        '204':
+          description: No Content
+          links:
+            Self:
+              $ref: '#/components/links/updateCountry'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/updateCountry'
+        '400':
+          description: Invalid data
+          links:
+            Self:
+              $ref: '#/components/links/updateCountry'
+    delete:
+      tags:
+        - country
+      operationId: deleteCountry
+      summary: Deletes given country
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+          links:
+            Self:
+              $ref: '#/components/links/getCountry'
+            GetCountries:
+              $ref: '#/components/links/getCountries'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/updateCountry'
+  /country:
+    get:
+      tags:
+        - country
+      operationId: getCountries
+      summary: List all countries
+      parameters:
+        - in: query
+          name: name
+          description: Filters out countries matching given name
+          style: spaceDelimited
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+          links:
+            Self:
+              $ref: '#/components/links/getCountries'
+            PostCountry:
+              $ref: '#/components/links/postCountry'
+    post:
+      tags:
+        - country
+      operationId: createCountry
+      summary: Create new country
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Country'
+        required: true
+      responses:
+        '201':
+          description: Created
+          links:
+            Self:
+              $ref: '#/components/links/postCountry'
+            GetCountries:
+              $ref: '#/components/links/getCountries'
+            GetCountryById:
+              $ref: '#/components/links/getCountry'
+        '400':
+          description: Invalid data
+          links:
+            Self:
+              $ref: '#/components/links/postCountry'
+  /location/{id}:
+    get:
+      tags:
+        - location
+      operationId: getLocation
+      summary: Get location detail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Location'
+          links:
+            Self:
+              $ref: '#/components/links/getLocation'
+            UpdateLocation:
+              $ref: '#/components/links/updateLocation'
+            DeleteLocation:
+              $ref: '#/components/links/deleteLocation'
+            GetLocations:
+              $ref: '#/components/links/getLocations'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/getLocation'
+    put:
+      tags:
+        - location
+      operationId: updateLocation
+      summary: Create new location or update existing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      responses:
+        '204':
+          description: No Content
+          links:
+            Self:
+              $ref: '#/components/links/updateLocation'
+            GetLocations:
+              $ref: '#/components/links/getLocations'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/updateLocation'
+        '400':
+          description: Invalid data
+          links:
+            Self:
+              $ref: '#/components/links/updateLocation'
+    delete:
+      tags:
+        - location
+      operationId: deleteLocation
+      summary: Delete given location
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+          links:
+            Self:
+              $ref: '#/components/links/deleteLocation'
+            GetTours:
+              $ref: '#/components/links/getLocations'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/deleteLocation'
+  /location:
+    get:
+      tags:
+        - location
+      operationId: getLocations
+      summary: List all locations
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+          links:
+            Self:
+              $ref: '#/components/links/getLocations'
+            PostLocation:
+              $ref: '#/components/links/postLocation'
+    post:
+      tags:
+        - location
+      operationId: createLocation
+      summary: Create new location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      responses:
+        '201':
+          description: Created
+          links:
+            Self:
+              $ref: '#/components/links/postLocation'
+            GetLocations:
+              $ref: '#/components/links/getLocations'
+            GetLocation:
+              $ref: '#/components/links/getLocation'
+        '400':
+          description: Invalid data
+          links:
+            Self:
+              $ref: '#/components/links/postLocation'
+  /tour/{id}:
+    get:
+      tags:
+        - tour
+      operationId: getTour
+      summary: Get tour detail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tour'
+          links:
+            Self:
+              $ref: '#/components/links/getTour'
+            UpdateTour:
+              $ref: '#/components/links/updateTour'
+            DeleteTour:
+              $ref: '#/components/links/deleteTour'
+            GetTours:
+              $ref: '#/components/links/getTours'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/getTour'
+    put:
+      tags:
+        - tour
+      operationId: updateTour
+      summary: Create new tour or update existing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tour'
+        required: true
+      responses:
+        '204':
+          description: No Content
+          links:
+            Self:
+              $ref: '#/components/links/updateTour'
+            GetTours:
+              $ref: '#/components/links/getTours'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/updateTour'
+        '400':
+          description: Invalid data
+          links:
+            Self:
+              $ref: '#/components/links/updateTour'
+    delete:
+      tags:
+        - tour
+      operationId: deleteTour
+      summary: Delete given tour
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+          links:
+            Self:
+              $ref: '#/components/links/deleteTour'
+            GetTours:
+              $ref: '#/components/links/getTours'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/deleteTour'
+  /tour:
+    get:
+      tags:
+        - tour
+      operationId: getTours
+      summary: List all tours
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tour'
+          links:
+            Self:
+              $ref: '#/components/links/getTours'
+            PostTour:
+              $ref: '#/components/links/postTour'
+    post:
+      tags:
+        - tour
+      operationId: createTour
+      summary: Create new tour
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tour'
+        required: true
+      responses:
+        '201':
+          description: Created
+          links:
+            Self:
+              $ref: '#/components/links/postTour'
+            GetTours:
+              $ref: '#/components/links/getTours'
+            GetTour:
+              $ref: '#/components/links/getTour'
+        '400':
+          description: Invalid data
+          links:
+            Self:
+              $ref: '#/components/links/postTour'
+  /customer/{id}:
+    get:
+      tags:
+        - customer
+      operationId: getCustomer
+      summary: Get customer detail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Customer'
+          links:
+            Self:
+              $ref: '#/components/links/getCustomer'
+            UpdateCustomer:
+              $ref: '#/components/links/updateCustomer'
+            DeleteCustomer:
+              $ref: '#/components/links/deleteCustomer'
+            GetCustomers:
+              $ref: '#/components/links/getCustomers'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/getCustomer'
+    put:
+      tags:
+        - customer
+      operationId: updateCustomer
+      summary: Create new customer or update existing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        '204':
+          description: No Content
+          links:
+            Self:
+              $ref: '#/components/links/updateCustomer'
+            GetCustomers:
+              $ref: '#/components/links/getCustomers'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/updateCustomer'
+        '400':
+          description: Invalid data
+          links:
+            Self:
+              $ref: '#/components/links/updateCustomer'
+    delete:
+      tags:
+        - customer
+      operationId: deleteCustomer
+      summary: Delete given customer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+          links:
+            Self:
+              $ref: '#/components/links/deleteCustomer'
+            GetTours:
+              $ref: '#/components/links/getCustomers'
+        '404':
+          description: Not found
+          links:
+            Self:
+              $ref: '#/components/links/deleteCustomer'
+  /customer:
+    get:
+      tags:
+        - customer
+      operationId: getCustomers
+      summary: List all customers
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+          links:
+            Self:
+              $ref: '#/components/links/getCustomers'
+            PostCustomer:
+              $ref: '#/components/links/postCustomer'
+    post:
+      tags:
+        - customer
+      operationId: createCustomer
+      summary: Create new customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        '201':
+          description: Created
+          links:
+            Self:
+              $ref: '#/components/links/postCustomer'
+            GetCustomers:
+              $ref: '#/components/links/getCustomers'
+            GetCustomer:
+              $ref: '#/components/links/getCustomer'
+        '400':
+          description: Invalid data
+          links:
+            Self:
+              $ref: '#/components/links/postCustomer'
+components:
+  schemas:
+    Country:
+      type: object
+      properties:
+        id:
+          type: string
+          example: CZ
+        name:
+          type: string
+          example: Česko
+    Location:
+      type: object
+      properties:
+        id:
+          type: string
+          example: CZ-01
+        name:
+          type: string
+          example: Pražský hrad
+        country:
+          $ref: '#/components/schemas/Country'
+    Tour:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "CZ-01-wrzecond"
+        name:
+          type: string
+          example: "Summer Trip"
+        date:
+          type: string
+          example: "2022-08-01T09:00:00"
+        location:
+          $ref: '#/components/schemas/Location'
+        customer:
+          $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "wrzecond"
+        name:
+          type: string
+          example: "Ondřej Wrzecionko"
+  links:
+    getCountry:
+      operationId: getCountry
+      parameters:
+        countryId: '$response.body#/id'
+    updateCountry:
+      operationId: updateCountry
+      parameters:
+        countryId: '$response.body#/id'
+    deleteCountry:
+      operationId: deleteCountry
+      parameters:
+        countryId: '$response.body#/id'
+    getCountries:
+      operationId: getCountries
+    postCountry:
+      operationId: postCountry
+    
+    getTour:
+      operationId: getTour
+      parameters:
+        tourId: '$response.body#/id'
+    updateTour:
+      operationId: updateTour
+      parameters:
+        tourId: '$response.body#/id'
+    deleteTour:
+      operationId: deleteTour
+      parameters:
+        tourId: '$response.body#/id'
+    getTours:
+      operationId: getTours
+    postTour:
+      operationId: postTour
+    
+    getLocation:
+      operationId: getLocation
+      parameters:
+        locationId: '$response.body#/id'
+    updateLocation:
+      operationId: updateLocation
+      parameters:
+        locationId: '$response.body#/id'
+    deleteLocation:
+      operationId: deleteLocation
+      parameters:
+        locationId: '$response.body#/id'
+    getLocations:
+      operationId: getLocations
+    postLocation:
+      operationId: postLocation
+
+    getCustomer:
+      operationId: getCustomer
+      parameters:
+        customerId: '$response.body#/id'
+    updateCustomer:
+      operationId: updateCustomer
+      parameters:
+        customerId: '$response.body#/id'
+    deleteCustomer:
+      operationId: deleteCustomer
+      parameters:
+        customerId: '$response.body#/id'
+    getCustomers:
+      operationId: getCustomers
+    postCustomer:
+      operationId: postCustomer

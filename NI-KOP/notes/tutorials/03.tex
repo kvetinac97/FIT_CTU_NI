@@ -1,0 +1,33 @@
+\section{Experimentální vyhodnocení algoritmu (více instancí)}
+
+\subsection{ECDF}
+
+Mám počet kroků algoritmu (na ose x) a pravděpodobnost, že algoritmus skončil v nejvýše daném kroku. Připomenutí vzorce:
+
+\begin{equation}
+    \sum_{k: x_k \leq x}{P(X = x_k)}
+\end{equation}
+
+Křivku počítáme jen z úspěšných běhů, ale dělíme ji počtem všech běhů. Vzniká tak tedy pravděpodobnost, že algoritmus \textbf{úspěšně} skončí do kroku $k$.
+
+Average fined par10 je tzv. penalizovaný průměr:
+
+\begin{equation}
+    \frac{\sum{k_i} + 10 \cdot l}{n}
+\end{equation}
+
+kde $k_i$ je počet kroků v úspěšném běhu, $l$ je limit kroků a $n$ je počet běhů.
+
+\subsection{Porovnávání}
+
+Můžeme porovnávat podle parametrů $\sigma^2$, $\mu$ normálního rozložení; počtu kroků; počtu penalizovaných kroků; nebo také podle xing, winner -- najde se poslední průsečík grafů ECDF a od toho se počítá kdo je nahoře.
+
+\subsection{Jak psát zprávu}
+
+Řekneme, který algoritmus je lepší na těžkých instancích o 20 proměnných (na základě porovnání z měření, co jsme dělali na cvičeních).
+
+\textbf{Material}: standardní implementace gSATu; datové sady ze SATLIBu, uf20-91 (1 000 instancí); primární data (počet iterací, počet splněných klauzulí); 500 iterací max; 1 000 spuštění na 1 instanci; pilotní experiment se 100 spuštěními
+
+\textbf{Results}: co jsme naměřili, k čemu jsme došli (příloha) -- pilotní experiment $\to$ odvozené metriky (četnost úspěchu); celý experiment: metrika -- par10, poslední křížení
+
+\textbf{Discussion}: interpretace dat, zhodnocení významu odpovědi, účinnosti zvolené metody. \textit{(avg fined steps říká, že je větší pravděpodobnost, že B dojde k správnému výsledku, než A, kratší očekávaná doba do úspěšného řešení ;; křížení: při počtu kroků větším než XY je u B větší pravděpodobnost úspěchu)}

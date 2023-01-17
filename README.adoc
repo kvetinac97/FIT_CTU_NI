@@ -1,0 +1,40 @@
+= FIT CTU NI
+
+Collection of my projects made on FIT_CTU throughout master studies.
+
+== First semester
+
+link:NI-AM1/[Middleware Architectures 1 (NI-AM1)] - lecture notes, exam notes, homeworks and grades export
+
+link:NI-CAP/[Human in Anthropological Perspectives (NI-CAP)] - reflection
+
+link:NI-HCM/[Mind Hacking (NI-HCM)] - lecture notes, semestral team project
+
+link:NI-KOP/[Combinatorial Optimization (NI-KOP)] - lecture & tutorial notes, homeworks and grades export
+
+link:NI-MPI/[Mathematics for Informatics (NI-MPI)] - lecture notes _(partially)_, homework, grades and MARAST export
+
+link:NI-VMM/[Searching Multimedia Databases (NI-VMM)] - lecture notes, semestral project
+
+|===
+|Subject |Grade |Total |Exam |Assessment
+
+|Middleware Architectures 1 |A|?|?|38.50/40
+|Human in Anthropological Perspectives 4+|A
+|Mind Hacking|B|84/100|45/60|39/40
+|Combinatorial Optimization|B|81/100|47/55|34/45
+|Mathematics for Informatics|A|103/100|73/80|30/20
+|Searching Multimedia Databases|A|?|?|50/50
+|===
+
+== Second semester
+
+_TBA_
+
+== Third semester
+
+_TBA_
+
+== Fourth semester
+
+_TBA_

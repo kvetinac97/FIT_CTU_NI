@@ -1,0 +1,63 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="https://courses.fit.cvut.cz/NI-AM1/tutorials/web-services/"
+           targetNamespace="https://courses.fit.cvut.cz/NI-AM1/tutorials/web-services/" elementFormDefault="qualified">
+
+    <!-- vrať mi seznam zájezdů, bez parametrů zde -->
+    <xs:element name="getToursRequest">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- sekvence elementů tour, vrátí XML se seznamem zájezdů -->
+    <xs:element name="getToursResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="tour" type="tns:tour"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addToursRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tour" type="tns:tour"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addToursResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteToursRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteToursResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="tour">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="type" type="tns:tourType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- v podstatě ENUM -->
+    <xs:simpleType name="tourType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CRUISES"/>
+            <xs:enumeration value="SKI"/>
+            <xs:enumeration value="BEACH"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

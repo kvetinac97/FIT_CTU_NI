@@ -1,0 +1,14 @@
+= Combinatorial Optimization
+
+Got 100 % from homework #1, 93 % from homework #2. +
+Got 63 % from semestral test & 72 % from written exam, resulting in grade B.
+
+== Lectures
+
+Lecture and tutorials notes in LaTeX, rendered to `lectures.pdf` and `tutorials.pdf` respectively.
+
+== Homework
+
+First (semestral) homework was about experimental evaluation and comparison of two algorithms, gSAT and probSAT.
+
+Second (exam) homework was about simulated annealing and its black-box & white-box testing.

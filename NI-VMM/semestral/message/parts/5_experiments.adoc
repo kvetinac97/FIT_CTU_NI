@@ -1,0 +1,331 @@
+== Experimentální sekce
+
+_Obsahem této kapitoly je experimentální testování různých parametrů porovnávání deskriptorů v naší aplikaci a jejich vlivu na přesnost a/nebo rychlost._
+
+=== Deskriptory
+
+_Cílem experimentu bylo porovnání přesnosti jednotlivých deskriptorů, jak na testovací množině, tak i na testovacích souborech._
+
+==== Testování přesnosti
+
+Každý deskriptor byl vyhodnocován *zvlášť* _(měl nastavenou váhu na hodnotu 1, ostatní deskriptory měly nastavenou váhu na 0)_. Počet sousedů byl nastaven na hodnotu *5*. Níže je uvedena tabulka s *přesností* pro jednotlivé deskriptory. Dále jsou uvedené *snímky obrazovky* s podrobnými výsledky pro jednotlivé deskriptory.
+
+[cols="1,1"]
+|===
+|Deskriptor|Přesnost
+
+|SpectrumSpreadType|21,43 %
+|SpectrumCentroidType|28,57 %
+|Area Method of Moments _(průměr)_|21,43 %
+|Area Method of Moments _(std. odchylka)_|21,43 %
+|Method of Moments _(průměr)_|50 %
+|MFCC _(průměr)_|71,43 %
+|MFCC _(časová řada)_|57,14 %
+|===
+
+[cols="^a,^a", frame=none, grid=none]
+|===
+| 
+image::media/5_1_spread.png[alt=Testování přesnosti SpectrumSpreadType,pdfWidth=40%]
+| 
+image::media/5_1_centroid.png[alt=Testování přesnosti SpectrumCentroidType,pdfWidth=40%]
+| 
+image::media/5_1_area_moments.png[alt=Testování přesnosti Area Method of Moments,pdfWidth=40%]
+| 
+image::media/5_1_area_moments_dev.png[alt=Testování přesnosti Area Method of Moments standardní odchylka,pdfWidth=40%]
+| 
+image::media/5_1_moments.png[alt=Testování přesnosti Method of Moments,pdfWidth=40%]
+| 
+image::media/5_1_mfcc_mean.png[alt=Testování přesnosti MFCC průměr,pdfWidth=40%]
+| 
+image::media/5_1_mfcc_time.png[alt=Testování přesnosti MFCC časová řada,pdfWidth=40%]
+|
+|===
+
+Výsledné tabulky testování přesnosti pro deskriptory _(zleva doprava, shora dolů)_: `SpectrumSpreadType`, `SpectrumCentroidType`, `Area Method of Moments` _(průměr)_, `Area Method of Moments` _(std. odchylka)_, `Method of Moments` _(průměr)_, `MFCC` _(průměr)_, `MFCC` _(časová řada)_.
+
+==== Testování na jednotlivých souborech
+
+Pro *každý* žánr jsme vybrali *jeden* soubor _(jiný od těch použitých pro sestavení databáze)_, na kterém jsme testovali *přesnost*. V tabulkách níže jsou v řádcích zapsány *skutečné* žánry testovacích souborů, ve sloupcích jsou vyobrazeny výsledné *pravděpodobnosti* daných žánrů na základě konkrétního *deskriptoru* a *vstupu*. Počet sousedů byl nastaven na hodnotu *5*.
+
+{empty} +
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|20 %|0 %|40 %|0 %|0 %
+|Jazz|40 %|*20 %*|0 %|40 %|0 %|0 %
+|Metal|0 %|40 %|*0 %*|20 %|20 %|20 %
+|Opera|0 %|40 %|0 %|*20 %*|20 %|20 %
+|Rap|40 %|40 %|0 %|0 %|*0 %*|20 %
+|Reggae|40 %|40 %|0 %|0 %|0 %|*20 %*
+|===
+
+Testování výstupů deskriptoru `SpectrumSpreadType`
+
+{empty} +
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*0 %*|40 %|40 %|0 %|20 %|0 %
+|Jazz|0 %|*0 %*|20 %|60 %|20 %|0 %
+|Metal|0 %|40 %|*40 %*|0 %|20 %|0 %
+|Opera|0 %|0 %|20 %|*40 %*|40 %|0 %
+|Rap|0 %|60 %|0 %|0 %|*20 %*|20 %
+|Reggae|0 %|20 %|40 %|0 %|0 %|*40 %*
+|===
+
+Testování výstupů deskriptoru `SpectrumCentroidType`
+
+<<<
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*20 %*|20 %|20 %|20 %|20 %|0 %
+|Jazz|20 %|2**0 %**|20 %|20 %|20 %|0 %
+|Metal|20 %|20 %|*20 %*|20 %|20 %|0 %
+|Opera|20 %|20 %|20 %|*20 %*|20 %|0 %
+|Rap|20 %|20 %|20 %|20 %|*20 %*|0 %
+|Reggae|20 %|0 %|20 %|0 %|40 %|*20 %*
+|===
+
+Testování výstupů deskriptoru `Area Method of Moments` _(průměr)_
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*20 %*|20 %|20 %|20 %|20 %|0 %
+|Jazz|20 %|*20 %*|20 %|20 %|20 %|0 %
+|Metal|20 %|20 %|*20 %*|20 %|20 %|0 %
+|Opera|20 %|20 %|20 %|*20 %*|20 %|0 %
+|Rap|20 %|20 %|20 %|20 %|*20 %*|0 %
+|Reggae|20 %|0 %|20 %|0 %|40 %|*20 %*
+|===
+
+Testování výstupů deskriptoru `Area Method of Moments` _(std. odchylka)_
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|0 %|0 %|60 %|0 %|0 %
+|Jazz|40 %|*0 %*|0 %|60 %|0 %|0 %
+|Metal|0 %|0 %|*60 %*|0 %|20 %|20 %
+|Opera|0 %|0 %|0 %|*100 %*|0 %|0 %
+|Rap|0 %|80 %|20 %|0 %|*0 %*|0 %
+|Reggae|0 %|0 %|40 %|0 %|20 %|*40 %*
+|===
+
+Testování výstupů deskriptoru `Method of Moments` _(průměr)_
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|0 %|0 %|40 %|0 %|20 %
+|Jazz|0 %|*20 %*|0 %|60 %|20 %|0 %
+|Metal|20 %|0 %|*20 %*|0 %|40 %|20 %
+|Opera|40 %|0 %|0 %|*40 %*|20 %|0 %
+|Rap|0 %|40 %|0 %|0 %|*20 %*|40 %
+|Reggae|0 %|0 %|40 %|0 %|40 %|*20 %*
+|===
+
+Testování výstupů deskriptoru `MFCC` _(průměr)_
+
+{empty} +
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|0 %|0 %|60 %|0 %|0 %
+|Jazz|40 %|*0 %*|0 %|60 %|0 %|0 %
+|Metal|0 %|20 %|*40 %*|0 %|20 %|20 %
+|Opera|40 %|0 %|0 %|*60 %*|0 %|0 %
+|Rap|0 %|20 %|40 %|0 %|*20 %*|20 %
+|Reggae|0 %|0 %|20 %|0 %|20 %|*60 %*
+|===
+
+Testování výstupů deskriptoru `MFCC` _(časová řada)_
+
+<<<
+
+=== Porovnání parametrů
+
+_Cílem experimentu je porovnání parametrů počet sousedů a šířka DTW okna pro příslušné deskriptory._
+
+==== Počet sousedů pro deskriptor MFCC průměr
+
+Níže jsou výsledky testování *přesnosti* pro deskriptor `MFCC` _(průměr)_ pro 1, 3, 5 a 10 *sousedů*.
+
+[cols="1,1"]
+|===
+|Počet sousedů|Přesnost
+
+|1|64,29 %
+|3|71,43 %
+|5|71,43 %
+|10|35,71 %
+|===
+
+[cols="^a,^a", frame=none, grid=none]
+|===
+|
+image::media/5_3_mfcc_k_1.png[alt=Testování přesnosti 1 soused,pdfWidth=50%]
+|
+image::media/5_3_mfcc_k_3.png[alt=Testování přesnosti 3 sousedé,pdfWidth=50%]
+|
+image::media/5_3_mfcc_k_5.png[alt=Testování přesnosti 5 sousedů,pdfWidth=50%]
+|
+image::media/5_3_mfcc_k_10.png[alt=Testování přesnosti 10 sousedů,pdfWidth=50%]
+|===
+
+V tabulkách níže jsou *výstupy* pro jednotlivé testovací *soubory*, opět postupně pro počet sousedů 1, 3, 5 a 10.
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*100 %*|0 %|0 %|0 %|0 %|0 %
+|Jazz|0 %|*0 %*|0 %|100 %|0 %|0 %
+|Metal|0 %|0 %|*100 %*|0 %|0 %|0 %
+|Opera|0 %|0 %|0 %|*100 %*|0 %|0 %
+|Rap|0 %|0 %|0 %|0 %|*100 %*|0 %
+|Reggae|0 %|0 %|0 %|0 %|100 %|*0 %*
+|===
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*67 %*|0 %|0 %|33 %|0 %|0 %
+|Jazz|0 %|*33 %*|0 %|67 %|0 %|0 %
+|Metal|33 %|0 %|*33 %*|0 %|33 %|0 %
+|Opera|33 %|0 %|0 %|*67 %*|0 %|0 %
+|Rap|0 %|33 %|33 %|0 %|*33 %*|0 %
+|Reggae|0 %|0 %|67 %|0 %|33 %|*0 %*
+|===
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|40 %|0 %|0 %|0 %|20 %
+|Jazz|0 %|*20 %*|0 %|60 %|20 %|0 %
+|Metal|20 %|0 %|*20 %*|0 %|40 %|20 %
+|Opera|40 %|0 %|0 %|*40 %*|20 %|0 %
+|Rap|0 %|20 %|20 %|0 %|*60 %*|0 %
+|Reggae|0 %|0 %|40 %|0 %|40 %|*20 %*
+|===
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*30 %*|10 %|0 %|40 %|10 %|10 %
+|Jazz|20 %|*10 %*|0 %|50 %|10 %|10 %
+|Metal|10 %|0 %|*20 %*|30 %|30 %|10 %
+|Opera|30 %|10 %|10 %|*30 %*|20 %|0 %
+|Rap|0 %|20 %|20 %|0 %|*40 %*|20 %
+|Reggae|0 %|10 %|30 %|0 %|30 %|*30 %*
+|===
+
+==== Šířka okna DTW pro deskriptor MFCC časová řada
+
+Níže jsou uvedeny výsledky testování *přesnosti* a *doby běhu* pro deskriptor `MFCC` _(časová řada)_ pro šířku okna *DTW* 0, 5, 10, 20 a 40.
+
+[cols="1,1,1"]
+|===
+|Počet sousedů|Přesnost|Doba běhu
+
+|0|50 %|6,54 s
+|5|57,14 %|12,48 s
+|10|42,86 %|18,52 s
+|20|35,71 %|29,7 s
+|40|35,71 %|51,72 s
+|===
+
+{empty} +
+
+[cols="^a,^a", frame=none, grid=none]
+|===
+| 
+image::media/5_4_mfcc_dtw_0.png[alt=Testování přesnosti šířka DTW okna 0,pdfWidth=50%]
+| 
+image::media/5_4_mfcc_dtw_5.png[alt=Testování přesnosti šířka DTW okna 5,pdfWidth=50%]
+| 
+image::media/5_4_mfcc_dtw_10.png[alt=Testování přesnosti šířka DTW okna 10,pdfWidth=50%]
+| 
+image::media/5_4_mfcc_dtw_20.png[alt=Testování přesnosti šířka DTW okna 20,pdfWidth=50%]
+| 
+image::media/5_4_mfcc_dtw_40.png[alt=Testování přesnosti šířka DTW okna 40,pdfWidth=50%]
+|
+|===
+
+V tabulkách níže jsou výstupy pro *jednotlivé* testovací soubory, rozdělené dle velikosti DTW okna, opět popořadě 0, 5, 10, 20 a 40.
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|0 %|0 %|60 %|0 %|0 %
+|Jazz|60 %|*0 %*|0 %|40 %|0 %|0 %
+|Metal|0 %|20 %|*20 %*|0 %|20 %|40 %
+|Opera|40 %|0 %|0 %|*60 %*|0 %|0 %
+|Rap|40 %|40 %|0 %|0 %|*20 %*|0 %
+|Reggae|0 %|0 %|40 %|0 %|20 %|*40 %*
+|===
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|0 %|0 %|60 %|0 %|0 %
+|Jazz|40 %|*0 %*|0 %|60 %|0 %|0 %
+|Metal|0 %|20 %|*40 %*|0 %|20 %|20 %
+|Opera|40 %|0 %|0 %|*60 %*|0 %|0 %
+|Rap|20 %|40 %|0 %|0 %|*20 %*|20 %
+|Reggae|0 %|0 %|20 %|0 %|20 %|*60 %*
+|===
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|0 %|0 %|60 %|0 %|0 %
+|Jazz|40 %|*0 %*|0 %|60 %|0 %|0 %
+|Metal|0 %|20 %|*40 %*|0 %|20 %|20 %
+|Opera|40 %|0 %|0 %|*60 %*|0 %|0 %
+|Rap|20 %|20 %|0 %|0 %|*40 %*|20 %
+|Reggae|0 %|0 %|20 %|0 %|20 %|*60 %*
+|===
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|0 %|0 %|60 %|0 %|0 %
+|Jazz|40 %|*0 %*|0 %|60 %|0 %|0 %
+|Metal|0 %|20 %|*40 %*|0 %|20 %|20 %
+|Opera|40 %|20 %|0 %|*40 %*|0 %|0 %
+|Rap|20 %|40 %|0 %|0 %|*40 %*|0 %
+|Reggae|0 %|0 %|0 %|0 %|40 %|*60 %*
+|===
+
+[cols="1,1,1,1,1,1,1"]
+|===
+|Žánr|Pravděpodobnost klasické hudby|Pravděpodobnost jazzu|Pravděpodobnost metalu|Pravděpodobnost opery|Pravděpodobnost rapu|Pravděpodobnost reggae 
+
+|Klasická hudba|*40 %*|0 %|0 %|60 %|0 %|0 %
+|Jazz|40 %|*0 %*|0 %|60 %|0 %|0 %
+|Metal|0 %|20 %|*40 %*|0 %|20 %|20 %
+|Opera|20 %|40 %|0 %|*40 %*|0 %|0 %
+|Rap|20 %|40 %|0 %|0 %|*40 %*|0 %
+|Reggae|0 %|20 %|0 %|0 %|40 %|*40 %*
+|===

@@ -1,0 +1,256 @@
+== Implementace
+
+_Popis použitých programových prostředků, tj. jaké byly použity programovací jazyky,
+stavba aplikace, použité knihovny třetích stran, požadavky na běh ..._
+
+=== Architektura aplikace
+
+Aplikace je napsána v programovacím jazyce Python a skládá se z následujících modulů a skriptů _(souborů ve složce `program/`)_, které budou podrobně popsány v podkapitolách:
+
+* `loader`, který obsahuje funkce pro načtení deskriptorů ze zadaného souboru
+* `helper`, který obsahuje funkce pro spočítání vzdálenosti dvou časových řad pomocí DTW `distance_dtw`, spočítání vzdálenosti mezi dvěma položkami v databázi `distance`, nalezení nejbližších k sousedů `getNeighbours`, nalezení nejbližších žánrů `nearestClass` a načtení databáze `loadDataset`
+
+* skript `script.py`, který vygeneruje databázi a následně otestuje přesnost porovnávání s parametry, které jsou zadány na začátku souboru
+* skript `recognise.py`, který pro zadaný soubor a parametry vypíše nejpravděpodobnější žánry
+
+* Streamlit soubor `main.py` a webové stránky `pages/`, které definují webový modul pro knihovnu Streamlit (https://streamlit.io)
+
+=== Načítání (loader.py)
+
+Modul loader obsahuje funkce pro načítání jednotlivých deskriptorů. Existují dva hlavní zdroje deskriptorů, ze kterých načítáme.
+
+Prvním zdrojem jsou deskriptory z knihoven *MPEG7* a *jAudio*. Pro získání těchto deskriptorů musíme nejprve spustit v příkazové řádce danou knihovnu:
+
+[source,python]
+----
+mpeg = subprocess.run(["java", "-jar", "mpeg.jar", file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+----
+
+a následně s pomocí knihovny `xml.etree.ElementTree` a `numpy` naparsovat hledané deskriptory:
+
+[source,python]
+----
+centroid = root.find(f'.//{xmlns}AudioDescriptor[@{xsi}type="AudioSpectrumCentroidType"]/{xmlns}SeriesOfScalar/{xmlns}Raw')
+# ...
+centroid_values = np.fromstring(centroid.text, sep=" ")
+# ...
+return np.average(centroid_values), # ...
+----
+
+Druhým zdrojem jsou pak MFCC koeficienty, které získáváme přímo pomocí Python knihovny `python_speech_features`:
+
+[source,python]
+----
+def loadMfccCoefficients(file):
+    (rate, sig) = wav.read(file)
+    mfcc_features = mfcc(sig, rate, winlen=0.020, appendEnergy=False, nfft=1024)
+    return mfcc_features.mean(0).flatten(), mfcc_features[:, 0][:256]
+----
+
+Při načítání MFCC koeficientů spočítáme *průměr* přes všech 13 koeficientů a následně *prvních 256* hodnot časové řady *prvního* deskriptoru.
+
+=== Pomocné funkce (helper.py)
+
+Funkce `distance_dtw` počítá vzdálenost pomocí algoritmu Dynamic Time Warping. Jelikož by ale takový výpočet trval pro velké časové řady *příliš dlouho*, je zde implementována metoda *ořezu* prohledávaného prostoru pomocí parametru `dtw_width`.
+
+[cols="a,a,a", frame=none, grid=none]
+|===
+| {empty}
+| image::media/3_implementation_dtw_width.png[Ořez prohledávaného prostoru v DTW pomocí parametru dtw_width]
+| {empty}
+|===
+
+Ukázka ořezu prohledávaného prostoru algoritmem DTW při použití parametru `dtw_width`.
+
+Jaký *vliv* má konkrétní hodnota tohoto parametru na *rychlost* a *přesnost* výpočtu vzdálenosti bude diskutováno v Experimentální sekci.
+
+Funkce `distance` slouží pro vypočítání vzdálenosti mezi *dvěma* sadami deskriptorů. Funkce pro každý deskriptor pomocí DTW spočítá vzdálenost a se zadanou *váhou* (parametrem `weights`) ji přičte k cílové vzdálenosti.
+
+[source,python]
+----
+for descriptor_index in range(instance1_length - 1):
+    if weights[descriptor_index] == 0:
+        continue # skip (better performance)
+    final_distance += weights[descriptor_index] * distance_dtw(
+        instance1[descriptor_index],
+        instance2[descriptor_index],
+        dtw_width
+    )
+----
+
+K povšimnutí jsou dvě věci: *první* je, že se při váze 0 výpočet přeskočí, aby se *ušetřil* čas. Druhou věcí je pak to, že se DTW používá k výpočtu vzdálenosti *všeho* (i jednotlivých hodnot -- průměrů a standardních odchylek), nejen časových řad.
+
+Tento výpočet ale bude fungovat správně, jelikož je DTW zavoláno na dvě pole velikosti jedna, nezávisle na parametru `dtw_width` se tedy vždy vrátí prosté porovnání a spočítání vzdáleností.
+
+[source,python]
+----
+def getFeatures(file):
+    # MPEG7 descriptors
+    centroid_average, spread_average = ld.loadMpegDescriptors(file)
+    spectrum_spread = [200 * spread_average]
+    spectral_centroid = [100 * centroid_average]
+    # ...
+    return [spectrum_spread, spectral_centroid, ...]
+----
+
+Ve funkci `getFeatures` pro načtení jednotlivých deskriptorů do "databázového záznamu" je použito přeškálování -- škálovací koeficienty jsme zvolili tak, že jsme spočítali *průměrnou* hodnotu pro *všechny* skladby v naší databázi a *přeškálovali* jsme je podle hodnot v MFCC.
+
+Funkce `getNeighbours` spočítá všechny *vzdálenosti* k prvkům v zadaném datasetu, seřadí je a vrátí *prvních k* záznamů z databáze s *nejmenší* vzdáleností.
+
+Funkce `nearestClass` pak pro zadané pole databázových *přepočítá* výskyty jednotlivých žánrů tak, aby bylo *výsledkem* pole pravděpodobností *příslušnosti* do daných žánrů (se součtem 1).
+
+=== Sestavení databáze (script.py)
+
+Pro sestavení databáze deskriptorů načteme hodnoty *všech* deskriptorů pro *všechny* skladby v naší databázi a uložíme je do databázového souboru `db.dat`:
+
+[source,python]
+----
+DATABASE_FILE = "db.dat"
+AUDIO_PATH = "../audio/"
+
+for genre in os.listdir(AUDIO_PATH):
+    for audioFile in os.listdir(AUDIO_PATH + genre):
+        feature = hp.getFeatures(audioFilePath)
+        feature.append(genre)
+        pickle.dump(feature, file)
+----
+
+=== Testování přesnosti (script.py)
+
+Součástí našeho projektu je také skript pro *testování přesnosti*. Při testování jsou skladby náhodně rozděleny s danou pravděpodobností do *testovací* sady a *trénovací* sady.
+
+Skript následně pro každou z testovacích skladeb vypočítá její příslušnost k skladbám ze zadanému žánru, vypíše *očekávaný* žánr a *předpovězený* žánr a na konci vypíše také pravděpodobnost (v %), v kolika případech se předpověď *podařila*.
+
+Skript umožňuje nastavit jednotlivé váhy deskriptorů `WEIGHTS`, šířku ořezu u DTW `DTW_WIDTH` a kolik nejbližších sousedů hledáme `TEST_K_NEAREST`.
+
+[source,python]
+----
+loadDataset(training_set, test_set)
+# ...
+for test_idx in range(test_length):
+    predictions.append(hp.nearestClass(hp.getNeighbours(training_set, test_set[test_idx], WEIGHTS, DTW_WIDTH, TEST_K_NEAREST)))
+# ...
+return 100.0 * correct_tries / test_length
+----
+
+=== Rozpoznání žánru (recognise.py)
+
+Poslední ze skriptů provede *rozpoznání* žánru zadané skladby se zadanými parametry _(váhy deskriptorů, šířka ořezu DTW, kolik nejbližších sousedů)_.
+
+[source,python]
+----
+def recognise(file, k_nearest, dtw_width, descriptor_weights):
+    feature = hp.getFeatures(file)
+    feature.append('') # doesn't matter
+    nearest_class = hp.nearestClass(hp.getNeighbours(
+        dataset, feature, descriptor_weights, dtw_width, k_nearest
+    ))
+    return nearest_class
+----
+
+=== Webové rozhraní
+
+Aplikace obsahuje kromě skriptů také *webové rozhraní* vytvořené pomocí knihovny *Streamlit* (https://streamlit.io). Webové rozhraní umožňuje na úvodní stránce nahrát skladbu, jejíž žánr chceme *rozpoznat* a na podstránkách *sestavit databázi* nebo interaktivně *testovat přesnost*.
+
+==== Postranní menu
+
+Součástí uživatelského rozhraní úvodní stránky a stránky pro testování přesnosti je *postranní menu*, které umožňuje nastavit hodnoty deskriptorů. To je definováno v souboru `st_sidebar.py`:
+
+[source,python]
+----
+def sidebar(dataset):
+    if 'spread_weight' not in st.session_state:
+        st.session_state.spread_weight = 0.0
+    # ...
+    st.sidebar.header("Weights")
+    st.sidebar.slider("Spectrum spread", key="spread_weight")
+    # ...
+----
+
+Jednotlivé hodnoty jsou *nastavovány* s pomocí komponenty `st.slidebar.slider` a jsou uloženy v HTTP session.
+
+==== Úvodní stránka
+
+Při *prvním* načtení úvodní stránky se provede načtení databáze ze souboru `db.dat`, přičemž je použita komponenta `st.spinner`:
+
+[source,python]
+----
+def loadDatabase():
+    return hp.loadDataset('db.dat')
+
+with st.spinner(text="Loading database..."):
+    dataset = loadDatabase()
+----
+
+Následně se v sidebaru zobrazí s pomocí `st.sidebar.file_uploader` pro nahrání skladby, pro kterou chceme *rozpoznat* žánr:
+
+[source,python]
+----
+uploaded_file = st.sidebar.file_uploader("Upload .wav file", type="wav", help="Upload file you want to classify")
+----
+
+Po nahrání souboru se následně nahraný soubor *zkontroluje* (`checkUploadedFile`), získáme z něj *deskriptory* a spočítáme vzdálenost pomocí funkcí ze skriptu `helper`. Výsledek pak vykreslíme do koláčového grafu pomocí `matplotlib.pyplot` a zobrazíme přes `st.pyplot`:
+
+[source,python]
+----
+with st.spinner(text="Processing uploaded file"):
+    if 'features' in st.session_state:
+        result = hp.nearestClass(hp.getNeighbours(...))
+        # ...
+        fig, ax = plt.subplots()
+        ax.pie(values, explode=explode, labels=labels, autopct='%1.f%%')
+        st.pyplot(fig)
+    else:
+        st.info('Upload a WAV file first', icon="ℹ️")
+----
+
+==== Sestavení databáze
+
+Stránka pro *sestavení databáze* pouze sestaví databázi, o čemž průběžně informuje uživatele pomocí `st.spinner` a `st.success`:
+
+[source,python]
+----
+st.title("Create database")
+
+with st.spinner("Building database..."):
+    script.buildDatabase()
+
+st.success("Database built")
+----
+
+==== Testování přesnosti
+
+Stránka pro *testování přesnosti* si stejně jako `script.py` načte dataset, náhodně ho rozdělí na *trénovací* a *testovací* a vypočítá přesnost, kromě toho ale také zobrazí *tabulku* s tím, který žánr byl predikován s jakou pravděpodobností a *čas běhu* aplikace.
+
+[source,python]
+----
+# ...
+st.write(f"Accuracy {(100.0 * correct_tries / test_length):.2f}%")
+st.write(f"Elapsed {(time.perf_counter() - started):.2f}s")
+
+table = [
+    {
+        "Genre": st.session_state.test_set[i][-1],
+        "Classified as": predictions[i][0][0],
+        "Probability": f"{(predictions[i][0][1] * 100.0):.0f}%"
+    } for i in range(len(st.session_state.test_set))
+]
+st.table(table)
+----
+
+Zobrazení výsledku testování s pomocí `st.write` a `st.table`.
+
+Stránka umožňuje také, stejně jako úvodní stránka v postranním menu *nastavení parametrů* jako počet nejbližších sousedů a váhy jednotlivých deskriptorů. Aby nedocházelo k rozdělení datasetu při každé změně parametru, pamatujeme si prvotní náhodné rozdělení v `st.session`:
+
+[source,python]
+----
+with st.spinner():
+    if 'training_set' not in st.session_state:
+        st.session_state.training_set = []
+
+    if 'test_set' not in st.session_state:
+        st.session_state.test_set = []
+
+    if len(st.session_state.training_set) == 0:
+        script.loadDataset(st.session_state.training_set, st.session_state.test_set)
+----

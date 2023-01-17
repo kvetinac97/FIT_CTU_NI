@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+    <env:Header />
+    <env:Body>
+        <hello xmlns="http://services/" />
+    </env:Body>
+</env:Envelope>

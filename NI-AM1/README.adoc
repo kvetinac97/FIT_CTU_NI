@@ -1,0 +1,26 @@
+= Middleware Architectures 1
+
+Got 96 % from homework. +
+Got enough points in written exam, resulting in grade A.
+
+== Lectures
+
+Lecture notes in LaTeX, rendered to `lectures.pdf` and re-arranged to `notes.pdf`
+
+== Homework
+
+Various homeworks solved through semester:
+
+* xref:homework/01/index#[]
+* xref:homework/02/index#[]
+* xref:homework/03/index#[]
+* xref:homework/04/index#[]
+* xref:homework/05/index#[]
+* xref:homework/06/index#[]
+* xref:homework/07/index#[]
+* xref:homework/08/index#[]
+* xref:homework/09/index#[]
+
+== Labs
+
+Various tasks solved on labs focused on SOAP, REST, HATEOAS and JMS.

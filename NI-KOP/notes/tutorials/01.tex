@@ -1,0 +1,57 @@
+\section{Úvod}
+
+\vspace{12pt}
+
+\subsection{Náplň cvičení}
+
+Odpadla konzultační cvičení, místo nich bude více cvičeních zaměřených na domácí úkoly.
+
+Máme speciální výpočetní server \href{ssh://ni-kop.fit.cvut.cz}{ni-kop.fit.cvut.cz}, na kterém je většina běžných kompilátorů, který můžeme použít pro výpočet.
+
+Na kompendiu optimalizačních problémů lze jednotlivé problémy najít, je to i dobrá zásobárna problémů ke zkoušce.
+
+\subsection{SAT problém}
+
+\textbf{Dáno}: množina $X$ $n$ proměnných $(x_1 \dots x_n), x_i \in {0,1}$, 
+dále Booleova formule  těchto proměnných v konjunktivní normální formě o $m$ klauzulích (součtových termech).
+
+\textbf{Rozhodnout}: existuje ohodnocení $Y$ proměnných $X$ takové, že $F(Y)=1$?
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{r|r|r|r}
+         1 & 2 & -3 & 0 \\
+         1 & -2 & 3 & 0 \\
+         -1 & -2 & -3 & 0 \\
+         -1 & 2 & 3 & 0
+    \end{tabular}
+\end{table}
+
+c komentář, nebo p "typ problému" "počet proměnných" "počet klauzulí"
+
++ znamená $x_1$, -- znamená $\neg x_1$, 0 je vždy na konci řádku.
+
+Zde tedy \colorbox{gray!20}{p cnf 3 4}, jelikož jde o CNF pro 3 proměnné a 4 formule. 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c|c|c}
+           x & (0,0,0) & (0,0,1) & (0,1,0) & (0,1,1) & (1,0,0) & (1,0,1) & (1,1,0) & (1,1,1) \\
+           \hline
+          K1 & 1 & 0 & 2 & 1 & 2 & 1 & 3 & 2 \\
+           \hline
+          K2 & 2 & 2 & 0 & 1 & 2 & 3 & 1 & 2 \\
+           \hline
+          K3 & 3 & 2 & 2 & 1 & 2 & 1 & 1 & 0 \\
+           \hline
+          K4 & 1 & 2 & 2 & 3 & 0 & 1 & 1 & 2 \\
+    \end{tabular}
+\end{table}
+
+Pro každou konfiguraci je zde počet splněných literálů, 8 sloupců = 8 konfigurací, obecně těchto konfigurací je $2^n$.
+
+\subsection{Problém batohu}
+
+\textbf{Dáno}: celé číslo $n$ \textit{(počet věcí)}, celé číslo $M$ \textit{(kapacita batohu)}, konečná množina $U = {u_1, u_2, \dots ,u_n }$ nějakých prvků a pro každé $u \in U$: cena $c(u) \in \mathbb{N}$ a váha $w(u) \in \mathbb{N}$
+
+\textbf{Konstruktivní verze}: nacpat do batohu co nejvíce věcí tak, tak aby se tam vlezly a měly co největší cenu menší než $K = 19$.

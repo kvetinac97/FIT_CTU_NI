@@ -1,0 +1,12 @@
+= HW4 - Skládání webových služeb
+
+Obsahem úkolu je IntelliJ projekt (`homework-04.iml`), který na základě Maven skriptu `pom.xml` spustí SOAP službu pro správu *plateb*.
+
+Tato služba umožňuje:
+
+ 1. výpis existujících plateb `getPaymentRequest`
+ 2. přidání nové platby `addPaymentRequest`
+
+Při přidání nové platby jsou data ověřena na vzdálené službě. Klient v rámci služby, který toto ověřuje, je automaticky generovaný.
+
+Ve složce `src/` jsou umístěny zdrojové kódy, složka `results/` obsahuje soubor `homework-04-soapui-project.xml` se SoapUI projektem, který byl použit pro otestování této služby.

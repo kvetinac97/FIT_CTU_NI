@@ -1,0 +1,35 @@
+\section{Vyhledávání v 2D a 3D modelech}
+
+\subsection{2D model}
+
+2D tvar je v podstatě stín, \textbf{obrys} objektu (mnohoúhelníky, množina bodů), může se jednat o \textbf{projekci 3D} modelů. Tvary můžeme získat také \textbf{vektorizací} objektů z \textbf{rastrových} obrázků \textit{(předpoklad jednoduchých izolovaných objektů -- produktové fotografie)}.
+
+V těchto modelech můžeme pracovat s deskriptory popisující \textbf{tvar}, nezávislými na \textbf{otočení}, natáhnutí \textit{(projekci 3D objektu pod jiným úhlem)}.
+
+MPEG7 obsahuje také dva deskriptory popisující tvar -- \textbf{Region Shape}: předpokládá tvary s obsahem, kde nás zajímá i \textbf{více} než jen obrys \textit{(simuluje tedy částečně i popis textury -- díry v hrnku} a \textbf{Contour Shape}: ten popisuje právě \textbf{obrys} bez vnitřku.
+
+2D tvar \textbf{uzavřeného} mnohoúhelníku lze reprezentovat také zápisem \textbf{centroid}u tvaru, \textbf{rozbalit} tento tvar do časové řady a \textbf{porovnávat} pomocí DTW\ldots
+
+U \textbf{otevřených} mnohoúhelníků reprezentujeme úhly mezi přilehlými hra\-nami do \textbf{časové řady} a to pak porovnáváme, je to ale \textbf{citlivé} na šum.
+
+Časové řady u \textbf{shape matching} můžeme porovnávat pomocí nejdelší společ\-né podposloupnosti (\textbf{LCSS}), pokud třeba vím, že mi bude chybět nějaká část.
+
+\subsection{Proteinové struktury}
+
+Proteiny jsou v reálu sice \textbf{3D struktury}, jsme ale schopni je zjednodušeně \textbf{reprezentovat} jako textové \textbf{řetězce} AT, CG, jsou tedy v podstatě 1D.
+
+Při porovnávání proteinů tedy nejprve porovnáme tuto jednu dominující \textbf{dimenzi}, a následně to \textbf{ověříme} v \textbf{3D} struktuře.
+
+\subsection{3D modely}
+
+Při vyhledávání 3D modelů musíme umět tyto modely \textbf{reprezentovat}, zároveň se ale \textbf{mění} v čase (pohyb = zachytíme jiné pózy). Můžeme taky hledat základní low-level \textbf{geometrickou} podobnost, nebo high-level sémantickou.
+
+3D deskriptory musí být \textbf{nezávislé} na rotaci, posunu, škálování a odrazech, robustnost vůči jednotlivým detailům \textit{(jak moc je to jemné)}.
+
+Zadaný objekt vždycky \textbf{normalizuji} (pokusím se odstranit otočení, posun, škálu, šum $\to$ abstrahuji objekt \textit{(typicky povrch)} $\to$ transformuji do \textbf{vektoru vlastností} a porovnám.
+
+\textbf{Nevýhodou} těchto \textbf{globálních} deskriptorů je citlivost na \textbf{pózy} a neschopnost částečné podobnosti. Používají se proto \textbf{lokální} deskriptory.
+
+Jedním z lokálních deskriptorů v 3D modelech jsou \textbf{zájmové body} \textit{(místo jasové funkce z obrázků používáme tvarovou funkci a extrémy v rámci geometrické křivosti} $\to$ jedná se v podstatě o \blockquote{3D SIFTy}.
+
+Na základě zájmových bodů jsme v 3D prostoru schopni detekovat \textbf{zájmové regiony} \textit{(hlava, noha u člověka, zvířete)} a ty pak v geodetickém prostoru \textbf{clusterovat}.

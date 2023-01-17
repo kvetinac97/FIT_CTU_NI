@@ -1,0 +1,10 @@
+== Úvod
+
+{empty} +
+
+Cílem projektu je vytvořit *webovou* aplikaci, do které uživatel nahraje libovolný audio soubor. Aplikace soubor *porovná* s databází písní v jednotlivých žánrech a zobrazí uživateli *míru shody* nahraného souboru s jednotlivými žánry v databázi.
+
+Aplikace umožní také vybudování *databáze* žánrů na základě oanotování (manuálním určení žánru) jednotlivých "trénovacích" písní.
+
+Aplikace umožní při porovnávání volit *parametry porovnání* _(podle kolika nejbližších skladeb se určuje příslušnost k žánru, jak přesné má porovnání být, s jakou váhou mají být použity jednotlivé deskriptory)_.
+

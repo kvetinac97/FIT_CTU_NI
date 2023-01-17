@@ -1,0 +1,45 @@
+\section{Deep learning}
+
+\subsection*{Úvod}
+
+MPEG7 deskriptory mají problém se \textbf{semantic gap} mezi popisem uživatele a nízkoúrovňovým popisem. SIFTy pracují dobře pouze s \blockquote{rigidními} vzory (architektura, pevné objekty), ale například přírodu nezvládnou.
+
+Můžeme zkusit také \textbf{rozdělení} (segmentace) obrazu na více podproblémů, tady se ale dostáváme k ještě většímu problému \textbf{sémantické segmentace}.
+
+Co nás bude zajímat, to je právě \textbf{machine learning} a neuronové sítě = naučíme síť na lidských deskriptorech a použijeme sítě s konvolučními vrstvami.
+
+Původní snaha byla o kognitivní podobnostní učení = vrstva dokumentů, dotazů a podobnost oddělená skrytou vrstvou, kdy se neuronová síť učila \textbf{podobnostní} funkci. Kdysi byly tyto neuronové sítě mělké a byla malá trénovací data = moc to nešlo. Dnes už máme výkonné GPU, hluboké sítě \textbf{(deep network)} a velká trénovací data = \textbf{úspěch}.
+
+\subsection{Konvoluční neuronové sítě (CNN)}
+
+\textbf{Konvoluce} = speciální typ propojení do určitých shluků, CNN jsou podobné buňkám na sítnici. Funguje opravdu jako lidský zrak = nejprve se pracuje s low-level prvky, pak s high-level = jde to od \textbf{více vizuálních} / méně semantických věcí k méně vizuálním, \textbf{více sémantickým}.
+
+Konvoluční síť vizualizujeme jako jednotlivé kvádry různých rozměrů napojených na sobě, popisují \textbf{propojení neuronů} v jednotlivých vrstvách. Klasická konvoluční síť, kde jsou v každé vlně propojeny všechny neurony, by zde moc nefungovala.
+
+Při učení se konvoluční síť \textbf{učí} konvoluční masky = filtry, například filtr pro detekci hran. Konvoluční sítě obsahují klasické vrstvy, vision vrstvy, aktivační vrstvy, klasické vrstvy a vrstvy pro zpracování chyb.
+
+\subsubsection*{Konvoluční vrstva}
+
+V každé konvoluční vrstvě jsou neurony \textbf{uspořádány} do 3D bloku, vrstvy. Každý neuron je \textit{perceptron}, který je propojen s neuronem v předchozí vrstvě, uvnitř to provede součet, ven se provede aktivační funkce na agregovaném vstupu a vytvoří aktivační hodnotu, která půjde dál, nebo je nula a zůstane dál.
+
+Specifikum konvoluční vrstvy je \textbf{jednotná} sada parametrů pro celý řez 3D blokem (na jedné ose). Navíc se hodnoty přijímají pouze z určitého \textbf{receptive field}.
+
+\subsubsection*{Pooling vrstva}
+
+Neobsahuje váhy, pouze \textbf{redukuje rozměr} vstupu pro zlepšení výkonu, může být vynechána. Typicky se používá \textbf{maximum}, průměr nebo \textbf{L2-norma}.
+
+\subsubsection*{ReLU vrstva}
+
+Typicky se používá funkce \textbf{sigmoida} (záporné do -1, kladné k 1, jinak jde brzy k 0), to se nám v multimedia retrieval ale moc nehodí.
+
+Používá se proto ReLU: aktivační funkce je \textbf{maximum} (záporné ignorujeme), je výpočetně levná, nezávislá na škálovatelnosti.
+
+\subsubsection*{Loss layer}
+
+Počítá \textbf{ztrátu} mezi predikcí a skutečností = softmax (1 z k), nebo sigmoidní entropie.
+
+\subsection{Transfer learning}
+
+Znovupoužití \textbf{již získaných} dat v \textbf{jiné} doméně \textit{(pokud máme málo dat v cílové doméně, kvůli personalizaci, spolehlivosti)}. Necháme to, co už víme, a dotrénujeme to a \textbf{dospecifikujeme} na cílovou doménu.
+
+\textbf{Zkombinujeme} tedy dvě konvoluční neuronové sítě, nižší vrstvy budou obsahovat tyto generické znalosti, a vyšší vrstvy právě tyto specifické vlastnosti (= \textbf{fine-tuned CNN)}.

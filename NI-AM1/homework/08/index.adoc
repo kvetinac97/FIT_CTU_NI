@@ -1,0 +1,142 @@
+= HW8 - Přeposílání zpráv
+
+Pro tento úkol jsem vytvořil sadu služeb, a to:
+
+. REST služba, která přijme žádost o nový pobyt nebo zájezd `/order`, a pošle tuto žádost pomocí JMS
+. služba, která přijme žádost o pobyt / zájezd a přepošle je do příslušné fronty
+. služba, která přijímá žádosti o pobyty, a zpřístupňuje seznam pobytů přes REST rozhraní
+. služba, která přijímá žádosti o zájezdy, a zpřístupňuje jejich seznam přes REST rozhraní
+
+== Test
+
+=== 1. Vytvoření žádosti o nový pobyt
+
+[source,text]
+----
+curl -v "http://localhost:8080/order" -H  "Content-Type: application/json" -d '{"id":"1", "name": "Mallorca hotel", "orderType": "BOOKING"}'
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> POST /order HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 60
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 201
+< Content-Length: 0
+< Date: Tue, 22 Nov 2022 12:19:25 GMT
+<
+* Connection #0 to host localhost left intact
+----
+
+=== 2. Vytvoření žádosti o nový zájezd
+
+[source,text]
+----
+curl -v "http://localhost:8080/order" -H  "Content-Type: application/json" -d '{"id":"2", "name": "Trip to USA", "orderType": "TRIP"}'
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+> POST /order HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.84.0
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 54
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 201
+< Content-Length: 0
+< Date: Tue, 22 Nov 2022 12:19:46 GMT
+<
+* Connection #0 to host localhost left intact
+----
+
+=== 3. Log z konzole služby 1 – Acceptor
+
+[source,text]
+----
+2022-11-22 13:19:25.164  INFO 20569 --- [nio-8080-exec-7] c.c.f.n.messaging.AcceptorApplication    : Sending order 1 request to orderQueue
+2022-11-22 13:19:46.276  INFO 20569 --- [nio-8080-exec-3] c.c.f.n.messaging.AcceptorApplication    : Sending order 2 request to orderQueue
+----
+
+=== 4. Log z konzole služby 2 – Redirector
+
+[source,text]
+----
+2022-11-22 13:19:25.193  INFO 20577 --- [ntContainer#0-1] c.c.f.n.messaging.RedirectorApplication  : Received order request for: 1
+2022-11-22 13:19:25.195  INFO 20577 --- [ntContainer#0-1] c.c.f.n.messaging.RedirectorApplication  : Redirecting order 1 request to bookingQueue
+2022-11-22 13:19:46.278  INFO 20577 --- [ntContainer#0-1] c.c.f.n.messaging.RedirectorApplication  : Received order request for: 2
+2022-11-22 13:19:46.280  INFO 20577 --- [ntContainer#0-1] c.c.f.n.messaging.RedirectorApplication  : Redirecting order 2 request to tripQueue
+----
+
+=== 5. Log z konzole služby 3 – Booking
+
+[source,text]
+----
+2022-11-22 13:19:25.206  INFO 20580 --- [ntContainer#0-1] c.c.f.n.messaging.BookingApplication     : Accepting booking request for: 1
+----
+
+=== 6. Služba 3 – endpoint /booking
+
+[source,text]
+----
+curl -v "http://localhost:8081/booking"
+*   Trying 127.0.0.1:8081...
+* Connected to localhost (127.0.0.1) port 8081 (#0)
+> GET /booking HTTP/1.1
+> Host: localhost:8081
+> User-Agent: curl/7.84.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Date: Tue, 22 Nov 2022 12:20:34 GMT
+<
+* Connection #0 to host localhost left intact
+[{"id":"1","name":"Mallorca hotel"}]%
+----
+
+=== 7. Log z konzole služby 4 – Trip
+
+[source,text]
+----
+2022-11-22 13:19:46.291  INFO 20583 --- [ntContainer#0-1] c.c.fit.niam1.messaging.TripApplication  : Accepting trip request for: 2
+----
+
+=== 8. Služba 4 – endpoint /trip
+
+[source,text]
+----
+ curl -v "http://localhost:8082/trip"
+*   Trying 127.0.0.1:8082...
+* Connected to localhost (127.0.0.1) port 8082 (#0)
+> GET /trip HTTP/1.1
+> Host: localhost:8082
+> User-Agent: curl/7.84.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Date: Tue, 22 Nov 2022 12:21:02 GMT
+<
+* Connection #0 to host localhost left intact
+[{"id":"2","name":"Trip to USA"}]%
+----
+
+=== 9. Kontrola v hawtio
+
+|===
+|Name |Queue size |Producer |Consumer |Enqueue |Dequeue
+
+|tripQueue| 0| 1| 1| 1| 1
+|bookingQueue| 0| 1| 1| 1| 1
+|orderQueue| 0| 1| 1| 2| 2
+|===
+
+Vidíme, že nám ve frontě nic nezbylo, vše bylo zpracováno, a sedí také počet producentů a konzumentů jednotlivých front.

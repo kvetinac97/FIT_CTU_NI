@@ -1,0 +1,34 @@
+\section{Nasazení simulovaného ochlazování}
+
+Když děláme simulované ochlazování, začneme tím stejným, co u lokálních heuristik: stavový prostor.
+
+\vspace{4pt}
+\noindent U SATu jde tedy o stav -- ohodnocení jednotlivých proměnných, operátorů bude n a každý z nich neguje svou proměnnou. Tento prostor bude \textbf{symetrický} -- každý operátor je sám sobě inverzní a každý stav je \textbf{dosažitelný}.
+
+\vspace{4pt}
+\noindent U \textbf{rozvrhu ochlazování} bude záležet na náhodné volbě souseda -- vyberu náhodně operátor (proměnnou) a zkusím ji flipnout. Pokud je po flipnutí stav lepší (více splněných klauzulí), beru toto řešení vždy, pokud je stav horší, s určitou pravděpodobností závislou na \textbf{zhoršení} a \textbf{teplotě} se toto řešení může vzít.
+
+\vspace{4pt}
+\noindent Počet splněných klauzulí ... $E(s)$, platí, že $\delta = E(s_1) - E(s_2)$, pravděpodobnost je pak $p = e^{-\frac{\delta}{T}}$. Jako metodu \textbf{ochlazování} volíme ono $T(x) = T_p \cdot \alpha^{\frac{x}{N}}$, kde $N$ je délka ekvilibra.
+
+\subsection{Faktorový návrh}
+
+\textbf{Faktorový návrh}: vyberu všechny parametry, kterým měním hodnoty, udělám jejich kartézský součin, a zkoumám.
+
+\vspace{4pt}
+\noindent Ekvilibrium zde volíme pevné, koeficient bude souviset s ním. Volím tedy např. $\alpha = 0.95, T = 20$ jako střední hodnoty a zkusím zkoumat rozsah $\alpha = 0.8$ až $\alpha = 0.99$ a $T = 5$ až $T = 50$.
+
+\vspace{4pt}
+\noindent Na začátku si vybíráme koeficient chlazení $\alpha$, (délku ekvilibria $N$) a počáteční teplotu $T$, uděláme ten kartézský součin a zapíšeme počty běhů do tabulky. Pak pozoruji.
+
+\vspace{4pt}
+\noindent Z pozorování vidíme, že je lepší volit \textbf{nižší} počáteční teplotu $T = 5$ nebo 3, nemá ale zas tak důležitou roli \textit{(aktuálně, u SAsatu)}, koeficient ochlazování určuje \textbf{nepřímou} úměru počet kroků vs počet úspěšných běhů. Naše závěry této white-box fáze bychom měli pak ověřit na sadách (black-box).
+
+\vspace{4pt}
+\noindent Z pozorování u SAsatu tedy vidíme, že pro $n = 20$ stačí $\alpha = 0.95$, aby bylo vše vyřešeno, u $n = 50$ to je už $\alpha = 0.999$, $n = 100 \to \alpha = 0.99999$ \ldots
+
+\vspace{4pt}
+\noindent Nejprve jsme udělali faktorový návrh na \textbf{jedné} instanci s možnými parametry, z toho jsme zjistili nějakou \textbf{počáteční} teplotu, tu jsme ověřili na jiných instancích a určili jsme \textbf{strategii} řízení teploty (konstanta, nebo určíme estimátorem). U řízení $\alpha$ jsme zjistili na čem \textbf{závisí} na lehkých sadách a určili strategii řízení ochlazování = konec a závěr \textbf{white-box} fáze.
+
+\vspace{4pt}
+\noindent Black-box fáze je již to, co jsme dělali v 1. domácím úkolu.

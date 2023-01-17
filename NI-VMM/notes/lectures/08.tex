@@ -1,0 +1,56 @@
+\section{Lokální deskriptory obrázků}
+
+\subsection{Detekce objektů}
+
+Globální deskriptory (MPEG7, deep learning) jsou \textbf{nepřizpůsobitelná} řešení. Lokální deskriptory jsou nezávislé vlastnosti obrázku v daném pixelu, můžou být low-level (clustery), nebo high-level (sémantické objekty, bouding-boxes).
+
+\subsection{Low-level}
+
+Asymetrický problém \textbf{hledání vzoru} (patternu) z jednoho obrázku v druhém, jde spíše o \textbf{identifikaci} než o podobnost.
+
+\subsection{Lokalizace vlastností}
+
+\textbf{Sada lokálních vlastností} je lokalizována na \textbf{určité místo} v obrázku (náhodným vzorkováním, detekcí bodů zájmu, segmentací), každá lokální vlastnost je popsána vektorem, a ty pak porovnávám.
+
+Jednotlivé body pak pomocí shlukování spojím do \textbf{clusterů} (shluků), se kterými následně můžu pracovat.
+
+\subsection{Shlukování vlastností}
+
+Může být provedeno pomocí \textbf{k-means} = vyberu náhodně centroidy, rozdělím databázi na k podmnožin podle centroidů, pak přepočítám \textbf{centroidy}, zapomenu shluky a počítám znovu.
+
+\subsection{Vytvoření deskriptoru}
+
+Vytvářím množinu \textbf{reprezentativních vzorků}, deskriptor je pak množina vlastností nebo množina centroidů.
+
+Nebo můžu použít klasický \textbf{bag of features}, jednotlivé clustery si namapuji na slovník, a deskriptor je pak histogram v doméně těchto vizuálních slov, nebo použiju každou vlastnost jako \textbf{deskriptor}.
+
+\subsection{Měření vzdálenosti}
+
+V případě \textbf{množin} počítám QDF, Hausdorfovu vzdálenost (metricky) nebo nemetrické vzdálenosti množin, v případě \textbf{bag of features} počítám klasickou $L_p$ vzdálenost nebo 
+
+\subsection{Detekce zájmových bodů}
+
+Vlastnosti jsou založeny na \textbf{bodech zájmu} (je zde možnost detekovat hrany nebo tvary), určeno specificky pro \textbf{zpracování obrazu} (detekce objektů, modelování 3D scén, sledování lidí).
+
+\vspace{4pt}
+\noindent Použít můžu první derivaci (Sobelův filtr) -- používaný pro rozmazání obrázku, nebo \textbf{druhou derivaci} Gaussiánu, ta je pak škálovatelná.
+
+\subsection{Zájmový bod}
+
+Zájmový bod by měl tedy být \textbf{dobře definován} a pozicován, měl by být opakovatelný i při změně jasu, měřítka, barvy. Dříve používány pro detekci hran, dnes se používají obecně k získání informací o \textbf{zájmových regionech} pro matchování obrázků a poznávání obrázků.
+
+\subsection{SIFT}
+
+Scale-invariant feature transform: \textbf{detektor} a \textbf{deskriptor} lokálních vlastností v obrázku, najde zájmové body, vygeneruje histogram 128 vektorů reprezentujících tyto body \textit{(odstraní málo kontrastní body, body na hraně)}.
+
+SIFT popisuje 4x4 \textbf{histogramy} na 16x16 vorku \textbf{pixelů} okolo zájmového bodu, tento histogram obsahuje 8 binů relativních k orientaci zájmového bodu, neobsahuje žádné \textbf{absolutní} úhly.
+
+\subsubsection*{Image matching se SIFTem}
+
+Používá se bag of features s vizuálními slovy (1 slovo = SIFT, id obrázků v invertovaném souboru), po matchnutí se udělá ještě geometrický \textbf{re-ranking} \textit{(aby se vrátila absolutní hodnota)}.
+
+Této geometrické verifikaci se říká \textbf{hamming embedding}, kromě porovnává\-ní vizuálního slova se porovnává i jejich hammingova vzdálenost.
+
+\subsubsection*{Detekce objektů}
+
+Používá se strojové učení, následně převádí nízkoúrovňové deskriptory na vyšší sémantiku. Existují modely obrazové \textit{(konvoluční vrstvy + detekční vrstvy)} i pro video.

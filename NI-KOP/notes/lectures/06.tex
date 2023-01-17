@@ -1,0 +1,71 @@
+\section{Stavový prostor}
+
+U \textbf{dynamického} programování zakládám řešení vždy na \textbf{optimálním} řešení problému nižšího stupně.
+
+\textbf{Batoh}: Platí, že následník každé konfigurace má větší celkovou váhu a cenu, následník \textbf{nepřípustné} konfigurace je nepřípustná konfigurace.
+
+\subsection{Formální definice}
+Nechť $X = {x_1, x_2, \ldots, x_n}$ jsou \textbf{konfigurační proměnné} problému $\Pi$. Nechť $Z = {z_1, z_2, \ldots, z_m}$ jsou \textbf{vnitřní proměnné} algoritmu A řešícího instanci I problému $\Pi$. Pak \textbf{každé ohodnocení} konfiguračních a vnitřních proměnných je \textbf{stav} algoritmu A řešícího I.
+
+Nechť $S = {s_i}$ je množina všech stavů algoritmu A řešícího I a $Q = {q_j}$ množina \textbf{operátorů} $S \to S$ takových, že $q_j(s_i) \neq s_i$ pro všechny kombinace (vždycky to nějak změní). Pak dvojici (S,Q) nazveme \textbf{stavovým prostorem} algoritmu A řešícího I.
+
+\textbf{Akce}: aplikace jednoho konkrétního operátoru $q_j$ na jeden konkrétní stav $s_i$. Stavový prostor se dá namapovat na \textbf{orientovaný graf} $H=(S,E)$, kde hrana $(s_i, s_j)$ odpovídá jedné akci, vrcholy jsou jednotlivé stavy.
+
+\textbf{Okolí stavu} je množina stavů, do kterých se dostanu \textbf{jedním} krokem, aplikací jedné operace. Stavy z okolí se nazývají \textbf{sousední} stavy.
+
+\textbf{k-okolí stavu} s je množina stavů, dosažitelných s aplikací nejméně jedné a nejvýše \textbf{k} operací/kroků. Výměny uvnitř grafu nejsou užitečné sama o sobě. Pouze inverzní operátory taky nestačí.
+
+\subsection{Grafy stavového prostoru}
+
+\begin{itemize}
+    \item \textbf{acyklický}: omezená délka cesty, jednoduché řízení heuristiky, \textit{hladové algoritmy}
+    \item \textbf{cyklický}: vyžaduje komplikovanější řízení, pokročilé heuristiky
+\end{itemize}
+
+Pro každé dva stavy nazveme délku nejkratší cesty z $s_1$ do $s_2$ v grafu H \textbf{vzdáleností} uzlu $s_2$ od $s_1$. Aby byla heuristika \textbf{pokročilá}, musí platit:
+
+\begin{itemize}
+    \item \textbf{dostupnost}: mezi každými dvěma uzly musí být cesta $\to$ graf musí být silně souvislý
+    \item \textbf{symetrie}: pro každé dva stavy musí být jejich vzdálenost $s_1$ do $s_2$ a $s_2$ do $s_1$ přibližně \textbf{stejná}
+\end{itemize}
+
+\textbf{Konfigurace} je obecně \textbf{podgraf} grafu G v závislosti na algoritmu. \textbf{Uzel stavového grafu} je ten daný stav, hranou je operace, pozor na příklad v úkolech souvisejících s grafy.
+
+\textbf{POZOR !!!} Některé úlohy mají za úkol najít \textbf{cestu} ke stavu jiného objektu \textit{(hra Sokoban)}. Množina stavů je pak \textbf{množina posloupností akcí}, operace nad stavem \textbf{přidej na konec}. Něco jiného je pak \textbf{stav scény} a \textbf{stav algoritmu}.
+
+\subsection{Strategie pohybu stavovým prostorem:}
+
+\subsubsection{Úplná strategie}
+
+Úplná strategie navštíví \textbf{všechny} stavy, kromě těch, o kterých víme, že nedávají optimální řešení \textit{(otevírá cestu k prořezávání)}
+
+\textbf{Úplný algoritmus} dokáže odpovědět, že instance nemá řešení. Použití úplné strategie v lokální heuristice dává úplný algoritmus \textit{(za cenu složitosti)}.
+
+\subsubsection{Systematická strategie}
+
+Systematická strategie je úplná strategie, která navštíví každý stav \textbf{nejvýše jednou}. Typicky systematické strategie obsahují proměnné:
+
+\begin{itemize}
+    \item \textbf{open}: neprozkoumaní sousedé \textit{(fronta -- BFS, zásobník -- DFS, prioritní fronta -- best first)}
+    \item \textbf{closed}: prozkoumané stavy
+    \item \textbf{state}: aktuální stav
+    \item \textbf{best}: nejlepší nalezený stav
+\end{itemize}
+
+Pokud neuvažujeme \textbf{prořezávání}, je nejhorší případ roven \textbf{hrubé síle} a tento případ nastane v případě \textbf{neexistujícího} řešení. Tyto strategie naleznou \textit{(optimální)} řešení, existuje-li.
+
+\subsection{Lokální heuristiky}
+
+U těchto heuristik platí, že struktura open má \textbf{jen jednu} položku, neprozkoumám typicky všechny možné stavy.
+
+\subsubsection{Best only}
+
+Vrátím \textbf{nejlepší} z okolních řešení. Pokud jsou všechna okolní řešení horší, vrátím prázdný stav. \textbf{Ne}záleží na pořadí procházení sousedů.
+
+\subsubsection{First improvement}
+
+Najdu prvního souseda, který je lepší, pokud žádný není, vrátím prázdný stav. \textbf{Záleží} na pořadí procházení sousedů $\to$ je nutná randomizace.
+
+\subsection{Závěrem}
+
+Většinou provádíme \textbf{kratší}, jednoduché, ale \textbf{rychlé} akce a pokud se to po nějakých MAX\_FLIPS nepovede, provedeme \textbf{složitější} a radikální akci. 

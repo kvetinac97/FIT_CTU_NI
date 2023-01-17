@@ -1,0 +1,54 @@
+\section{Optimalizační problémy}
+
+\subsection{Pseudopolynomiální algoritmy}
+
+Tváří se jako P, ale nejsou polynomiální. Například problém batohu se tváří jako polynomiální $O(n\cdot{}M)$, ale ve skutečnosti $M$ nesouvisí s velikostí instance.
+
+\vspace{4pt}
+\noindent \textbf{Definice}: Algoritmus, jehož počet kroků závisí polynomiálně na velikosti instance, ale závisí \underline{dále} na vstupní proměnné, který s velikostí instance nesouvisí.
+
+\subsection{Aproximativní algoritmy}
+
+U problému batohu lze věci vkládat seřazené podle klesajícího poměru cena / hmotnost, vkládá se věci, dokud není překročena nosnost. Tento algoritmus má \textbf{polynomiální} složitost, a lze dokázat, že výsledné řešení má cenu $\geq 50\%$ optimálního řešení.
+
+\vspace{4pt}
+\noindent U těchto programů jsme schopni spočítat \textbf{relativní kvalitu / chybu} jako maximum z hodnot aproximativních / optimálních kritérií \ldots
+
+\subsubsection{Třída APX}
+
+Algoritmus $APR$ pro problém $\Pi$ je \textbf{R-aproximativní}, jestliže každou instanci problému $\Pi$ vyřeší v polynomiálním čase s relativní kvalitou R (chybou $\epsilon$).
+
+\vspace{4pt}
+\noindent Optimalizační problém $\Pi$ je \textbf{R-aproximativní}, jestliže pro něj existuje R-aproximativní polynomiální algoritmus. $R(\epsilon)$ nazveme \textbf{aproximativním prahem} problému $\Pi$.
+
+\vspace{4pt}
+\noindent Optimalizační problém $\Pi$ patří do třídy \textbf{APX}, jestliže je R-aproximativní pro \textbf{konečné} R.
+
+\subsubsection{Známé aproximativní prahy}
+
+Pro uzlové pokrytí je to $\epsilon < 1/2$, pro problém batohu libovolně malé číslo (ale ne 0), pro problém obchodního cestujícího v optimalizační verzi je $\epsilon = 1$, neexistuje tedy aproximativní algoritmus.
+
+\subsection{PTAS}
+
+Algoritmus $APR$, který pro každé $1>\epsilon>0$ vyřeší každou instanci $I$ problému $\Pi$ s relativní chybou nejvýše $\epsilon$ v polynomiálním čase nazveme \textbf{polynomiální aproximační schéma problému $\Pi$}. Problém patří do třídy \textbf{PTAS}, pokud pro něj existuje polynomiální aproximační schéma.
+
+\vspace{4pt}
+\noindent Například problém batohu jsme takto schopni aproximovat algoritmem PTAS-KNAP (pamatuji si všechny konfigurace batohu, které obsahují $1/\epsilon$ věcí do méně a doplníme je algoritmem APR-KNAP.
+
+\subsection{FPTAS}
+
+Polynomiální aproximační schéma $APR$, jehož čas výpočtu závisí polynomiálně na $1/\epsilon$, nazýváme \textbf{plně polynomiální aproximační schéma}. Problém $\Pi$ patří do třídy \textbf{FPTAS}, pokud pro něj existuje plně polynomiální aproximační schéma.
+
+\subsection{APX redukce}
+
+Nechť $\Pi_1, \Pi_2 \in NPO$. Pro libovolné $r > 1$ existují dvě funkce tak, že: $f(I_1, r)$ zachovává existenci řešení a mění instanci $I_1$ na instanci $I_2$, to jsem schopný aproximativním algoritmem převést na $\Pi_2$ s relativní kvalitou $r$, pak i tuto instanci jsem schopný převést $g(I_1,y,r)$ zpět na řešení $y$ instance $I_1$ problému $\Pi_1$ \ldots
+
+\vspace{4pt}
+\noindent APX redukce se značí $\Pi_1 \propto^{APX} \Pi_2$. Pokud něco převedu na APX nebo PTAS problém $\Pi_2$, pak i $\Pi_1$ patří do APX nebo PTAS.
+
+\subsection{Těžké třídy}
+
+Problém $\Pi$ je \textbf{NPO-těžký}, jestliže $\forall \Pi^x \in $ NPO, ¨$ \Pi^x \propto^{APX} \Pi$, NPO-úplný, pokud je NPO-těžký a zároveň je v NPO.
+
+\vspace{4pt}
+\noindent Problém $\Pi$ je \textbf{APX-těžký}, jestliže $\forall Pi^x \in $ APX, $\Pi^x \propto^{APX} \Pi$, APX-úplný, pokud je APX-těžký a zároveň je v APX.

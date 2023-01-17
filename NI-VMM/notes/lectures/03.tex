@@ -1,0 +1,51 @@
+\section{Textové a bag-of-words modely vyhledávání}
+
+Multimédia jsou často \textbf{spojena} s textovým dokumentem (obtékání na webové stránce) nebo můžou mít textovou anotaci.
+
+\subsection{Textové modely vyhledávání}
+
+Když vyhledávám v textu, provedu předzpracování, odstraním HTML tagy, stop slova a rozbiju ho na jednotlivé \textbf{term}y, které pak ještě \textbf{stemming} a zjednoduším na kořen slov = toto je v podstatě získání \textbf{textového deskriptoru}.
+
+\textbf{Kolekce} = množina dokumentů, v kolekci je \textbf{slovník} (množina všech unikátních termů s identifikátory -- specifikum pro text), \textbf{dokument} obsahuje nějakou část těchto termů. \textbf{Dotaz} je pak dokumentem nebo sadou klíčových slov.
+
+\subsubsection{Boolský model}
+
+Vytvoříme \textbf{binární} vektor -- term x dokument, kolekce je pak matice, reprezentujeme jako \textbf{sparse} matici, protože většina prvků bude nula. Dotazy jsou pak \textbf{boolské} dotazy \blockquote{\textit{(hora NEBO les) A NE příroda}}, výsledkem je množina relevantních dokumentů \textbf{bez pořadí}. V paměti reprezentujeme \textbf{invertovaným indexem} s řetězy.
+
+\textbf{Výhodou} je jednoduchost implementace, \textbf{nevýhodou} je velmi omezená možnost vyjádření, nemožnost ovlivnit počet výsledků a jejich pořadí, ani v dotazu \textbf{nejde} použít relevance feedback.
+
+\subsubsection{Vektorový model}
+
+Vylepšení boolského modelu: \textbf{dokument} je multimnožina termů, uživatel specifikuje požadované termy a jejich požadované \textbf{váhy}, nejsou zde boolské podmínky. \textit{q = < mountain(0.5); forest (0.8); nature(0.2) >}
+
+Vyhledávání je založeno na \textbf{podobnosti} dotazu a dokumentů, výsledné dokumenty lze \textbf{seřadit} na základě podobnosti \textit{(četnosti klíčových slov v dotazu a dokumentu)}, jsme schopni provést relevance feedback (\textbf{posunout} vektor dotazu).
+
+Reprezentace zůstává ve \textbf{sparse} matici, ale místo 1 zde bude normované číslo reprezentující \textbf{frekvenci} v daném dokumentu -- počítá se ale také i s \textbf{inverzní} frekvencí \textit{(když je term méně častý, je vzácnější a specifikuje dokument více)}.
+
+\textbf{Podobnost} vektorů se počítá \textbf{kosinovou} podobností vektoru dotazu a vektorů jednotlivých dokumentů, v paměti opět invertovaným indexem.
+
+\subsection{LSI vektorový model}
+
+Vektorový model předpokládá \textbf{nezávislé} dimenze. V přirozeném jazyce ale dimenze souvisí, vektorový model se proto rozšíří o \textbf{sémantiku} (matice se pronásobí koncepty \textit{(lineární kombinaci termů)}).
+
+Matice se touto transformací stane \textbf{hustá}, tímpádem už nejde ukládat invertovaným indexem, matice je díky tomu ale malá.
+
+\subsection{Automatické anotování}
+
+Modely založené na textovém vyhledávání jsou užitečné, pokud vyhledáváme multimédia podle anotací. Pokud máme pouze obsah, můžeme hledat podle obsahu, nebo zkusit \textbf{automatické anotování} \textit{(generování klíčových slov)}.
+
+Anotaci provádí předtrénované \textbf{deep learning modely}, máme anotovanou trénovací kolekci. Vždy se zkouší fetchnout nejpodobnější dokument a použít některá jeho klíčová slova.
+
+\subsection{Bag of features}
+
+Pokud nemůžeme použít textovou anotaci, můžeme zkusit vyhledávat s \textbf{vizuálními slovy} místo skutečných slov. Obrázky můžeme reprezentovat \textbf{histogramy}.
+
+Prvním krokem je \textbf{extrakce vlastností} (obyčejnou mřížkou z JPEG, body zájmu v SIFT) $\to$ výsledkem je \textbf{sada vlastností} vektorů v obrázku. Obecně získat sémantická vizuální slova je obtížná úloha.
+
+Při \textbf{dotazování} extrahuji vlastnosti, vytvořím dotazový vektor, a počítám podobnost. \textbf{VLAD}: vektor lokálně agregovaných deskriptorů \textit{(každému vizuálnímu slovu se přiřadí jeho nejbližší vizuální slovo)} $\to$ není zde žádný slovník.
+
+\subsection{Word2vec}
+
+Machine-learning metoda pro hledání \textbf{vektorových} reprezentací pro \textbf{nevektorová} data (slova) -- užitečné pro NLP, hledání, doporučování, analýzu sentimentů.
+
+Vezmeme slovo s jeho kontextem a začneme ho postupně vkládat do \textbf{CBOW} (continuos bag of words) modelu. Můžeme se tedy učit hledat \textbf{slovo} na základě kontextu, nebo \textbf{kontext} na základě slova. Pak můžeme \textbf{počítat} stylem king - man + woman = queen.

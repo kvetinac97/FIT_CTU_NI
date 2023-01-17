@@ -1,0 +1,79 @@
+\subsection{Vázané extrémy}
+
+Co to je: hledáme extrémy jen v rámci nějakých omezených rovností (\textit{(například na kružnici)}.
+
+\vspace{4pt}
+\noindent Úloha vázaného extrému je obecně následující úloha:
+
+minimalizuj $f(x)$,
+za podmínek $g_j(x) = 0, j \in m$, $h_k(x) \leq$ 0 
+
+$g_j$: rovnostní podmínka, $h_k$ nerovnostní podmínka
+
+\vspace{4pt}
+\noindent Pokud jsou všechny funkce lineární, jedná se o \textbf{úlohu lineárního programová\-ní}, pokud jsou všechny lineární a $f$ kvadratická, je to úloha \textbf{kvadratického} programování, jinak úloha \textbf{nelineárního} programování.
+
+\vspace{4pt}
+\noindent Množinu přípustných řešení $\mathcal{M}$ nazveme množinu všech prvků takových, že $g_j(x) = 0$ a pro každé $k$ platí $h_k(x) \leq 0$.
+
+\vspace{4pt}
+\noindent Funkce $f$ má v bodě $x^* \in \mathcal{M}$ $\cap D_f$ lokální minimum \textbf{vzhledem k množině} $\mathcal{M}$ pokud existuje okolí $H(x^*)$ takové, že
+
+\begin{equation}
+    \forall x \in ( H(x^*) \cap \mathcal{M} ) f(x^*) \leq  f(x)
+\end{equation}
+
+\vspace{4pt}
+\noindent \textbf{Lagrangeova} funkce: $L(x,\lambda,\mu) = f(x) + \sum_{j=1}^{m}{\lambda_j g_j (x)} + \sum_{k=1}^{p}{\mu_k h_k (x)}$
+
+\vspace{4pt}
+\noindent TL;DR : mám $m$ rovností, $p$ nerovností, hledám extrémy. Pro každou tu rovnost a nerovnost dokážu najít lambdy a mý takové, aby to bylo kolmé.
+
+\vspace{4pt}
+\noindent \textbf{Postačující podmínka} existence ostrého lokálního minima: nechť $f, g_j$ mají spojité všechny druhé parciální derivace na otevřené nadmnožině $M \subset M$. Pokud dvojice $(x^*;\lambda^*) \in \mathbb{R}^n$ x $\mathbb{R}^m$ splňuje:
+
+\begin{itemize}
+    \item $x^* \in M$ \textit{(leží v množině, nultá derivace)}
+    \item $\forall i, \frac{\partial L}{\partial x_i} (x^*;\lambda^*;\mu^*) = 0$ \textit{(je to kolmé)}
+    \item pro každé $k \in p, \mu_k = 0$ nebo $h_k(x^*) = 0$; jsem uvnitř, nebo vně vazby? \textit{(aktivní / neaktivní)}
+    \item pro každý nenulový vektor $v \in \mathbb{R}^n$, který je kolmý na gradient vazeb, platí, že je to kladné \textit{(zjednodušení pozitivní definitnosti)}
+    \item správný směr od hranice $M$ : $\mu_k \geq 0$ pro minimum a $\mu_k \leq 0$ pro maximum \textbf{!!!} \textit{(nerovnostní vazby)}
+\end{itemize}
+
+\vspace{4pt}
+\noindent \textbf{Aktivní} omezení nebo neaktivní omezení závisí na tom, zda se omezení zrovna aplikuje na základě toho, jestli to je nebo není na hranici množiny.
+
+% Počítání
+
+\vspace{12pt}
+\noindent Hledáme lokální extrémy $\frac{x^3}{3} - x + y^2$ za podmínek: $g(x,y) = y - 1 = 0$. \textit{(Odpovídá hledání na řezu, 1D úloha)}. Při řešení naší úlohy: $L(x, y, \lambda) = \frac{x^3}{3} - x + y^2 + \lambda * (y - 1)$, $\nabla L(x^*, y^*, \lambda^*) = 0 \iff (x^2 - 1, 2y + \lambda, y - 1) = (0, 0, 0)$. Body podezřelé z extrému jsou tedy $(1,1,-2)$ a $(-1,1,-2)$.
+
+\vspace{4pt}
+\noindent Vyjde nám $\nabla^2_x L = \begin{pmatrix}
+    2x & 0 \\
+    0 & 2
+\end{pmatrix}$, což je pro náš bod $(1,1,-2)$ pozitivně definitní a je tam lokální minimum, pro bod $(-1,1,-2)$ už vychází matice indefinitní, \textbf{ALE}! $\nabla g(x,y) = (0,1)$ a při dosazení $(-1,1)$ dostáváme toto, obecně tedy hledám vektory $(a,0)$, pronásobím s maticí a získávám $-2a^2$, což je vždy menší než 0 (ostře menší, protože $a \neq 0$, jedná se tedy o lokální maximum.
+
+\vspace{12pt}
+\noindent Opět hledáme lokální extrémy $\frac{x^3}{3} - x + y^2$, ale tentokrát máme funkci $x^2 + 2x + y^2 = 0$. Pořád platí $L(x, y, \lambda) = \frac{x^3}{3} - x + y^2 + \lambda \cdot (x^2 + 2x + y^2)$. O gradientu platí: $\nabla L(x^*, y^*, \lambda^*) = (x^2 - 1 + 2\lambda{}x + 2\lambda, 2y + 2y\lambda, x^2 + 2x + y^2)$, což se má rovnat $(0,0,0)$.
+
+\vspace{4pt}
+\noindent Řešením soustavy těchto rovnic zjistíme, že: $y = 0 \lor \lambda = -1$. Pokud $y = 0$, pak vychází body $(0,0,\frac{1}{2})$ a $(-2,0,\frac{3}{2})$. Pokud $\lambda = -1$, pak vychází body $(-1,1,-1)$ a $(-1,-1,-1)$.
+
+\vspace{4pt}
+\noindent Vyjde nám $\nabla^2_x L = \begin{pmatrix}
+    2x + 2\lambda & 0 \\
+    0 & 2 + 2\lambda
+\end{pmatrix}$ a dosadím konkrétní body: v $(0,0,\frac{1}{2}$ vychází pozitivně definitní $\to$ je minimem, v $(-2,0,\frac{3}{2})$ počítáme gradient $\nabla g(x,y) = (2x + 2, 2y)$, v bodě $(-2,0)$ bude kolmý $(0,b)$, po vynásobení zjistíme, že vychází $5b^2$, takže tam je také lokální minimum. V bodě $(-1,1,-1)$ počítáme, dostáváme gradient $(0,2)$, na ten jsou kolmé vektory $(a,0)$, po dosazení dostáváme $-4a^2$, je zde lokální maximum. A finálně v bodě $(-1,-1,-1)$ dostáváme gradient $(0,-2)$, na ten jsou zase kolmé $(a,0)$ a bude to opět lokální maximum.
+
+\vspace{12pt}
+\noindent \textbf{Nerovnostní vazba:} hledáme extrémy $f(x,y) = 2x^2 + y$ za podmínky $x^2 + y^2 - 1\leq 0$. Lagrangeova funkce se tentokrát bude jmenovat $L(x,y,\mu) = 2x^2 + y + \mu(x^2 + y^2 + 1)$, vazbu si tedy dělím na dva případy, kdy je to rovno nebo menší.
+
+\vspace{4pt}
+\noindent a) vazba neaktivní: $h(x,y) < 0, \mu = 0$, počítám tedy v podstatě pouze gradient funkce x. Platí $\nabla_x(x,y,\mu) = (4x + 2\mu{}x, 1 + 2\mu{}y)$, což zde nelze splnit.
+
+\vspace{4pt}
+\noindent b) vazba \textbf{aktivní}: $x^2 + y^2 - 1 = 0$, gradient je stále $\nabla_x(x,y,\mu) = (4x + 2\mu{}x, 1 + 2\mu{}y)$, řešíme tedy soustavu těchto rovnic. To řeší body $(0,\pm 1,\pm \frac{1}{2})$ a také $(\pm \frac{\sqrt{15}}{4}, \frac{1}{4}, -2)$. Hessova matice je $\nabla^2_{x,y} L = \begin{pmatrix}
+    4 + 2\mu & 0 \\
+    0 & 2\mu
+\end{pmatrix}$. Pro bod $(0,\pm 1, - \frac{1}{2})$ to vychází indefinitní, po spočítání gradientu $3a^2 > 0$, je to lokální maximum ..? Musíme zkontrolovat znaménko $\mu$, což je zde \textbf{záporné} !!!, tedy \textbf{NENÍ}. Pro bod $(0, \pm 1, + \frac{1}{2}$ to už vychází pozitivně definitní a $\mu > 0$ a zde je opravdu lokální minimum.

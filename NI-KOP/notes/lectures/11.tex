@@ -1,0 +1,25 @@
+\section{Globální metody}
+
+Lokální metody mají stavový prostor, aktuální stav a jeho okolí. \textbf{Globální metody} z instance problému $\Pi$ vyrobí menší instance, nějak je vyřeší, a zkombinuje do výsledného řešení problému. Příkladem může být dynamické programování na problému batohu.
+
+Při dekompozici vždy dostanu instance \textbf{menší} velikosti (typicky o 1 menší, nebo dvakrát menší). Existuje čistá dekompozice, nebo také přibližná dekompozice.
+
+Pokud použijeme algoritmus, který používá pouze přesnou dekompozici, získáme \textbf{všechna optimální řešení}, pokud použijeme přesnou a čistou dekompozici, získáme alespoň jedno optimální řešení, jinak nemůžeme nic zaručit.
+
+Dekompozice taková, že jedna z dekomponovaných instancí je \textbf{triviální} se nazývá \textbf{redukce}.
+
+Specifikum některých algoritmů Rozděl a panuj může být využití přibližné dekompozice, nebo také řešení jen jedné z dekomponovaných instancí \textit{(zmenši a panuj, binární vyhledávání)}.
+
+\subsection{Dynamické programování}
+
+Dekomponované instance se dají \textbf{charakterizovat} malým objemem hodnot tak, aby to šlo \textbf{efektivně} indexovat a vyhledávat. Známe rekurzivní formulaci \textit{(+ cachování, méně výpočtů)} a \textbf{dopřednou} formulaci \textit{(vyplňujeme celé od triviálních řešení)}.
+
+\section{Problém omezujících podmínek}
+
+Máme množinu proměnných a pro každou proměnnou \textbf{konečnou} množinu hodnot. Pak množina omezení, která jsou dvojice (množina proměnných, nějaká relace). Chceme zkonstruovat ohodnocení tak, že splňují všechny relace $R_i$.
+
+\vspace{4pt}
+\noindent Omezeními vlastně definuji \textbf{deklarativní} program. Zmenšit stavový prostor můžu postupnou \textbf{redukcí} domén (omezit na množinu unárních omezení $\to$ určitá hodnota proměnných nikdy nedovolí splnění jednoho z kritérií).
+
+\vspace{4pt}
+\noindent CSP se dá řešit i na \textbf{konečném intervalu}, nikoliv konečnou množinu hodnot, zůstává mnnožina omezení a opět chceme zkonstruovat ohodnocení tak, aby splnili všechny relace $R_i$. Tomuto se pak říká \textbf{branch and prune}.

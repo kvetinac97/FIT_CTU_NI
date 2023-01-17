@@ -1,0 +1,47 @@
+\section{NP-těžké (NPH) a NP-úplné (NPC) problémy}
+
+Problém $\Pi$ je \textbf{X-těžký}, jestliže se efektivní řešení všech problémů z třídy X dá \textbf{zredukovat} na efektivní řešení problému $\Pi$.
+
+\vspace{4pt}
+\noindent Problém $\Pi$ je \textbf{X-úplný}, jestliže je X-těžký a sám patří do třídy X.
+
+\vspace{4pt}
+\noindent \textbf{Efektivní} řešení = v polynomiálním čase s omezenou chybou
+
+\vspace{4pt}
+\noindent Zredukovat na řešení X = \textbf{vyřešit} pomocí nějakého řešiče pro X.
+
+\vspace{4pt}
+\noindent \textbf{Nejtěžší} problém = ten, \textbf{na} který lze převést všechny ostatní
+
+\vspace{4pt}
+\noindent \textit{(Pokud jde $\Pi_1$ převést na $\Pi_2$, pak je $\Pi_1$ nejvýše tak těžký, jako $\Pi_2$ a $\Pi_2$ je nejméně tak těžký jako $\Pi_1$}
+
+\vspace{4pt}
+\noindent Rozhodovací problém $\Pi_1$ je \textbf{Karp-redukovatelný} na $\Pi_2$, pokud existuje polynomiální program pro (ne)deterministický Turingův stroj, který převede každou instanci $I_1$ problému $\Pi_1$ na instanci $I_2$ problému $\Pi_2$
+
+\vspace{4pt}
+\noindent Pokud dokážu zredukovat $\Pi_1$ na $\Pi_2$ a $\Pi_2$ na $\Pi_1$, jsou \textbf{polynomiálně ekvivalentní} + tato relace je ekvivalentní.
+
+\vspace{4pt}
+\noindent Problém $\Pi$ je \textbf{NP-těžký}, jestliže pro všechny problémy z NP, jsem schopný je převést na $\Pi$ \textit{(ale já neumím převádět mimo NP)}. U \textbf{NP-úplný}ch problémů to jsem již schopen popsat. Problémy v \textbf{NPC} jsou \textbf{nejtěžší} problémy v NP.
+
+\vspace{4pt}
+\noindent Všechny NPC problémy tvoří třídu ekvivalence.
+
+\subsection{Cookova věta}
+
+\textbf{SAT je NP-úplný}, tedy NPC není prázdná a známe tisíce NPC problémů. Pokud bychom našli efektivní algoritmus na jeden, pak by existoval na všechny, ale nevypadá to tak. NPC = NPH $\cap$ NP
+
+\vspace{4pt}
+\noindent \textbf{Důsledky}: pokud je problém v NP, pak není horší než NP a existující certifikát / svědek jsme schopni efektivně zkontrolovat a prakticky ho převést na známé problémy s cca efektivními řešiči (SAT). Exaktní řešení NP problémů ale můžeme prakticky vyloučit.
+
+\subsection{Třída NPO}
+
+Optimalizační problém patří do NPO, pokud je výstup, omezující podmínky i optimalizační kritérium vyhodnotitelné v P. Patří do PO, pokud je NPO a existuje řešení v polynomiálním čase.
+
+Pokud nelze vypočíst optimalizační kritérium v P, není to ani NPO, je to těžší, bad news.
+
+\subsection{NPI}
+
+Problémy, které nemohou mít polynomiální algoritmus ani na ně nemůže být převeden SAT (např. izomorfismus grafů)

@@ -1,0 +1,62 @@
+\section{Aplikační protokoly}
+
+Viz. ISO/OSI model nebo TCP/IP model $\to$ zajímá nás právě tato aplikační vrstva, která sdružuje aplikační / prezentační / relační vrstvy. Aplikační protokoly závisí především na \textbf{TCP} \textit{(ale HTTP/3 už UDP)}.
+
+\vspace{4pt}
+\noindent Většina aplikací je založena na HTTP protokolu, XML-RPC / SOAP jsou založeny na HTTP, WebSocket a Remote Method Invocation (založeno na Javě).
+
+\subsection{Socket}
+
+\textbf{Handshaking}: ustanovení spojení $\to$ server poslouchá na IP:port, three-way handshake (SYN, SYN ACK, ACK), výsledkem je \textbf{socket} s unikátními zdrojovými / cílovými adresami a porty.
+
+\subsection{Metriky}
+
+Vytváření nových spojení je drahé a omezené \textbf{latencí} = doba, kdy putují data mezi klientem a serverem \textit{(5 500 km vzdálenost = 28ms)}, proto chceme optimalizovat spojení $\to$ HTTP Keep-alive / pipelining.
+
+\vspace{4pt}
+\noindent TCP Fast Open (\textbf{TFO}): při prvním navázání spojení se vytvoří TCP Cookie, při dalším se pak pošle toto cookie a spojení se naváže \blockquote{okamžitě} \textit{(jen se ověří cookie)} $\to$ redukce až o 15\%.
+
+\vspace{4pt}
+\noindent Round trip time (\textbf{RTT}): doba od poslání prvního požadavku po přijetí (při navazování spojení: 2x latence, poté: \textit{můžou} se tam počítat i čas zpracování požadavku (\textbf{SPT}) na serveru) $\to$ u nás \textbf{RTT} = 2x latence, \textbf{RT} \textit{(response time)} = 2x latence + SPT
+
+\subsection{Adresace}
+
+IP adresa -- váže se k rozhraní (eth0, eth1), TCP port je adresou aplikace na jednom rozhraní -- více aplikací s různými porty může nalouchat. Existují ale i \textbf{aplikační} adresování -- například HTTP hlavička Host a domény \textit{(mimo TCP/IP)}.
+
+\subsection{HTTP}
+
+Aplikační protokol, základ webu; původně jeden socket, request-response, postupně se ale došlo k možnosti využití více socketů, perzistenci, pipelingu, načítání zdrojů (CSS) z více domén \textit{(domain sharding)}.
+
+\subsection{HTTP Keep-alive}
+
+HTTP keep-alive zajišťuje perzistentní spojení: TCP spojení se použije pro více požadavků a odpovědí, čímž \textbf{nemusí} dojít k three-way handshake při každém spojení, dochází k \textbf{nižší latenci}. Jednotlivé požadavky se obsluhují ve frontě (FIFO) – \textit{request queue}.
+
+\subsection{HTTP pipelining}
+
+HTTP pipelining: optimalizace, která umožňuje poslat v jednom síťovém požadavku za sebou \textbf{více} HTTP požadavků, které se následně zpracují paralelně \textit{(response queue)}. Pořád zde ale dochází k \textbf{head of line blocking} \textit{(dojdou 2 požadavky za sebou, první je ready za 40ms, druhý za 20ms, ale musí čekat, aby došly za sebou)}. Podpora HTTP pipelining je \textbf{omezená}, protože mechanismus pro posílání více požadavků za sebou je už implementován v HTTP 2.0.
+
+\subsection{Domain sharding}
+
+\textbf{Maximální} počet paralelních TCP spojení vůči jednomu originu (protokol; doména; port) pro prohlížeč je \textbf{6}. \textit{(tento počet je nastaven kvůli DDoS)}
+
+Tento počet se dá navýšit pomocí tzv. \textbf{domain sharding} —> doménu example.com rozdělím na shard1.example.com a shard2.example.com, které ukazují na \textbf{stejnou} IP adresu. Na web serveru to rozdělím pomocí konfigurace \textbf{VirtualHost}.
+
+\subsection{State management}
+
+Při \textbf{prvním} požadavku na server je v odpovědi hlavička \textbf{Set-Cookie}, která nastaví klientovi cookie, kterou následně kopíruje při každém požadavku.
+
+\textbf{Cookie} obsahuje informace o doméně, maximální době platnosti, URL cestu. Klient pak posílá v hlavičce \textbf{Cookie}, pokud nevypršela a sedí doména a cesta. Server pak aktualizuje maximální dobu platnosti při každé odpovědi.
+
+\textbf{Stateful server} -- server si pamatuje informace o session v neperzistentní paměti serveru (po restartu se smaže).
+
+\subsection{SOAP}
+
+SOAP je framework pro \textbf{posílání zpráv}, založený na XML, o vrstvu výše (nabinduje se na HTTP / SMTP / JMS). Obsahuje odesílatele, příjemce a prostředníky. Obsah SOAP zprávy je obálka s hlavičkou a tělem.
+
+\textbf{Hlavička} obsahuje \textbf{metadata} (informace o směrování, rozšíření WS-*). \textbf{Tělo} obsahuje vlastní \textbf{obsah} zprávy a/nebo \textbf{chyby}. Poslední částí je \textbf{příloha} pro případ binárních dat.
+
+\textbf{Endpoint} SOAP služby je síťová \textbf{adresa} používaná pro komunikaci pomocí požadavků a odpovědí. U \textbf{synchronní} komunikace definuje endpoint pouze služba, u \textbf{asynchronní} jak služba, tak klient.
+
+\subsection{WSDL}
+
+Komponenty \textbf{WSDL}: informační model \textit{(typy)}, sada operací \textit{(jméno, vstup, výstup, chyby)}, binding \textit{(způsob přesunu zpráv po síti protokolem)}, endpoint \textit{(kde se služba nachází na síti)}. WSDL může být \textbf{abstraktní} (pouze informační model a sada operací) nebo \textbf{konkrétní}.

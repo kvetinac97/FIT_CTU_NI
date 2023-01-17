@@ -1,0 +1,14 @@
+= Mind Hacking
+
+Got 97 % from written exam. +
+Got 75 % from team semestral work defense, resulting in grade B.
+
+== Lectures
+
+Lecture notes in LaTeX, rendered to `lectures.pdf`.
+
+== Semestral work
+
+In our semestral work, we tried to analyse possible improvements of MARAST system by using gamification elements.
+
+link:semestral/[You can see the semestral work here]

@@ -1,0 +1,11 @@
+= HW5 - Návrh RESTful API
+
+API jsem navrhl s pomocí online editoru https://editor.swagger.io ve formátu *OpenAPI 3.0*, vycházel jsem přitom z předvygenerovaného souboru z kódu ze cvičení.
+
+Zdroj `/country` umožňuje filtrování zemí query parametrem `name` pomocí jména země.
+
+Popsány jsou všechny *operace* a *přidružené metody*: *Create* je realizováno pomocí `POST` nebo `PUT`, *Update* pomocí `PUT`, *Read* pomocí `GET` a *Delete* pomocí `DELETE`.
+
+Z návratových kódů jsou popsány ty specifické pro dané metody (200, 201, 204, 400, 404), obecné kódy jako 401/403 nebo 500 ve specifikaci nejsou.
+
+Každá operace obsahuje také *HATEOAS* principy.
