@@ -19,7 +19,7 @@ link:NI-VMM/[Searching Multimedia Databases (NI-VMM)] - lecture notes, semestral
 |===
 |Subject |Grade |Total |Exam |Assessment
 
-|Middleware Architectures 1 |A|?|?|38.50/40
+|Middleware Architectures 1 |A|91.5/100|53/60|38.50/40
 |Human in Anthropological Perspectives 4+|A
 |Mind Hacking|B|84/100|45/60|39/40
 |Combinatorial Optimization|B|81/100|47/55|34/45
