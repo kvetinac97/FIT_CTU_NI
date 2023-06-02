@@ -1,0 +1,9 @@
+= HW7 – Server Sent Events
+
+In this task, I created a simple Node.js server and client to demonstrate Server Sent Events.
+
+After connection, the server sends messages to client in interval of 2 seconds.
+
+The SSE requires `text/event-stream` content type and keep-alive connection.
+
+Client is a simple HTML webpage, which starts connection and displays incoming lines in an unordered list.

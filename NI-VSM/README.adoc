@@ -1,0 +1,12 @@
+= Selected statistical Methods
+
+Completed all mandatory MARAST quizzes. +
+Got 93 % points from homework. +
+Got 93 % points from written exam.
+
+Finished with grade *A*.
+
+== Homework
+
+Codes and messages for our team homeworks about Theory of information, Hypotheses testing, Markov chains and Queuing systems.
+

@@ -1,0 +1,73 @@
+root@wrzecond-02:~# docker exec -it openvswitch_vswitchd bash -i
+(openvswitch-vswitchd)[root@wrzecond-02 /]# ovs-vsctl show
+8c725f77-096e-49e3-8a37-b9a0777b3569
+    Manager "ptcp:6640:127.0.0.1"
+        is_connected: true
+    Bridge br-tun
+        Controller "tcp:127.0.0.1:6633"
+            is_connected: true
+        fail_mode: secure
+        datapath_type: system
+        Port br-tun
+            Interface br-tun
+                type: internal
+        Port vxlan-0a2604ac
+            Interface vxlan-0a2604ac
+                type: vxlan
+                options: {df_default="true", egress_pkt_mark="0", in_key=flow, local_ip="10.38.4.173", out_key=flow, remote_ip="10.38.4.172"}
+        Port patch-int
+            Interface patch-int
+                type: patch
+                options: {peer=patch-tun}
+    Bridge br-int
+        Controller "tcp:127.0.0.1:6633"
+            is_connected: true
+        fail_mode: secure
+        datapath_type: system
+        Port patch-tun
+            Interface patch-tun
+                type: patch
+                options: {peer=patch-int}
+        Port qvo3ddd72e6-8c
+            tag: 1
+            Interface qvo3ddd72e6-8c
+        Port br-int
+            Interface br-int
+                type: internal
+(openvswitch-vswitchd)[root@wrzecond-02 /]# ovs-ofctl show br-int
+OFPT_FEATURES_REPLY (xid=0x2): dpid:00001e15b7f62d4e
+n_tables:254, n_buffers:0
+capabilities: FLOW_STATS TABLE_STATS PORT_STATS QUEUE_STATS ARP_MATCH_IP
+actions: output enqueue set_vlan_vid set_vlan_pcp strip_vlan mod_dl_src mod_dl_dst mod_nw_src mod_nw_dst mod_nw_tos mod_tp_src mod_tp_dst
+ 1(patch-tun): addr:02:d1:5c:ac:fe:8d
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ 2(qvo3ddd72e6-8c): addr:22:03:b7:80:2d:9a
+     config:     0
+     state:      0
+     current:    10GB-FD COPPER
+     speed: 10000 Mbps now, 0 Mbps max
+ LOCAL(br-int): addr:1e:15:b7:f6:2d:4e
+     config:     PORT_DOWN
+     state:      LINK_DOWN
+     speed: 0 Mbps now, 0 Mbps max
+OFPT_GET_CONFIG_REPLY (xid=0x4): frags=normal miss_send_len=0
+(openvswitch-vswitchd)[root@wrzecond-02 /]# ovs-ofctl show br-tun
+OFPT_FEATURES_REPLY (xid=0x2): dpid:0000de58d052554e
+n_tables:254, n_buffers:0
+capabilities: FLOW_STATS TABLE_STATS PORT_STATS QUEUE_STATS ARP_MATCH_IP
+actions: output enqueue set_vlan_vid set_vlan_pcp strip_vlan mod_dl_src mod_dl_dst mod_nw_src mod_nw_dst mod_nw_tos mod_tp_src mod_tp_dst
+ 1(patch-int): addr:a6:a2:50:3e:47:e3
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ 2(vxlan-0a2604ac): addr:42:32:99:e5:ea:66
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ LOCAL(br-tun): addr:de:58:d0:52:55:4e
+     config:     PORT_DOWN
+     state:      LINK_DOWN
+     speed: 0 Mbps now, 0 Mbps max
+OFPT_GET_CONFIG_REPLY (xid=0x4): frags=normal miss_send_len=0

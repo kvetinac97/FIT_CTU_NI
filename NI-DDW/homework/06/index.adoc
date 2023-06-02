@@ -1,0 +1,70 @@
+= HW6 – Recommender systems
+
+In this task, my objective was to create a user content-based, hybrid and framework recommender system, use them to recommend movies for users and evaluate the recommendations.
+
+== Implementation
+
+The implementation is provided in file `rs.py`, which contains all the necessary functions.
+
+=== Content-based RS
+
+The functions `load_movies` and `load_users` load corresponding movies or ratings as vectors in the format movieId/userId, genre1, genre2, ... This is used for the *content based* recommender system (function `content_rs`), where I compare user vector to each movie vector and return the most similar items (function `similar_items`).
+
+As the similarity, I use *Cosine similarity* (`cosine_sim`) as introduced on the sixth tutorial. I also tried using the Pearson similarity, but I got much worse results for the recommendation _(the precision, recall, and F-score were 0 most of the time)_.
+
+In the `content_rs` function, there is also a control which removes all the movies, that the user has *already rated*, which means he won't get recommendations for such movies.
+
+=== Collaborative filtering
+
+For collaborative filtering, I build on the code from sixth tutorial. I use the `knn` function to compare users ratings and find the `k` nearest neighbours (with most similar ratings). Then, in `recommendations` function, I predict the *expected* ratings for films the user has not rated yet and finally, in the `collaborative_rs`, I *map* those ratings (1 -- 5 to appropriate interval [0.0, 1.0]).
+
+=== Hybrid RS
+
+The hybrid recommender system is really easy -- it takes all the results from content-based RS and collaborative filtering and *weights* them using the given weightings. Then, the most similar `k` items are returned.
+
+I used *three* different weightings *schemes*: 0.7:0.3, 0.5:0.5 and 0.3:0.7.
+
+=== Framework RS
+
+I use the framework `surprise`, which contains a simple recommender system with algorithm `SVD`, which can be trained using given data and then estimates the ratings. Similar to collaborative filtering, I *map* the resulting ratings to scores in interval [0.0, 1.0] and return top `k` items. This recommender system is in file `framework_rs`.
+
+=== Random RS
+
+Just for fun, I decided to include also a `random_rs` function, which returns random `k` values from the movie data set. This can help me to compare, whether my recommender systems are *better* than a random selection _(they should be)_.
+
+== Evaluation
+
+For evaluating my results, I split the dataset into two parts -- `test-ratings.csv` and `train-ratings.csv`. The *training* part is used to train all the recommender systems, whether the *test* part is used in function `load_expected_ratings` to load films user should *rate*.
+
+Then, I have my function from homework 05, which calculates the precision, recall and *F-score*.
+
+== Comparing RS
+
+The function `compare_rs` prints the precision, recall and F-score for each of given recommender systems for given user. By testing, I found out that the best parameters that work are `k=10000` _(which means that the systems work with 10 000 top results)_ and `top=1000` _(so for evaluation, top 1 000 results are used)_.
+
+The `k` number is necessary because in the hybrid recommender system, I can *only* calculate similarities for movies, which are in the result of both content-based RS and collaborative filtering.
+
+== Results
+
+After running the program for *all* 610 users, I got the resulting metrics in file xref:results/result.csv[]. Those were the resulting scores:
+
+
+|===
+|RS |Precision |Recall |F-score
+|random  |0.84%	| 9.87%	|0.16%
+|collab  |1.36%	|20.49%	|0.47%
+|framew  |1.44%	|21.73%	|0.49%
+|hybrid1 |1.52%	|23.82%	|0.57%
+|*avg*	 |*1.54%* |*22.71%*	|*0.59%*
+|content |1.61%	|23.66%	|0.63%
+|hybrid2 |1.94%	|29.19%	|0.84%
+|hybrid3 |2.08%	|30.20%	|0.94%
+|===
+
+As expected, the *random* recommender system has the *worst* score. Then, there are the collaborative filtering and framework implementation _(which uses the collaborative filtering inside, indeed)_ and the *hybrid* RS1 (collaborative 0.7 : 0.3 content-based). Then, there's the overall average, content-based, hybrid RS weighted 0.5:0.5 and the *best* recommender system is *hybrid* RS with weighting collaborative 0.3 : 0.7 content-based.
+
+== Ending
+
+I really *enjoyed* trying to implement the various recommender systems. The resulting precisions and f-scores were *not* perfect _(altough the precision 2 %, recall 30.20 % and  f-score 0.94 % for the 0.3:0.7 hybrid RS is pretty OK)_.
+
+However, I think that is because there were not really too many ratings, so in reality, the recommender system would *definitely* give good recommendations _(I just could not evaluate them)_.

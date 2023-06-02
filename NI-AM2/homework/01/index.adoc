@@ -1,0 +1,67 @@
+= HW1 – Simple stateful/stateless server
+
+In this task, my objective was to create a simple stateful and stateless server for order processing. I used Node.js and `net` library to achieve that.
+
+== Stateless server
+
+In stateless server, the server does not hold any information on the current session, so it has to be passed in each request. Here, it means each request has to begin with `orderId`.
+
+Example of communication _(for easier reading, server responses are in *bold*)_:
+
+====
+telnet 127.0.0.1 8124 +
+*Trying 127.0.0.1...* +
+*Connected to localhost.* +
+*Escape character is '^]'.* +
+help +
+*Syntax: <open|process|add> <order> (item)* +
+add order1 milk +
+*Order order1 is not opened!* +
+process order1 +
+*Order order1 is not opened!* +
+open order1 +
+*Opened order order1* +
+add order1 milk +
+*Added milk to order order1* +
+add order1 eggs +
+*Added eggs to order order1* +
+open order1 +
+*Order order1 is already opened!* +
+process order1 +
+*Processed order order1 with items milk,eggs* +
+exit 1 +
+*Connection closed by foreign host.*
+====
+
+== Stateful server
+
+With stateful server, the server holds session information, which means the user does not have to send the order id each time because the server remembers it.
+
+Example of communication _(for easier reading, server responses are in *bold*)_:
+
+====
+telnet 127.0.0.1 8125 +
+*Trying 127.0.0.1...* +
+*Connected to localhost.* +
+*Escape character is '^]'.* +
+help +
+*Syntax: <open|process|add> (item)* +
+add milk +
+*Order is not opened!* +
+open +
+*Opened new order* +
+add milk +
+*Added milk to order* +
+add eggs +
+*Added eggs to order* +
+add butter +
+*Added butter to order* +
+open +
+*Order is already opened!* +
+process +
+*Processed order with items milk,eggs,butter* +
+process +
+*Order is not opened!* +
+exit +
+*Connection closed by foreign host.*
+====

@@ -1,0 +1,964 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2023-03-27">
+    <creator>NetworkX 3.0</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <nodes>
+      <node id="Perfect" label="Perfect" />
+      <node id="Lewis" label="Lewis" />
+      <node id="Darwinian" label="Darwinian" />
+      <node id="Fifty" label="Fifty" />
+      <node id="Shut" label="Shut" />
+      <node id="Hooters" label="Hooters" />
+      <node id="Hey" label="Hey" />
+      <node id="Dad" label="Dad" />
+      <node id="Super Bowl" label="Super Bowl" />
+      <node id="Lisa" label="Lisa" />
+      <node id="Jasper Johns" label="Jasper Johns" />
+      <node id="Homer" label="Homer" />
+      <node id="Maudie" label="Maudie" />
+      <node id="Heaven" label="Heaven" />
+      <node id="Ringo Starr" label="Ringo Starr" />
+      <node id="Bart" label="Bart" />
+      <node id="Tennessee Williams" label="Tennessee Williams" />
+      <node id="Teacher" label="Teacher" />
+      <node id="YOUR" label="YOUR" />
+      <node id="AND" label="AND" />
+      <node id="KICK" label="KICK" />
+      <node id="Hm" label="Hm" />
+      <node id="Wonderland" label="Wonderland" />
+      <node id="Underpants" label="Underpants" />
+      <node id="Simpson" label="Simpson" />
+      <node id="Help" label="Help" />
+      <node id="Uh" label="Uh" />
+      <node id="Always" label="Always" />
+      <node id="Wow" label="Wow" />
+      <node id="New Kirk Smell" label="New Kirk Smell" />
+      <node id="Aw" label="Aw" />
+      <node id="Kid" label="Kid" />
+      <node id="Cool" label="Cool" />
+      <node id="Fine" label="Fine" />
+      <node id="Mom" label="Mom" />
+      <node id="Pull" label="Pull" />
+      <node id="Does" label="Does" />
+      <node id="Tiens" label="Tiens" />
+      <node id="Nope" label="Nope" />
+      <node id="Skinrash" label="Skinrash" />
+      <node id="Homer Simpson" label="Homer Simpson" />
+      <node id="Sucker" label="Sucker" />
+      <node id="Springfield" label="Springfield" />
+      <node id="Dammit" label="Dammit" />
+      <node id="Club" label="Club" />
+      <node id="Girl Scouts" label="Girl Scouts" />
+      <node id="Milhouse" label="Milhouse" />
+      <node id="Homicidal" label="Homicidal" />
+      <node id="GOOD" label="GOOD" />
+      <node id="MORNING" label="MORNING" />
+      <node id="THE" label="THE" />
+      <node id="EARTH" label="EARTH" />
+      <node id="Hi" label="Hi" />
+      <node id="Daddy" label="Daddy" />
+      <node id="Grampa" label="Grampa" />
+      <node id="Al Roker" label="Al Roker" />
+      <node id="Look" label="Look" />
+      <node id="Marge" label="Marge" />
+      <node id="America" label="America" />
+      <node id="Professor" label="Professor" />
+      <node id="Loyal" label="Loyal" />
+      <node id="New Springfield" label="New Springfield" />
+      <node id="Roy Cohn" label="Roy Cohn" />
+      <node id="Oink" label="Oink" />
+      <node id="Larry" label="Larry" />
+      <node id="Japanese" label="Japanese" />
+      <node id="Mmmm" label="Mmmm" />
+      <node id="Chocolate" label="Chocolate" />
+      <node id="Forbidden" label="Forbidden" />
+      <node id="Fightin" label="Fightin" />
+      <node id="Oktoberfest" label="Oktoberfest" />
+      <node id="Moe" label="Moe" />
+      <node id="Haw" label="Haw" />
+      <node id="Hello" label="Hello" />
+      <node id="Donald Trump" label="Donald Trump" />
+      <node id="Huh" label="Huh" />
+      <node id="Mr. Homer" label="Mr. Homer" />
+      <node id="Maggie" label="Maggie" />
+      <node id="Gasoline" label="Gasoline" />
+      <node id="Good" label="Good" />
+      <node id="Nelson" label="Nelson" />
+      <node id="Freeways" label="Freeways" />
+      <node id="British" label="British" />
+      <node id="Heart" label="Heart" />
+      <node id="Mr. Ford" label="Mr. Ford" />
+      <node id="Sorry" label="Sorry" />
+      <node id="Krusty" label="Krusty" />
+      <node id="Sir" label="Sir" />
+      <node id="Awful" label="Awful" />
+      <node id="Baryshnikov" label="Baryshnikov" />
+      <node id="Ew" label="Ew" />
+      <node id="Fat Load" label="Fat Load" />
+      <node id="Hmm" label="Hmm" />
+      <node id="Kyle LoBianco" label="Kyle LoBianco" />
+      <node id="Boats" label="Boats" />
+      <node id="Ooh" label="Ooh" />
+      <node id="Pauper" label="Pauper" />
+      <node id="Ohhh" label="Ohhh" />
+      <node id="Coppppss" label="Coppppss" />
+      <node id="Caitlin" label="Caitlin" />
+      <node id="Kogen" label="Kogen" />
+      <node id="Wolodarsky" label="Wolodarsky" />
+      <node id="Ooooh" label="Ooooh" />
+      <node id="Life Magazine" label="Life Magazine" />
+      <node id="Rod" label="Rod" />
+      <node id="Grampapa" label="Grampapa" />
+      <node id="Mabel" label="Mabel" />
+      <node id="Cousin Merl" label="Cousin Merl" />
+      <node id="Revenuers" label="Revenuers" />
+      <node id="Springfield Elementary" label="Springfield Elementary" />
+      <node id="Krustyland" label="Krustyland" />
+      <node id="Ahh" label="Ahh" />
+      <node id="APB" label="APB" />
+      <node id="Hii" label="Hii" />
+      <node id="Hell" label="Hell" />
+      <node id="Okay" label="Okay" />
+      <node id="Edison" label="Edison" />
+      <node id="Ha" label="Ha" />
+      <node id="Young" label="Young" />
+      <node id="Jump" label="Jump" />
+      <node id="Marc Fredericks" label="Marc Fredericks" />
+      <node id="CLOUD" label="CLOUD" />
+      <node id="NEVER" label="NEVER" />
+      <node id="SCHOOL" label="SCHOOL" />
+      <node id="TOAD" label="TOAD" />
+      <node id="SPIRIT" label="SPIRIT" />
+      <node id="Nothin" label="Nothin" />
+      <node id="Lis" label="Lis" />
+      <node id="Lou" label="Lou" />
+      <node id="Eh" label="Eh" />
+      <node id="School" label="School" />
+      <node id="PATRICK" label="PATRICK" />
+      <node id="Week" label="Week" />
+      <node id="Part Two" label="Part Two" />
+      <node id="Little Anthony" label="Little Anthony" />
+      <node id="Lake Tahoe" label="Lake Tahoe" />
+      <node id="Michael" label="Michael" />
+      <node id="Senator Geary" label="Senator Geary" />
+      <node id="Italy" label="Italy" />
+      <node id="Opera" label="Opera" />
+      <node id="Hallelujah" label="Hallelujah" />
+      <node id="Clancy" label="Clancy" />
+      <node id="Damn" label="Damn" />
+      <node id="CALL" label="CALL" />
+      <node id="PLOW" label="PLOW" />
+      <node id="THAT" label="THAT" />
+      <node id="Sun City" label="Sun City" />
+      <node id="Patty" label="Patty" />
+      <node id="Selma" label="Selma" />
+      <node id="Squalid" label="Squalid" />
+      <node id="Brittany" label="Brittany" />
+      <node id="Wiggum" label="Wiggum" />
+      <node id="Oooooh" label="Oooooh" />
+      <node id="Boys" label="Boys" />
+      <node id="Boy" label="Boy" />
+      <node id="Seaman Simpson" label="Seaman Simpson" />
+      <node id="Tailhook Scandal" label="Tailhook Scandal" />
+      <node id="Goodbye" label="Goodbye" />
+      <node id="Whack" label="Whack" />
+      <node id="Abra" label="Abra" />
+      <node id="Middle Ages" label="Middle Ages" />
+      <node id="Zzzapp" label="Zzzapp" />
+      <node id="Please" label="Please" />
+      <node id="Yo" label="Yo" />
+      <node id="Neddie" label="Neddie" />
+      <node id="Mr. Johannson" label="Mr. Johannson" />
+      <node id="Shelbyville" label="Shelbyville" />
+      <node id="Cheer" label="Cheer" />
+      <node id="Barney" label="Barney" />
+      <node id="Max" label="Max" />
+      <node id="Santa" label="Santa" />
+      <node id="Lady" label="Lady" />
+      <node id="Cletus" label="Cletus" />
+      <node id="Fire" label="Fire" />
+      <node id="Doctor" label="Doctor" />
+      <node id="Luann Van Houten" label="Luann Van Houten" />
+      <node id="Gyro" label="Gyro" />
+      <node id="Beer" label="Beer" />
+      <node id="Goggles" label="Goggles" />
+      <node id="Eyes" label="Eyes" />
+      <node id="Nantucket" label="Nantucket" />
+      <node id="Steal" label="Steal" />
+      <node id="Hope" label="Hope" />
+      <node id="Welcome" label="Welcome" />
+      <node id="Mr. Simpson" label="Mr. Simpson" />
+      <node id="ATM" label="ATM" />
+      <node id="Kids" label="Kids" />
+      <node id="Guys" label="Guys" />
+      <node id="Lenny" label="Lenny" />
+      <node id="Oooh" label="Oooh" />
+      <node id="Hurry" label="Hurry" />
+      <node id="Ah" label="Ah" />
+      <node id="Brakes Cut" label="Brakes Cut" />
+      <node id="Dennis" label="Dennis" />
+      <node id="Mary" label="Mary" />
+      <node id="Anyway" label="Anyway" />
+      <node id="Joy Luck Club" label="Joy Luck Club" />
+      <node id="CAN" label="CAN" />
+      <node id="SUN" label="SUN" />
+      <node id="Son" label="Son" />
+      <node id="Jenda" label="Jenda" />
+      <node id="Could" label="Could" />
+      <node id="Simpsons" label="Simpsons" />
+      <node id="Get" label="Get" />
+      <node id="Dude" label="Dude" />
+      <node id="Ribwich" label="Ribwich" />
+      <node id="Deal" label="Deal" />
+      <node id="Boggs" label="Boggs" />
+      <node id="SUVs" label="SUVs" />
+      <node id="Worldwide Wrestling" label="Worldwide Wrestling" />
+      <node id="Too" label="Too" />
+      <node id="U.S.A." label="U.S.A." />
+      <node id="Demonstration Gold" label="Demonstration Gold" />
+      <node id="Chess Club" label="Chess Club" />
+      <node id="Skinner" label="Skinner" />
+      <node id="American League" label="American League" />
+      <node id="Will Harridge" label="Will Harridge" />
+      <node id="Clown" label="Clown" />
+      <node id="Yep" label="Yep" />
+      <node id="Party Posse" label="Party Posse" />
+      <node id="Vandahar" label="Vandahar" />
+      <node id="Labneh" label="Labneh" />
+      <node id="Cook" label="Cook" />
+      <node id="Great" label="Great" />
+      <node id="Waylon" label="Waylon" />
+      <node id="Blah" label="Blah" />
+      <node id="TWO" label="TWO" />
+      <node id="Japan" label="Japan" />
+      <node id="Stick" label="Stick" />
+      <node id="Stampy" label="Stampy" />
+      <node id="Smithers" label="Smithers" />
+      <node id="Yay" label="Yay" />
+      <node id="Vanity" label="Vanity" />
+      <node id="Edna" label="Edna" />
+      <node id="Hippie" label="Hippie" />
+      <node id="Low" label="Low" />
+      <node id="Glamorous Godfrey" label="Glamorous Godfrey" />
+      <node id="Grandma" label="Grandma" />
+      <node id="Broncos" label="Broncos" />
+      <node id="Chester" label="Chester" />
+      <node id="Duck" label="Duck" />
+      <node id="Duck Goose" label="Duck Goose" />
+      <node id="Got Your Nose" label="Got Your Nose" />
+      <node id="Ivan Denisovich" label="Ivan Denisovich" />
+      <node id="Portsmouth" label="Portsmouth" />
+      <node id="Yourmouth" label="Yourmouth" />
+      <node id="DATE" label="DATE" />
+      <node id="GAME" label="GAME" />
+      <node id="DESSERT" label="DESSERT" />
+      <node id="RIGHT" label="RIGHT" />
+      <node id="Want" label="Want" />
+      <node id="Don" label="Don" />
+      <node id="Mike Ditka" label="Mike Ditka" />
+      <node id="GENTLY" label="GENTLY" />
+      <node id="STREAM" label="STREAM" />
+      <node id="MERRILY" label="MERRILY" />
+      <node id="Moleman" label="Moleman" />
+      <node id="God" label="God" />
+      <node id="Burns" label="Burns" />
+      <node id="Kent" label="Kent" />
+      <node id="Which" label="Which" />
+      <node id="YouTube" label="YouTube" />
+      <node id="Mine" label="Mine" />
+      <node id="Ehhh" label="Ehhh" />
+      <node id="Americano" label="Americano" />
+      <node id="Sweetie" label="Sweetie" />
+      <node id="Capital City" label="Capital City" />
+      <node id="Roger" label="Roger" />
+      <node id="Meyers" label="Meyers" />
+      <node id="PinItchio" label="PinItchio" />
+      <node id="Lousy" label="Lousy" />
+      <node id="Well" label="Well" />
+      <node id="Kisss" label="Kisss" />
+      <node id="African" label="African" />
+      <node id="Seattle Cinco" label="Seattle Cinco" />
+      <node id="Nick" label="Nick" />
+      <node id="Xena" label="Xena" />
+      <node id="Star Wars" label="Star Wars" />
+      <node id="Phantom Menace" label="Phantom Menace" />
+      <node id="Stay Outta My Way" label="Stay Outta My Way" />
+      <node id="Idiot" label="Idiot" />
+      <node id="Lucky" label="Lucky" />
+      <node id="Hitler" label="Hitler" />
+      <node id="Ivy" label="Ivy" />
+      <node id="Strong Ivy" label="Strong Ivy" />
+      <node id="Burn" label="Burn" />
+      <node id="Dirty Dozen" label="Dirty Dozen" />
+      <node id="Angry Men" label="Angry Men" />
+      <node id="Betty" label="Betty" />
+      <node id="Bye" label="Bye" />
+      <node id="Assel Adams" label="Assel Adams" />
+      <node id="AFLAC" label="AFLAC" />
+      <node id="Denny" label="Denny" />
+      <node id="Ow" label="Ow" />
+      <node id="Chuck" label="Chuck" />
+      <node id="David" label="David" />
+      <node id="South" label="South" />
+      <node id="Africa" label="Africa" />
+      <node id="La" label="La" />
+      <node id="Paul" label="Paul" />
+      <node id="Easter Special" label="Easter Special" />
+      <node id="Willie Tyler" label="Willie Tyler" />
+      <node id="Lester" label="Lester" />
+      <node id="Nadia Comaneci" label="Nadia Comaneci" />
+      <node id="Hard" label="Hard" />
+      <node id="Tampa" label="Tampa" />
+      <node id="Florida" label="Florida" />
+      <node id="Manjula" label="Manjula" />
+      <node id="PARCHED" label="PARCHED" />
+      <node id="Alan Dershowitz" label="Alan Dershowitz" />
+      <node id="Alan" label="Alan" />
+      <node id="Eww" label="Eww" />
+      <node id="Holy" label="Holy" />
+      <node id="Excellent" label="Excellent" />
+      <node id="Ausgezeichnet" label="Ausgezeichnet" />
+      <node id="Tonight" label="Tonight" />
+      <node id="Mmm" label="Mmm" />
+      <node id="Principal Skinner" label="Principal Skinner" />
+      <node id="Russian" label="Russian" />
+      <node id="Allison" label="Allison" />
+      <node id="Genesis" label="Genesis" />
+      <node id="Bible" label="Bible" />
+      <node id="Exodus" label="Exodus" />
+      <node id="Seymour" label="Seymour" />
+      <node id="Bent" label="Bent" />
+      <node id="Poor" label="Poor" />
+      <node id="Heinz" label="Heinz" />
+      <node id="Hunt" label="Hunt" />
+      <node id="Kent Brockman" label="Kent Brockman" />
+      <node id="Costington" label="Costington" />
+      <node id="Department" label="Department" />
+      <node id="Otto" label="Otto" />
+      <node id="Springfield Gorge" label="Springfield Gorge" />
+      <node id="Earth" label="Earth" />
+      <node id="Stupid A.F.I" label="Stupid A.F.I" />
+      <node id="Israel" label="Israel" />
+      <node id="Saran" label="Saran" />
+      <node id="Nana" label="Nana" />
+      <node id="Yeah" label="Yeah" />
+      <node id="English" label="English" />
+      <node id="Casbah" label="Casbah" />
+      <node id="Little Helper" label="Little Helper" />
+      <node id="Psych" label="Psych" />
+      <node id="Uosdwis" label="Uosdwis" />
+      <node id="Better" label="Better" />
+      <node id="Greektown" label="Greektown" />
+      <node id="Kansas City" label="Kansas City" />
+      <node id="Christmas" label="Christmas" />
+      <node id="CUT" label="CUT" />
+      <node id="EVEN" label="EVEN" />
+      <node id="Thank" label="Thank" />
+      <node id="Egad" label="Egad" />
+      <node id="Green Lantern" label="Green Lantern" />
+      <node id="Thundra" label="Thundra" />
+      <node id="Ghost Rider" label="Ghost Rider" />
+      <node id="Fishnet Speedo" label="Fishnet Speedo" />
+      <node id="Jr" label="Jr" />
+      <node id="Wheelie Shoes" label="Wheelie Shoes" />
+      <node id="Joe" label="Joe" />
+      <node id="Start" label="Start" />
+      <node id="Listen" label="Listen" />
+      <node id="Faith" label="Faith" />
+      <node id="Batman" label="Batman" />
+      <node id="Let" label="Let" />
+    </nodes>
+    <edges>
+      <edge source="Perfect" target="Perfect" id="0" />
+      <edge source="Lewis" target="Lewis" id="1" />
+      <edge source="Darwinian" target="Darwinian" id="2" />
+      <edge source="Fifty" target="Fifty" id="3" />
+      <edge source="Shut" target="Shut" id="4" />
+      <edge source="Shut" target="Hooters" id="5" />
+      <edge source="Hooters" target="Hooters" id="6" />
+      <edge source="Hey" target="Hey" id="7" />
+      <edge source="Hey" target="Dad" id="8" />
+      <edge source="Hey" target="Ringo Starr" id="9" />
+      <edge source="Hey" target="Bart" id="10" />
+      <edge source="Hey" target="Larry" id="11" />
+      <edge source="Hey" target="Japanese" id="12" />
+      <edge source="Hey" target="Hello" id="13" />
+      <edge source="Hey" target="Mom" id="14" />
+      <edge source="Hey" target="Wiggum" id="15" />
+      <edge source="Hey" target="Zzzapp" id="16" />
+      <edge source="Hey" target="Santa" id="17" />
+      <edge source="Hey" target="Portsmouth" id="18" />
+      <edge source="Hey" target="Yourmouth" id="19" />
+      <edge source="Hey" target="Barney" id="20" />
+      <edge source="Hey" target="Assel Adams" id="21" />
+      <edge source="Hey" target="Homer" id="22" />
+      <edge source="Hey" target="Let" id="23" />
+      <edge source="Dad" target="Dad" id="24" />
+      <edge source="Dad" target="Bart" id="25" />
+      <edge source="Dad" target="Tennessee Williams" id="26" />
+      <edge source="Dad" target="Wow" id="27" />
+      <edge source="Dad" target="Zzzapp" id="28" />
+      <edge source="Dad" target="Mom" id="29" />
+      <edge source="Super Bowl" target="Super Bowl" id="30" />
+      <edge source="Lisa" target="Lisa" id="31" />
+      <edge source="Lisa" target="Jasper Johns" id="32" />
+      <edge source="Lisa" target="Help" id="33" />
+      <edge source="Lisa" target="Bart" id="34" />
+      <edge source="Lisa" target="Moe" id="35" />
+      <edge source="Lisa" target="Worldwide Wrestling" id="36" />
+      <edge source="Lisa" target="Kisss" id="37" />
+      <edge source="Lisa" target="Marge" id="38" />
+      <edge source="Jasper Johns" target="Jasper Johns" id="39" />
+      <edge source="Homer" target="Homer" id="40" />
+      <edge source="Homer" target="Maudie" id="41" />
+      <edge source="Homer" target="Heaven" id="42" />
+      <edge source="Homer" target="Marge" id="43" />
+      <edge source="Homer" target="Wow" id="44" />
+      <edge source="Homer" target="Don" id="45" />
+      <edge source="Maudie" target="Maudie" id="46" />
+      <edge source="Maudie" target="Heaven" id="47" />
+      <edge source="Heaven" target="Heaven" id="48" />
+      <edge source="Ringo Starr" target="Ringo Starr" id="49" />
+      <edge source="Bart" target="Bart" id="50" />
+      <edge source="Bart" target="Tennessee Williams" id="51" />
+      <edge source="Bart" target="Does" id="52" />
+      <edge source="Bart" target="Larry" id="53" />
+      <edge source="Bart" target="Simpson" id="54" />
+      <edge source="Bart" target="Shelbyville" id="55" />
+      <edge source="Bart" target="Well" id="56" />
+      <edge source="Tennessee Williams" target="Tennessee Williams" id="57" />
+      <edge source="Teacher" target="Teacher" id="58" />
+      <edge source="YOUR" target="YOUR" id="59" />
+      <edge source="YOUR" target="AND" id="60" />
+      <edge source="YOUR" target="KICK" id="61" />
+      <edge source="AND" target="AND" id="62" />
+      <edge source="AND" target="KICK" id="63" />
+      <edge source="KICK" target="KICK" id="64" />
+      <edge source="Hm" target="Hm" id="65" />
+      <edge source="Hm" target="Wonderland" id="66" />
+      <edge source="Hm" target="Underpants" id="67" />
+      <edge source="Wonderland" target="Wonderland" id="68" />
+      <edge source="Wonderland" target="Underpants" id="69" />
+      <edge source="Underpants" target="Underpants" id="70" />
+      <edge source="Simpson" target="Simpson" id="71" />
+      <edge source="Simpson" target="Marge" id="72" />
+      <edge source="Simpson" target="Marc Fredericks" id="73" />
+      <edge source="Help" target="Help" id="74" />
+      <edge source="Uh" target="Uh" id="75" />
+      <edge source="Uh" target="Al Roker" id="76" />
+      <edge source="Uh" target="Moe" id="77" />
+      <edge source="Uh" target="Krustyland" id="78" />
+      <edge source="Uh" target="Neddie" id="79" />
+      <edge source="Uh" target="Waylon" id="80" />
+      <edge source="Uh" target="Simpsons" id="81" />
+      <edge source="Always" target="Always" id="82" />
+      <edge source="Wow" target="Wow" id="83" />
+      <edge source="Wow" target="Mom" id="84" />
+      <edge source="Wow" target="Lenny" id="85" />
+      <edge source="Wow" target="Nick" id="86" />
+      <edge source="New Kirk Smell" target="New Kirk Smell" id="87" />
+      <edge source="Aw" target="Aw" id="88" />
+      <edge source="Aw" target="Nantucket" id="89" />
+      <edge source="Kid" target="Kid" id="90" />
+      <edge source="Cool" target="Cool" id="91" />
+      <edge source="Fine" target="Fine" id="92" />
+      <edge source="Mom" target="Mom" id="93" />
+      <edge source="Pull" target="Pull" id="94" />
+      <edge source="Does" target="Does" id="95" />
+      <edge source="Tiens" target="Tiens" id="96" />
+      <edge source="Nope" target="Nope" id="97" />
+      <edge source="Skinrash" target="Skinrash" id="98" />
+      <edge source="Homer Simpson" target="Homer Simpson" id="99" />
+      <edge source="Sucker" target="Sucker" id="100" />
+      <edge source="Springfield" target="Springfield" id="101" />
+      <edge source="Dammit" target="Dammit" id="102" />
+      <edge source="Club" target="Club" id="103" />
+      <edge source="Club" target="Girl Scouts" id="104" />
+      <edge source="Girl Scouts" target="Girl Scouts" id="105" />
+      <edge source="Milhouse" target="Milhouse" id="106" />
+      <edge source="Homicidal" target="Homicidal" id="107" />
+      <edge source="GOOD" target="GOOD" id="108" />
+      <edge source="GOOD" target="MORNING" id="109" />
+      <edge source="GOOD" target="THE" id="110" />
+      <edge source="GOOD" target="EARTH" id="111" />
+      <edge source="MORNING" target="MORNING" id="112" />
+      <edge source="MORNING" target="THE" id="113" />
+      <edge source="MORNING" target="EARTH" id="114" />
+      <edge source="THE" target="THE" id="115" />
+      <edge source="THE" target="EARTH" id="116" />
+      <edge source="EARTH" target="EARTH" id="117" />
+      <edge source="Hi" target="Hi" id="118" />
+      <edge source="Hi" target="Daddy" id="119" />
+      <edge source="Hi" target="Caitlin" id="120" />
+      <edge source="Daddy" target="Daddy" id="121" />
+      <edge source="Daddy" target="Sweetie" id="122" />
+      <edge source="Grampa" target="Grampa" id="123" />
+      <edge source="Al Roker" target="Al Roker" id="124" />
+      <edge source="Look" target="Look" id="125" />
+      <edge source="Look" target="Marge" id="126" />
+      <edge source="Look" target="America" id="127" />
+      <edge source="Look" target="Heinz" id="128" />
+      <edge source="Look" target="Hunt" id="129" />
+      <edge source="Look" target="Psych" id="130" />
+      <edge source="Marge" target="Marge" id="131" />
+      <edge source="Marge" target="America" id="132" />
+      <edge source="Marge" target="Marc Fredericks" id="133" />
+      <edge source="Marge" target="Great" id="134" />
+      <edge source="Marge" target="Seattle Cinco" id="135" />
+      <edge source="America" target="America" id="136" />
+      <edge source="Professor" target="Professor" id="137" />
+      <edge source="Loyal" target="Loyal" id="138" />
+      <edge source="Loyal" target="New Springfield" id="139" />
+      <edge source="New Springfield" target="New Springfield" id="140" />
+      <edge source="Roy Cohn" target="Roy Cohn" id="141" />
+      <edge source="Oink" target="Oink" id="142" />
+      <edge source="Larry" target="Larry" id="143" />
+      <edge source="Japanese" target="Japanese" id="144" />
+      <edge source="Mmmm" target="Mmmm" id="145" />
+      <edge source="Mmmm" target="Chocolate" id="146" />
+      <edge source="Mmmm" target="Forbidden" id="147" />
+      <edge source="Chocolate" target="Chocolate" id="148" />
+      <edge source="Chocolate" target="Forbidden" id="149" />
+      <edge source="Forbidden" target="Forbidden" id="150" />
+      <edge source="Fightin" target="Fightin" id="151" />
+      <edge source="Oktoberfest" target="Oktoberfest" id="152" />
+      <edge source="Moe" target="Moe" id="153" />
+      <edge source="Moe" target="Krustyland" id="154" />
+      <edge source="Haw" target="Haw" id="155" />
+      <edge source="Hello" target="Hello" id="156" />
+      <edge source="Donald Trump" target="Donald Trump" id="157" />
+      <edge source="Huh" target="Huh" id="158" />
+      <edge source="Huh" target="Edison" id="159" />
+      <edge source="Mr. Homer" target="Mr. Homer" id="160" />
+      <edge source="Maggie" target="Maggie" id="161" />
+      <edge source="Maggie" target="Ooh" id="162" />
+      <edge source="Gasoline" target="Gasoline" id="163" />
+      <edge source="Good" target="Good" id="164" />
+      <edge source="Good" target="Nelson" id="165" />
+      <edge source="Nelson" target="Nelson" id="166" />
+      <edge source="Freeways" target="Freeways" id="167" />
+      <edge source="Freeways" target="British" id="168" />
+      <edge source="Freeways" target="Heart" id="169" />
+      <edge source="British" target="British" id="170" />
+      <edge source="British" target="Heart" id="171" />
+      <edge source="Heart" target="Heart" id="172" />
+      <edge source="Mr. Ford" target="Mr. Ford" id="173" />
+      <edge source="Sorry" target="Sorry" id="174" />
+      <edge source="Sorry" target="Krusty" id="175" />
+      <edge source="Sorry" target="Mr. Johannson" id="176" />
+      <edge source="Krusty" target="Krusty" id="177" />
+      <edge source="Krusty" target="Mr. Johannson" id="178" />
+      <edge source="Krusty" target="Anyway" id="179" />
+      <edge source="Krusty" target="Hippie" id="180" />
+      <edge source="Sir" target="Sir" id="181" />
+      <edge source="Awful" target="Awful" id="182" />
+      <edge source="Baryshnikov" target="Baryshnikov" id="183" />
+      <edge source="Ew" target="Ew" id="184" />
+      <edge source="Fat Load" target="Fat Load" id="185" />
+      <edge source="Hmm" target="Hmm" id="186" />
+      <edge source="Kyle LoBianco" target="Kyle LoBianco" id="187" />
+      <edge source="Boats" target="Boats" id="188" />
+      <edge source="Ooh" target="Ooh" id="189" />
+      <edge source="Ooh" target="Cheer" id="190" />
+      <edge source="Pauper" target="Pauper" id="191" />
+      <edge source="Ohhh" target="Ohhh" id="192" />
+      <edge source="Ohhh" target="Coppppss" id="193" />
+      <edge source="Coppppss" target="Coppppss" id="194" />
+      <edge source="Caitlin" target="Caitlin" id="195" />
+      <edge source="Kogen" target="Kogen" id="196" />
+      <edge source="Kogen" target="Wolodarsky" id="197" />
+      <edge source="Kogen" target="Ooooh" id="198" />
+      <edge source="Wolodarsky" target="Wolodarsky" id="199" />
+      <edge source="Wolodarsky" target="Ooooh" id="200" />
+      <edge source="Ooooh" target="Ooooh" id="201" />
+      <edge source="Life Magazine" target="Life Magazine" id="202" />
+      <edge source="Rod" target="Rod" id="203" />
+      <edge source="Grampapa" target="Grampapa" id="204" />
+      <edge source="Mabel" target="Mabel" id="205" />
+      <edge source="Cousin Merl" target="Cousin Merl" id="206" />
+      <edge source="Cousin Merl" target="Revenuers" id="207" />
+      <edge source="Revenuers" target="Revenuers" id="208" />
+      <edge source="Springfield Elementary" target="Springfield Elementary" id="209" />
+      <edge source="Krustyland" target="Krustyland" id="210" />
+      <edge source="Ahh" target="Ahh" id="211" />
+      <edge source="Ahh" target="APB" id="212" />
+      <edge source="APB" target="APB" id="213" />
+      <edge source="Hii" target="Hii" id="214" />
+      <edge source="Hell" target="Hell" id="215" />
+      <edge source="Okay" target="Okay" id="216" />
+      <edge source="Okay" target="Part Two" id="217" />
+      <edge source="Okay" target="Little Anthony" id="218" />
+      <edge source="Okay" target="Lake Tahoe" id="219" />
+      <edge source="Okay" target="Michael" id="220" />
+      <edge source="Okay" target="Senator Geary" id="221" />
+      <edge source="Okay" target="ATM" id="222" />
+      <edge source="Okay" target="Boggs" id="223" />
+      <edge source="Okay" target="South" id="224" />
+      <edge source="Okay" target="Africa" id="225" />
+      <edge source="Edison" target="Edison" id="226" />
+      <edge source="Ha" target="Ha" id="227" />
+      <edge source="Ha" target="Young" id="228" />
+      <edge source="Young" target="Young" id="229" />
+      <edge source="Jump" target="Jump" id="230" />
+      <edge source="Marc Fredericks" target="Marc Fredericks" id="231" />
+      <edge source="CLOUD" target="CLOUD" id="232" />
+      <edge source="CLOUD" target="NEVER" id="233" />
+      <edge source="CLOUD" target="SCHOOL" id="234" />
+      <edge source="CLOUD" target="TOAD" id="235" />
+      <edge source="CLOUD" target="SPIRIT" id="236" />
+      <edge source="NEVER" target="NEVER" id="237" />
+      <edge source="NEVER" target="SCHOOL" id="238" />
+      <edge source="NEVER" target="TOAD" id="239" />
+      <edge source="NEVER" target="SPIRIT" id="240" />
+      <edge source="SCHOOL" target="SCHOOL" id="241" />
+      <edge source="SCHOOL" target="TOAD" id="242" />
+      <edge source="SCHOOL" target="SPIRIT" id="243" />
+      <edge source="TOAD" target="TOAD" id="244" />
+      <edge source="TOAD" target="SPIRIT" id="245" />
+      <edge source="SPIRIT" target="SPIRIT" id="246" />
+      <edge source="Nothin" target="Nothin" id="247" />
+      <edge source="Lis" target="Lis" id="248" />
+      <edge source="Lou" target="Lou" id="249" />
+      <edge source="Eh" target="Eh" id="250" />
+      <edge source="School" target="School" id="251" />
+      <edge source="PATRICK" target="PATRICK" id="252" />
+      <edge source="Week" target="Week" id="253" />
+      <edge source="Part Two" target="Part Two" id="254" />
+      <edge source="Part Two" target="Little Anthony" id="255" />
+      <edge source="Part Two" target="Lake Tahoe" id="256" />
+      <edge source="Part Two" target="Michael" id="257" />
+      <edge source="Part Two" target="Senator Geary" id="258" />
+      <edge source="Little Anthony" target="Little Anthony" id="259" />
+      <edge source="Little Anthony" target="Lake Tahoe" id="260" />
+      <edge source="Little Anthony" target="Michael" id="261" />
+      <edge source="Little Anthony" target="Senator Geary" id="262" />
+      <edge source="Lake Tahoe" target="Lake Tahoe" id="263" />
+      <edge source="Lake Tahoe" target="Michael" id="264" />
+      <edge source="Lake Tahoe" target="Senator Geary" id="265" />
+      <edge source="Michael" target="Michael" id="266" />
+      <edge source="Michael" target="Senator Geary" id="267" />
+      <edge source="Senator Geary" target="Senator Geary" id="268" />
+      <edge source="Italy" target="Italy" id="269" />
+      <edge source="Opera" target="Opera" id="270" />
+      <edge source="Hallelujah" target="Hallelujah" id="271" />
+      <edge source="Clancy" target="Clancy" id="272" />
+      <edge source="Damn" target="Damn" id="273" />
+      <edge source="CALL" target="CALL" id="274" />
+      <edge source="CALL" target="PLOW" id="275" />
+      <edge source="CALL" target="THAT" id="276" />
+      <edge source="PLOW" target="PLOW" id="277" />
+      <edge source="PLOW" target="THAT" id="278" />
+      <edge source="THAT" target="THAT" id="279" />
+      <edge source="Sun City" target="Sun City" id="280" />
+      <edge source="Patty" target="Patty" id="281" />
+      <edge source="Patty" target="Selma" id="282" />
+      <edge source="Selma" target="Selma" id="283" />
+      <edge source="Selma" target="Dennis" id="284" />
+      <edge source="Squalid" target="Squalid" id="285" />
+      <edge source="Brittany" target="Brittany" id="286" />
+      <edge source="Wiggum" target="Wiggum" id="287" />
+      <edge source="Oooooh" target="Oooooh" id="288" />
+      <edge source="Boys" target="Boys" id="289" />
+      <edge source="Boy" target="Boy" id="290" />
+      <edge source="Boy" target="Stupid A.F.I" id="291" />
+      <edge source="Seaman Simpson" target="Seaman Simpson" id="292" />
+      <edge source="Seaman Simpson" target="Tailhook Scandal" id="293" />
+      <edge source="Seaman Simpson" target="Goodbye" id="294" />
+      <edge source="Tailhook Scandal" target="Tailhook Scandal" id="295" />
+      <edge source="Tailhook Scandal" target="Goodbye" id="296" />
+      <edge source="Goodbye" target="Goodbye" id="297" />
+      <edge source="Whack" target="Whack" id="298" />
+      <edge source="Abra" target="Abra" id="299" />
+      <edge source="Middle Ages" target="Middle Ages" id="300" />
+      <edge source="Zzzapp" target="Zzzapp" id="301" />
+      <edge source="Please" target="Please" id="302" />
+      <edge source="Yo" target="Yo" id="303" />
+      <edge source="Neddie" target="Neddie" id="304" />
+      <edge source="Mr. Johannson" target="Mr. Johannson" id="305" />
+      <edge source="Shelbyville" target="Shelbyville" id="306" />
+      <edge source="Cheer" target="Cheer" id="307" />
+      <edge source="Barney" target="Barney" id="308" />
+      <edge source="Max" target="Max" id="309" />
+      <edge source="Santa" target="Santa" id="310" />
+      <edge source="Santa" target="Ah" id="311" />
+      <edge source="Santa" target="Little Helper" id="312" />
+      <edge source="Lady" target="Lady" id="313" />
+      <edge source="Cletus" target="Cletus" id="314" />
+      <edge source="Fire" target="Fire" id="315" />
+      <edge source="Doctor" target="Doctor" id="316" />
+      <edge source="Luann Van Houten" target="Luann Van Houten" id="317" />
+      <edge source="Luann Van Houten" target="Gyro" id="318" />
+      <edge source="Gyro" target="Gyro" id="319" />
+      <edge source="Beer" target="Beer" id="320" />
+      <edge source="Beer" target="Goggles" id="321" />
+      <edge source="Beer" target="Eyes" id="322" />
+      <edge source="Goggles" target="Goggles" id="323" />
+      <edge source="Goggles" target="Eyes" id="324" />
+      <edge source="Eyes" target="Eyes" id="325" />
+      <edge source="Nantucket" target="Nantucket" id="326" />
+      <edge source="Steal" target="Steal" id="327" />
+      <edge source="Hope" target="Hope" id="328" />
+      <edge source="Welcome" target="Welcome" id="329" />
+      <edge source="Welcome" target="Mr. Simpson" id="330" />
+      <edge source="Mr. Simpson" target="Mr. Simpson" id="331" />
+      <edge source="ATM" target="ATM" id="332" />
+      <edge source="Kids" target="Kids" id="333" />
+      <edge source="Kids" target="U.S.A." id="334" />
+      <edge source="Kids" target="Demonstration Gold" id="335" />
+      <edge source="Guys" target="Guys" id="336" />
+      <edge source="Lenny" target="Lenny" id="337" />
+      <edge source="Oooh" target="Oooh" id="338" />
+      <edge source="Hurry" target="Hurry" id="339" />
+      <edge source="Ah" target="Ah" id="340" />
+      <edge source="Ah" target="Simpsons" id="341" />
+      <edge source="Brakes Cut" target="Brakes Cut" id="342" />
+      <edge source="Dennis" target="Dennis" id="343" />
+      <edge source="Mary" target="Mary" id="344" />
+      <edge source="Anyway" target="Anyway" id="345" />
+      <edge source="Anyway" target="Alan Dershowitz" id="346" />
+      <edge source="Anyway" target="Alan" id="347" />
+      <edge source="Joy Luck Club" target="Joy Luck Club" id="348" />
+      <edge source="CAN" target="CAN" id="349" />
+      <edge source="CAN" target="SUN" id="350" />
+      <edge source="SUN" target="SUN" id="351" />
+      <edge source="Son" target="Son" id="352" />
+      <edge source="Jenda" target="Jenda" id="353" />
+      <edge source="Could" target="Could" id="354" />
+      <edge source="Simpsons" target="Simpsons" id="355" />
+      <edge source="Simpsons" target="Waylon" id="356" />
+      <edge source="Get" target="Get" id="357" />
+      <edge source="Dude" target="Dude" id="358" />
+      <edge source="Dude" target="Ribwich" id="359" />
+      <edge source="Ribwich" target="Ribwich" id="360" />
+      <edge source="Deal" target="Deal" id="361" />
+      <edge source="Boggs" target="Boggs" id="362" />
+      <edge source="SUVs" target="SUVs" id="363" />
+      <edge source="Worldwide Wrestling" target="Worldwide Wrestling" id="364" />
+      <edge source="Too" target="Too" id="365" />
+      <edge source="U.S.A." target="U.S.A." id="366" />
+      <edge source="U.S.A." target="Demonstration Gold" id="367" />
+      <edge source="Demonstration Gold" target="Demonstration Gold" id="368" />
+      <edge source="Chess Club" target="Chess Club" id="369" />
+      <edge source="Skinner" target="Skinner" id="370" />
+      <edge source="American League" target="American League" id="371" />
+      <edge source="American League" target="Will Harridge" id="372" />
+      <edge source="Will Harridge" target="Will Harridge" id="373" />
+      <edge source="Clown" target="Clown" id="374" />
+      <edge source="Yep" target="Yep" id="375" />
+      <edge source="Party Posse" target="Party Posse" id="376" />
+      <edge source="Vandahar" target="Vandahar" id="377" />
+      <edge source="Vandahar" target="Labneh" id="378" />
+      <edge source="Labneh" target="Labneh" id="379" />
+      <edge source="Cook" target="Cook" id="380" />
+      <edge source="Great" target="Great" id="381" />
+      <edge source="Waylon" target="Waylon" id="382" />
+      <edge source="Waylon" target="Start" id="383" />
+      <edge source="Blah" target="Blah" id="384" />
+      <edge source="TWO" target="TWO" id="385" />
+      <edge source="Japan" target="Japan" id="386" />
+      <edge source="Stick" target="Stick" id="387" />
+      <edge source="Stampy" target="Stampy" id="388" />
+      <edge source="Smithers" target="Smithers" id="389" />
+      <edge source="Yay" target="Yay" id="390" />
+      <edge source="Vanity" target="Vanity" id="391" />
+      <edge source="Vanity" target="Edna" id="392" />
+      <edge source="Edna" target="Edna" id="393" />
+      <edge source="Hippie" target="Hippie" id="394" />
+      <edge source="Low" target="Low" id="395" />
+      <edge source="Glamorous Godfrey" target="Glamorous Godfrey" id="396" />
+      <edge source="Grandma" target="Grandma" id="397" />
+      <edge source="Broncos" target="Broncos" id="398" />
+      <edge source="Chester" target="Chester" id="399" />
+      <edge source="Duck" target="Duck" id="400" />
+      <edge source="Duck" target="Duck Goose" id="401" />
+      <edge source="Duck" target="Got Your Nose" id="402" />
+      <edge source="Duck" target="Ivan Denisovich" id="403" />
+      <edge source="Duck Goose" target="Duck Goose" id="404" />
+      <edge source="Duck Goose" target="Got Your Nose" id="405" />
+      <edge source="Duck Goose" target="Ivan Denisovich" id="406" />
+      <edge source="Got Your Nose" target="Got Your Nose" id="407" />
+      <edge source="Got Your Nose" target="Ivan Denisovich" id="408" />
+      <edge source="Ivan Denisovich" target="Ivan Denisovich" id="409" />
+      <edge source="Portsmouth" target="Portsmouth" id="410" />
+      <edge source="Portsmouth" target="Yourmouth" id="411" />
+      <edge source="Yourmouth" target="Yourmouth" id="412" />
+      <edge source="DATE" target="DATE" id="413" />
+      <edge source="DATE" target="GAME" id="414" />
+      <edge source="DATE" target="DESSERT" id="415" />
+      <edge source="DATE" target="RIGHT" id="416" />
+      <edge source="GAME" target="GAME" id="417" />
+      <edge source="GAME" target="DESSERT" id="418" />
+      <edge source="GAME" target="RIGHT" id="419" />
+      <edge source="DESSERT" target="DESSERT" id="420" />
+      <edge source="DESSERT" target="RIGHT" id="421" />
+      <edge source="RIGHT" target="RIGHT" id="422" />
+      <edge source="Want" target="Want" id="423" />
+      <edge source="Don" target="Don" id="424" />
+      <edge source="Mike Ditka" target="Mike Ditka" id="425" />
+      <edge source="GENTLY" target="GENTLY" id="426" />
+      <edge source="GENTLY" target="STREAM" id="427" />
+      <edge source="GENTLY" target="MERRILY" id="428" />
+      <edge source="STREAM" target="STREAM" id="429" />
+      <edge source="STREAM" target="MERRILY" id="430" />
+      <edge source="MERRILY" target="MERRILY" id="431" />
+      <edge source="Moleman" target="Moleman" id="432" />
+      <edge source="God" target="God" id="433" />
+      <edge source="Burns" target="Burns" id="434" />
+      <edge source="Kent" target="Kent" id="435" />
+      <edge source="Which" target="Which" id="436" />
+      <edge source="Which" target="YouTube" id="437" />
+      <edge source="YouTube" target="YouTube" id="438" />
+      <edge source="Mine" target="Mine" id="439" />
+      <edge source="Ehhh" target="Ehhh" id="440" />
+      <edge source="Ehhh" target="Americano" id="441" />
+      <edge source="Americano" target="Americano" id="442" />
+      <edge source="Sweetie" target="Sweetie" id="443" />
+      <edge source="Capital City" target="Capital City" id="444" />
+      <edge source="Roger" target="Roger" id="445" />
+      <edge source="Roger" target="Meyers" id="446" />
+      <edge source="Roger" target="PinItchio" id="447" />
+      <edge source="Meyers" target="Meyers" id="448" />
+      <edge source="Meyers" target="PinItchio" id="449" />
+      <edge source="PinItchio" target="PinItchio" id="450" />
+      <edge source="Lousy" target="Lousy" id="451" />
+      <edge source="Well" target="Well" id="452" />
+      <edge source="Kisss" target="Kisss" id="453" />
+      <edge source="African" target="African" id="454" />
+      <edge source="Seattle Cinco" target="Seattle Cinco" id="455" />
+      <edge source="Nick" target="Nick" id="456" />
+      <edge source="Xena" target="Xena" id="457" />
+      <edge source="Xena" target="Star Wars" id="458" />
+      <edge source="Xena" target="Phantom Menace" id="459" />
+      <edge source="Star Wars" target="Star Wars" id="460" />
+      <edge source="Star Wars" target="Phantom Menace" id="461" />
+      <edge source="Phantom Menace" target="Phantom Menace" id="462" />
+      <edge source="Stay Outta My Way" target="Stay Outta My Way" id="463" />
+      <edge source="Stay Outta My Way" target="Idiot" id="464" />
+      <edge source="Idiot" target="Idiot" id="465" />
+      <edge source="Lucky" target="Lucky" id="466" />
+      <edge source="Hitler" target="Hitler" id="467" />
+      <edge source="Ivy" target="Ivy" id="468" />
+      <edge source="Ivy" target="Strong Ivy" id="469" />
+      <edge source="Strong Ivy" target="Strong Ivy" id="470" />
+      <edge source="Burn" target="Burn" id="471" />
+      <edge source="Dirty Dozen" target="Dirty Dozen" id="472" />
+      <edge source="Dirty Dozen" target="Angry Men" id="473" />
+      <edge source="Angry Men" target="Angry Men" id="474" />
+      <edge source="Betty" target="Betty" id="475" />
+      <edge source="Bye" target="Bye" id="476" />
+      <edge source="Assel Adams" target="Assel Adams" id="477" />
+      <edge source="AFLAC" target="AFLAC" id="478" />
+      <edge source="Denny" target="Denny" id="479" />
+      <edge source="Ow" target="Ow" id="480" />
+      <edge source="Chuck" target="Chuck" id="481" />
+      <edge source="David" target="David" id="482" />
+      <edge source="South" target="South" id="483" />
+      <edge source="South" target="Africa" id="484" />
+      <edge source="Africa" target="Africa" id="485" />
+      <edge source="La" target="La" id="486" />
+      <edge source="Paul" target="Paul" id="487" />
+      <edge source="Paul" target="Easter Special" id="488" />
+      <edge source="Paul" target="Willie Tyler" id="489" />
+      <edge source="Paul" target="Lester" id="490" />
+      <edge source="Paul" target="Nadia Comaneci" id="491" />
+      <edge source="Easter Special" target="Easter Special" id="492" />
+      <edge source="Easter Special" target="Willie Tyler" id="493" />
+      <edge source="Easter Special" target="Lester" id="494" />
+      <edge source="Easter Special" target="Nadia Comaneci" id="495" />
+      <edge source="Willie Tyler" target="Willie Tyler" id="496" />
+      <edge source="Willie Tyler" target="Lester" id="497" />
+      <edge source="Willie Tyler" target="Nadia Comaneci" id="498" />
+      <edge source="Lester" target="Lester" id="499" />
+      <edge source="Lester" target="Nadia Comaneci" id="500" />
+      <edge source="Nadia Comaneci" target="Nadia Comaneci" id="501" />
+      <edge source="Hard" target="Hard" id="502" />
+      <edge source="Hard" target="Tampa" id="503" />
+      <edge source="Hard" target="Florida" id="504" />
+      <edge source="Tampa" target="Tampa" id="505" />
+      <edge source="Tampa" target="Florida" id="506" />
+      <edge source="Florida" target="Florida" id="507" />
+      <edge source="Manjula" target="Manjula" id="508" />
+      <edge source="PARCHED" target="PARCHED" id="509" />
+      <edge source="Alan Dershowitz" target="Alan Dershowitz" id="510" />
+      <edge source="Alan Dershowitz" target="Alan" id="511" />
+      <edge source="Alan" target="Alan" id="512" />
+      <edge source="Eww" target="Eww" id="513" />
+      <edge source="Holy" target="Holy" id="514" />
+      <edge source="Excellent" target="Excellent" id="515" />
+      <edge source="Ausgezeichnet" target="Ausgezeichnet" id="516" />
+      <edge source="Tonight" target="Tonight" id="517" />
+      <edge source="Mmm" target="Mmm" id="518" />
+      <edge source="Principal Skinner" target="Principal Skinner" id="519" />
+      <edge source="Russian" target="Russian" id="520" />
+      <edge source="Allison" target="Allison" id="521" />
+      <edge source="Genesis" target="Genesis" id="522" />
+      <edge source="Genesis" target="Bible" id="523" />
+      <edge source="Genesis" target="Exodus" id="524" />
+      <edge source="Bible" target="Bible" id="525" />
+      <edge source="Bible" target="Exodus" id="526" />
+      <edge source="Exodus" target="Exodus" id="527" />
+      <edge source="Seymour" target="Seymour" id="528" />
+      <edge source="Bent" target="Bent" id="529" />
+      <edge source="Poor" target="Poor" id="530" />
+      <edge source="Heinz" target="Heinz" id="531" />
+      <edge source="Heinz" target="Hunt" id="532" />
+      <edge source="Hunt" target="Hunt" id="533" />
+      <edge source="Kent Brockman" target="Kent Brockman" id="534" />
+      <edge source="Kent Brockman" target="Costington" id="535" />
+      <edge source="Kent Brockman" target="Department" id="536" />
+      <edge source="Costington" target="Costington" id="537" />
+      <edge source="Costington" target="Department" id="538" />
+      <edge source="Department" target="Department" id="539" />
+      <edge source="Otto" target="Otto" id="540" />
+      <edge source="Otto" target="Springfield Gorge" id="541" />
+      <edge source="Springfield Gorge" target="Springfield Gorge" id="542" />
+      <edge source="Earth" target="Earth" id="543" />
+      <edge source="Stupid A.F.I" target="Stupid A.F.I" id="544" />
+      <edge source="Israel" target="Israel" id="545" />
+      <edge source="Saran" target="Saran" id="546" />
+      <edge source="Nana" target="Nana" id="547" />
+      <edge source="Yeah" target="Yeah" id="548" />
+      <edge source="English" target="English" id="549" />
+      <edge source="Casbah" target="Casbah" id="550" />
+      <edge source="Little Helper" target="Little Helper" id="551" />
+      <edge source="Psych" target="Psych" id="552" />
+      <edge source="Uosdwis" target="Uosdwis" id="553" />
+      <edge source="Uosdwis" target="Better" id="554" />
+      <edge source="Uosdwis" target="Greektown" id="555" />
+      <edge source="Better" target="Better" id="556" />
+      <edge source="Better" target="Greektown" id="557" />
+      <edge source="Greektown" target="Greektown" id="558" />
+      <edge source="Kansas City" target="Kansas City" id="559" />
+      <edge source="Christmas" target="Christmas" id="560" />
+      <edge source="CUT" target="CUT" id="561" />
+      <edge source="CUT" target="EVEN" id="562" />
+      <edge source="EVEN" target="EVEN" id="563" />
+      <edge source="Thank" target="Thank" id="564" />
+      <edge source="Egad" target="Egad" id="565" />
+      <edge source="Egad" target="Green Lantern" id="566" />
+      <edge source="Egad" target="Thundra" id="567" />
+      <edge source="Egad" target="Ghost Rider" id="568" />
+      <edge source="Green Lantern" target="Green Lantern" id="569" />
+      <edge source="Green Lantern" target="Thundra" id="570" />
+      <edge source="Green Lantern" target="Ghost Rider" id="571" />
+      <edge source="Thundra" target="Thundra" id="572" />
+      <edge source="Thundra" target="Ghost Rider" id="573" />
+      <edge source="Ghost Rider" target="Ghost Rider" id="574" />
+      <edge source="Fishnet Speedo" target="Fishnet Speedo" id="575" />
+      <edge source="Fishnet Speedo" target="Jr" id="576" />
+      <edge source="Fishnet Speedo" target="Wheelie Shoes" id="577" />
+      <edge source="Jr" target="Jr" id="578" />
+      <edge source="Jr" target="Wheelie Shoes" id="579" />
+      <edge source="Wheelie Shoes" target="Wheelie Shoes" id="580" />
+      <edge source="Joe" target="Joe" id="581" />
+      <edge source="Start" target="Start" id="582" />
+      <edge source="Listen" target="Listen" id="583" />
+      <edge source="Faith" target="Faith" id="584" />
+      <edge source="Faith" target="Batman" id="585" />
+      <edge source="Batman" target="Batman" id="586" />
+      <edge source="Let" target="Let" id="587" />
+    </edges>
+  </graph>
+</gexf>

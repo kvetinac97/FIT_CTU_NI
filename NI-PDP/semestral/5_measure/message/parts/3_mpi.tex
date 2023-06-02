@@ -1,0 +1,11 @@
+\section{Popis paralelního algoritmu a jeho implementace v MPI}
+
+Při tvorbě paralelního algoritmu pro \textbf{MPI} jsem vycházel z verze pro OpenMP. Na základě provedených měření se ukázal \textbf{datový paralelismus} jako efektivnější způsob, rozhodl jsem se proto pro model, kdy na jednotlivých \textbf{Slave} uzlech poběží paralelní program s datovým paralelismem a \textbf{Master} bude tento výpočet pouze řídit.
+
+Na klastru Star, který máme k dispozici, toto \textbf{není} optimální řešení, jelikož se zde nachází 4 stroje s 20 jádry, a při rozdělení na 1 Mastera a 3 Slavy tak pro výpočet budou použita pouze jádra na Slave procesech, tento model by byl tedy vhodnější pro klastr, kde by master uzel mohl být méně výkonný.
+
+Princip \textbf{distribuovaného} algoritmu je následující: Master ve funkci \mintinline{c}{weight_master} načte graf a pomocí \textbf{BFS} vygeneruje $(slave\_count + 1) \cdot 2$ stavů, které rozešle jednotlivým pracovním uzlům s tagem \mintinline{c}{TAG_WORK}. Ty ve funkci \mintinline{c}{slaveWork} v cyklu čekají na práci, a jakmile ji dostanou, tak pomocí OpenMP datového paralelismu provedou paralelní výpočet a výsledek předají zpět pomocí tagu \mintinline{c}{TAG_DONE}. Master tak průběžně rozděluje práci, dokud nějaká zbývá. Když je fronta úloh prázdná, počká na dokončení práce na všech pracovních uzlech \textit{(ty, kde práce doběhla, ukončí zprávou \mintinline{c}{TAG_TERMINATE})}.
+
+Aby byl program \textbf{efektivnější}, pokaždé, když Master od pracovního uzlu obdrží výsledek, tak si aktualizuje aktuálně nejlepší řešení a předá ho pracovnímu uzlu -- probíhá tak částečná synchronizace nejlepších řešení napříč pracovními uzly, a může tedy docházet k efektivnějšímu \textbf{prořezávání}.
+
+Distribuovaný paralelní program pomocí MPI jsem již na \textbf{všech} mnou vygenerovaných instancích nespouštěl, jelikož nemám k dispozici klastr školních počítačů. Spustil jsem jej pouze na třech instancích, které jsem zároveň pustil i sekvenčně, a to vše na klastru Star -- více v následující kapitole \nameref{4_measure}.

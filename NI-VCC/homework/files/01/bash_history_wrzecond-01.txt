@@ -1,0 +1,50 @@
+ssh-keygen
+cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+cat .ssh/id_rsa.pub
+sudo apt update
+sudo apt upgrade
+
+ssh root@wrzecond-01.vcc
+ssh wrzecond-02.vcc
+
+vi /etc/systemd/network/25-veth-b1b2.netdev
+vi /etc/netplan/00-installer-config.yaml
+
+netplan generate
+service systemd-networkd stop
+service systemd-networkd start
+
+sudo apt install git python3-dev libffi-dev gcc libssl-dev
+sudo apt install python3-pip
+sudo pip3 install -U pip
+sudo pip install -U 'ansible>=4,<6'
+sudo pip3 install git+https://opendev.org/openstack/kolla-ansible@stable/zed
+
+sudo mkdir -p /etc/kolla
+sudo chown $USER:$USER /etc/kolla
+cp -r /usr/local/share/kolla-ansible/etc_examples/kolla/* /etc/kolla/
+cp /usr/local/share/kolla-ansible/ansible/inventory/* .
+
+kolla-ansible install-deps
+mkdir -p /etc/ansible
+vi /etc/ansible/ansible.cfg
+vi multinode
+
+ansible -i multinode all -m ping
+kolla-genpwd
+
+vi /etc/kolla/globals.yml
+
+kolla-ansible -i ./multinode bootstrap-servers
+pip install python-openstackclient -c https://releases.openstack.org/constraints/upper/zed
+kolla-ansible -i ./multinode prechecks
+kolla-ansible -i ./multinode deploy
+
+kolla-ansible post-deploy
+/usr/local/share/kolla-ansible/init-runonce
+
+cat /etc/kolla/passwords.yml | grep keystone_admin
+
+iptables -t nat -A POSTROUTING -o ens192 -j MASQUERADE
+ip addr add 10.0.2.1/24 dev veth1
+echo 1 > /proc/sys/net/ipv4/ip_forward

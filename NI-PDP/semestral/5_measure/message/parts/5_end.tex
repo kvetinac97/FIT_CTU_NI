@@ -1,0 +1,8 @@
+\section{Závěr}
+\label{5_end}
+
+V semestrální práci jsem si vyzkoušel nejprve \textbf{návrh} sekvenčního řešení algoritmu a následně jeho \textbf{paralelizaci} -- nejprve pomocí \textbf{OpenMP} na jednom zařízení, následně pomocí \textbf{MPI} na více zařízeních. Na závěr jsem \textbf{změřil} efektivitu mého řešení na třech vybraných instancích se sekvenční složitostí mezi 2 a 10 minutami.
+
+Na základě \nameref{4_times} a grafů \nameref{4_timesgraph} \nameref{4_speedup} můžu provést analýzu mého řešení. První věc, které si lze všimnout, je \textbf{superlineární} zrychlení (lehce nad 2) na dvou vláknech u OpenMP u všech tří instancí. Další zajímavý fakt je ten, že s \textbf{rostoucím} počtem vláken vždy \textbf{neklesá} doba běhu -- například OpenMP program na 4 vláknech běží déle než na 2 vláknech na instancích 27\_19 a 28\_24 -- nejspíše se práce dokáže mezi vlákna rozdělit \textbf{rovnoměrněji} právě v tomto případě. Z grafu lze vypozorovat také to, že program má pro 20 vláken mnohem \textbf{menší} zrychlení, než pro 16 \textit{(nejspíše je už vláken tolik, že se nedaří tak dobře rozdělit práci)}. V neposlední řadě lze také zjistit, že zrychlení je mnohem \textbf{větší} u grafů s \textbf{menším} průměrným stupněm (19 vs 24).
+
+Semestrální práce mi přišla jakožto velmi \textbf{přínosná}, bylo skvělé vidět, jak jde algoritmus, který \textbf{původně} v sekvenčním programu bez prořezávání \textbf{nedokáže} zpracovat ani grafy o 10 vrcholech s průměrným stupněm 3 pomocí prořezávání, \textbf{paralelizace} a použití distribuovaného programování vylepšit tak, že \textbf{dokáže} za 5 sekund zpracovat graf o 27 vrcholech s průměrným stupněm 19.

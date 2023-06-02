@@ -1,0 +1,14 @@
+vi .ssh/authorized_keys
+sudo apt update
+sudo apt upgrade
+
+vi /etc/systemd/network/25-veth-b1b2.netdev
+vi /etc/netplan/00-installer-config.yaml
+
+netplan generate
+service systemd-networkd stop
+service systemd-networkd start
+
+sudo apt install git python3-dev libffi-dev gcc libssl-dev
+sudo apt install python3-pip
+sudo pip3 install -U pip

@@ -1,0 +1,10 @@
+jupyterlab
+nltk
+numpy
+scikit-learn
+gensim
+fasttext
+wordcloud
+Image
+matplotlib
+networkx

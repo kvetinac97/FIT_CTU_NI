@@ -1,0 +1,130 @@
+root@wrzecond-02:~# systemd-nspawn -M arch-linux -b --network-bridge=docker0
+Spawning container arch-linux on /var/lib/machines/arch-linux.raw.
+Press ^] three times within 1s to kill container.
+systemd 253.3-3-arch running in system mode (+PAM +AUDIT -SELINUX -APPARMOR -IMA +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY +P11KIT -QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +XKBCOMMON +UTMP -SYSVINIT default-hierarchy=unified)
+Detected virtualization systemd-nspawn.
+Detected architecture x86-64.
+Failed to create symlink /sys/fs/cgroup/cpu: Read-only file system
+Failed to create symlink /sys/fs/cgroup/cpuacct: Read-only file system
+Failed to create symlink /sys/fs/cgroup/net_prio: Read-only file system
+Failed to create symlink /sys/fs/cgroup/net_cls: Read-only file system
+
+Welcome to Arch Linux!
+
+Hostname set to <archlinux>.
+Not running with unified cgroup hierarchy, disabling cgroup BPF features.
+Queued start job for default target Graphical Interface.
+[  OK  ] Created slice Slice /system/getty.
+[  OK  ] Created slice Slice /system/modprobe.
+[  OK  ] Created slice User and Session Slice.
+[  OK  ] Started Dispatch Password Requests to Console Directory Watch.
+[  OK  ] Started Forward Password Requests to Wall Directory Watch.
+[  OK  ] Reached target Local Encrypted Volumes.
+[  OK  ] Reached target Local Integrity Protected Volumes.
+[  OK  ] Reached target Path Units.
+[  OK  ] Reached target Remote Encrypted Volumes.
+[  OK  ] Reached target Remote File Systems.
+[  OK  ] Reached target Slice Units.
+[  OK  ] Reached target Swaps.
+[  OK  ] Reached target Local Verity Protected Volumes.
+[  OK  ] Listening on Device-mapper event daemon FIFOs.
+[  OK  ] Listening on Process Core Dump Socket.
+[  OK  ] Listening on Journal Socket (/dev/log).
+[  OK  ] Listening on Journal Socket.
+[  OK  ] Listening on Network Service Netlink Socket.
+[  OK  ] Listening on User Database Manager Socket.
+         Mounting Huge Pages File System...
+systemd-journald.service: unit configures an IP firewall, but the local system does not support BPF/cgroup firewalling.
+(This warning is only shown for the first unit using IP firewalling.)
+         Starting Journal Service...
+         Starting Generate network units from Kernel command line...
+         Starting Remount Root and Kernel File Systems...
+         Starting Apply Kernel Variables...
+[  OK  ] Finished Generate network units from Kernel command line.
+[  OK  ] Reached target Preparation for Network.
+[  OK  ] Mounted Huge Pages File System.
+[  OK  ] Finished Remount Root and Kernel File Systems.
+         Starting Create Static Device Nodes in /dev...
+[  OK  ] Finished Apply Kernel Variables.
+         Starting User Database Manager...
+[  OK  ] Started Journal Service.
+         Starting Flush Journal to Persistent Storage...
+[  OK  ] Finished Flush Journal to Persistent Storage.
+[  OK  ] Started User Database Manager.
+[  OK  ] Finished Create Static Device Nodes in /dev.
+[  OK  ] Reached target Preparation for Local File Systems.
+[  OK  ] Reached target Local File Systems.
+[  OK  ] Reached target Containers.
+         Starting Restore /run/initramfs on shutdown...
+         Starting Automatic Boot Loader Update...
+         Starting Create Volatile Files and Directories...
+         Starting Network Configuration...
+[  OK  ] Finished Restore /run/initramfs on shutdown.
+[  OK  ] Finished Automatic Boot Loader Update.
+[  OK  ] Finished Create Volatile Files and Directories.
+         Starting Network Name Resolution...
+[  OK  ] Reached target System Time Set.
+         Starting Record System Boot/Shutdown in UTMP...
+[  OK  ] Finished Record System Boot/Shutdown in UTMP.
+[  OK  ] Started Network Configuration.
+[  OK  ] Started Network Name Resolution.
+[  OK  ] Reached target Network.
+[  OK  ] Reached target Host and Network Name Lookups.
+[  OK  ] Reached target System Initialization.
+[  OK  ] Started Refresh existing PGP keys of archlinux-keyring regularly.
+[  OK  ] Started Daily verification of password and group files.
+[  OK  ] Started Daily Cleanup of Temporary Directories.
+[  OK  ] Reached target Timer Units.
+[  OK  ] Listening on D-Bus System Message Bus Socket.
+[  OK  ] Reached target Socket Units.
+[  OK  ] Reached target Basic System.
+         Starting D-Bus System Message Bus...
+         Starting User Login Management...
+[  OK  ] Started D-Bus System Message Bus.
+         Starting Home Area Manager...
+[  OK  ] Started Home Area Manager.
+[  OK  ] Finished Home Area Activation.
+         Starting Permit User Sessions...
+[  OK  ] Finished Permit User Sessions.
+[  OK  ] Started Console Getty.
+[  OK  ] Reached target Login Prompts.
+[  OK  ] Started User Login Management.
+[  OK  ] Reached target Multi-User System.
+[  OK  ] Reached target Graphical Interface.
+
+Arch Linux 5.15.0-58-generic (pts/0)
+
+archlinux login: root
+Password:
+Last login: Tue Apr 25 19:17:48 on pts/0
+[root@archlinux ~]# ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.2  0.2  19208 11324 ?        Ss   19:20   0:00 /usr/lib/systemd/systemd
+root          18  0.0  0.2  32300  8972 ?        Ss   19:20   0:00 /usr/lib/systemd/systemd-journald
+root          25  0.0  0.1  15608  6568 ?        Ss   19:20   0:00 /usr/lib/systemd/systemd-userdbd
+root          28  0.0  0.1  16152  7096 ?        S    19:20   0:00 systemd-userwork: waiting...
+root          29  0.0  0.1  16152  7132 ?        S    19:20   0:00 systemd-userwork: waiting...
+root          30  0.0  0.1  16152  6972 ?        S    19:20   0:00 systemd-userwork: waiting...
+systemd+      34  0.0  0.2  17240  8552 ?        Ss   19:20   0:00 /usr/lib/systemd/systemd-networkd
+systemd+      36  0.0  0.2  19836 11676 ?        Ss   19:20   0:00 /usr/lib/systemd/systemd-resolved
+dbus          39  0.0  0.1   8636  4864 ?        Ss   19:20   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          40  0.0  0.1  15872  7820 ?        Ss   19:20   0:00 /usr/lib/systemd/systemd-logind
+root          41  0.0  0.1  16040  7664 ?        Ss   19:20   0:00 /usr/lib/systemd/systemd-homed
+root          43  0.0  0.1   8316  5528 ?        Ss   19:20   0:00 login -- root
+root          45  0.1  0.2  18092 10176 ?        Ss   19:21   0:00 /usr/lib/systemd/systemd --user
+root          46  0.0  0.0  22364  2892 ?        S    19:21   0:00 (sd-pam)
+root          52  0.0  0.1   5156  4204 pts/0    Ss   19:21   0:00 -bash
+root          56  0.0  0.1   9000  4080 pts/0    R+   19:21   0:00 ps -aux
+[root@archlinux ~]# ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: host0@if87: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether f6:95:65:0d:eb:b5 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 169.254.128.230/16 metric 2048 brd 169.254.255.255 scope link host0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::f495:65ff:fe0d:ebb5/64 scope link
+       valid_lft forever preferred_lft forever

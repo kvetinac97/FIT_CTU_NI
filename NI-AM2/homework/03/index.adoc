@@ -1,0 +1,102 @@
+= HW3 – Node.js server in Docker
+
+In this task, my objective was to create a configuration of Node.js server, that could run in a Docker container.
+
+== Server
+
+The server is a simple Node.js server, which just responds "Hello, \{name}" to any request in format `/[a-zA-Z0-9_]`, otherwise, it answers 404 NOT FOUND.
+
+== Dockerfile
+
+The Dockerfile defines how the server will be created. I'm using base image `node:19-alpine3.16`, which already has Node.js installed, so the server can be run just with `node server.js`.
+
+To be able to run the server, I created a new work directory /server, in which I copy the server.js file which can be run.
+
+As the server will be running on port 8888, I have to expose this port.
+
+== Running
+
+Firstly, I have to build an image from my Dockerfile.
+
+[source,shell]
+----
+kvetinac97@e-79-148 src % docker build -t hw03 .
+[+] Building 1.3s (8/8) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                   0.0s
+ => => transferring dockerfile: 36B                                                                                                                                    0.0s
+ => [internal] load .dockerignore                                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:19-alpine3.16                                                                                                  1.2s
+ => [internal] load build context                                                                                                                                      0.0s
+ => => transferring context: 31B                                                                                                                                       0.0s
+ => [1/3] FROM docker.io/library/node:19-alpine3.16@sha256:f5b2f5862dec95bd1d83991efe71470b31607e915b7d3495f73e078726a0ab04                                            0.0s
+ => CACHED [2/3] WORKDIR /server                                                                                                                                       0.0s
+ => CACHED [3/3] COPY server.js .                                                                                                                                      0.0s
+ => exporting to image                                                                                                                                                 0.0s
+ => => exporting layers                                                                                                                                                0.0s
+ => => writing image sha256:e63e8d6b1acabf492d00e77ce0db94140861d88e2058ce44e7611ec6b94f8a94                                                                           0.0s
+ => => naming to docker.io/library/hw03
+----
+
+Then, I create and start a new container from that image:
+
+[source,shell]
+----
+kvetinac97@e-79-148 src % docker run -p 8080:8888 --name hw03_container hw03
+Server running at http://0.0.0.0:8888/
+----
+
+Now, let's check the container in container list:
+
+[source,shell]
+----
+kvetinac97@e-79-148 src % docker container ls
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                    NAMES
+75c22343b765   hw03      "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:8080->8888/tcp   hw03_container
+----
+
+And let's send some requests to the server:
+
+[source,shell]
+----
+kvetinac97@e-79-148 src % curl 127.0.0.1:8080/John
+Hello John
+kvetinac97@e-79-148 src % curl 127.0.0.1:8080/Alice
+Hello Alice
+kvetinac97@e-79-148 src % curl 127.0.0.1:8080/Bob
+Hello Bob
+
+kvetinac97@e-79-148 src % curl -v 127.0.0.1:8080/another/site
+*   Trying 127.0.0.1:8080...
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> GET /another/site HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.86.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 404 Not Found
+< Date: Mon, 06 Mar 2023 12:49:45 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Content-Length: 0
+<
+* Connection #0 to host 127.0.0.1 left intact
+----
+
+And check that the commands have been run successfully in the server log:
+
+[source,shell]
+----
+Response to: John
+Response to: Alice
+Response to: Bob
+----
+
+Finally, let's stop the Docker container.
+
+[source,shell]
+----
+kvetinac97@e-79-148 src % docker stop hw03_container
+hw03_container
+----

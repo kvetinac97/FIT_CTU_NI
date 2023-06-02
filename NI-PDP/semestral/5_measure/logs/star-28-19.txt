@@ -1,0 +1,142 @@
+=======================
+[wrzecond@star ~]$ cat graf-28-19.txt
+=======================
+[OMP] Using 10 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 79593.3 ms
+=======================
+=======================
+[OMP] Using 2 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 158141 ms
+=======================
+=======================
+[OMP] Using 20 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 20239.4 ms
+=======================
+=======================
+[MPI] Using 10 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 33892.7 ms
+=======================
+=======================
+[MPI] Using 10 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 29035.4 ms
+=======================
+=======================
+[MPI] Using 2 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 97083.2 ms
+=======================
+=======================
+[MPI] Using 2 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 58276.8 ms
+=======================
+=======================
+[MPI] Using 20 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 17185.4 ms
+=======================
+=======================
+[MPI] Using 20 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 10785.5 ms
+=======================
+=======================
+Sequential
+Loaded matrix.
+Weight: 15758
+Recursions: 38784516382
+Time: 321817 ms
+=======================
+=======================
+[OMP] Using 8 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 122108 ms
+=======================
+=======================
+[OMP] Using 16 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 20267 ms
+=======================
+=======================
+[OMP] Using 4 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 80066.4 ms
+=======================
+=======================
+[MPI] Using 8 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 38630 ms
+=======================
+=======================
+[MPI] Using 8 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 43320.8 ms
+=======================
+=======================
+[MPI] Using 16 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 19590.1 ms
+=======================
+=======================
+[MPI] Using 16 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 7572.54 ms
+=======================
+=======================
+[MPI] Using 4 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 39226.1 ms
+=======================
+=======================
+[MPI] Using 4 threads
+Edges: 266
+Loaded matrix.
+Weight: 15758
+Time: 29345.6 ms
+=======================
+=======================
+Sequential
+Loaded matrix.
+Weight: 15758
+Recursions: 38784516382
+Time: 323073 ms
+=======================

@@ -1,0 +1,40 @@
+= Tutorial 2
+
+== Virtualenv
+
+
+[source,bash]
+----
+# https://virtualenv.pypa.io/en/stable/userguide/
+
+# create env
+virtualenv ddw-tutorial-2
+# virtualenv --system-site-packages ddw-tutorial-2
+
+# activate
+source ddw-tutorial-2/bin/activate
+
+# operations ...
+pip install ...
+
+# deactivate and remove
+deactivate
+rm -r ./ddw-tutorial-2
+---- 
+
+
+== Requirements
+
+
+[source,bash]
+----
+pip install -r requirements.txt
+---- 
+
+
+== Run
+
+[source,bash]
+----
+./run.sh
+---- 

@@ -1,0 +1,8 @@
+[Unit]
+Description=Simple Node.js server
+
+[Service]
+ExecStart=/usr/bin/node /root/hw3/nodejs/simple.js
+
+[Install]
+WantedBy=multi-user.target

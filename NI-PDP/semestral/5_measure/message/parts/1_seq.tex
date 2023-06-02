@@ -1,0 +1,101 @@
+\section{Definice problému a popis sekvenčního algoritmu}
+
+Problémem, který budu ve svém semestrálním projektu řešit, je problém \textbf{BPO}: nalezení bipartitního souvislého podgrafu hranově ohodnoceného grafu s maximální vahou.
+
+Vstupem programu bude \textbf{graf} $G(V,E)$, což je jednoduchý neorientovaný hranově ohodnocený souvislý graf o $n$ uzlech a průměrném stupni $k$, kde váhy hran jsou z intervalu 80 a 120.
+
+Naším cílem je najít \textbf{podmnožinu hran} $F$ takovou, aby byl podgraf $G(V,F)$ bipartitní, souvislý a zároveň součet ohodnocení jeho hran byl \textbf{maximální} mezi všemi takovými bipartitními grafy.
+
+\textbf{Sekvenční algoritmus} prohledává stavový prostor všech stavů. Zde je třeba si uvědomit, že stav je určen "obarvením" (přiřazením do jedné nebo druhé partity) jednotlivých vrcholů. Máme-li dáno rozdělení vrcholů do partit, je pak už jednoznačně definováno také, které hrany budou součástí grafu -- mezi dvěma vrcholy stejné partity hrana \textbf{nepovede}, mezi dvěma vrcholy různé partity hrana \textbf{povede} právě tehdy, když vedla v původním grafu. Tímto postupem máme zaručenou maximalitu, protože váhy hran jsou kladné \textit{(takže hranu mezi různě obarvenými vrcholy přidat chceme)}.
+
+Konstrukci budeme tedy provádět pomocí \textbf{BB-DFS}, kdy si v každém stavu držíme pozici v poli hran \textit{(procházíme hrany)} a v jednom kroku projdeme jednu hranu \textit{(hloubka rekurze bude tedy maximálně počet hran)}. U hrany rozhodujeme o tom, zda ji \textbf{přidáme}, nebo \textbf{nepřidáme}. Podíváme se na to, jaké barvy mají \textbf{vrcholy}, mezi kterými hrana vede. Pokud se jedná o vrcholy \textbf{stejné} barvy, hranu nepřidáváme, pokud \textbf{různé} barvy, hranu přidáme. Pokud je obarven pouze \textbf{jeden} vrchol, druhý obarvíme stejnou barvou a hranu nepřidáme, nebo jinou barvou a hranu přidáme. Pokud není obarven zatím \textbf{ani jeden} vrchol, vyzkoušíme \textbf{všechny 4} možnosti obarvení (přidat hranu, bílá - černá, černá - bílá a nepřidat hranu, bílá - bílá, černá - černá).
+
+Už tato složitější logika nám v některých případech \textbf{snižuje} počet rekurzivních větvení (ze 4 na 2 nebo 1). Dalším vylepšením je \textbf{prořezávání}. V každém kroku si držíme váhu nejlepšího řešení a součet vah zbývajících hran. Pokud je už jasné, že ani kdybychom přidali všechny hrany, tak \textbf{nepřekonáme} nejlepší řešení, tak nemá smysl pokračovat a výpočet \textbf{ukončíme}.
+
+Pro zjednodušení výpočtu funkce \mintinline{c}{weight_inner} vrací pouze číslo (\mintinline{c}{size_t}) symbolizující váhu nejlepšího řešení. Kdybychom chtěli zobrazit či vypsat všechny hrany použité v řešení, stačilo by upravit typ proměnné \mintinline{c}{currentBest} na \mintinline{c}{State} a do \mintinline{c}{currentBest} pak ukládat tento stav. Po skončení programu bychom pak na základě obarvení a logiky v odstavci výše vypsali použité hrany.
+
+Program pro sekvenční řešení úloh jsem \textbf{spustil} na všech instancích ze \href{https://courses.fit.cvut.cz/NI-PDP/labs/down/graf_bpo.zip}{sady na Courses}. Ukázalo se ale, že je můj program tak \textbf{rychlý}, že i nejtěžší instance, pro kterou referenční řešení běželo 5700 sekund moje řešení běželo pouhých 0.017s \textit{(a provedlo 2 509 822 rekurzivních volání oproti 1.3 T referenčního)}.
+
+Pomocí \href{https://courses.fit.cvut.cz/NI-PDP/labs/Generator-neorientovanych-grafu.html}{generátoru z Courses} jsem tedy vygeneroval \textbf{obtížnější} instance s 20 až 30 vrcholy a odpovídajícími počty průměrných stupňů uzlu. Na těch už program běžel v desítkách sekund až desítkách minut. Jednotlivé doby běhů pro sekvenční řešení uvádím v tabulkách  \nameref{tab_seq_par_task_data_easy} a \nameref{tab_seq_par_task_data_hard}
+
+\textbf{Poznámka}: Časy běhu v tabulkách na následující stránce byly měřeny na školních počítačích, tedy na \textbf{Intel Xeon CPU E3-1245 }v6 @ 3.70GHz. Paralelní konfigurace byly spuštěny na \textbf{8 vláknech}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{c|c|c|c|c|c}
+       Graf     & Váha & Rekurzivních volání & Čas (sekvenční) & Čas (parallel task) & Čas (parallel data) \\
+       \hline
+       10\_3 & 1300 & 259 & 0.007s & 0.025s & 0.025s \\
+       \hline
+       10\_5 & 1885 & 4 950 & 0.010s & 0.012s & 0.011s \\
+       \hline
+       10\_6 & 2000 & 7 104 & 0.010s & 0.011s & 0.011s \\
+       \hline
+       10\_7 & 2348 & 15 725 & 0.011s & 0.012s & 0.012s \\
+       \hline
+       12\_3 & 1422 & 3 518 & 0.010s & 0.030s & 0.007s \\
+       \hline
+       12\_5 & 2219 & 22 389 & 0.007s & 0.016s & 0.006s \\
+       \hline
+       12\_6 & 2533 & 40 433 & 0.006s & 0.007s & 0.013s \\
+       \hline
+       12\_9 & 3437 & 133 K & 0.007s & 0.007s & 0.006s \\
+       \hline
+       13\_12 & 4182 & 498 K & 0.009s & 0.008s & 0.008s \\
+       \hline
+       13\_9 & 3700 & 228 K & 0.007s & 0.009s & 0.006s \\
+       \hline
+       15\_12 & 5380 & 1.6 M & 0.018s & 0.014s & 0.007s \\
+       \hline
+       15\_14 & 5578 & 2.5 M & 0.017s & 0.012s & 0.008s \\
+       \hline
+       15\_4 & 2547 & 21 232 & 0.006s & 0.005s & 0.005s \\
+       \hline
+       15\_5 & 2892 & 148 K & 0.007s & 0.008s & 0.006s \\
+       \hline
+       15\_6 & 3353 & 220 K & 0.006s & 0.008s & 0.006s \\
+       \hline
+       15\_8 & 3984 & 753 K & 0.009s & 0.011s & 0.007s \\
+       \hline
+       17\_10 & 5415 & 5.3 M & 0.031s & 0.027s & 0.011s \\
+    \end{tabular}
+    \caption{Tabulka časů běhů pro jednotlivé instance z Courses}
+    \label{tab_seq_par_task_data_easy}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{c|c|c|c|c|c}
+       Graf     & Váha & Rekurzivních volání & Čas (sekvenční) & Čas (parallel task) & Čas (parallel data) \\
+       \hline
+       20\_16 & 9353 & 111 M & 0.517s & 0.235s & 0.229s \\
+       \hline
+       20\_17 & 9768 & 132 M & 0.628s & 0.231s & 0.127s \\
+       \hline
+       20\_19 & 10288 & 154 M & 0.727s & 0.253s & 0.140s \\
+       \hline
+       21\_15 & 9570 & 197 M & 0.968s & 0.444s & 0.393s \\
+       \hline
+       22\_17 & 11015 & 517 M & 2.266s & 0.952s & 0.461s \\
+       \hline
+       23\_20 & 12902 & 1.4 G & 6.326s & 2.638s & 1.429s \\
+       \hline
+       24\_23 & 14844 & 3.5 G & 16.149s & 5.019s & 3.152s \\
+       \hline
+       25\_16 & 12105 & 3.9 G & 16.677s & 7.635s & 3.409s \\
+       \hline
+       25\_22 & 15594 & 6.4 G & 28.416s & 9.895s & 5.755s \\
+       \hline
+       26\_25 & 17477 & 17.3 G & 76.146s & 23.859s & 15.349s \\
+       \hline
+       27\_19 & 15470 & 21.3 G & 87.856s & 35.597s & 19.900s \\
+       \hline
+       28\_19 & 15758 & 38.7 G & 170.7s & 72.1s & 63.2s \\
+       \hline
+       28\_24 & 18729 & 65.5 G & 234.4s & 90.6s & 54.3s \\
+       \hline
+       29\_26 & 20810 & 161.2 G & 586.9s & 204.5s & 125.8s \\
+    \end{tabular}
+    \caption{Tabulka časů běhů pro jednotlivé vygenerované instance}
+    \label{tab_seq_par_task_data_hard}
+\end{table}

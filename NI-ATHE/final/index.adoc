@@ -1,0 +1,59 @@
+= TP Athens 2023
+
+A simple chat client and server.
+
+== Compilation
+
+You can easily compile the client and server with `CMakeLists.txt` and corresponding targets `athens_server` and `athens_client`.
+
+If you prefer to compile on command line, use following commands:
+
+Server: `g\++ -lpthread -std=c++17 -Wall -pedantic server.cpp CServer.cpp CSocketServer.cpp CSocket.cpp -o server`
+
+Client: `g\++ -lpthread -std=c++17 -Wall -pedantic client.cpp CSocketClient.cpp CSocket.cpp -o client`
+
+== Client
+
+The starting point for client is `main` function in `client.cpp` file. It parses the argument, uses *RTTI*, reads username and joins public channel. Whole app is in try-catch, so if any *exception* happens, it will be handled properly.
+
+The `CSocketClient.cpp` class contains whole logic for connecting to the server, sending commands and receiving them. Thanks to *C++11* thread library, there are two threads: the main thread is reading commands from user, and the `m_Receiver` thread is reading messages from socket.
+
+Whole client contains C++ *classes*, and the `CSocketClient.cpp` has base class of `CSocket.cpp`, which results in using *inheritance*.
+
+=== Usage
+
+If you want to start the client, run following command: `./client <serverIp> <serverPort>`. Then, type username. Afterwards, you can use `/chn` to join different channel, `/prv` to send a private message or `/usr` to change username. If you need help, use `/hlp`. To quit server, type `/end`.
+
+== Server
+
+The server is implemented as a multi-thread server. The main thread starts the receiver thread and waits for user input, then stops. The receiver thread is waiting for new connection. When there is a new connection, for each one is created a new thread managing that connection. These are implemented as `CServer.cpp`.
+
+Message processing is made really simple thanks to `polymorphism` _(which is here much better than RTTI)_. There is a static map of message objects, which are all `shared_ptr` from C++11 memory header. When new message is received, I get the object from map by message id, and thanks to polymorphic method `ProcessMessage`, I process the message using dynamic binding.
+
+=== Usage
+
+To start the server, type following command: `./server <port>`. Server will start listening on given port and accept new connections. If you want to stop the server, type any character and send enter or type Ctrl^D _(EOF)_. Stopping server will disconnect all the clients.
+
+== Criteria
+
+Here is table of criteria and where you can find it in the program:
+
+|===
+|Criteria |Percentage 3+|Description
+
+|class |100 % 3+| Whole server and client is split into classes, using `.cpp` and `.h` files.
+
+|virtual |100 % 3+| There is a dynamic binding on both CSocketClient and CSocketServer, but as they are singletons, it is not a 100 % example. On `CMessage` _(message processing on server)_, the polymorphism and `virtual` are used in *perfect* way.
+
+|template |5 % 3+| Whole server and client are using STL classes, which are indeed templates. However, there is no template class or function in the project.
+
+|stl |100 % 3+| *Everything* is made using containers from STL, pairs iterators, C++11 extensions (auto, smart pointers, thread library)
+
+|exception |100 % 3+| Exceptions are used in both server and client to handle exceptional situations, as connection failures.
+
+|RTTI |50 % 3+| RTTI is used with `dynamic_cast` in client.cpp and server.cpp, but it is really not a 100 % example.
+
+|inheritance |100 % 3+| Both `CMessage` and `CSocket` are classes which use inheritance in a really useful way _(code reuse, no code duplicates)_
+
+|*bonus* |\*** % 3+| I am using C++11 and the thread library _(so everything is multithread)_. Also, I made not just the client, but also the server.
+|===

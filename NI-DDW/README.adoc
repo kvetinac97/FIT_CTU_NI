@@ -1,0 +1,19 @@
+= Web Data Mining
+
+Got 96 % from homework. +
+Got enough points from written exam, resulting in grade B.
+
+== Homework
+
+Various homeworks solved through semester:
+
+* xref:homework/01/index#[]
+* xref:homework/02/index#[]
+* xref:homework/03/index#[]
+* xref:homework/04/index#[]
+* xref:homework/05/index#[]
+* xref:homework/06/index#[]
+
+== Labs
+
+Various tasks solved on labs focused on Crawling, Text Mining, Social Network Analysis, PageRank, Association Rules Mining and Recommender Systems.

@@ -1,0 +1,38 @@
+\documentclass[epsf,epic,eepic,eepicemu]{article}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+\oddsidemargin=-5mm
+\evensidemargin=-5mm
+\marginparwidth=.08in
+\marginparsep=.01in
+\marginparpush=5pt
+\topmargin=-15mm
+\headheight=12pt
+\headsep=25pt
+\footskip=30pt
+\textheight=25cm
+\textwidth=17cm
+\columnsep=2mm
+\columnseprule=1pt
+\parindent=15pt
+\parskip=2pt
+
+\begin{document}
+
+\begin{center}
+\bf Semestrální projekt NI-PDP 2022/2023:\\[5mm]
+    Paralelní algoritmus pro řešení problému\\[5mm] 
+    Ondřej Wrzecionko\\[2mm]
+magisterské studium, FIT ČVUT, Thákurova 9, 160 00 Praha 6\\[2mm]
+25. dubna 2023
+\end{center}
+
+\input{parts/1_seq}
+\include{parts/2_openmp}
+\input{parts/3_mpi}
+\input{parts/4_measure}
+\include{parts/5_end}
+
+\end{document}

@@ -29,7 +29,31 @@ link:NI-VMM/[Searching Multimedia Databases (NI-VMM)] - lecture notes, semestral
 
 == Second semester
 
-_TBA_
+link:NI-AM2/[Middleware Architectures 2 (NI-AM2)] - exam notes, homeworks and grades export
+
+link:NI-ATHE/[ATHENS course (NI-ATHE)] - course slides, codes and final project
+
+link:NI-DDW/[Web Data Mining (NI-DDW)] - exam notes, homeworks and grades export
+
+https://github.com/kvetinac97/FIT_CTU_BP/[Advanced Technologies for iOS Development (NI-IOS)] - semestral work _(I used my bachelor work)_
+
+link:NI-PDP/[Parallel and Distributed Programming (NI-PDP)] - exam notes and semestral project
+
+link:NI-VCC/[Virtualization and Cloud Computing (NI-VCC)] - homeworks, grades export and exam report
+
+link:NI-VSM/[Selected statistical Methods (NI-VSM)] - team homeworks, grades and MARAST export
+
+|===
+|Subject |Grade |Total |Exam |Assessment
+
+|Middleware Architectures 2 |A|99.5/100|60/60|39.50/40
+|ATHENS course 4+|A
+|Web Data Mining |B|88.5/100|50/60|38.50/40
+|Advanced Technologies for iOS Development 4+| A
+|Parallel and Distributed Programming|A|95.50/100|43.50/50|52/50
+|Virtualization and Cloud Computing|A|96.50/100|26.50/40|70/60
+|Selected statistical Methods|A|94.50/100|56/60|38.50/40
+|===
 
 == Third semester
 

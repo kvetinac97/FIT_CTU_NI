@@ -1,0 +1,460 @@
+======================
+Sequential: graph/graf_10_3.txt
+Loaded matrix.
+Weight: 1300
+Recursions: 259
+
+real	0m0.007s
+user	0m0.002s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_10_3.txt
+Edges: 15
+Loaded matrix.
+Weight: 1300
+
+real	0m0.025s
+user	0m0.000s
+sys	0m0.014s
+======================
+Parallel (data): graph/graf_10_3.txt
+Edges: 15
+Loaded matrix.
+Weight: 1300
+
+real	0m0.025s
+user	0m0.000s
+sys	0m0.023s
+======================
+Sequential: graph/graf_10_5.txt
+Loaded matrix.
+Weight: 1885
+Recursions: 4950
+
+real	0m0.010s
+user	0m0.003s
+sys	0m0.004s
+======================
+Parallel (task): graph/graf_10_5.txt
+Edges: 25
+Loaded matrix.
+Weight: 1885
+
+real	0m0.012s
+user	0m0.012s
+sys	0m0.013s
+======================
+Parallel (data): graph/graf_10_5.txt
+Edges: 25
+Loaded matrix.
+Weight: 1885
+
+real	0m0.011s
+user	0m0.000s
+sys	0m0.012s
+======================
+Sequential: graph/graf_10_6.txt
+Loaded matrix.
+Weight: 2000
+Recursions: 7104
+
+real	0m0.010s
+user	0m0.006s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_10_6.txt
+Edges: 30
+Loaded matrix.
+Weight: 2000
+
+real	0m0.011s
+user	0m0.009s
+sys	0m0.009s
+======================
+Parallel (data): graph/graf_10_6.txt
+Edges: 30
+Loaded matrix.
+Weight: 2000
+
+real	0m0.011s
+user	0m0.000s
+sys	0m0.012s
+======================
+Sequential: graph/graf_10_7.txt
+Loaded matrix.
+Weight: 2348
+Recursions: 15725
+
+real	0m0.011s
+user	0m0.007s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_10_7.txt
+Edges: 35
+Loaded matrix.
+Weight: 2348
+
+real	0m0.012s
+user	0m0.019s
+sys	0m0.000s
+======================
+Parallel (data): graph/graf_10_7.txt
+Edges: 35
+Loaded matrix.
+Weight: 2348
+
+real	0m0.012s
+user	0m0.012s
+sys	0m0.002s
+======================
+Sequential: graph/graf_12_3.txt
+Loaded matrix.
+Weight: 1422
+Recursions: 3518
+
+real	0m0.010s
+user	0m0.000s
+sys	0m0.007s
+======================
+Parallel (task): graph/graf_12_3.txt
+Edges: 18
+Loaded matrix.
+Weight: 1422
+
+real	0m0.030s
+user	0m0.145s
+sys	0m0.004s
+======================
+Parallel (data): graph/graf_12_3.txt
+Edges: 18
+Loaded matrix.
+Weight: 1422
+
+real	0m0.007s
+user	0m0.008s
+sys	0m0.000s
+======================
+Sequential: graph/graf_12_5.txt
+Loaded matrix.
+Weight: 2219
+Recursions: 22389
+
+real	0m0.007s
+user	0m0.003s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_12_5.txt
+Edges: 30
+Loaded matrix.
+Weight: 2219
+
+real	0m0.016s
+user	0m0.076s
+sys	0m0.004s
+======================
+Parallel (data): graph/graf_12_5.txt
+Edges: 30
+Loaded matrix.
+Weight: 2219
+
+real	0m0.006s
+user	0m0.006s
+sys	0m0.000s
+======================
+Sequential: graph/graf_12_6.txt
+Loaded matrix.
+Weight: 2533
+Recursions: 40433
+
+real	0m0.006s
+user	0m0.000s
+sys	0m0.003s
+======================
+Parallel (task): graph/graf_12_6.txt
+Edges: 36
+Loaded matrix.
+Weight: 2533
+
+real	0m0.007s
+user	0m0.015s
+sys	0m0.000s
+======================
+Parallel (data): graph/graf_12_6.txt
+Edges: 36
+Loaded matrix.
+Weight: 2533
+
+real	0m0.013s
+user	0m0.056s
+sys	0m0.000s
+======================
+Sequential: graph/graf_12_9.txt
+Loaded matrix.
+Weight: 3437
+Recursions: 133614
+
+real	0m0.007s
+user	0m0.004s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_12_9.txt
+Edges: 54
+Loaded matrix.
+Weight: 3437
+
+real	0m0.007s
+user	0m0.015s
+sys	0m0.000s
+======================
+Parallel (data): graph/graf_12_9.txt
+Edges: 54
+Loaded matrix.
+Weight: 3437
+
+real	0m0.006s
+user	0m0.005s
+sys	0m0.004s
+======================
+Sequential: graph/graf_13_12.txt
+Loaded matrix.
+Weight: 4182
+Recursions: 498813
+
+real	0m0.009s
+user	0m0.006s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_13_12.txt
+Edges: 78
+Loaded matrix.
+Weight: 4182
+
+real	0m0.008s
+user	0m0.025s
+sys	0m0.000s
+======================
+Parallel (data): graph/graf_13_12.txt
+Edges: 78
+Loaded matrix.
+Weight: 4182
+
+real	0m0.008s
+user	0m0.021s
+sys	0m0.000s
+======================
+Sequential: graph/graf_13_9.txt
+Loaded matrix.
+Weight: 3700
+Recursions: 228697
+
+real	0m0.007s
+user	0m0.004s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_13_9.txt
+Edges: 58
+Loaded matrix.
+Weight: 3700
+
+real	0m0.009s
+user	0m0.027s
+sys	0m0.000s
+======================
+Parallel (data): graph/graf_13_9.txt
+Edges: 58
+Loaded matrix.
+Weight: 3700
+
+real	0m0.006s
+user	0m0.000s
+sys	0m0.009s
+======================
+Sequential: graph/graf_15_12.txt
+Loaded matrix.
+Weight: 5380
+Recursions: 1676672
+
+real	0m0.018s
+user	0m0.011s
+sys	0m0.004s
+======================
+Parallel (task): graph/graf_15_12.txt
+Edges: 90
+Loaded matrix.
+Weight: 5380
+
+real	0m0.014s
+user	0m0.026s
+sys	0m0.032s
+======================
+Parallel (data): graph/graf_15_12.txt
+Edges: 90
+Loaded matrix.
+Weight: 5380
+
+real	0m0.007s
+user	0m0.018s
+sys	0m0.000s
+======================
+Sequential: graph/graf_15_14.txt
+Loaded matrix.
+Weight: 5578
+Recursions: 2509822
+
+real	0m0.017s
+user	0m0.014s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_15_14.txt
+Edges: 105
+Loaded matrix.
+Weight: 5578
+
+real	0m0.012s
+user	0m0.051s
+sys	0m0.007s
+======================
+Parallel (data): graph/graf_15_14.txt
+Edges: 105
+Loaded matrix.
+Weight: 5578
+
+real	0m0.008s
+user	0m0.021s
+sys	0m0.000s
+======================
+Sequential: graph/graf_15_4.txt
+Loaded matrix.
+Weight: 2547
+Recursions: 21232
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_15_4.txt
+Edges: 30
+Loaded matrix.
+Weight: 2547
+
+real	0m0.005s
+user	0m0.009s
+sys	0m0.000s
+======================
+Parallel (data): graph/graf_15_4.txt
+Edges: 30
+Loaded matrix.
+Weight: 2547
+
+real	0m0.005s
+user	0m0.004s
+sys	0m0.000s
+======================
+Sequential: graph/graf_15_5.txt
+Loaded matrix.
+Weight: 2892
+Recursions: 148986
+
+real	0m0.007s
+user	0m0.003s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_15_5.txt
+Edges: 37
+Loaded matrix.
+Weight: 2892
+
+real	0m0.008s
+user	0m0.031s
+sys	0m0.004s
+======================
+Parallel (data): graph/graf_15_5.txt
+Edges: 37
+Loaded matrix.
+Weight: 2892
+
+real	0m0.006s
+user	0m0.011s
+sys	0m0.000s
+======================
+Sequential: graph/graf_15_6.txt
+Loaded matrix.
+Weight: 3353
+Recursions: 220716
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.002s
+======================
+Parallel (task): graph/graf_15_6.txt
+Edges: 45
+Loaded matrix.
+Weight: 3353
+
+real	0m0.008s
+user	0m0.030s
+sys	0m0.000s
+======================
+Parallel (data): graph/graf_15_6.txt
+Edges: 45
+Loaded matrix.
+Weight: 3353
+
+real	0m0.006s
+user	0m0.010s
+sys	0m0.000s
+======================
+Sequential: graph/graf_15_8.txt
+Loaded matrix.
+Weight: 3984
+Recursions: 753592
+
+real	0m0.009s
+user	0m0.004s
+sys	0m0.002s
+======================
+Parallel (task): graph/graf_15_8.txt
+Edges: 60
+Loaded matrix.
+Weight: 3984
+
+real	0m0.011s
+user	0m0.047s
+sys	0m0.006s
+======================
+Parallel (data): graph/graf_15_8.txt
+Edges: 60
+Loaded matrix.
+Weight: 3984
+
+real	0m0.007s
+user	0m0.019s
+sys	0m0.003s
+======================
+Sequential: graph/graf_17_10.txt
+Loaded matrix.
+Weight: 5415
+Recursions: 5327358
+
+real	0m0.031s
+user	0m0.028s
+sys	0m0.000s
+======================
+Parallel (task): graph/graf_17_10.txt
+Edges: 85
+Loaded matrix.
+Weight: 5415
+
+real	0m0.027s
+user	0m0.170s
+sys	0m0.000s
+======================
+Parallel (data): graph/graf_17_10.txt
+Edges: 85
+Loaded matrix.
+Weight: 5415
+
+real	0m0.011s
+user	0m0.048s
+sys	0m0.006s
+======================

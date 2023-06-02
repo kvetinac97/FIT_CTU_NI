@@ -1,0 +1,10 @@
+= Virtualization and Cloud Computing
+
+Got 116 % from homeworks. +
+Got enough points from written exam composed of two parts for grade *A*.
+
+== Homeworks
+
+In homeworks, my target was to deploy OpenStack to virtual machines hosted on our school infrastructure. Then, I inspected various aspect of this OpenStack, ran some Docker containers and analysed network between the virtual machines. Last, bonus homework was for deploying Kubernetes on the virtual machines.
+
+link:homework/[You can see homeworks here]

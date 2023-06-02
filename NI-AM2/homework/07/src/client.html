@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HW07</title>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            const eventSource = new EventSource(window.location.href + 'messages')
+            console.log(eventSource.url)
+            eventSource.onopen = () => { console.log("connection opened") }
+            eventSource.onerror = (event) => {
+                console.log(`connection closed: ${JSON.stringify(event)}`)
+                eventSource.close()
+            }
+            eventSource.onmessage = (event) => {
+                $('#list').prepend($('<li>').append(event.data))
+            }
+        })
+    </script>
+</head>
+<body>
+<ul id="list">
+</ul>
+</body>
+</html>

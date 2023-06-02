@@ -1,0 +1,16 @@
+= Parallel and Distributed Programming
+
+Got 100 % from semestral work with bonus points for efficient solution. +
+Got 87 % from oral exam, resulting in grade *A*.
+
+== Exam
+
+All 52 questions for oral exam in one PDF file, summarized for better learning.
+
+== Semestral
+
+The semestral work was to implement an algorithm for finding a bipartite continuos subgraph of an edge-valued graph with maximum weight.
+
+At first, we should have implemented the algorithm sequentially, with incremental updates incoming -- firstly using task parallelism, then data parallelism and finally by using a distributed computing cluster Star. I finally measured the efficiency of my solution and analyzed it.
+
+xref:semestral/[You can see the semestral work here]

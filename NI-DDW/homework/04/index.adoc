@@ -1,0 +1,65 @@
+= HW4 – Web Usage Mining
+
+V tomto úkolu bylo mým cílem analyzovat data návštěv stránek cestovní agentury. Prvním krokem bylo provést nad vybranými daty vhodné *předzpracování* tak, abych byl schopný rozpoznat jednotlivé události. Následně jsem pomocí algoritmu *Apriori* našel mezi těmito událostmi jednotlivé asociační pravidla.
+
+== Předzpracování
+
+K dispozici mám tři datasety -- jednotlivé *návštěvy* stránek včetně jejich kategorií, tématu a doby návštěvy, jednotlivé *návštěvníky* (unique users) včetně dne, hodiny a doby návštěvy a kategorizaci *referrer* adres.
+
+V rámci datasetů jsem se rozhodl zabývat jednotlivými *conversions* -- APPLICATION (rezervace cesty), CATALOG (žádost o katalog), DISCOUNT, HOWTOJOIN, INSURANCE nebo WHOAREWE. Rozhodl jsem se zkoumat jejich vztah k *denní době*, *dni v týdnu* a *adrese*, odkud se daný člověk na stránku dostal.
+
+Prvním krokem bylo tedy načtení dat, které provádím ve funkci `load_df`. Nejprve načtu data všech *návštěvníků* ze souboru `visitors.csv` a odstraním příliš krátké návštěvy (`Length_seconds` je nulová). Následně odstraním nepotřebné sloupce, které by vedly k zbytečnému prodlužování datasetu a s pomocí funkce `pandas.cut` rozdělím hodiny do 4 intervalů podle denní doby: 0-6, 6-12, 12-18 a 18-24. Kdybych toto neprovedl, bylo by hodnot ve sloupci `Hour` tolik, že by nedošlo k nalezení pravidel typu Hour->XY _(neměly by dostatečný support)_.
+
+Poté jsem načetl data *návštěv* ze souboru `clicks.csv`. Odstranil jsem zbytečné sloupce s ID jednotlivých kategorií, témat a stránek _(informace jsou duplikované -- ID stránky, jméno stránky)_. Následně jsem provedl *transformaci* na *page-feature* matici -- přidal jsem pro každou konverzi sloupec, který symbolizoval hodnotu `True` nebo `False`. Jelikož by se ale v takové matici nedalo příliš dobře vyhledávat, provedl jsem ještě *clustering* podle jednotlivých návštěv (funkce `custom_agg`), kdy se hodnota True či False nahradí součtem časů `TimeOnPage`, které člověk strávil na stránkách s daným názvem / tématem. Na závěr jsem tyto časy opět pomocí `pandas.cut` rozdělil do *intervalů*: 0-1, 1-300 a 300-10000, aby mohlo dojít k hledání asociačních pravidel a měly jednotlivé hodnoty dostatečný *support*.
+
+Nakonec jsem tyto dva data framy spojil pomocí funkce `pandas.merge` a ve funkci `convert_to_dataset` jsem podle vzoru ze cvičení *spojil* jméno sloupce a hodnotu v dataframu, aby bylo v nalezených pravidlech vidět, čeho se dané pravidlo *týká*. Předzpracovaný data frame jsem uložil do složky `results` jako `merged.csv`.
+
+*Výsledný* dataset po předzpracování tedy obsahuje sloupce Referrer, Day, Hour a následně jednotlivé konverze. *Hodnoty* pro dané konverze reprezentují *interval*, kolik času *strávil* návštěvník na zadaném typu stránky po *příchodu* z URL Referrer v zadaný *den* v týdnu v denní době dané intervalem *Hour*.
+
+[%header,format=csv]
+|===
+include::results/merged.csv[lines=1..6]
+|===
+
+Ukázka tabulky s výslednými daty po předzpracování.
+
+== Zpracování
+
+Pro zpracování jsem nejprve musel najít *nejčastější* množiny, které se vyskytují v zadaném datasetu. K tomu jsem využil *Apriori* algoritmus ze cvičení 5 (funkce `apriori_algorithm`). Tento algoritmus nejprve najde itemy se supportem _(poměrem počtu výskytů k počtu prvků v datasetu)_ větším než `min_support` a následně je skládá do množin postupně vzrůstající velikosti až `max_len`.
+
+Tento algoritmus jsem *upravil* tak, aby *negeneroval* množiny, ve kterých se vyskytují *alespoň dvě* pravidla konverzí, případně pravidla, kde je konverze se stráveným časem v intervalu [0, 1].
+
+Touto úpravou jsem docílil toho, že následné generování pravidel *nevygeneruje* pravidlo typu konverze -> konverze nebo cokoliv -> konverze [0, 1] _(taková pravidla by nebyla příliš užitečná -- vzhledem k tomu, jak je matice návštěv řídká, by byla ve výsledných pravidlech hlavně pravidla typu v sobotu večer nikdo nenavštěvuje katalog nebo pokud člověk nestrávil moc času v katalogu, nestrávil moc času ani hledáním slev)_.
+
+Výsledkem je seznam nejčastějších množin a jejich supportů:
+
+[source,text]
+----
+['Howtojoin=(-0.001, 1.0]'], 0.9983833303395007
+['Application=(-0.001, 1.0]'], 0.9971259206035566
+['Insurance=(-0.001, 1.0]'], 0.9922759116220585
+['Discount=(-0.001, 1.0]'], 0.9662295670917909
+['Whoweare=(-0.001, 1.0]'], 0.9655110472426801
+['Catalog=(1.0, 300.0]'], 0.7395365546973235
+['Hour=(12.0, 18.0]'], 0.4056044548230645
+['Hour=(6.0, 12.0]'], 0.37273217172624395
+['Catalog=(1.0, 300.0]', 'Hour=(12.0, 18.0]'], 0.3003412969283277
+['Referrer=URI_0'], 0.29800610741871747
+----
+
+Následně jsem provedl generaci zajímavých *asociačních pravidel*. Rozhodl jsem se hledat pravidla typu \{množina} -> prvek a použil jsem *nezměněný* algoritmus ze cvičení 5. Výsledek jsem uložil do pandas *DataFrame* a vypsal do souboru `associations.csv` ve složce `results`.
+
+[%header,format=csv]
+|===
+include::results/associations.csv[lines=1..21]
+|===
+
+Z těchto asociačních pravidel můžeme například vidět, že pokud uživatel přijde ze stránky *URL_0* mezi 6 a 12. hodinou, což se stalo v 8 % případů, je 74 % *šance*, že si *objedná* katalog. Podobně to je i pro 12. až 18. hodinu. Podobně zjistíme například to, že pokud člověk přijde na naši stránku v *Pondělí* mezi 12. a 18. hodinou, což se stalo v 7 % případů, je 73 % šance, že si *objedná* katalog.
+
+Bohužel je zde vidět, že ve vygenerovaných pravidlech je na pravé straně *pouze* objednání katalogu. Je to kvůli tomu, že když se podíváme na *nejčastější* množiny, vidíme, že stránky jako Howtojoin, Application, Insurance byly navštíveny jen v *0.1 %* případů, což není dostatečné pro to, abychom mohli něco tvrdit _(náš data set má 5 567 řádků, jedné promili tedy odpovídá 5 návštěv...)_. Pokud bychom chtěli provést *podrobnější* analýzu těchto konverzí, potřebovali bychom *větší* support těchto konverzí.
+
+== Závěr
+
+V tomto úkolu jsem si vyzkoušel *web usage mining* na předem získaných datech. Úkol byl velmi zajímavý, bylo přínosné si *rozmyslet*, která data analyzovat, jak provést vhodně předzpracování a následně pozorovat jednotlivá pravidla. Bohužel vzhledem k *malému supportu* většiny konverzí jsem nebyl schopný najít pravidla, která by obsahovala i jinou konverzi než Catalog.
+
+Možnosti *budoucího rozšíření* by mohlo být například zkusit na základě pořadí stránek v návštěvě zkusit najít pravidla typu "Když uživatel navštíví stránku Discount, tak pak navštíví Catalog".

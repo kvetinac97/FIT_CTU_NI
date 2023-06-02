@@ -1,0 +1,21 @@
+= Middleware Architectures 2
+
+Got 99 % from homework. +
+Got 100 % from written exam, resulting in grade A.
+
+== Homework
+
+Various homeworks solved through semester:
+
+* xref:homework/01/index#[]
+* xref:homework/02/index#[]
+* xref:homework/03/index#[]
+* xref:homework/04/index#[]
+* xref:homework/05/index#[]
+* xref:homework/06/index#[]
+* xref:homework/07/index#[]
+* xref:homework/08/index#[]
+
+== Labs
+
+Various tasks solved on labs focused on Node.js, CORS, JSONP, JWT, Realtime Web and OAuth

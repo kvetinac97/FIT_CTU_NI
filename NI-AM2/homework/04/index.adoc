@@ -1,0 +1,105 @@
+= HW4 – Docker advanced
+
+In this task, my objective was to create two Docker containers, one with `redis` database, and second with simple `Node.js` server communicating with that database.
+
+== Task 1 + 2: Redis server & client
+
+Firstly, I had to start a Docker container with `redis` image. I started by pulling the image:
+
+[source,shell]
+----
+kvetinac97@e-79-22 ~ % docker pull redis
+Using default tag: latest
+latest: Pulling from library/redis
+66dbba0fb1b5: Pull complete
+9e30abea72ba: Pull complete
+d01ec855d06e: Pull complete
+7f65636102fd: Pull complete
+56f49543da32: Pull complete
+60a641879ddf: Pull complete
+Digest: sha256:e50c7e23f79ae81351beacb20e004720d4bed657415e68c2b1a2b5557c075ce0
+Status: Downloaded newer image for redis:latest
+docker.io/library/redis:latest
+----
+
+Then, I created & started the container with `docker run`. I used name `hw04-redis` and hostname `redisdb`.
+
+[source,shell]
+----
+kvetinac97@e-79-22 ~ % docker run -p 6379:6379 --name hw04-redis --hostname redisdb redis
+1:C 06 Mar 2023 16:56:09.997 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 06 Mar 2023 16:56:09.997 # Redis version=7.0.9, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 06 Mar 2023 16:56:09.997 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+1:M 06 Mar 2023 16:56:09.998 * monotonic clock: POSIX clock_gettime
+1:M 06 Mar 2023 16:56:09.998 * Running mode=standalone, port=6379.
+1:M 06 Mar 2023 16:56:09.998 # Server initialized
+1:M 06 Mar 2023 16:56:10.001 * Ready to accept connections
+----
+
+Then, I opened redis command line interface and set some basic data for 3 people (John, Karel and Alice):
+
+[source,shell]
+----
+kvetinac97@e-79-22 src % docker exec -it hw04-redis sh
+# redis-cli
+127.0.0.1:6379> set John "Thakurova 9, 160 00, Prague"
+OK
+127.0.0.1:6379> set Karel "Na Piskach 136, 561 69 Kraliky"
+OK
+127.0.0.1:6379> set Alice "Soukenicka 556, 602 00 Brno"
+OK
+127.0.0.1:6379> get Karel
+"Na Piskach 136, 561 69 Kraliky"
+----
+
+== Task 3: HTTP server
+
+Next part was to implement a simple Node.js server for answering requests on `/person/\{name}/address` endpoint. I created the client with `redis.createClient`, set the correct hostname and port _(which will be `redisdb` and `6379` respectively)_ and connected. Then, there is some simple logic for responding to requests including parsing name from address and some asynchronous I/O response callback handling.
+
+== Task 4: Dockerfile for the server
+
+Then, I copied the `Dockerfile` from third homework with one small change -- adding `RUN npm install redis` in order to have `redis` package installed.
+
+[source,shell]
+----
+kvetinac97@e-79-22 src % docker build -t hw04 .
+[+] Building 1.2s (9/9) FINISHED
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 36B                                        0.0s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load metadata for docker.io/library/node:19-alpine3.16      1.1s
+ => [internal] load build context                                          0.0s
+ => => transferring context: 1.53kB                                        0.0s
+ => [1/4] FROM docker.io/library/node:19-alpine3.16@sha256:f5b2f5862dec95  0.0s
+ => CACHED [2/4] WORKDIR /server                                           0.0s
+ => CACHED [3/4] RUN npm install redis                                     0.0s
+ => [4/4] COPY server.js .                                                 0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:80a552a1a859ed50717a286ddcf34105ababdf2e19d22  0.0s
+ => => naming to docker.io/library/hw04 
+----
+
+Last step to having a running server was to start it _(notice linking to the redis container with `--link hw04-redis`)_:
+
+[source,shell]
+----
+kvetinac97@e-79-22 src % docker run -p 8080:8888 --name hw04_server --link hw04-redis hw04
+Server running at http://0.0.0.0:8888/
+Redis client connected
+----
+
+And try some HTTP requests:
+
+[source,shell]
+----
+kvetinac97@e-79-22 ~ % curl 127.0.0.1:8080/person/John/address
+Address: Thakurova 9, 160 00, Prague
+kvetinac97@e-79-22 ~ % curl 127.0.0.1:8080/person/Alice/address
+Address: Soukenicka 556, 602 00 Brno
+kvetinac97@e-79-22 ~ % curl 127.0.0.1:8080/person/Karel/address
+Address: Na Piskach 136, 561 69 Kraliky
+kvetinac97@e-79-22 ~ % curl 127.0.0.1:8080/person/xyz/address
+Error: User xyz not found.
+----

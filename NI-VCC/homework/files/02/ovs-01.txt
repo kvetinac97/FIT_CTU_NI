@@ -1,0 +1,119 @@
+root@wrzecond-01:~# docker exec -it openvswitch_vswitchd bash -i
+(openvswitch-vswitchd)[root@wrzecond-01 /]# ovs-vsctl show
+4bc594ec-01f0-43be-afe3-44693896a5ea
+    Manager "ptcp:6640:127.0.0.1"
+        is_connected: true
+    Bridge br-int
+        Controller "tcp:127.0.0.1:6633"
+            is_connected: true
+        fail_mode: secure
+        datapath_type: system
+        Port qvo5375a180-1e
+            tag: 1
+            Interface qvo5375a180-1e
+        Port br-int
+            Interface br-int
+                type: internal
+        Port qg-d09ee669-fc
+            tag: 2
+            Interface qg-d09ee669-fc
+                type: internal
+        Port int-br-ex
+            Interface int-br-ex
+                type: patch
+                options: {peer=phy-br-ex}
+        Port tap97068b0f-08
+            tag: 1
+            Interface tap97068b0f-08
+                type: internal
+        Port qr-34765208-af
+            tag: 1
+            Interface qr-34765208-af
+                type: internal
+        Port patch-tun
+            Interface patch-tun
+                type: patch
+                options: {peer=patch-int}
+    Bridge br-ex
+        Controller "tcp:127.0.0.1:6633"
+            is_connected: true
+        fail_mode: secure
+        datapath_type: system
+        Port phy-br-ex
+            Interface phy-br-ex
+                type: patch
+                options: {peer=int-br-ex}
+        Port br-ex
+            Interface br-ex
+                type: internal
+        Port veth0
+            Interface veth0
+    Bridge br-tun
+        Controller "tcp:127.0.0.1:6633"
+            is_connected: true
+        fail_mode: secure
+        datapath_type: system
+        Port vxlan-0a2604ad
+            Interface vxlan-0a2604ad
+                type: vxlan
+                options: {df_default="true", egress_pkt_mark="0", in_key=flow, local_ip="10.38.4.172", out_key=flow, remote_ip="10.38.4.173"}
+        Port patch-int
+            Interface patch-int
+                type: patch
+                options: {peer=patch-tun}
+        Port br-tun
+            Interface br-tun
+                type: internal
+(openvswitch-vswitchd)[root@wrzecond-01 /]# ovs-ofctl show br-int
+OFPT_FEATURES_REPLY (xid=0x2): dpid:0000d28cbe2ca048
+n_tables:254, n_buffers:0
+capabilities: FLOW_STATS TABLE_STATS PORT_STATS QUEUE_STATS ARP_MATCH_IP
+actions: output enqueue set_vlan_vid set_vlan_pcp strip_vlan mod_dl_src mod_dl_dst mod_nw_src mod_nw_dst mod_nw_tos mod_tp_src mod_tp_dst
+ 1(int-br-ex): addr:aa:65:9e:fd:fe:ba
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ 2(patch-tun): addr:fe:d3:0c:a2:27:f7
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ 3(tap97068b0f-08): addr:fa:16:3e:e0:64:a8
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ 4(qr-34765208-af): addr:fa:16:3e:30:86:d1
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ 5(qg-d09ee669-fc): addr:fa:16:3e:4a:a5:30
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ 6(qvo5375a180-1e): addr:7e:8c:43:3a:21:61
+     config:     0
+     state:      0
+     current:    10GB-FD COPPER
+     speed: 10000 Mbps now, 0 Mbps max
+ LOCAL(br-int): addr:d2:8c:be:2c:a0:48
+     config:     PORT_DOWN
+     state:      LINK_DOWN
+     speed: 0 Mbps now, 0 Mbps max
+OFPT_GET_CONFIG_REPLY (xid=0x4): frags=normal miss_send_len=0
+(openvswitch-vswitchd)[root@wrzecond-01 /]# ovs-ofctl show br-tun
+OFPT_FEATURES_REPLY (xid=0x2): dpid:00005633f3c3ae49
+n_tables:254, n_buffers:0
+capabilities: FLOW_STATS TABLE_STATS PORT_STATS QUEUE_STATS ARP_MATCH_IP
+actions: output enqueue set_vlan_vid set_vlan_pcp strip_vlan mod_dl_src mod_dl_dst mod_nw_src mod_nw_dst mod_nw_tos mod_tp_src mod_tp_dst
+ 1(patch-int): addr:4a:aa:7f:62:b3:db
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ 2(vxlan-0a2604ad): addr:06:e1:71:bf:2c:35
+     config:     0
+     state:      0
+     speed: 0 Mbps now, 0 Mbps max
+ LOCAL(br-tun): addr:56:33:f3:c3:ae:49
+     config:     PORT_DOWN
+     state:      LINK_DOWN
+     speed: 0 Mbps now, 0 Mbps max
+OFPT_GET_CONFIG_REPLY (xid=0x4): frags=normal miss_send_len=0

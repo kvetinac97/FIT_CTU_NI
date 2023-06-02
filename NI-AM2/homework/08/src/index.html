@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>OAuth app</title>
+    <script src="client.js" type="text/javascript"></script>
+    <style>
+        th, td {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+<h1>Google Doc files</h1>
+<button id="logout" style="display: none">Logout</button>
+<button id="connection" style="display: none">Connect</button>
+<p id="message"></p>
+<table id="files" style="border-collapse: collapse; width: 100%; display: none">
+    <thead>
+        <tr>
+            <th style="width: 10%">Kind</th>
+            <th style="width: 50%">Name</th>
+            <th style="width: 20%">Last modified by</th>
+            <th style="width: 20%">Last modify time</th>
+        </tr>
+    </thead>
+</table>
+</body>
+</html>

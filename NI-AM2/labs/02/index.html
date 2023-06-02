@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic HTML file</title>
+    <script type="text/javascript">
+        function load(data) {
+            alert(`Received: ${JSON.stringify(data)}`)
+        }
+    </script>
+</head>
+<body>
+    <script src="http://127.0.0.1:8080/jsonp?_callback=load"></script>
+    It's easy :-)
+</body>
+</html>

@@ -1,0 +1,66 @@
+= HW5 – Indexing & Document Retrieval
+
+In this task, my objective was to represent documents and queries from Cranfield collection in Vector Space Model with different weightings / similarity metrics and to calculate relevant statistics.
+
+== Implementation
+
+Implementation is provided in file `retrieval.py`, which contains various functions to ensure the required functionality.
+
+Firstly, I load all the documents (`prepare_corpus_d`) and the query (`prepare_corpus_qr`) into a corpus, from which I create a document -- term matrix using different weightings (`transform_binary`, `transform_term_freq`, `transform_tf_idf`, `transform_word2vec`). Afterwards, I use different similarity metrics (`cosine_similarity`, `euclidean_distances`) to find the closest documents to given query and compare it with the corresponding relevant documents (`calculate_prf`), which gives me the precision, recall and F score.
+
+== Weightings
+
+The *binary* weighting `transform_binary` works the same as in a Boolean model, which means that terms are assigned 1 if present or 0 otherwise. The *term frequency* weighting `transform_term_freq` is a little more complex, as it assigns a decimal number between 0 and 1, where 0 means that the term is not present anywhere and 1 means the term is present in each document.
+
+The *tf-idf* weighting `transform_tf_idf` improves the term frequency weighting by also calculating the inverse document frequency (so if a term is really frequent in 1 explicit document but rare in the whole collection, it will have high tf-idf score).
+
+These 3 weightings have corresponding functions in the library `sklearn.feature_extraction.text` -- `CountVectorizer(binary=True)`, `CountVectorizer` and `TfidfVectorizer`.
+
+Last used weighting was written by myself using the Word2Vec model. The term frequency is calculated as norm of the word vector.
+
+== Relevance scores
+
+As relevance score methods, I used the cosine similarity `cosine_similarity` and Euclidean distance `euclidean_distances` from `sklearn.metrics.pairwise` library.
+
+The Euclidean distance is, however, fragile when using it to compare vectors of different "size", which is resolved by the cosine similarity, which divides each vector by its size.
+
+== Results
+
+I ran the script, you can see the results in `data.csv` file. When analyzing this data, the overall winner is the combination of *tf-idf* weighting with *cosine* similarity, which is no surprise, as it builds on the previous weightings / similarity and improves it. Then, it is (always with the cosine similarity) the *term frequency* weighting, *binary weighting* and on the last place is my *Word2Vec* weighting, which has a really low score of 0.06 %.
+
+With the Euclidean similarity, all weightings significantly lose precision, recall and f-scores. You can see the biggest drop in term frequency, where the problem of not normalizing the vectors can be seen the most.
+
+Averages:
+
+ * binary weighting, cosine similarity
+    ** precision: 8.62 %
+    ** recall: 19.28 %
+    ** f-score: 3.85 %
+ * binary weighting, euclidean similarity
+    ** precision: 0.56 %
+    ** recall: 0.76 %
+    ** f-score: 0.09 %
+ * term frequency weighting, cosine similarity:
+    ** precision: 9.87 %
+    ** recall: 20.69 %
+    ** f-score: 4.40 %
+ * term frequency weighting, euclidean similarity
+    ** precision: 0.00 %
+    ** recall: 0.00 %
+    ** f-score: 0.00 %
+ * *tf-idf* frequency weighting, *cosine* similarity:
+    ** precision: 17.04 %
+    ** recall: 36.68 %
+    ** f-score: *9.20* %
+ * tf-idf frequency weighting, euclidean similarity
+    ** precision: 0.03 %
+    ** recall: 0.02 %
+    ** f-score: 0.00 %
+ * Word2Vec frequency weighting, cosine similarity:
+    ** precision: 0.27 %
+    ** recall: 0.63 %
+    ** f-score: 0.06 %
+ * Word2Vec frequency weighting, euclidean similarity
+    ** precision: 0.27 %
+    ** recall: 0.63 %
+    ** f-score: 0.06 %

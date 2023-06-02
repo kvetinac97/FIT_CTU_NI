@@ -1,0 +1,346 @@
+======================
+Sequential: graph-hard/graf-20-16.txt
+Loaded matrix.
+Weight: 9353
+Recursions: 111460978
+
+real	0m0.517s
+user	0m0.510s
+sys	0m0.000s
+======================
+Parallel (task): graph-hard/graf-20-16.txt
+Edges: 160
+Loaded matrix.
+Weight: 9353
+
+real	0m0.235s
+user	0m1.537s
+sys	0m0.004s
+======================
+Parallel (data): graph-hard/graf-20-16.txt
+Edges: 160
+Loaded matrix.
+Weight: 9353
+
+real	0m0.229s
+user	0m0.732s
+sys	0m0.000s
+======================
+Sequential: graph-hard/graf-20-17.txt
+Loaded matrix.
+Weight: 9768
+Recursions: 132195383
+
+real	0m0.628s
+user	0m0.611s
+sys	0m0.000s
+======================
+Parallel (task): graph-hard/graf-20-17.txt
+Edges: 170
+Loaded matrix.
+Weight: 9768
+
+real	0m0.231s
+user	0m1.448s
+sys	0m0.024s
+======================
+Parallel (data): graph-hard/graf-20-17.txt
+Edges: 170
+Loaded matrix.
+Weight: 9768
+
+real	0m0.127s
+user	0m0.965s
+sys	0m0.004s
+======================
+Sequential: graph-hard/graf-20-19.txt
+Loaded matrix.
+Weight: 10288
+Recursions: 154902522
+
+real	0m0.727s
+user	0m0.711s
+sys	0m0.004s
+======================
+Parallel (task): graph-hard/graf-20-19.txt
+Edges: 190
+Loaded matrix.
+Weight: 10288
+
+real	0m0.253s
+user	0m1.731s
+sys	0m0.004s
+======================
+Parallel (data): graph-hard/graf-20-19.txt
+Edges: 190
+Loaded matrix.
+Weight: 10288
+
+real	0m0.140s
+user	0m1.076s
+sys	0m0.000s
+======================
+Sequential: graph-hard/graf-21-15.txt
+Loaded matrix.
+Weight: 9570
+Recursions: 197658027
+
+real	0m0.968s
+user	0m0.946s
+sys	0m0.004s
+======================
+Parallel (task): graph-hard/graf-21-15.txt
+Edges: 157
+Loaded matrix.
+Weight: 9570
+
+real	0m0.444s
+user	0m2.498s
+sys	0m0.000s
+======================
+Parallel (data): graph-hard/graf-21-15.txt
+Edges: 157
+Loaded matrix.
+Weight: 9570
+
+real	0m0.393s
+user	0m1.293s
+sys	0m0.004s
+======================
+Sequential: graph-hard/graf-22-17.txt
+Loaded matrix.
+Weight: 11015
+Recursions: 517946909
+
+real	0m2.266s
+user	0m2.239s
+sys	0m0.008s
+======================
+Parallel (task): graph-hard/graf-22-17.txt
+Edges: 187
+Loaded matrix.
+Weight: 11015
+
+real	0m0.952s
+user	0m6.379s
+sys	0m0.004s
+======================
+Parallel (data): graph-hard/graf-22-17.txt
+Edges: 187
+Loaded matrix.
+Weight: 11015
+
+real	0m0.461s
+user	0m3.598s
+sys	0m0.008s
+======================
+Sequential: graph-hard/graf-23-20.txt
+Loaded matrix.
+Weight: 12902
+Recursions: 1482266861
+
+real	0m6.326s
+user	0m6.304s
+sys	0m0.000s
+======================
+Parallel (task): graph-hard/graf-23-20.txt
+Edges: 230
+Loaded matrix.
+Weight: 12902
+
+real	0m2.638s
+user	0m14.947s
+sys	0m0.195s
+======================
+Parallel (data): graph-hard/graf-23-20.txt
+Edges: 230
+Loaded matrix.
+Weight: 12902
+
+real	0m1.429s
+user	0m9.711s
+sys	0m0.079s
+======================
+Sequential: graph-hard/graf-24-23.txt
+Loaded matrix.
+Weight: 14844
+Recursions: 3567620855
+
+real	0m16.149s
+user	0m16.142s
+sys	0m0.000s
+======================
+Parallel (task): graph-hard/graf-24-23.txt
+Edges: 276
+Loaded matrix.
+Weight: 14844
+
+real	0m5.019s
+user	0m33.989s
+sys	0m0.020s
+======================
+Parallel (data): graph-hard/graf-24-23.txt
+Edges: 276
+Loaded matrix.
+Weight: 14844
+
+real	0m3.152s
+user	0m23.663s
+sys	0m0.024s
+======================
+Sequential: graph-hard/graf-25-16.txt
+Loaded matrix.
+Weight: 12105
+Recursions: 3952759184
+
+real	0m16.677s
+user	0m16.632s
+sys	0m0.020s
+======================
+Parallel (task): graph-hard/graf-25-16.txt
+Edges: 200
+Loaded matrix.
+Weight: 12105
+
+real	0m7.635s
+user	0m47.100s
+sys	0m0.008s
+======================
+Parallel (data): graph-hard/graf-25-16.txt
+Edges: 200
+Loaded matrix.
+Weight: 12105
+
+real	0m3.409s
+user	0m26.244s
+sys	0m0.016s
+======================
+Sequential: graph-hard/graf-25-22.txt
+Loaded matrix.
+Weight: 15594
+Recursions: 6432754923
+
+real	0m28.416s
+user	0m28.408s
+sys	0m0.000s
+======================
+Parallel (task): graph-hard/graf-25-22.txt
+Edges: 275
+Loaded matrix.
+Weight: 15594
+
+real	0m9.895s
+user	1m4.737s
+sys	0m0.064s
+======================
+Parallel (data): graph-hard/graf-25-22.txt
+Edges: 275
+Loaded matrix.
+Weight: 15594
+
+real	0m5.755s
+user	0m42.278s
+sys	0m0.044s
+======================
+======================
+Sequential: temp/graf-26-25.txt
+Loaded matrix.
+Weight: 17477
+Recursions: 17334101349
+
+real	1m16.146s
+user	1m16.065s
+sys	0m0.036s
+======================
+Parallel (task): temp/graf-26-25.txt
+Edges: 325
+Loaded matrix.
+Weight: 17477
+
+real	0m23.859s
+user	2m32.634s
+sys	0m0.040s
+======================
+Parallel (data): temp/graf-26-25.txt
+Edges: 325
+Loaded matrix.
+Weight: 17477
+
+real	0m15.349s
+user	1m52.909s
+sys	0m0.466s
+======================
+Sequential: temp/graf-27-19.txt
+Loaded matrix.
+Weight: 15470
+Recursions: 21346128931
+
+real	1m27.856s
+user	1m27.803s
+sys	0m0.000s
+======================
+Parallel (task): temp/graf-27-19.txt
+Edges: 256
+Loaded matrix.
+Weight: 15470
+
+real	0m35.597s
+user	3m30.215s
+sys	0m0.481s
+======================
+Parallel (data): temp/graf-27-19.txt
+Edges: 256
+Loaded matrix.
+Weight: 15470
+
+real	0m19.900s
+user	2m13.509s
+sys	0m0.458s
+======================
+Sequential: temp/graf-28-24.txt
+Loaded matrix.
+Weight: 18729
+Recursions: 65525634394
+
+real	4m42.424s
+user	4m42.093s
+sys	0m0.136s
+======================
+Parallel (task): temp/graf-28-24.txt
+Edges: 336
+Loaded matrix.
+Weight: 18729
+
+real	1m30.639s
+user	9m40.149s
+sys	0m0.500s
+======================
+Parallel (data): temp/graf-28-24.txt
+Edges: 336
+Loaded matrix.
+Weight: 18729
+
+real	0m54.310s
+user	7m9.046s
+sys	0m0.180s
+======================
+Sequential: temp/graf-29-26.txt
+======================
+Parallel (task): temp/graf-29-26.txt
+Edges: 377
+Loaded matrix.
+Weight: 20810
+
+real	3m24.504s
+user	22m5.304s
+sys	0m1.848s
+======================
+Parallel (data): temp/graf-29-26.txt
+Edges: 377
+Loaded matrix.
+Weight: 20810
+
+real	2m5.837s
+user	16m22.154s
+sys	0m2.099s
+======================

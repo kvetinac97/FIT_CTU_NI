@@ -1,0 +1,12 @@
+jupyterlab
+nltk
+numpy
+scikit-learn
+gensim
+fasttext
+wordcloud
+Image
+matplotlib
+networkx
+node2vec
+ipywidgets

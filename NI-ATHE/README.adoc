@@ -1,0 +1,9 @@
+= ATHENS course
+
+I participated in ATHENS course in March 2023 at Mines Paris for C++ programming course (MP01).
+
+Throughout lectures, we heard some details about C++ language with some examples (`codes/`).
+
+Then, we had to do a final project to get a grade. xref:final/[See the final project].
+
+I got *grade A* from the ATHENS course.

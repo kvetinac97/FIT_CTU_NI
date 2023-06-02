@@ -1,0 +1,28 @@
+[[('Did', 'NNP'), ('you', 'PRP'), ('hear', 'VBP'), ('that', 'IN'), ('?', '.')], [('They', 'PRP'), ("'ve", 'VBP'), ('shut', 'VBN'), ('down', 'RP'), ('the', 'DT'), ('main', 'JJ'), ('reactor', 'NN'), ('.', '.')], [('We', 'PRP'), ("'ll", 'MD'), ('be', 'VB'), ('destroyed', 'VBN'), ('for', 'IN'), ('sure', 'JJ'), ('.', '.')], [('This', 'DT'), ('is', 'VBZ'), ('madness', 'JJ'), ('!', '.')], [('We', 'PRP'), ("'re", 'VBP'), ('doomed', 'VBN'), ('!', '.')], [('There', 'EX'), ("'ll", 'MD'), ('be', 'VB'), ('no', 'DT'), ('escape', 'NN'), ('for', 'IN'), ('the', 'DT'), ('Princess', 'NNP'), ('this', 'DT'), ('time', 'NN'), ('.', '.')], [('What', 'WP'), ("'s", 'VBZ'), ('that', 'DT'), ('?', '.')], [('I', 'PRP'), ('should', 'MD'), ('have', 'VB'), ('known', 'VBN'), ('better', 'JJR'), ('than', 'IN'), ('to', 'TO'), ('trust', 'VB'), ('the', 'DT'), ('logic', 'NN'), ('of', 'IN'), ('a', 'DT'), ('half-sized', 'JJ'), ('thermocapsulary', 'JJ'), ('dehousing', 'NN'), ('assister', 'NN'), ('...', ':')], [('Hurry', 'NNP'), ('up', 'RP'), ('!', '.')], [('Come', 'VBN'), ('with', 'IN'), ('me', 'PRP'), ('!', '.')]]
+
+
+[('Luke (PERSON)', 30), ('Artoo (PERSON)', 17), ('Empire (ORGANIZATION)', 13), ('Luke (GPE)', 12), ('Rebellion (ORGANIZATION)', 10), ('Alderaan (GPE)', 10), ('Force (ORGANIZATION)', 10), ('Han (PERSON)', 9), ('Kenobi (PERSON)', 8), ('Uncle Owen (PERSON)', 7)]
+
+[('Luke', 60), ('Force', 21), ('Well', 20), ('Come', 19), ('Alderaan', 18), ('Artoo', 18), ('Rebel', 16), ('Red', 15), ('Kenobi', 15), ('Obi-Wan', 14)]
+
+[{'entity_group': 'PER', 'score': 0.8596304, 'word': 'Art', 'start': 353, 'end': 356}, {'entity_group': 'PER', 'score': 0.9136556, 'word': 'Art', 'start': 360, 'end': 363}, {'entity_group': 'PER', 'score': 0.92311335, 'word': 'Det', 'start': 366, 'end': 369}, {'entity_group': 'LOC', 'score': 0.9355953, 'word': 'Kessel', 'start': 516, 'end': 522}, {'entity_group': 'ORG', 'score': 0.9749446, 'word': 'Death Star', 'start': 595, 'end': 605}, {'entity_group': 'PER', 'score': 0.9509984, 'word': 'Vader', 'start': 1013, 'end': 1018}]
+
+
+{'Han': 'Thing'}
+{'Chewie': 'fictional character'}
+{'Rebellion': 'refusal'}
+{'Rebel': 'Thing'}
+{'Come': 'town'}
+{'Obi-Wan': 'fictional character'}
+{'Kenobi': 'fictional character'}
+{'Rebel': 'Thing'}
+{'Kenobi': 'fictional character'}
+{'Force': 'influence'}
+{'Red': 'color'}
+{'Well': 'excavation'}
+{'Force': 'influence'}
+{'Luke': 'Thing'}
+{'Empire': 'political unit'}
+{'Artoo': 'fictional robot character'}
+{'Luke': 'Thing'}
+{'Alderaan': 'fictional planet'}

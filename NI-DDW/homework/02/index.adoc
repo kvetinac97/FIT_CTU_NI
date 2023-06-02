@@ -1,0 +1,75 @@
+= HW2 – Text Mining
+
+Jako data pro text mining jsem vybral přepis 4. dílu epizody Star Wars z https://www.kaggle.com/datasets/xvivancos/star-wars-movie-scripts.
+
+Funkce `read_text` slouží pouze pro primitivní načtení textu z přiloženého souboru.
+
+== POS
+
+Funkce `pos_tagging` provede POS analýzu textu.
+
+[source,python]
+----
+[('Did', 'NNP'), ('you', 'PRP'), ('hear', 'VBP'), ('that', 'IN'), ('?', '.')], [('They', 'PRP'), ("'ve", 'VBP'), ('shut', 'VBN'), ('down', 'RP'), ('the', 'DT'), ('main', 'JJ'), ('reactor', 'NN'), ('.', '.')]]
+----
+_(Ukázka provedené POS analýzy na prvních dvou větách.)_
+
+== NER
+
+Funkce `extract_entities` je pomocná funkce, která provede přepis entit ze stromové struktury do textového řetězce. Parametr `type` určuje, zda se má do řetězce vypsat i typ entity (GPE, ORGANIZATION, PERSON).
+
+Funkce `ner_ec`, `ner_cp` a `ner_bert` slouží k Named Entity Recognition pomocí třech různých přístupů -- prvním z nich je funkce `ntlk.ne_chunk`, druhá je rozpoznávání pomocí vlastního vzoru _(posloupnost přídavných jmen a členů zakončená podstatným jménem)_ a třetí je rozpoznávání pomocí natrénovaného modelu https://huggingface.co/dslim/bert-base-NER[BERT z Hugging Face].
+
+[source,python]
+----
+# ner_ec output (TOP 7)
+[('Luke (PERSON)', 30), ('Artoo (PERSON)', 17), ('Empire (ORGANIZATION)', 13), ('Luke (GPE)', 12), ('Rebellion (ORGANIZATION)', 10), ('Alderaan (GPE)', 10), ('Force (ORGANIZATION)', 10)]
+
+# ner_cp output (TOP 10)
+[('Luke', 60), ('Force', 21), ('Well', 20), ('Come', 19), ('Alderaan', 18), ('Artoo', 18), ('Rebel', 16), ('Red', 15), ('Kenobi', 15), ('Obi-Wan', 14)]
+
+# ner_bert output
+[{'entity_group': 'PER', 'score': 0.9136556, 'word': 'Art'}, {'entity_group': 'PER', 'score': 0.92311335, 'word': 'Det'}, {'entity_group': 'LOC', 'score': 0.9355953, 'word': 'Kessel'}, {'entity_group': 'ORG', 'score': 0.9749446, 'word': 'Death Star'}, {'entity_group': 'PER', 'score': 0.9509984, 'word': 'Vader'}]
+----
+_(Výpis nejčastějších NER včetně rozpoznaných typů)_
+
+== Custom Entity Classification
+
+Ve funkci `classify_wikipedia` z nejčastějších entit zkusím získat jejich popis pomocí knihovny `wikipedia`. Pokusím se najít entitu a získat její shrnutí pomocí `wikipedia.summary`, v případě neúspěchu _(více možných výsledků)_ vezmu první z nabízených. Následně pomocí `RegexpParser` naleznu sekvenci sloveso člen přídavná jména podstatné jméno _(mělo by odpovídat "is a nice thing")_, ze které získám popis.
+
+[source,python]
+----
+{'Han': 'Thing'}
+{'Chewie': 'fictional character'}
+{'Rebellion': 'refusal'}
+{'Rebel': 'Thing'}
+{'Come': 'town'}
+{'Obi-Wan': 'fictional character'}
+{'Kenobi': 'fictional character'}
+{'Rebel': 'Thing'}
+{'Kenobi': 'fictional character'}
+{'Force': 'influence'}
+{'Red': 'color'}
+{'Well': 'excavation'}
+{'Force': 'influence'}
+{'Luke': 'Thing'}
+{'Empire': 'political unit'}
+{'Artoo': 'fictional robot character'}
+{'Luke': 'Thing'}
+{'Alderaan': 'fictional planet'}
+----
+_(Výpis klasifikace TOP 18 entit)_
+
+== Porovnání
+
+Jako nejlepší se zdá být klasifikace přímo pomocí `nltk.ne_chunk`, která rozpoznala většinu entit správně. Můj klasifikátor také rozpoznal většinu entit správně, akorát jsem neimplementoval rozpoznání typů.
+
+Největším zklámáním se ukázal být `BERT` klasifikátor, který rozpoznal jen pár entit _(výstup jsem nijak neomezoval a dostal jsem pouze 5 entit)_, k tomu navíc ještě klasifikace není úplně přesná a ani rozpoznání jmen entit není přesné (Artoo-Detoo je rozpoznán jako Art, Det). Problém zde může být v datasetech, které byly použity k natrénování tohoto jazykového modelu -- jednalo se o novinové články, nejspíše tedy scénář filmu nezvládl správně analyzovat.
+
+Ohledně klasifikace jednotlivých entit pomocí Wikipedie byly výsledky někdy přesné, někdy ne _(problém je v tom, že se bere první výsledek, přičemž Red zde není barva, ale postava například)_. Překvapilo mě také, že některé entity (`Luke`, `Rebel`) Wikipedie nenašla.
+
+== Problémy a vylepšení
+
+Většinu problémů jsem popsal již v předchozích odstavcích. Kdybych měl volit klasifikátor, který použiju, v tomto případě dopadl nejlépe `nltk.ne_chunk`, možná bych ale zkusil najít `bert` klasifikátor s lepšími trénovacími daty. Zprovoznění tohoto modelu mi ale zabralo dost času, musel jsem najít vhodnou verzi Pythonu a závislostí, aby vše běželo.
+
+Co se týče klasifikace pomocí Wikipedie, rozhodně by to chtělo použít chytřejší logiku než vzít první výsledek prvního vyhledávání.

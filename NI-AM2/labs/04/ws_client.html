@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            let host = 'ws://localhost:8080'
+            let ws = new WebSocket(host)
+            ws.onmessage = function (event) {
+                let li = document.createElement('li')
+                li.innerHTML = event.data
+                document.querySelector('#list').appendChild(li)
+            }
+            
+            $("#button").click(() => {
+                ws.send(JSON.stringify($("#message").val()))
+            })
+        })
+    </script>
+</head>
+<body>
+<div>
+    <input id="message" type="text" name="message"><input id="button" type="button" value="Send">
+</div>
+<ul id="list"></ul>
+</body>
+</html>

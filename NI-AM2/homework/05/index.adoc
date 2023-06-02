@@ -1,0 +1,18 @@
+= HW5 – Data access
+
+In this task, we will fill the table with possible access technologies for methods GET and DELETE.
+
+|====
+<h| Resource                      <h| Format <h| GET             <h| DELETE
+  | http://company.at/customers     | XML      | CORS, REST        | CORS, REST
+  | http://company.at/suppliers     | JSON     | CORS, REST, JSONP | CORS, REST
+  | http://weather.at/innsbruck     | XML      | CORS              | CORS
+  | http://people.at/students       | JSON     | CORS, JSONP       | CORS
+  | http://people.at/\{dob}/contact | VCARD    | CORS              | CORS
+|====
+
+To access each resource, we can use the CORS access technology, which has no limitations here.
+
+For the first two resources, we can use REST, which supports both XML and JSON format. However, as the other resources are not on same origin (company.at), we are *not* able to use REST here as we would be *blocked* by the same origin policy.
+
+And at last, we can use JSONP for *GET* requests on resources in JSON format.

@@ -1,0 +1,16 @@
+[
+  {
+    "Config": "2c0e6089a9afac357bbe0a0d9f8568f2724c6f274dd1390992a0d657b52e9abb.json",
+    "RepoTags": [
+      "nodejs:latest"
+    ],
+    "Layers": [
+      "3be6c542afa552407f562521e870a0bd0f36e2f6513b2e28d9405b21a28fc79d/layer.tar",
+      "230d6355c8488e6feda7ec245d8afe807d85c09742495a3cf4e84c17cfa398ec/layer.tar",
+      "0a74e8b6a9dbdd6cdeaac890cd8174aadd8fd0a58f54f60e2109602dfa3f472c/layer.tar",
+      "fe23ec585d6d8e96d914ca48d24034acaa1b4b78e089001b98bdfef623a1b809/layer.tar",
+      "566be302268fc94b0200db3a960b78d3a82a10aaa3231bb4e5432695688c0e0b/layer.tar",
+      "0c70a9de1cad6e6c150389b71ccaf0bd5214962ece51e1b505357c44bcce3c84/layer.tar"
+    ]
+  }
+]
