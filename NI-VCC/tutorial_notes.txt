@@ -1,0 +1,86 @@
+T1
+
+Open Nebula
+ - sun stone: master,  rozhraní
+ - virtual host: na počítačích, slave; na nich běží virtuální počítače
+ - data storages: obsahují uložené obrazy virtuálních počítačů
+ - https://cloud.fit.cvut.cz 
+ - ovládání pomocí webu nebo pomocí API	
+
+1. Vytvoreni: VMs -> instantiate -> nastavíme parametry
+ -> apt update -> apt upgrade -> apt install net-tools
+ -> adduser wrzecond -> adduser wrzecond sudo
+ . přepnout do konzole, sudo -i
+
+2. ifconfig, route -n pro zobrazení brány
+ -> vytváření VLAN sítí: apt install vlan
+ -> vconfig add eth0 <id_site>
+ -> ifconfig eth0.101 <jakakoliv_ip>/<maska>
+
+3. svazování linek do sebe = bonding (kdyby 1 spadla, máme zálohu)
+ 
+ VMWare
+  - cloud.in.fit.cvut.cz
+  - funguje pouze uvnitř FIT sítě
+
+==========================
+
+T2 (pokračování Open Nebula)
+
+Připojení: ssh root@ip.co.najdu.v.konzoli
+(pokud nahraný SSH klíč, nemusím řešit heslo)
+
+Pokud nechceme do OpenVM dávat naše heslo,
+použijeme Settings > Auth > Manage tokens.
+Takový token funguje stejně jako heslo s omezenou platností.
+
+Perzistentní obraz = když se mění virtuálka, mění se i obraz
+
+==========================
+
+VMWare:
+ - instalujeme BEZ virtuálního prostředí
+ - ansible instalovat z modrého rámečku
+ - do "multinode" souboru nastavit "control", "compute", "network", ("storage")
+ 
+ - globals.yml: do `kolla_internal_vip_address` dát IP adresu prvního serveru
+     network_interface "ens192"
+     neuron_external_interface "veth0" # švindl, vytáhnu pak
+     vypnout HA (enable_haproxy) => umožním vnořenou virtualizaci
+ 
+  - vymyšlení síťové karty: 
+  
+  https://askubuntu.com/questions/1054034/netplan-how-to-describe-veth-peer-links
+    (virtuální roura, propojuje mi to) :: bonusová úloha [[5b]] = udělat maškarádu tak, aby se virtuálky dostaly na internet
+  !!! NEPŘIDÁVAT BRIDGE, TEN TO POKAZÍ :(
+
+ - pak kolla-ansible -i ./multinode bootstrap-servers
+ - kolla-ansible -i ./multinode prechecks
+ - kolla-ansible -i ./multinode deploy
+
+==========================
+
+T3 - sítě v OpenStack
+
+Data plane je pro nás kernel linuxu + openvswitch
+
+docker ps: neutron-openvswitch-agent nastavuje switch
+do toho kontejneru se můžu switchnout |docker exec -it openvswitch_vswitchd bash -i|
+
+Provider Network
+    Network Type: vxlan
+    Segmentation ID: 896 <<< tady mě zajímá to ID
+    
+Odposlouchání VXLAN: |tcpdump -i ens192 -vv udp|
+
+Úloha 1: udělat toto, najít ID ( virsh dumpxml instance-00000001 ), tady najdeme interface, a budeme na něm měřit: tcpdump -i tapXXXXXXXXX
+Úloha 2: tcpdump -w soubor, otevřít ve Wiresharku, jak se nám podaří se na to podívat
+Úloha 3: east-west = mezi virtuálkami: https://docs.openstack.org/neutron/rocky/admin/deploy-ovs-selfservice.html
+
+Seznam všeho: iptables -L -v (jsou tam různé security groups)
+OVS je zapíchnutý na ovsXXXXX, ale neměli bychom to úplně pokoušet...
+
+Úloha 4: ip netns mi ukáže virtuální routery, pomocí ip netns můžu něco spustit
+ - ip netns exec qrouter-215e2ff8-c4b4-4365-8120-06c52a07aba4 tcpdump -ll -i qr-34765208-af
+ - kudy to leze? přes DHCP: 10.0.0.2 na wrzecond-01 v ip netns qdhcp... tam budeme trasovat
+
