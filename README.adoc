@@ -24,7 +24,7 @@ link:NI-VMM/[Searching Multimedia Databases (NI-VMM)] - lecture notes, semestral
 |Mind Hacking|B|84/100|45/60|39/40
 |Combinatorial Optimization|B|81/100|47/55|34/45
 |Mathematics for Informatics|A|103/100|73/80|30/20
-|Searching Multimedia Databases|A|?|?|50/50
+|Searching Multimedia Databases|A|≥ 90/100|≥ 40/50|50/50
 |===
 
 == Second semester
@@ -57,8 +57,32 @@ link:NI-VSM/[Selected statistical Methods (NI-VSM)] - team homeworks, grades and
 
 == Third semester
 
-_TBA_
+link:NI-EPC/[Effective C++ Programming (NI-EPC)] - homeworks and grades export
+
+link:NI-NUR/[User Interface Design (NI-NUR)] - exam notes and semestral project export
+
+link:NI-PDB/[Advanced Database Systems (NI-PDB)] - exam notes and grades export
+
+link:NI-SWE/[Semantic Web and Knowledge Graphs (NI-SWE)] - homeworks, tutorials and grades export
+
+|===
+|Subject |Grade |Total |Exam |Assessment
+
+|English Conversation 2 4+|-
+|German Language 1 4+|-
+|Effective C++ Programming |A|100/100|50/50|50/50
+|Master Project 4+| -
+|User Interface Design|A|≥ 90/100|≥ 54/61|46/49
+|Advanced Database Systems|A|94/96|55/56|39/40
+|Semantic Web and Knowledge Graphs|A|98/100|58/60|40/40
+|===
 
 == Fourth semester
 
-_TBA_
+Master thesis *will* be available as a separate repository on this GitHub account in June 2024.
+
+|===
+|Subject |Grade |Total |Exam |Assessment
+
+|Master Thesis 4+|-
+|===

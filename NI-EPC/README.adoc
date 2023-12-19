@@ -1,0 +1,13 @@
+= Effective C++ Programming
+
+Got 100 % from homework. +
+Got 100 % from written exam, resulting in grade A.
+
+== Homework
+
+Throughout 4 homeworks, I had to program an effective implementation of C++ vector. You can see each homework here:
+
+* link:homework/01/vector.h[Basic Implementation]
+* link:homework/02/vector.h[Separating Allocation and Initialization]
+* link:homework/03/vector.h[Small buffer optimization]
+* link:homework/04/vector.h[Move semantics]
