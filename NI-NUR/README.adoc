@@ -1,0 +1,14 @@
+= User Interface Design
+
+Got 92 % for semestral team project. +
+Got enough points from written & oral exam for grade *A*.
+
+== Semestral work
+
+In our semestral work, we designed a new user interface for my master thesis project.
+
+The project was done in 3 parts:
+
+* link:semestral/1_analysis.pdf[Analysis] and link:semestral/1_lofi.pdf[Lo-fi] prototype.
+* link:semestral/2_usability_testing.pdf[Usability testing] along with Hi-fi prototype
+* link:semestral/3_heuristic_evaluation.pdf[Heuristic evaluation]
