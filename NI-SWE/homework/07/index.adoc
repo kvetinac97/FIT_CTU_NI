@@ -1,0 +1,40 @@
+= HW7 – SHACL
+
+== Dataset
+
+Jako dataset pro tuto úlohu jsem se rozhodl využít dataset z úkolu číslo 2. Jedná se o data lidí, jmen, organizací, pro které pracují a rodinných vztahů.
+
+Tento dataset jsem ještě vhodně poupravil a rozšířil tak, aby v něm byly platná i neplatná data. Naleznete ho zde: link:results/hw07.ttl[]
+
+== SHACL Shapes
+
+Pro validaci používám následující Shapes:
+
+ - value-type: matka (property `hasMother`) musí být osoba
+ - cardinality: osoba musí mít nejvýše jednu matku
+ - value-range: věk (property `age`) musí být číslo od 0 do 120
+ - string-based: jméno osoby nesmí obsahovat čísla
+ - property pair: název organizace se musí shodovat s jejím oficiálním názvem
+ - logická: osoba musí být zaměstnána buď prací, nebo studiem
+ - shape-based: věk dítěte musí být od 0 do 18
+
+Pro každý Shape jsou pak k dispozici platné i neplatné scénáře. Shapes naleznete zde: link:results/shapes.ttl[]
+
+=== Neplatné scénáře
+
+ - `ex:Tom` má dvě matky, přičemž jednou to není osoba, ale string _(porušuje value-type i cardinality)_
+ - `ex:Soused` má 666 let _(porušuje value-range)_
+ - `ex:Tom` má ve jménu číslice _(porušuje string-based)_
+ - `ex:IBM` má jiný oficiální název než název _(porušuje property pair)_
+ - `ex:Soused` je zaměstnán "Opravou potrubí" (string), ne prací ani školou _(porušuje logickou)_
+ - `ex:Tom` je dítě, ale má více než 18 let _(porušuje shape-based)_
+
+=== Platné scénáře
+
+Jinak jsou všechny scénáře platné.
+
+== Skript
+
+Validaci jsem provedl pomocí skriptu `validate.sh`, který je dostupný ve složce results/. Skript s pomocí `rdfunit` vyzkouší všechny shapes vůči datům.
+
+Výsledek běhu je k dispozici v souboru link:results/validation.ttl[]

@@ -1,0 +1,426 @@
+@prefix customer:        <http://localhost:8888/customer/> .
+
+customer:12  customer:name          "Zdeněk Vyskočil";
+        customer:sits_at_id         38;
+        customer:sits_in_name       "Pizzerie Verdi";
+        customer:unique_food_count  0 .
+
+customer:40  customer:name          "Filip Spěvák";
+        customer:sits_at_id         46;
+        customer:sits_in_name       "Pizzerie Maestro";
+        customer:unique_food_count  0 .
+
+customer:59  customer:name          "Hugo Spěvák";
+        customer:sits_at_id         16;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  2 .
+
+customer:7  customer:name           "Hugo Novotný";
+        customer:sits_at_id         3;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  3 .
+
+customer:18  customer:name          "Hugo Vyskočil";
+        customer:sits_at_id         33;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  0 .
+
+customer:46  customer:name          "Vojtěch Novotný";
+        customer:sits_at_id         24;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:74  customer:name          "Jan Ševčík";
+        customer:sits_at_id         40;
+        customer:sits_in_name       "Pizzerie Verdi";
+        customer:unique_food_count  0 .
+
+customer:33  customer:name          "Jan Skřivánek";
+        customer:sits_at_id         24;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:61  customer:name          "Jan Skřivánek";
+        customer:sits_at_id         13;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  1 .
+
+customer:20  customer:name          "Jan Vyskočil";
+        customer:sits_at_id         50;
+        customer:sits_in_name       "Aqua patet";
+        customer:unique_food_count  0 .
+
+customer:39  customer:name          "Erik Skřivánek";
+        customer:sits_at_id         19;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:67  customer:name          "Josef Vomáčka";
+        customer:sits_at_id         34;
+        customer:sits_in_name       "Melodie";
+        customer:unique_food_count  0 .
+
+customer:26  customer:name          "Hugo Janoušek";
+        customer:sits_at_id         32;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  0 .
+
+customer:54  customer:name          "Karel Konvalinka";
+        customer:sits_at_id         44;
+        customer:sits_in_name       "Pizzerie Maestro";
+        customer:unique_food_count  0 .
+
+customer:82  customer:name          "Zikmund Novák";
+        customer:sits_at_id         24;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:2  customer:name           "Zikmund Konvalinka";
+        customer:sits_at_id         33;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  0 .
+
+customer:13  customer:name          "Hugo Konvalinka";
+        customer:sits_at_id         22;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  0 .
+
+customer:41  customer:name          "Patrik Janoušek";
+        customer:sits_at_id         10;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  2 .
+
+customer:8  customer:name           "Patrik Novotný";
+        customer:sits_at_id         28;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  1 .
+
+customer:19  customer:name          "Josef Skřivánek";
+        customer:sits_at_id         25;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  2 .
+
+customer:47  customer:name          "Erik Spěvák";
+        customer:sits_at_id         28;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  1 .
+
+customer:75  customer:name          "Filip Spěvák";
+        customer:sits_at_id         3;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  3 .
+
+customer:34  customer:name          "Jan Vomáčka";
+        customer:sits_at_id         18;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  3 .
+
+customer:62  customer:name          "Karel Skřivánek";
+        customer:sits_at_id         16;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  2 .
+
+customer:21  customer:name          "Josef Tříska";
+        customer:sits_at_id         12;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  1 .
+
+customer:68  customer:name          "Zikmund Ševčík";
+        customer:sits_at_id         19;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:27  customer:name          "Vojtěch Ševčík";
+        customer:sits_at_id         46;
+        customer:sits_in_name       "Pizzerie Maestro";
+        customer:unique_food_count  0 .
+
+customer:55  customer:name          "Hugo Konvalinka";
+        customer:sits_at_id         6;
+        customer:sits_in_name       "Café Imperial";
+        customer:unique_food_count  2 .
+
+customer:83  customer:name          "Zdeněk Janoušek";
+        customer:sits_at_id         24;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:3  customer:name           "Karel Novotný";
+        customer:sits_at_id         1;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  0 .
+
+customer:14  customer:name          "Hugo Novák";
+        customer:sits_at_id         10;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  2 .
+
+customer:42  customer:name          "Patrik Spěvák";
+        customer:sits_at_id         38;
+        customer:sits_in_name       "Pizzerie Verdi";
+        customer:unique_food_count  0 .
+
+customer:70  customer:name          "Filip Ševčík";
+        customer:sits_at_id         4;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  1 .
+
+customer:9  customer:name           "Filip Janoušek";
+        customer:sits_at_id         20;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  1 .
+
+customer:48  customer:name          "Karel Skřivánek";
+        customer:sits_at_id         39;
+        customer:sits_in_name       "Pizzerie Verdi";
+        customer:unique_food_count  0 .
+
+customer:76  customer:name          "Josef Ševčík";
+        customer:sits_at_id         29;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  1 .
+
+customer:35  customer:name          "Erik Vomáčka";
+        customer:sits_at_id         29;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  1 .
+
+customer:63  customer:name          "Karel Novotný";
+        customer:sits_at_id         43;
+        customer:sits_in_name       "Pizzerie Verdi";
+        customer:unique_food_count  0 .
+
+customer:22  customer:name          "Zdeněk Novotný";
+        customer:sits_at_id         6;
+        customer:sits_in_name       "Café Imperial";
+        customer:unique_food_count  2 .
+
+customer:50  customer:name          "Zdeněk Tříska";
+        customer:sits_at_id         12;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  1 .
+
+customer:69  customer:name          "Josef Novotný";
+        customer:sits_at_id         7;
+        customer:sits_in_name       "Café Imperial";
+        customer:unique_food_count  0 .
+
+customer:28  customer:name          "Jan Novák";
+        customer:sits_at_id         18;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  3 .
+
+customer:56  customer:name          "Filip Vyskočil";
+        customer:sits_at_id         8;
+        customer:sits_in_name       "Café Imperial";
+        customer:unique_food_count  2 .
+
+customer:84  customer:name          "Patrik Novotný";
+        customer:sits_at_id         13;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  1 .
+
+customer:4  customer:name           "Karel Tříska";
+        customer:sits_at_id         3;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  3 .
+
+customer:15  customer:name          "Zikmund Vyskočil";
+        customer:sits_at_id         29;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  1 .
+
+customer:43  customer:name          "Josef Spěvák";
+        customer:sits_at_id         52;
+        customer:sits_in_name       "Aqua patet";
+        customer:unique_food_count  0 .
+
+customer:71  customer:name          "Vojtěch Vomáčka";
+        customer:sits_at_id         31;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  0 .
+
+customer:30  customer:name          "Filip Vyskočil";
+        customer:sits_at_id         10;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  2 .
+
+customer:49  customer:name          "Zikmund Novotný";
+        customer:sits_at_id         3;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  3 .
+
+customer:77  customer:name          "Zikmund Janoušek";
+        customer:sits_at_id         44;
+        customer:sits_in_name       "Pizzerie Maestro";
+        customer:unique_food_count  0 .
+
+customer:36  customer:name          "Filip Vyskočil";
+        customer:sits_at_id         28;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  1 .
+
+customer:64  customer:name          "Jan Konvalinka";
+        customer:sits_at_id         45;
+        customer:sits_in_name       "Pizzerie Maestro";
+        customer:unique_food_count  0 .
+
+customer:23  customer:name          "Filip Vyskočil";
+        customer:sits_at_id         48;
+        customer:sits_in_name       "Pizzerie Maestro";
+        customer:unique_food_count  0 .
+
+customer:51  customer:name          "Erik Ševčík";
+        customer:sits_at_id         27;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  1 .
+
+customer:10  customer:name          "Karel Konvalinka";
+        customer:sits_at_id         26;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  2 .
+
+customer:29  customer:name          "Hugo Janoušek";
+        customer:sits_at_id         26;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  2 .
+
+customer:57  customer:name          "Filip Konvalinka";
+        customer:sits_at_id         20;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  1 .
+
+customer:5  customer:name           "Erik Konvalinka";
+        customer:sits_at_id         26;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  2 .
+
+customer:85  customer:name          "Jan Skřivánek";
+        customer:sits_at_id         13;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  1 .
+
+customer:16  customer:name          "Jan Konvalinka";
+        customer:sits_at_id         12;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  1 .
+
+customer:44  customer:name          "Filip Janoušek";
+        customer:sits_at_id         19;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:72  customer:name          "Josef Spěvák";
+        customer:sits_at_id         2;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  1 .
+
+customer:31  customer:name          "Zikmund Janoušek";
+        customer:sits_at_id         28;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  1 .
+
+customer:78  customer:name          "Hugo Novotný";
+        customer:sits_at_id         34;
+        customer:sits_in_name       "Melodie";
+        customer:unique_food_count  0 .
+
+customer:37  customer:name          "Zdeněk Ševčík";
+        customer:sits_at_id         10;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  2 .
+
+customer:65  customer:name          "Zdeněk Skřivánek";
+        customer:sits_at_id         14;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  1 .
+
+customer:24  customer:name          "Zdeněk Konvalinka";
+        customer:sits_at_id         2;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  1 .
+
+customer:52  customer:name          "Jan Novotný";
+        customer:sits_at_id         5;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  1 .
+
+customer:80  customer:name          "Jan Novotný";
+        customer:sits_at_id         16;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  2 .
+
+customer:11  customer:name          "Zdeněk Novák";
+        customer:sits_at_id         10;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  2 .
+
+customer:58  customer:name          "Erik Skřivánek";
+        customer:sits_at_id         19;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:6  customer:name           "Josef Novák";
+        customer:sits_at_id         26;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  2 .
+
+customer:17  customer:name          "Zikmund Janoušek";
+        customer:sits_at_id         9;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  0 .
+
+customer:45  customer:name          "Zikmund Novák";
+        customer:sits_at_id         20;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  1 .
+
+customer:73  customer:name          "Josef Vomáčka";
+        customer:sits_at_id         28;
+        customer:sits_in_name       "Červené jablko";
+        customer:unique_food_count  1 .
+
+customer:32  customer:name          "Patrik Vomáčka";
+        customer:sits_at_id         1;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  0 .
+
+customer:60  customer:name          "Zdeněk Ševčík";
+        customer:sits_at_id         19;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:79  customer:name          "Josef Skřivánek";
+        customer:sits_at_id         5;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  1 .
+
+customer:38  customer:name          "Erik Janoušek";
+        customer:sits_at_id         10;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  2 .
+
+customer:66  customer:name          "Erik Vomáčka";
+        customer:sits_at_id         2;
+        customer:sits_in_name       "Ostravská";
+        customer:unique_food_count  1 .
+
+customer:25  customer:name          "Vojtěch Novotný";
+        customer:sits_at_id         11;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  3 .
+
+customer:53  customer:name          "Jan Vomáčka";
+        customer:sits_at_id         24;
+        customer:sits_in_name       "Síla chuti";
+        customer:unique_food_count  10 .
+
+customer:81  customer:name          "Hugo Vomáčka";
+        customer:sits_at_id         14;
+        customer:sits_in_name       "Harmony";
+        customer:unique_food_count  1 .
+
+customer:1  customer:name           "Zdeněk Vomáčka";
+        customer:sits_at_id         10;
+        customer:sits_in_name       "Divinis";
+        customer:unique_food_count  2 .

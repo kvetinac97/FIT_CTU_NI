@@ -1,0 +1,27 @@
+= HW2 – Ontology Modelling
+
+== Task 1: Define the vocabulary using Jena
+
+Mým prvním úkolem bylo definovat RDFS vocabulary. To jsem provedl v *Jeně*. Jelikož mám více zkušeností s programovacím jazykem Kotlin, použil jsem tento jazyk.
+
+Definice je možno zhlédnout v souboru link:src/main/kotlin/cz/cvut/fit/niswe/App.kt[App.kt] ve funkci `Model.createVocabularyAndData`.
+
+== Task 2: Model the instance data
+
+Ve stejné výše zmíněné funkci link:src/main/kotlin/cz/cvut/fit/niswe/App.kt[App.kt] ve funkci `Model.createVocabularyAndData` lze vidět namodelovaná i data podle zadání.
+
+== Task 3: Run a RDFS reasoner
+
+Následně jsem spustil nad vytvořenými daty RDFS reasoner. To lze vidět ve funkci `Model.inferredModel()`.
+
+== Porovnání
+
+Vzniklé turtle soubory jsou ve složce link:results/[].
+
+V souboru link:results/hw02-01.ttl[hw02-01.ttl] můžeme vidět jen základní definici vocabulary.
+
+V souboru link:results/hw02-02.ttl[hw02-02.ttl] lze vidět přidaná data, jinak zde ale není nic speciálního.
+
+V souboru link:results/hw02-03.ttl[hw02-03.ttl] je vzniklý inferred model. Vidíme zde nové triplety, které nebyly definovány. Například se zde definují části RDF.
+
+Zajímavé je ale to, že se nám zde například inferrovaly triplety, jako že otec je zároveň osoba, že Karel je **otec** a **rodič** _(což jsme nedefinovali)_, nebo že **IBM je organizace**.

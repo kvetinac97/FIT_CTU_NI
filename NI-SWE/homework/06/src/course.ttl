@@ -1,0 +1,102 @@
+@prefix ex:   <http://example.com/> .
+@prefix ext:   <http://example.com/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+ext:Course a rdfs:Class ;
+    rdfs:label "Course" ;
+    rdfs:comment "Class for course taught at university" .
+
+ext:title a rdf:Property ;
+    rdfs:label "title" ;
+    rdfs:comment "Title of the course" ;
+    rdfs:range xsd:string ;
+    rdfs:domain ext:Course .
+
+ext:lecturer a rdf:Property ;
+    rdfs:label "lecturer" ;
+    rdfs:comment "Person who gives lectures on the course" ;
+    rdfs:range ext:Lecturer ;
+    rdfs:domain ext:Course .
+
+ext:timeLocation a rdf:Property ;
+    rdfs:label "timeLocation" ;
+    rdfs:comment "Time and location of the course" ;
+    rdfs:range ext:TimeLocation ;
+    rdfs:domain ext:Course .
+
+ext:ects a rdf:Property ;
+    rdfs:label "ects" ;
+    rdfs:comment "Number of ECTS credits for the course" ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:domain ext:Course .
+
+ext:cvutCredits a rdf:Property ;
+    rdfs:label "cvutCredits" ;
+    rdfs:comment "Number of credits awarded by CTU for the course" ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:domain ext:Course .
+
+
+
+ext:Lecturer a rdfs:Class ;
+    rdfs:label "Lecturer" ;
+    rdfs:comment "Teacher, who takes care of the lecture" .
+
+ext:name a rdf:Property ;
+    rdfs:label "name" ;
+    rdfs:comment "Name of lecturer" ;
+    rdfs:range xsd:string ;
+    rdfs:domain ext:Lecturer .
+
+ext:url a rdf:Property ;
+    rdfs:label "name" ;
+    rdfs:comment "URL address of lecturer's website" ;
+    rdfs:range xsd:anyURI ;
+    rdfs:domain ext:Lecturer .
+
+ext:TimeLocation a rdfs:Class ;
+    rdfs:label "TimeLocation" ;
+    rdfs:comment "Time and location" .
+
+ext:day a rdf:Property ;
+    rdfs:label "day" ;
+    rdfs:comment "Day of the course" ;
+    rdfs:range xsd:string ;
+    rdfs:domain ext:TimeLocation .
+
+ext:timeFrom a rdf:Property ;
+    rdfs:label "timeFrom" ;
+    rdfs:comment "Time when the course starts" ;
+    rdfs:range xsd:time ;
+    rdfs:domain ext:TimeLocation .
+
+ext:duration a rdf:Property ;
+    rdfs:label "duration" ;
+    rdfs:comment "Time when the course ends" ;
+    rdfs:range xsd:time ;
+    rdfs:domain ext:TimeLocation .
+
+ext:room a rdf:Property ;
+    rdfs:label "room" ;
+    rdfs:comment "Room in which the course happens" ;
+    rdfs:range xsd:string ;
+    rdfs:domain ext:TimeLocation .
+
+ex:Milan a ext:Lecturer ;
+    ext:name "Milan Dojčinovski"^^xsd:string ;
+    ext:url "http://dojchinovski.mk"^^xsd:anyURI .
+
+_:SWETime a ext:TimeLocation ;
+    ext:day "Tuesday"^^xsd:string ;
+    ext:timeFrom "11:00"^^xsd:time ;
+    ext:duration "12:30"^^xsd:time ;
+    ext:room "TK:PU1"^^xsd:string .
+
+ex:SWE a ext:Course ;
+    ext:title "Semantic Web and Knowledge Graphs" ;
+    ext:lecturer ex:Milan ;
+    ext:timeLocation _:SWETime ;
+    ext:ects "5"^^xsd:nonNegativeInteger ;
+    ext:cvutCredits "5"^^xsd:nonNegativeInteger .

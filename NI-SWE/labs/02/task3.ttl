@@ -1,0 +1,22 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ext: <http://example.org/terms/> .
+@prefix ex: <http://example.org/res/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ext:Person a rdfs:Class .
+
+ext:address a rdf:Property ;
+    rdfs:domain ext:Person ;
+    rdfs:range xsd:string .
+
+ext:workAddress a rdf:Property .
+ext:homeAddress a rdf:Property .
+
+ext:address rdfs:subPropertyOf ext:workAddress,
+                               ext:homeAddress .
+
+# Example
+ex:Karel a ext:Person ;
+    ext:address "Thákurova 9, Praha 6" .

@@ -1,0 +1,20 @@
+= Semantic Web and Knowledge Graphs
+
+Got 100 % from homework. +
+Got 96 % from written exam, resulting in grade A.
+
+== Homework
+
+Various homeworks solved through semester:
+
+* xref:homework/01/index#[]
+* xref:homework/02/index#[]
+* xref:homework/03/index#[]
+* xref:homework/04/index#[]
+* xref:homework/05/index#[]
+* xref:homework/06/index#[]
+* xref:homework/07/index#[]
+
+== Labs
+
+Various tasks solved on labs focused on Semantic Web (RDF, RDFS, OWL, SPARQL, Linked Data, Web Annotations and SHACL)

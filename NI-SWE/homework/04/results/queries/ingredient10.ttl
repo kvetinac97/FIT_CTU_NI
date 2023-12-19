@@ -1,0 +1,19 @@
+@prefix customer:        <http://localhost:8888/customer/> .
+@prefix employee:        <http://localhost:8888/employee/> .
+@prefix food:            <http://localhost:8888/food/> .
+@prefix food_ingredient: <http://localhost:8888/food_ingredient/> .
+@prefix ingredient:      <http://localhost:8888/ingredient/> .
+@prefix manager:         <http://localhost:8888/manager/> .
+@prefix order:           <http://localhost:8888/order/> .
+@prefix restaurant:      <http://localhost:8888/restaurant/> .
+@prefix storage_item:    <http://localhost:8888/storage_item/> .
+@prefix table:           <http://localhost:8888/table/> .
+@prefix table_type:      <http://localhost:8888/table_type/> .
+@prefix xsd:             <http://www.w3.org/2001/XMLSchema#> .
+
+ingredient:10  ingredient:fat  6;
+        ingredient:fiber    1;
+        ingredient:id       10;
+        ingredient:name     "rajčatová omáčka";
+        ingredient:protein  2;
+        ingredient:sugar    8 .

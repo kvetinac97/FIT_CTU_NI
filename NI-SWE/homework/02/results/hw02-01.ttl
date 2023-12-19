@@ -1,0 +1,27 @@
+@prefix ext:   <http://example.com/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<ext:officialName>  a  rdf:Property ;
+        rdfs:domain  <ext:Organisation> ;
+        rdfs:range   <http://www.w3.org/2001/XMLSchema#normalizedString> .
+
+<ext:Father>  rdfs:subClassOf  <ext:Man> , <ext:Parent> .
+
+<ext:age>  a         rdf:Property ;
+        rdfs:domain  <ext:Person> ;
+        rdfs:range   <http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+
+<ext:worksFor>  a    rdf:Property ;
+        rdfs:domain  <ext:Person> ;
+        rdfs:range   <ext:Organisation> .
+
+<ext:Man>  rdfs:subClassOf  <ext:Person> .
+
+<ext:Parent>  rdfs:subClassOf  <ext:Person> .
+
+<ext:Child>  rdfs:subClassOf  <ext:Person> .
+
+<ext:hasFather>  a   rdf:Property ;
+        rdfs:domain  <ext:Person> ;
+        rdfs:range   <ext:Father> .

@@ -1,0 +1,91 @@
+@prefix ext:   <http://example.com/terms/> .
+@prefix ex:    <http://example.com/data/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Schema
+
+ext:Organization a rdfs:Class .
+ext:School a rdfs:Class .
+
+ext:Person a rdfs:Class .
+ext:Man rdfs:subClassOf ext:Person .
+ext:Woman rdfs:subClassOf ext:Person .
+ext:Parent rdfs:subClassOf ext:Person .
+ext:Child rdfs:subClassOf ext:Person .
+
+ext:Father rdfs:subClassOf ext:Man, ext:Parent .
+ext:Mother rdfs:subClassOf ext:Woman, ext:Parent .
+ext:Son rdfs:subClassOf ext:Man, ext:Child .
+ext:Daugther rdfs:subClassOf ext:Woman, ext:Child .
+
+ext:name a rdf:Property ;
+         rdfs:domain ext:Person, ext:Organization ;
+         rdfs:range xsd:string .
+
+ext:age  a rdf:Property ;
+         rdfs:domain ext:Person ;
+         rdfs:range xsd:nonNegativeInteger .
+
+ext:hasParent a rdf:Property ;
+         rdfs:domain ext:Child ;
+         rdfs:range ext:Parent .
+
+ext:hasFather a rdf:Property ;
+         rdfs:subPropertyOf ext:hasParent ;
+         rdfs:domain ext:Person ;
+         rdfs:range ext:Father .
+
+ext:hasMother a rdf:Property ;
+          rdfs:subPropertyOf ext:hasParent ;
+          rdfs:domain ext:Person ;
+          rdfs:range ext:Mother .
+
+ext:hasChild a rdf:Property ;
+             rdfs:domain ext:Parent ;
+             rdfs:range ext:Child .
+
+ext:occupation a rdf:Property ;
+         rdfs:domain ext:Person ;
+         rdfs:range ext:Organization, ext:School .
+
+ext:officialName a rdf:Property ;
+         rdfs:domain ext:Organization, ext:School ;
+         rdfs:range xsd:string .
+
+# Data
+
+ex:IBM a ext:Organization ;
+       ext:officialName "International Business Machines Corporation" ;
+       ext:name "IBM" .
+
+ex:GNK a ext:School ;
+       ext:officialName "Gymnazium Nad Kavalirkou" ;
+       ext:name "Gymnazium nad Kavalirkou" .
+
+ex:Carla a ext:Woman ;
+        ext:name "Karla Novakova" ;
+        ext:age 42 ;
+        ext:hasChild ex:Tom, ex:Magda ;
+        ext:occupation ex:IBM .
+
+ex:Soused a ext:Man ;
+        ext:name "Soused" ;
+        ext:age 666 ;
+        ext:occupation "Oprava potrubí" ;
+        ext:hasChild ex:Magda .
+
+ex:Tom a ext:Man ;
+       ext:name "Tomas 128" ;
+       ext:hasMother ex:Carla ;
+       ext:hasMother "Karla" ;
+       ext:age 25 ;
+       ext:occupation ex:GNK .
+
+ex:Magda a ext:Woman ;
+         ext:name "Magda Novakova" ;
+         ext:hasMother ex:Carla ;
+         ext:age 12 ;
+         ext:occupation ex:GNK .
+

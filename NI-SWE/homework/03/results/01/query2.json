@@ -1,0 +1,24 @@
+{ "head": {
+    "vars": [ "ingredient" , "ingredient_name" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "ingredient": { "type": "uri" , "value": "http://localhost:8888/ingredient/1" } ,
+        "ingredient_name": { "type": "literal" , "value": "voda" }
+      } ,
+      { 
+        "ingredient": { "type": "uri" , "value": "http://localhost:8888/ingredient/5" } ,
+        "ingredient_name": { "type": "literal" , "value": "celestýnské nudle" }
+      } ,
+      { 
+        "ingredient": { "type": "uri" , "value": "http://localhost:8888/ingredient/6" } ,
+        "ingredient_name": { "type": "literal" , "value": "hrášek" }
+      } ,
+      { 
+        "ingredient": { "type": "uri" , "value": "http://localhost:8888/ingredient/7" } ,
+        "ingredient_name": { "type": "literal" , "value": "chléb" }
+      }
+    ]
+  }
+}

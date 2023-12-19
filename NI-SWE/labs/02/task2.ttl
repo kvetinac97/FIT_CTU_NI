@@ -1,0 +1,42 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ext: <http://example.org/terms/> .
+@prefix ex: <http://example.org/res/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ext:Course a rdfs:Class .
+
+ext:label a rdf:Property ;
+          rdfs:domain ext:Course ;
+          rdfs:range xsd:string .
+
+ex:ni-swe a ext:Course ;
+          ext:label "NI-SWE" .
+
+foaf:Person a rdfs:Class .
+
+ext:name a rdf:Property ;
+         rdfs:domain foaf:Person ;
+         rdfs:range xsd:string .
+
+ext:age a rdf:Property ;
+        rdfs:domain foaf:Person ;
+        rdfs:range xsd:nonNegativeInteger .
+
+foaf:knows a rdf:Property ;
+           rdfs:domain foaf:Person ;
+           rdfs:range foaf:Person .
+
+ext:enrolled a rdf:Property ;
+             rdfs:domain foaf:Person ;
+             rdfs:range ext:Course .
+
+ex:Alice a foaf:Person ;
+         ext:name "Alice" ;
+         ext:age "25"^^xsd:nonNegativeInteger .
+
+ex:Bob a foaf:Person ;
+    ext:name "Bob" ;
+    ext:enrolled ex:ni-swe ;
+    foaf:knows ex:Alice .

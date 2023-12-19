@@ -1,0 +1,33 @@
+@prefix ex: <http://example.org/> .
+@prefix ext: <http://example.org/schema/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ext:Vehicle a owl:Class .
+ext:Car a owl:Class .
+
+ext:Vehicle rdfs:subClassOf ext:Car .
+
+ext:Color a owl:Class .
+ext:Blue a owl:Class .
+
+ext:Blue rdfs:subClassOf ext:Color .
+
+ex:Porsche a ext:Car .
+ex:Skoda a ext:Car ;
+    owl:disjointWith ex:Porsche .
+
+ext:BlueCar owl:equivalentClass [
+    a owl:Class ;
+    owl:intersectionOf (ext:Blue ext:Car)
+] .
+
+ext:spz a owl:DatatypeProperty ;
+        rdfs:domain ext:Car ;
+        rdfs:range xsd:string .
+
+ex:Skoda3T32522 a ext:BlueCar ;
+    ext:spz "3T32522" .
+

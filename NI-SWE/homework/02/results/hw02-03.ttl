@@ -1,0 +1,153 @@
+@prefix ext:   <http://example.com/terms/> .
+@prefix ex:    <http://example.com/data/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+rdf:rest  a                 rdf:Property , rdfs:Resource ;
+        rdfs:domain         rdf:List ;
+        rdfs:range          rdf:List ;
+        rdfs:subPropertyOf  rdf:rest .
+
+rdf:List  a              rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource .
+
+<ext:Organisation>  a    rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource , <ext:Organisation> .
+
+rdf:predicate  a            rdf:Property , rdfs:Resource ;
+        rdfs:domain         rdf:Statement ;
+        rdfs:subPropertyOf  rdf:predicate .
+
+rdf:Property  a          rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource , rdf:Property .
+
+rdfs:label  a       rdf:Property , rdfs:Resource ;
+        rdfs:range  rdfs:Literal .
+
+<ext:officialName>  a       rdf:Property , rdfs:Resource ;
+        rdfs:domain         <ext:Organisation> ;
+        rdfs:range          xsd:normalizedString ;
+        rdfs:subPropertyOf  <ext:officialName> .
+
+<ext:age>  a                rdf:Property , rdfs:Resource ;
+        rdfs:domain         <ext:Person> ;
+        rdfs:range          xsd:nonNegativeInteger ;
+        rdfs:subPropertyOf  <ext:age> .
+
+<ext:hasFather>  a          rdf:Property , rdfs:Resource ;
+        rdfs:domain         <ext:Person> ;
+        rdfs:range          <ext:Father> ;
+        rdfs:subPropertyOf  <ext:hasFather> .
+
+<ext:worksFor>  a           rdf:Property , rdfs:Resource ;
+        rdfs:domain         <ext:Person> ;
+        rdfs:range          <ext:Organisation> ;
+        rdfs:subPropertyOf  <ext:worksFor> .
+
+rdf:Statement  a         rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource .
+
+rdfs:Class  a            rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource , rdfs:Class .
+
+rdf:type  a         rdf:Property , rdfs:Resource ;
+        rdfs:range  rdfs:Class .
+
+rdfs:Resource  a         rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource .
+
+rdf:subject  a              rdf:Property , rdfs:Resource ;
+        rdfs:domain         rdf:Statement ;
+        rdfs:subPropertyOf  rdf:subject .
+
+rdf:XMLLiteral  a  rdfs:Datatype , rdfs:Class , rdfs:Resource .
+
+rdfs:comment  a     rdf:Property , rdfs:Resource ;
+        rdfs:range  rdfs:Literal .
+
+rdfs:range  a        rdf:Property , rdfs:Resource ;
+        rdfs:domain  rdf:Property ;
+        rdfs:range   rdfs:Class .
+
+xsd:nonNegativeInteger
+        a                rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource , xsd:nonNegativeInteger .
+
+rdfs:subPropertyOf  a  rdf:Property , rdfs:Resource ;
+        rdfs:domain  rdf:Property ;
+        rdfs:range   rdf:Property .
+
+rdf:object  a               rdf:Property , rdfs:Resource ;
+        rdfs:domain         rdf:Statement ;
+        rdfs:subPropertyOf  rdf:object .
+
+<ext:Person>  a          rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource , <ext:Person> .
+
+xsd:normalizedString  a  rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource , xsd:normalizedString .
+
+<ext:Father>  a          rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource , <ext:Man> , <ext:Parent> , <ext:Father> , <ext:Person> .
+
+rdf:nil  a      rdf:List , rdfs:Resource .
+
+rdfs:domain  a       rdf:Property , rdfs:Resource ;
+        rdfs:domain  rdf:Property ;
+        rdfs:range   rdfs:Class .
+
+rdfs:Literal  a          rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Resource .
+
+rdf:first  a                rdf:Property , rdfs:Resource ;
+        rdfs:domain         rdf:List ;
+        rdfs:subPropertyOf  rdf:first .
+
+rdfs:subClassOf  a   rdf:Property , rdfs:Resource ;
+        rdfs:domain  rdfs:Class ;
+        rdfs:range   rdfs:Class .
+
+<ex:Carl>  a    <ext:Man> , <ext:Father> , rdfs:Resource , <ext:Person> , <ext:Parent> .
+
+<ex:Anna>  a             <ext:Person> , rdfs:Resource ;
+        <ext:age>        "25"^^xsd:int ;
+        <ext:hasFather>  <ex:Carl> ;
+        <ext:worksFor>   <ex:IBM> .
+
+<ext:Man>  a             rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  <ext:Person> , <ext:Man> , rdfs:Resource .
+
+<ex:IBM>  a                 <ext:Organisation> , rdfs:Resource ;
+        <ext:officialName>  "International Business Machines Corporation" .
+
+<ext:Parent>  a          rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  <ext:Person> , <ext:Parent> , rdfs:Resource .
+
+<ext:Child>  a           rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  <ext:Person> , <ext:Child> , rdfs:Resource .
+
+rdfs:Container  a        rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Container .
+
+rdfs:ContainerMembershipProperty
+        a                rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:ContainerMembershipProperty , rdf:Property .
+
+rdf:Bag  a               rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdf:Bag , rdfs:Container .
+
+rdf:Seq  a               rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdf:Seq , rdfs:Container .
+
+rdfs:Datatype  a         rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdfs:Datatype , rdfs:Class .
+
+rdf:Alt  a               rdfs:Class , rdfs:Resource ;
+        rdfs:subClassOf  rdf:Alt , rdfs:Container .
+
+rdfs:isDefinedBy  a         rdf:Property , rdfs:Resource ;
+        rdfs:subPropertyOf  rdfs:isDefinedBy , rdfs:seeAlso .
+
+rdfs:seeAlso  a             rdf:Property , rdfs:Resource ;
+        rdfs:subPropertyOf  rdfs:seeAlso .

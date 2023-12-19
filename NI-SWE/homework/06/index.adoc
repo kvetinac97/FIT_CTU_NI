@@ -1,0 +1,26 @@
+= HW6 – Web Annotations
+
+== Data
+
+Mým úkolem bylo vzít informace o kurzu a převést je to Microdata. Abych si vyzkoušel všechno, převedl jsem informace do **Turtle** vocabulary i dat (link:src/course.ttl[]), do **mikroformátu** (link:src/course.html[]).
+
+[source,turtle]
+----
+include::src/course.ttl[]
+----
+
+== Mikrodata
+
+Pomocí mikrodat jsem vložil informace do HTML:
+
+[source,html]
+----
+include::results/microdata.html[]
+----
+
+a tyto informace jsem vložil také pomocí RDFa:
+
+[source,html]
+----
+include::results/rdfa.html[]
+----

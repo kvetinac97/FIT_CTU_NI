@@ -1,0 +1,47 @@
+kvetinac97@e-79-220 ~ % curl -H 'Accept: text/turtle' -v https://dbpedia.org/resource/Prague
+*   Trying 194.109.129.58:443...
+* Connected to dbpedia.org (194.109.129.58) port 443 (#0)
+* ALPN: offers h2,http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+*  CAfile: /etc/ssl/cert.pem
+*  CApath: none
+* (304) (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+* TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384
+* ALPN: server did not agree on a protocol. Uses default.
+* Server certificate:
+*  subject: CN=dbpedia.org
+*  start date: Nov 11 02:17:23 2023 GMT
+*  expire date: Feb  9 02:17:22 2024 GMT
+*  subjectAltName: host "dbpedia.org" matched cert's "dbpedia.org"
+*  issuer: C=US; O=Let's Encrypt; CN=R3
+*  SSL certificate verify ok.
+* using HTTP/1.x
+> GET /resource/Prague HTTP/1.1
+> Host: dbpedia.org
+> User-Agent: curl/8.1.2
+> Accept: text/turtle
+>
+< HTTP/1.1 303 See Other
+< Date: Tue, 14 Nov 2023 13:55:36 GMT
+< Content-Type: text/turtle
+< Content-Length: 0
+< Connection: keep-alive
+< Server: Virtuoso/08.03.3329 (Linux) x86_64-generic-linux-glibc25  VDB
+< TCN: choice
+< Vary: negotiate,accept
+< Alternates: {"/data/Prague.atom" 0.500000 {type application/atom+xml}}, {"/data/Prague.jrdf" 0.600000 {type application/rdf+json}}, {"/data/Prague.jsod" 0.500000 {type application/odata+json}}, {"/data/Prague.json" 0.600000 {type application/json}}, {"/data/Prague.jsonld" 0.500000 {type application/ld+json}}, {"/data/Prague.n3" 0.800000 {type text/n3}}, {"/data/Prague.nt" 0.800000 {type text/rdf+n3}}, {"/data/Prague.ntriples" 0.500000 {type application/n-triples}}, {"/data/Prague.ttl" 0.700000 {type text/turtle}}, {"/data/Prague.xml" 0.950000 {type application/rdf+xml}}
+< Link: <http://creativecommons.org/licenses/by-sa/3.0/>; rel="license", <http://dbpedia.mementodepot.org/timegate/http://dbpedia.org/resource/Prague>; rel="timegate"
+< Location: http://dbpedia.org/data/Prague.ttl
+< Access-Control-Allow-Credentials: true
+< Access-Control-Allow-Methods: GET, POST, OPTIONS
+< Access-Control-Allow-Headers: Depth,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Accept-Encoding
+<
+* Connection #0 to host dbpedia.org left intact

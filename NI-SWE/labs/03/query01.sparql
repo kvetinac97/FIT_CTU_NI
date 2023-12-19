@@ -1,0 +1,17 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+SELECT ?city ?name ?population ?max_elevation ?areaTotalKm ?subdivision ?totalWidth ?utcOffset ?recordHighC WHERE {
+    ?city a dbo:City ;
+    dbp:name ?name .
+    OPTIONAL { ?city dbp:populationTotal ?population } .
+    OPTIONAL { ?city dbo:maximumElevation  ?max_elevation } .
+    OPTIONAL { ?city dbp:areaTotalKm ?areaTotalKm } .
+    OPTIONAL { ?city dbo:subdivision ?subdivision } .
+    OPTIONAL { ?city dbp:totalWidth ?totalWidth } .
+    OPTIONAL { ?city dbo:utcOffset ?utcOffset } .
+    OPTIONAL { ?city dbp:yearRecordHighC ?recordHighC } .
+}
+LIMIT 25

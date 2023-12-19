@@ -1,0 +1,23 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:table_type="http://localhost:8888/table_type/"
+    xmlns:storage_item="http://localhost:8888/storage_item/"
+    xmlns:table="http://localhost:8888/table/"
+    xmlns:manager="http://localhost:8888/manager/"
+    xmlns:food="http://localhost:8888/food/"
+    xmlns:order="http://localhost:8888/order/"
+    xmlns:restaurant="http://localhost:8888/restaurant/"
+    xmlns:ingredient="http://localhost:8888/ingredient/"
+    xmlns:employee="http://localhost:8888/employee/"
+    xmlns:food_ingredient="http://localhost:8888/food_ingredient/"
+    xmlns:customer="http://localhost:8888/customer/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#" > 
+  <rdf:Description rdf:about="http://localhost:8888/restaurant/1">
+    <restaurant:managed_by rdf:resource="http://localhost:8888/manager/1"/>
+    <restaurant:open_until rdf:datatype="http://www.w3.org/2001/XMLSchema#time">20:00:00</restaurant:open_until>
+    <restaurant:open_from rdf:datatype="http://www.w3.org/2001/XMLSchema#time">08:00:00</restaurant:open_from>
+    <restaurant:location>Rottrova 2800/7,  Ostrava</restaurant:location>
+    <restaurant:name>Ostravská</restaurant:name>
+    <restaurant:id rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</restaurant:id>
+  </rdf:Description>
+</rdf:RDF>

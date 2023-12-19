@@ -1,0 +1,29 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sct:   <http://soccer.com/terms/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix pext:  <http://www.ontotext.com/proton/protonext#> .
+
+# Mappings to DBPedia Ontology
+sct:Player owl:equivalentClass dbo:SoccerPlayer .
+sct:Team rdfs:subClassOf dbo:SportsTeam .
+sct:Match rdfs:subClassOf dbo:SportsEvent .
+sct:Referee rdfs:subClassOf dbo:Referee .
+
+sct:playerName owl:equivalentProperty dbo:name .
+sct:coachName owl:equivalentProperty dbo:name .
+sct:playerBirthDate owl:equivalentProperty dbo:birthDate .
+sct:playsFor rdfs:subPropertyOf dbo:playerInTeam .
+sct:coachedBy rdfs:subPropertyOf dbo:manager .
+
+# Mappings to FOAF Ontology
+sct:Player rdfs:subClassOf foaf:Person .
+sct:Team rdfs:subClassOf foaf:Group .
+sct:playerName owl:equivalentProperty foaf:name .
+sct:playerBirthDate owl:equivalentProperty foaf:birthday .
+sct:coachName owl:equivalentProperty foaf:name .
+
+# Mappings to PEXT Ontology
+sct:Team owl:equivalentClass pext:SoccerClub .
+sct:Match rdfs:subClassOf pext:SportEvent .

@@ -1,0 +1,21 @@
+@prefix table:           <http://localhost:8888/table/> .
+
+table:3  table:has_food_count  6 .
+
+table:13  table:has_food_count  2 .
+
+table:24  table:has_food_count  23 .
+
+table:5  table:has_food_count  3 .
+
+table:26  table:has_food_count  5 .
+
+table:4  table:has_food_count  1 .
+
+table:14  table:has_food_count  4 .
+
+table:25  table:has_food_count  4 .
+
+table:6  table:has_food_count  4 .
+
+table:16  table:has_food_count  5 .

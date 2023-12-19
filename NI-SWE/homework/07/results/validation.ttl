@@ -1,0 +1,78 @@
+[
+	a sh:ValidationResult ;
+	sh:resultSeverity sh:Violation ;
+	sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+	sh:sourceShape ex:MotherCountShape ;
+	sh:focusNode ex:Tom ;
+	sh:resultPath ext:hasMother ;
+	sh:resultMessage "More than 1 values" ;
+] .
+[
+	a sh:ValidationResult ;
+	sh:resultSeverity sh:Violation ;
+	sh:sourceConstraintComponent sh:ClassConstraintComponent ;
+	sh:sourceShape _:n365 ;
+	sh:focusNode ex:Tom ;
+	sh:value "Karla" ;
+	sh:resultPath ext:hasMother ;
+	sh:resultMessage "Value does not have class ext:Person" ;
+] .
+[
+	a sh:ValidationResult ;
+	sh:resultSeverity sh:Violation ;
+	sh:sourceConstraintComponent sh:MaxInclusiveConstraintComponent ;
+	sh:sourceShape _:n366 ;
+	sh:focusNode ex:Soused ;
+	sh:value 666 ;
+	sh:resultPath ext:age ;
+	sh:resultMessage "Value is not <= 120" ;
+] .
+[
+	a sh:ValidationResult ;
+	sh:resultSeverity sh:Violation ;
+	sh:sourceConstraintComponent sh:PatternConstraintComponent ;
+	sh:sourceShape _:n367 ;
+	sh:focusNode ex:Tom ;
+	sh:value "Tomas 128" ;
+	sh:resultPath ext:name ;
+	sh:resultMessage "Value does not match pattern "^[a-zA-Z ]*$"" ;
+] .
+[
+	a sh:ValidationResult ;
+	sh:resultSeverity sh:Violation ;
+	sh:sourceConstraintComponent sh:EqualsConstraintComponent ;
+	sh:sourceShape _:n368 ;
+	sh:focusNode ex:IBM ;
+	sh:resultPath ext:officialName ;
+	sh:value "International Business Machines Corporation" ;
+	sh:resultMessage "Must have same values as ext:name" ;
+] .
+[
+	a sh:ValidationResult ;
+	sh:resultSeverity sh:Violation ;
+	sh:sourceConstraintComponent sh:EqualsConstraintComponent ;
+	sh:sourceShape _:n368 ;
+	sh:focusNode ex:IBM ;
+	sh:resultPath ext:officialName ;
+	sh:value "IBM" ;
+	sh:resultMessage "Must have same values as ext:name" ;
+] .
+[
+	a sh:ValidationResult ;
+	sh:resultSeverity sh:Violation ;
+	sh:sourceConstraintComponent sh:OrConstraintComponent ;
+	sh:sourceShape _:n369 ;
+	sh:focusNode ex:Soused ;
+	sh:value "Oprava potrubí" ;
+	sh:resultPath ext:occupation ;
+] .
+[
+	a sh:ValidationResult ;
+	sh:resultSeverity sh:Violation ;
+	sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+	sh:sourceShape _:n374 ;
+	sh:focusNode ex:Carla ;
+	sh:value ex:Tom ;
+	sh:resultPath ext:hasChild ;
+	sh:resultMessage "Value does not have shape ex:ChildAgeShape" ;
+] .

@@ -1,0 +1,9 @@
+# Prefix
+PREFIX restaurant: <http://localhost:8888/restaurant/>
+
+# 5. Kontrola, že každá restaurace má právě jednoho manažera
+ASK WHERE { FILTER NOT EXISTS { SELECT * WHERE { # Reverse yes/no
+    ?restaurant restaurant:name ?name .
+    OPTIONAL { ?restaurant restaurant:managed_by ?manager }
+}
+GROUP BY ?restaurant ?name HAVING (COUNT(?manager) != 1) } }

@@ -1,0 +1,81 @@
+@prefix sct:   <http://soccer.com/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+sct:Player rdf:type owl:Class .
+sct:Team rdf:type owl:Class .
+sct:Position rdf:type owl:Class .
+sct:Coach rdf:type owl:Class .
+sct:Match rdf:type owl:Class .
+sct:Goal rdf:type owl:Class .
+sct:Referee rdf:type owl:Class .
+sct:Foul rdf:type owl:Class .
+
+# Object Properties
+sct:playsFor rdf:type owl:ObjectProperty ;
+    rdfs:domain sct:Player ;
+    rdfs:range sct:Team .
+
+sct:hasPosition rdf:type owl:ObjectProperty ;
+    rdfs:domain sct:Player ;
+    rdfs:range sct:Position .
+
+sct:coachedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain sct:Team ;
+    rdfs:range sct:Coach .
+
+sct:participatedIn rdf:type owl:ObjectProperty ;
+    rdfs:domain sct:Player ;
+    rdfs:range sct:Match .
+
+sct:scoredBy rdf:type owl:ObjectProperty ;
+    rdfs:domain sct:Goal ;
+    rdfs:range sct:Player .
+
+sct:scoredIn rdf:type owl:ObjectProperty ;
+    rdfs:domain sct:Goal ;
+    rdfs:range sct:Match .
+
+sct:refereedMatch rdf:type owl:ObjectProperty;
+    rdfs:domain sct:Referee;
+    rdfs:range sct:Match.
+
+sct:committedFoul rdf:type owl:ObjectProperty ;
+    rdfs:domain sct:Player ;
+    rdfs:range sct:Foul .
+
+# Datatype Properties
+sct:playerName rdf:type owl:DatatypeProperty ;
+    rdfs:domain sct:Player ;
+    rdfs:range xsd:string .
+
+sct:playerBirthDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain sct:Player ;
+    rdfs:range xsd:date .
+
+sct:playerNationality rdf:type owl:DatatypeProperty ;
+    rdfs:domain sct:Player ;
+    rdfs:range xsd:string .
+
+sct:coachName rdf:type owl:DatatypeProperty ;
+    rdfs:domain sct:Coach ;
+    rdfs:range xsd:string .
+
+sct:matchDate rdf:type owl:DatatypeProperty ;
+    rdfs:domain sct:Match ;
+    rdfs:range xsd:date .
+
+sct:matchVenue rdf:type owl:DatatypeProperty ;
+    rdfs:domain sct:Match ;
+    rdfs:range xsd:nonNegativeInteger .
+
+sct:foulType rdf:type owl:DatatypeProperty ;
+    rdfs:domain sct:Foul ;
+    rdfs:range xsd:string .
+
+sct:foulTime rdf:type owl:DatatypeProperty ;
+    rdfs:domain sct:Foul ;
+    rdfs:range xsd:time .

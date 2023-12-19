@@ -1,0 +1,58 @@
+{
+    "@graph": [
+        {
+            "@id": "table:24",
+            "table:operated_by": {
+                "@id": "employee:30"
+            },
+            "table:in": {
+                "@id": "restaurant:5"
+            },
+            "table:type": {
+                "@id": "table_type:2"
+            },
+            "table:capacity": {
+                "@value": "11",
+                "@type": "xsd:integer"
+            },
+            "table:id": {
+                "@value": "24",
+                "@type": "xsd:integer"
+            }
+        },
+        {
+            "@id": "table:19",
+            "table:operated_by": {
+                "@id": "employee:30"
+            },
+            "table:in": {
+                "@id": "restaurant:5"
+            },
+            "table:type": {
+                "@id": "table_type:1"
+            },
+            "table:capacity": {
+                "@value": "5",
+                "@type": "xsd:integer"
+            },
+            "table:id": {
+                "@value": "19",
+                "@type": "xsd:integer"
+            }
+        }
+    ],
+    "@context": {
+        "ingredient": "http://localhost:8888/ingredient/",
+        "manager": "http://localhost:8888/manager/",
+        "restaurant": "http://localhost:8888/restaurant/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "food_ingredient": "http://localhost:8888/food_ingredient/",
+        "employee": "http://localhost:8888/employee/",
+        "food": "http://localhost:8888/food/",
+        "storage_item": "http://localhost:8888/storage_item/",
+        "table": "http://localhost:8888/table/",
+        "table_type": "http://localhost:8888/table_type/",
+        "customer": "http://localhost:8888/customer/",
+        "order": "http://localhost:8888/order/"
+    }
+}

@@ -1,0 +1,49 @@
+@base <http://example.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<CzechRepublic> a <Country> ;
+    <countryProp> <Landlocked> ;
+    <in> <CentralEurope> ;
+    <historicalName> "Bohemia"^^xsd:normalizedString ;
+    <southBorder> <Austria> ;
+    <westBorder> <Germany> ;
+    <northBorder> <Poland> ;
+    <eastBorder> <Slovakia> ;
+    <landscape> _:landscape1 ;
+    <climate> <ContinentalOceanicClimate> ;
+    <largestCity> <Prague> ;
+    <capital> <Prague> ;
+    <majorCity> <Brno> ;
+    <majorCity> <Ostrava> ;
+    <majorCity> <Plzen> ;
+    <majorCity> <Liberec> .
+
+<Landlocked> a <CountryProperty> .
+
+<CentralEurope> a <Region> .
+
+<Austria> a <Country> .
+<Germany> a <Country> .
+<Poland> a <Country> .
+<Slovakia> a <Country> .
+
+<ContinentalOceanicClimate> a <Climate> ;
+    <type> <Continental> ;
+    <type> <Oceanic> .
+
+<Continental> a <ClimateType> .
+<Oceanic> a <ClimateType> .
+
+_:landscape1 a <Landscape> ;
+    <type> <Hilly> ;
+    <covers> _:area78sqkm ;
+    <covers> _:area30sqmi .
+
+<Hilly> a <LandscapeType> .
+
+_:area78sqkm rdf:value "78871"^^xsd:integer ;
+   <unit> <squareKilometers> .
+
+_:area30sqmi rdf:value "30452"^^xsd:integer ;
+    <unit> <squareMiles> .

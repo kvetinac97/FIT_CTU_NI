@@ -1,0 +1,71 @@
+@prefix ext:   <http://example.com/terms/> .
+@prefix ex:    <http://example.com/data/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+
+# value-type: matka (property `hasMother`) musí být osoba
+ex:MotherValueShape a sh:NodeShape ;
+    sh:targetClass ext:Person ;
+    sh:property [
+        sh:path ext:hasMother ;
+        sh:class ext:Person
+    ] .
+
+# - cardinality: osoba musí mít nejvýše jednu matku
+ex:MotherCountShape a sh:PropertyShape ;
+    sh:targetClass ext:Person ;
+    sh:path ext:hasMother ;
+    sh:maxCount 1 .
+
+# - value-range: věk (property `age`) musí být číslo od 0 do 120
+ex:AgeShape a sh:NodeShape ;
+    sh:targetClass ext:Person ;
+    sh:property [
+        sh:path ext:age ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 120
+    ] .
+
+# - string-based: jméno osoby nesmí obsahovat čísla
+ex:NameShape a sh:NodeShape ;
+    sh:targetClass ext:Person ;
+    sh:property [
+        sh:path ext:name ;
+        sh:pattern "^[a-zA-Z ]*$"
+    ] .
+
+# - property pair: název organizace se musí shodovat s jejím oficiálním názvem
+ex:OrganizationNameShape a sh:NodeShape ;
+    sh:targetClass ext:Organization ;
+    sh:property [
+        sh:path ext:officialName ;
+        sh:equals ext:name
+    ] .
+
+# - logická: osoba musí být zaměstnána buď prací, nebo studiem
+ex:WorkOrStudyShape a sh:NodeShape ;
+    sh:targetClass ext:Person ;
+    sh:property [
+        sh:path ext:occupation ;
+        sh:or (
+            [sh:class ext:Organization]
+            [sh:class ext:School]
+        )
+    ] .
+
+# - shape-based: věk dítěte musí splňovat AgeShape
+ex:ChildAgeShape a sh:NodeShape  ;
+    sh:property [
+        sh:path ext:age ;
+        sh:minInclusive 0 ;
+        sh:maxExclusive 18
+    ] .
+
+ex:NameAgeShape a sh:NodeShape ;
+    sh:targetClass ext:Person ;
+    sh:property [
+        sh:path ext:hasChild ;
+        sh:node ex:ChildAgeShape
+    ] .

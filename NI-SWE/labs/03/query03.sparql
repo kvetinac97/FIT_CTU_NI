@@ -1,0 +1,15 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+SELECT DISTINCT ?country ?property
+WHERE {
+    ?country a dbo:Country, dbo:Place, dbo:Location, geo:SpatialThing ;
+        ?property ?anything ;
+        foaf:name 'Poland'@en .
+    ?property a rdf:Property .
+}
+LIMIT 10

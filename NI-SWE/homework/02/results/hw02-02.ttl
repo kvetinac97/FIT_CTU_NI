@@ -1,0 +1,37 @@
+@prefix ext:   <http://example.com/terms/> .
+@prefix ex:    <http://example.com/data/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<ext:officialName>  a  rdf:Property ;
+        rdfs:domain  <ext:Organisation> ;
+        rdfs:range   xsd:normalizedString .
+
+<ext:Father>  rdfs:subClassOf  <ext:Man> , <ext:Parent> .
+
+<ext:age>  a         rdf:Property ;
+        rdfs:domain  <ext:Person> ;
+        rdfs:range   xsd:nonNegativeInteger .
+
+<ext:worksFor>  a    rdf:Property ;
+        rdfs:domain  <ext:Person> ;
+        rdfs:range   <ext:Organisation> .
+
+<ex:Carl>  a    <ext:Man> .
+
+<ex:Anna>  <ext:age>     "25"^^xsd:int ;
+        <ext:hasFather>  <ex:Carl> ;
+        <ext:worksFor>   <ex:IBM> .
+
+<ext:Man>  rdfs:subClassOf  <ext:Person> .
+
+<ex:IBM>  <ext:officialName>  "International Business Machines Corporation" .
+
+<ext:Parent>  rdfs:subClassOf  <ext:Person> .
+
+<ext:Child>  rdfs:subClassOf  <ext:Person> .
+
+<ext:hasFather>  a   rdf:Property ;
+        rdfs:domain  <ext:Person> ;
+        rdfs:range   <ext:Father> .

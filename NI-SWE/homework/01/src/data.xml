@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns="http://example.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <rdf:type rdf:resource="http://example.org/Country"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <countryProp rdf:resource="http://example.org/Landlocked"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <in rdf:resource="http://example.org/CentralEurope"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <historicalName>Bohemia</historicalName>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <southBorder rdf:resource="http://example.org/Austria"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <westBorder rdf:resource="http://example.org/Germany"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <northBorder rdf:resource="http://example.org/Poland"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <eastBorder rdf:resource="http://example.org/Slovakia"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <landscape rdf:nodeID="landscape1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <climate rdf:resource="http://example.org/ContinentalOceanicClimate"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <largestCity rdf:resource="http://example.org/Prague"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <capital rdf:resource="http://example.org/Prague"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <majorCity rdf:resource="http://example.org/Brno"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <majorCity rdf:resource="http://example.org/Ostrava"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <majorCity rdf:resource="http://example.org/Plzen"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CzechRepublic">
+    <majorCity rdf:resource="http://example.org/Liberec"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Landlocked">
+    <rdf:type rdf:resource="http://example.org/CountryProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/CentralEurope">
+    <rdf:type rdf:resource="http://example.org/Region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Austria">
+    <rdf:type rdf:resource="http://example.org/Country"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Germany">
+    <rdf:type rdf:resource="http://example.org/Country"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Poland">
+    <rdf:type rdf:resource="http://example.org/Country"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Slovakia">
+    <rdf:type rdf:resource="http://example.org/Country"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ContinentalOceanicClimate">
+    <rdf:type rdf:resource="http://example.org/Climate"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ContinentalOceanicClimate">
+    <type rdf:resource="http://example.org/Continental"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ContinentalOceanicClimate">
+    <type rdf:resource="http://example.org/Oceanic"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Continental">
+    <rdf:type rdf:resource="http://example.org/ClimateType"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Oceanic">
+    <rdf:type rdf:resource="http://example.org/ClimateType"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="landscape1">
+    <rdf:type rdf:resource="http://example.org/Landscape"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="landscape1">
+    <type rdf:resource="http://example.org/Hilly"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="landscape1">
+    <covers rdf:nodeID="area78sqkm"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="landscape1">
+    <covers rdf:nodeID="area30sqmi"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Hilly">
+    <rdf:type rdf:resource="http://example.org/LandscapeType"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="area78sqkm">
+    <rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">78871</rdf:value>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="area78sqkm">
+    <unit rdf:resource="http://example.org/squareKilometers"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="area30sqmi">
+    <rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">30452</rdf:value>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="area30sqmi">
+    <unit rdf:resource="http://example.org/squareMiles"/>
+  </rdf:Description>
+</rdf:RDF>

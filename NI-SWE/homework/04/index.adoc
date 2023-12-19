@@ -1,0 +1,20 @@
+= HW4 – Linked Data
+
+V tomto úkolu bylo mým cílem nejprve nahrát RDF data na Fuseki triple store a následně tato data *publikovat*.
+
+== Data
+
+Pro tento úkol jsem využil stejná data a kolekci, jako v link:../03/index.adoc[3. domácím úkolu] -- jedná se o data restauračního systému, která jsem vytvořil v rámci bakalářského předmětu BI-VWM. Data naleznete ve složce link:results/data.ttl[].
+
+== Publikace
+
+Pro publikaci jsem vytvořil Node.js server. Tento server publikuje každou kolekci _(restaurant, food, manager, ingredient, employee, table,
+customer, order, storage_item, table_type)_ z datové sady.
+
+K datům se dá přistoupit na adrese http://localhost:8888/kolekce/id _(např. http://localhost:8888/restaurant/2)_. Je použita **303 Linked Data URI dereferencing strategy**, tedy na základě použité hlavičky `Accept` je uživatel přesměrován na odpovídající adresu daného typu.
+
+Například pro hodnotu hlavičky `Accept: text/turtle` je tedy uživatel přesměrován na adresu http://localhost:8888/kolekce/id.ttl. Na této adrese již uživatel dostane data, která vyžadoval.
+
+== Příklady
+
+Příklady možných cURL příkazů naleznete ve složce link:results/queries[]. Dotazy jsou vždy v `.sh`, odpovědi v odpovídajícím formátu.

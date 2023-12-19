@@ -1,0 +1,24 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?city ?name ?population ?max_elevation ?areaTotalKm ?subdivision ?totalWidth ?utcOffset ?recordHighC WHERE {
+    ?city a dbo:City ;
+    dbp:name ?name ;
+    dbp:populationTotal ?population ;
+    dbo:country ?country .
+    ?country foaf:name 'Poland'@en .
+
+    OPTIONAL { ?city dbo:maximumElevation  ?max_elevation } .
+    OPTIONAL { ?city dbp:areaTotalKm ?areaTotalKm } .
+    OPTIONAL { ?city dbo:subdivision ?subdivision } .
+    OPTIONAL { ?city dbp:totalWidth ?totalWidth } .
+    OPTIONAL { ?city dbo:utcOffset ?utcOffset } .
+    OPTIONAL { ?city dbp:yearRecordHighC ?recordHighC } .
+
+    FILTER (?population > 100000)
+}
+ORDER BY DESC(?population)
+LIMIT 10

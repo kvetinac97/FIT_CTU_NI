@@ -1,0 +1,62 @@
+{ "head": {
+    "vars": [ "restaurant" , "restaurant_id" , "restaurant_name" , "manager_name" ]
+  } ,
+  "results": {
+    "bindings": [
+      { 
+        "restaurant": { "type": "uri" , "value": "http://localhost:8888/restaurant/4" } ,
+        "restaurant_id": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "4" } ,
+        "restaurant_name": { "type": "literal" , "value": "Harmony" } ,
+        "manager_name": { "type": "literal" , "value": "Mikuláš Janovský" }
+      } ,
+      { 
+        "restaurant": { "type": "uri" , "value": "http://localhost:8888/restaurant/5" } ,
+        "restaurant_id": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "5" } ,
+        "restaurant_name": { "type": "literal" , "value": "Síla chuti" } ,
+        "manager_name": { "type": "literal" , "value": "Mikuláš Janovský" }
+      } ,
+      { 
+        "restaurant": { "type": "uri" , "value": "http://localhost:8888/restaurant/6" } ,
+        "restaurant_id": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "6" } ,
+        "restaurant_name": { "type": "literal" , "value": "Červené jablko" } ,
+        "manager_name": { "type": "literal" , "value": "Hugo Pudil" }
+      } ,
+      { 
+        "restaurant": { "type": "uri" , "value": "http://localhost:8888/restaurant/7" } ,
+        "restaurant_id": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "7" } ,
+        "restaurant_name": { "type": "literal" , "value": "Melodie" } ,
+        "manager_name": { "type": "literal" , "value": "Gustav Šťastný" }
+      } ,
+      { 
+        "restaurant": { "type": "uri" , "value": "http://localhost:8888/restaurant/8" } ,
+        "restaurant_id": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "8" } ,
+        "restaurant_name": { "type": "literal" , "value": "Pizzerie Verdi" } ,
+        "manager_name": { "type": "literal" , "value": "Roman Klusák" }
+      } ,
+      { 
+        "restaurant": { "type": "uri" , "value": "http://localhost:8888/restaurant/9" } ,
+        "restaurant_id": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "9" } ,
+        "restaurant_name": { "type": "literal" , "value": "Pizzerie Maestro" } ,
+        "manager_name": { "type": "literal" , "value": "Karel Novák" }
+      } ,
+      { 
+        "restaurant": { "type": "uri" , "value": "http://localhost:8888/restaurant/10" } ,
+        "restaurant_id": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "10" } ,
+        "restaurant_name": { "type": "literal" , "value": "Aqua patet" } ,
+        "manager_name": { "type": "literal" , "value": "Bruno Opatrný" }
+      } ,
+      { 
+        "restaurant": { "type": "uri" , "value": "http://localhost:8888/restaurant/11" } ,
+        "restaurant_id": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "11" } ,
+        "restaurant_name": { "type": "literal" , "value": "Pizzerie Verdi" } ,
+        "manager_name": { "type": "literal" , "value": "Karel Novák" }
+      } ,
+      { 
+        "restaurant": { "type": "uri" , "value": "http://localhost:8888/restaurant/12" } ,
+        "restaurant_id": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#integer" , "value": "12" } ,
+        "restaurant_name": { "type": "literal" , "value": "Melodie" } ,
+        "manager_name": { "type": "literal" , "value": "Karel Novák" }
+      }
+    ]
+  }
+}

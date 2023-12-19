@@ -1,0 +1,31 @@
+= HW5 – Knowledge Graphs Integration
+
+== Task 1: Ontology/Vocabulary Integration
+
+=== 1.1 Ontology definition
+
+Jako ontologii, kterou budu implementovat, jsem se rozhodl zvolit ontologii fotbalových týmů a hráčů.
+
+Fotbalový hráč hraje za nějaký tým na určité pozici, má nějaké číslo. Tým má taky trenéra. Týmy hrají proti sobě zápasy, v zápasech hráči dávají góly a dostávají fauly. Zápasy pískají rozhodčí.
+
+Ontologii jsem zadefinoval v RDF souboru link:results/soccer.ttl[]
+
+=== 1.2 Another ontologies
+
+Fotbalové hráče, týmy a utkání můžeme najít ve více ontologiích. Pro vyhledání jsem použil LOV (https://lov.linkeddata.es/).
+
+Našel jsem napříkald FOAF (http://xmlns.com/foaf/0.1/), která obsahuje koncepty jako Skupiny, Lidé, Události, DBPedia-owl (http://dbpedia.org/), která obsahuje přímo fotbalové kluby, rozhodčí apod., pext (http://www.ontotext.com/proton/protonext).
+
+=== 1.3 Create Ontology Alignment Mappings
+
+V posledním kroku jsem provedl "propojení" těchto ontologií s mojí pomocí RDFs a OWL.
+
+Výsledná propojení lze najít v RDF souboru link:results/mappings.ttl[]
+
+== Task 2: Data Integration
+
+V tomto úkolu jsem vzal dva knowledge grafy -- DBPedia a Wikidata a vytvořil jsem program, který zarovnává entity z těchto dvou grafů.
+
+Program naleznete v link:src/linker.py[]. Nejprve pomocí SPARQL dotazu získá fotbalové hráče z DBPedia, pak z Wikidata, a vytvoří spojení `owl:equivalentClass` mezi těmi, kteří mají stejný label (foaf:name), místo narození a propojí taky místo narození.
+
+Ukázka takto vygenerovaných linků je dostupná v souboru link:results/links.txt[]

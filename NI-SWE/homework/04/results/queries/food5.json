@@ -1,0 +1,21 @@
+{ 
+  "http://localhost:8888/food/5" : { 
+    "http://localhost:8888/food/id" : [ { 
+      "type" : "literal" ,
+      "value" : "5" ,
+      "datatype" : "http://www.w3.org/2001/XMLSchema#integer"
+    }
+     ] ,
+    "http://localhost:8888/food/name" : [ { 
+      "type" : "literal" ,
+      "value" : "Rumcajsovy koule"
+    }
+     ] ,
+    "http://localhost:8888/food/price" : [ { 
+      "type" : "literal" ,
+      "value" : "150" ,
+      "datatype" : "http://www.w3.org/2001/XMLSchema#integer"
+    }
+     ]
+  }
+}

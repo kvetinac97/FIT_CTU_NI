@@ -1,0 +1,12 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+
+ASK {
+    ?city a dbo:City ;
+        dbp:name ?name ;
+        dbo:elevation ?elevation .
+    ?anyone dbp:birthPlace ?city .
+    FILTER (?elevation < 200) .
+}
