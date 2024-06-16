@@ -79,7 +79,8 @@ link:NI-SWE/[Semantic Web and Knowledge Graphs (NI-SWE)] - homeworks, tutorials 
 
 == Fourth semester
 
-Master thesis *will* be available as a separate repository on this GitHub account in June 2024.
+Master thesis has been defended successfully with grade A.
+Final exams were completed with grades A, A resulting in total grade A with red diploma.
 
 |===
 |Subject |Grade |Total |Exam |Assessment
